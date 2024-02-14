@@ -19,4 +19,12 @@
     <ProjectReference Include="..\CoffeeBlog.Application\CoffeeBlog.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Persistence\Repositories\DbEntitiesBase\" />
+    <Folder Include="Persistence\Repositories\Errors\" />
+    <Folder Include="Persistence\Repositories\Requests\" />
+    <Folder Include="Persistence\Repositories\Roles\" />
+    <Folder Include="Persistence\Repositories\Users\" />
+  </ItemGroup>
+
 </Project>
