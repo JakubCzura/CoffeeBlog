@@ -19,9 +19,9 @@ public class ExceptionMiddleware(RequestDelegate next,
             _logger.LogError(exception, "Exception caught by exception middleware");
 
             APIError error = new(exception.ToString(),
-                              exception.Message,
-                              "Exception caught by exception middleware",
-                              DateTime.UtcNow);
+                                 exception.Message,
+                                 "Exception caught by exception middleware",
+                                 DateTime.UtcNow);
 
             //Write data to database
         }
