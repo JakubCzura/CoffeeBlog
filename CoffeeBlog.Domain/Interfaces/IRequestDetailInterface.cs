@@ -1,4 +1,4 @@
-﻿using CoffeeBlog.Domain.Entities.Request;
+﻿using CoffeeBlog.Domain.Entities.Requests;
 
 namespace CoffeeBlog.Domain.Interfaces;
 

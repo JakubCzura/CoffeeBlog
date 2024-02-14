@@ -1,4 +1,4 @@
-﻿using CoffeeBlog.Domain.Entities.EntityBase;
+﻿using CoffeeBlog.Domain.Entities.Base;
 
 namespace CoffeeBlog.Domain.Entities.Requests;
 

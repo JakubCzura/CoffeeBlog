@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace CoffeeBlog.API.Controllers;
+namespace CoffeeBlog.API.Controllers.Base;
 
-[ApiController]
-[Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+public class WeatherForecastController : APIControllerBase
 {
     private static readonly string[] Summaries = new[]
     {
