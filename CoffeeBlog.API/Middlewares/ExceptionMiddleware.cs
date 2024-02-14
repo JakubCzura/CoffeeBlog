@@ -1,4 +1,6 @@
-﻿namespace CoffeeBlog.API.Middlewares;
+﻿using CoffeeBlog.Domain.Entities.Errors;
+
+namespace CoffeeBlog.API.Middlewares;
 
 public class ExceptionMiddleware(RequestDelegate next,
                                  ILogger<ExceptionMiddleware> logger)
@@ -15,6 +17,13 @@ public class ExceptionMiddleware(RequestDelegate next,
         catch (Exception exception)
         {
             _logger.LogError(exception, "Exception caught by exception middleware");
+
+            APIError error = new(exception.ToString(),
+                              exception.Message,
+                              "Exception caught by exception middleware",
+                              DateTime.UtcNow);
+
+            //Write data to database
         }
     }
 }
