@@ -1,4 +1,4 @@
-﻿using CoffeeBlog.Domain.Entities.Base;
+﻿using CoffeeBlog.Domain.Entities.DbEntitiesBase;
 
 namespace CoffeeBlog.Domain.Entities.Errors;
 

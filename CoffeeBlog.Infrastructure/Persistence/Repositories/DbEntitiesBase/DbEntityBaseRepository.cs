@@ -1,7 +1,7 @@
-﻿using CoffeeBlog.Domain.Entities.Base;
-using CoffeeBlog.Domain.Interfaces.Base;
+﻿using CoffeeBlog.Application.Interfaces.Persistence.Repositories.DbEntitiesBase;
+using CoffeeBlog.Domain.Entities.DbEntitiesBase;
 
-namespace CoffeeBlog.Infrastructure.Repositories.Base;
+namespace CoffeeBlog.Infrastructure.Persistence.Repositories.DbEntitiesBase;
 
 public class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : DbEntityBase
 {

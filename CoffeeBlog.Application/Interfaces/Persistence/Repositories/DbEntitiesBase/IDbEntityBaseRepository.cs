@@ -1,6 +1,6 @@
-﻿using CoffeeBlog.Domain.Entities.Base;
+﻿using CoffeeBlog.Domain.Entities.DbEntitiesBase;
 
-namespace CoffeeBlog.Domain.Interfaces.Base;
+namespace CoffeeBlog.Application.Interfaces.Persistence.Repositories.DbEntitiesBase;
 
 /// <summary>
 /// Generic interface to perform CRUD operations in database

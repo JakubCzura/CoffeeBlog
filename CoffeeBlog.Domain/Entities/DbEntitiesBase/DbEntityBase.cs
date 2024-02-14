@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CoffeeBlog.Domain.Entities.Base;
+namespace CoffeeBlog.Domain.Entities.DbEntitiesBase;
 
 /// <summary>
 /// Represents a base class for database entities.

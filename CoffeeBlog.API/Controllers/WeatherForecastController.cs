@@ -1,8 +1,9 @@
+using CoffeeBlog.API.Controllers.ControllersBase;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CoffeeBlog.API.Controllers.Base;
+namespace CoffeeBlog.API.Controllers;
 
-public class WeatherForecastController : APIControllerBase
+public class WeatherForecastController : ApiControllerBase
 {
     private static readonly string[] Summaries = new[]
     {
