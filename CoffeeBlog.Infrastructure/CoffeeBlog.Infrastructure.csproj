@@ -15,4 +15,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CoffeeBlog.Application\CoffeeBlog.Application.csproj" />
+  </ItemGroup>
+
 </Project>
