@@ -1,6 +1,8 @@
-﻿namespace CoffeeBlog.Domain.Entities.Users;
+﻿using CoffeeBlog.Domain.Entities.Base;
 
-public class UserDetail
+namespace CoffeeBlog.Domain.Entities.Users;
+
+public class UserDetail : DbEntityBase
 {
     public int UserId { get; set; }
 

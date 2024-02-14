@@ -2,7 +2,7 @@
 
 namespace CoffeeBlog.Domain.Entities.Errors;
 
-public class APIError(string exception,
+public class ApiError(string exception,
                    string message,
                    string description,
                    DateTime createdAt) : DbEntityBase
