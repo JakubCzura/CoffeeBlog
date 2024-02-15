@@ -1,32 +1,53 @@
 ﻿using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 using CoffeeBlog.Domain.Entities.DbEntitiesBase;
+using CoffeeBlog.Domain.Exceptions;
+using CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeBlog.Infrastructure.Persistence.Repositories;
 
 public class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : DbEntityBase
 {
-    public Task<int> CreateAsync(T entity)
+    private readonly CoffeeBlogDbContext _coffeeBlogDbContext;
+    private readonly DbSet<T> _dbSet;
+
+    public DbEntityBaseRepository(CoffeeBlogDbContext coffeeBlogDbContext)
     {
-        throw new NotImplementedException();
+        _coffeeBlogDbContext = coffeeBlogDbContext;
+        _dbSet = _coffeeBlogDbContext.Set<T>();
     }
 
-    public Task<int> DeleteAsync(int id)
+    public async Task<int> CreateAsync(T entity, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        if (entity is null)
+        {
+            throw new NullEntityException("Provided entity was null");
+        }
+
+        await _dbSet.AddAsync(entity, cancellationToken);
+        return await _coffeeBlogDbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public Task<List<T>> GetAllAsync()
+    public async Task<T?> GetAsync(int id, CancellationToken cancellationToken)
+        => await _dbSet.AsNoTracking()
+                       .FirstOrDefaultAsync(entity => entity.Id == id, cancellationToken);
+
+    public Task<List<T>> GetAllAsync(CancellationToken cancellationToken)
+        => _dbSet.AsNoTracking()
+                 .ToListAsync(cancellationToken);
+
+    public Task<int> UpdateAsync(T entity, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        if (entity is null)
+        {
+            throw new NullEntityException("Provided entity was null");
+        }
+
+        _dbSet.Update(entity);
+        return _coffeeBlogDbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public Task<T?> GetAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<int> UpdateAsync(T entity)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<int> DeleteAsync(int id, CancellationToken cancellationToken)
+        => await _dbSet.Where(entity => entity.Id == id)
+                       .ExecuteDeleteAsync(cancellationToken);
 }

@@ -8,13 +8,13 @@ namespace CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 /// <typeparam name="T">Entity in database</typeparam>
 public interface IDbEntityBaseRepository<T> where T : DbEntityBase
 {
-    Task<int> CreateAsync(T entity);
+    Task<int> CreateAsync(T entity, CancellationToken cancellationToken);
 
-    Task<T?> GetAsync(int id);
+    Task<T?> GetAsync(int id, CancellationToken cancellationToken);
 
-    Task<List<T>> GetAllAsync();
+    Task<List<T>> GetAllAsync(CancellationToken cancellationToken);
 
-    Task<int> UpdateAsync(T entity);
+    Task<int> UpdateAsync(T entity, CancellationToken cancellationToken);
 
-    Task<int> DeleteAsync(int id);
+    Task<int> DeleteAsync(int id, CancellationToken cancellationToken);
 }
