@@ -15,8 +15,8 @@ namespace CoffeeBlog.Infrastructure.ExtensionMethods;
 
 public static class InfrastructureRegistration
 {
-    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services,
-                                                               IConfiguration configuration)
+    public static IServiceCollection AddInfrastructureDI(this IServiceCollection services,
+                                                         IConfiguration configuration)
     {
         services.AddDbContext<CoffeeBlogDbContext>(options =>
         {
