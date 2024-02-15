@@ -21,7 +21,7 @@ public class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : Db
     {
         if (entity is null)
         {
-            throw new NullEntityException("Provided entity was null");
+            throw new NullEntityException($"Provided entity {typeof(T)} was null");
         }
 
         await _dbSet.AddAsync(entity, cancellationToken);
@@ -40,7 +40,7 @@ public class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : Db
     {
         if (entity is null)
         {
-            throw new NullEntityException("Provided entity was null");
+            throw new NullEntityException($"Provided entity {typeof(T)} was null");
         }
 
         _dbSet.Update(entity);
