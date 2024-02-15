@@ -1,4 +1,4 @@
-﻿using CoffeeBlog.Domain.Entities.Errors;
+﻿using CoffeeBlog.Domain.Entities;
 
 namespace CoffeeBlog.API.Middlewares;
 

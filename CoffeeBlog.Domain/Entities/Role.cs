@@ -1,7 +1,6 @@
 ﻿using CoffeeBlog.Domain.Entities.DbEntitiesBase;
-using CoffeeBlog.Domain.Entities.Users;
 
-namespace CoffeeBlog.Domain.Entities.Roles;
+namespace CoffeeBlog.Domain.Entities;
 
 public class Role : DbEntityBase
 {

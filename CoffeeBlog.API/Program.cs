@@ -1,4 +1,6 @@
 using CoffeeBlog.API.Middlewares;
+using CoffeeBlog.Application.ExtensionMethods;
+using CoffeeBlog.Infrastructure.ExtensionMethods;
 using Serilog;
 
 namespace CoffeeBlog.API;
@@ -8,6 +10,9 @@ public class Program
     public static void Main(string[] args)
     {
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.AddApplicationDI(builder.Configuration);
+        builder.Services.AddInfrastructureDI(builder.Configuration);
 
         // Add services to the container.
 

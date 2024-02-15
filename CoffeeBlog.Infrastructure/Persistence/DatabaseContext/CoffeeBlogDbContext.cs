@@ -1,7 +1,4 @@
-﻿using CoffeeBlog.Domain.Entities.Errors;
-using CoffeeBlog.Domain.Entities.Requests;
-using CoffeeBlog.Domain.Entities.Roles;
-using CoffeeBlog.Domain.Entities.Users;
+﻿using CoffeeBlog.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeBlog.Infrastructure.Persistence.DatabaseContext;

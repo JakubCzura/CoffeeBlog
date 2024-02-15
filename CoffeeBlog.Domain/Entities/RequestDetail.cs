@@ -1,6 +1,6 @@
 ﻿using CoffeeBlog.Domain.Entities.DbEntitiesBase;
 
-namespace CoffeeBlog.Domain.Entities.Requests;
+namespace CoffeeBlog.Domain.Entities;
 
 public class RequestDetail(string controllerName,
                            string path,

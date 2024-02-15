@@ -1,6 +1,6 @@
 ﻿using CoffeeBlog.Domain.Entities.DbEntitiesBase;
 
-namespace CoffeeBlog.Domain.Entities.Errors;
+namespace CoffeeBlog.Domain.Entities;
 
 public class ApiError(string exception,
                    string message,

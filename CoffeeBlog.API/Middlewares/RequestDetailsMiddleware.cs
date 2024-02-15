@@ -1,5 +1,5 @@
 ﻿using CoffeeBlog.API.ExtensionMethods;
-using CoffeeBlog.Domain.Entities.Requests;
+using CoffeeBlog.Domain.Entities;
 using System.Diagnostics;
 
 namespace CoffeeBlog.API.Middlewares;

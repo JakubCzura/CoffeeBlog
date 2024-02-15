@@ -1,12 +1,9 @@
-﻿using CoffeeBlog.Application.Interfaces.Persistence.Repositories.Errors;
-using CoffeeBlog.Application.Interfaces.Persistence.Repositories.Requests;
-using CoffeeBlog.Application.Interfaces.Persistence.Repositories.Roles;
-using CoffeeBlog.Application.Interfaces.Persistence.Repositories.Users;
+﻿using CoffeeBlog.Application.ExtensionMethods;
+using CoffeeBlog.Application.Interfaces.Helpers;
+using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
+using CoffeeBlog.Infrastructure.Helpers;
 using CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
-using CoffeeBlog.Infrastructure.Persistence.Repositories.Errors;
-using CoffeeBlog.Infrastructure.Persistence.Repositories.Requests;
-using CoffeeBlog.Infrastructure.Persistence.Repositories.Roles;
-using CoffeeBlog.Infrastructure.Persistence.Repositories.Users;
+using CoffeeBlog.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +26,8 @@ public static class InfrastructureRegistration
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IUserDetailRepository, UserDetailRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+
+        services.AddScoped<IDateTimeHelper, DateTimeHelper>();
 
         return services;
     }
