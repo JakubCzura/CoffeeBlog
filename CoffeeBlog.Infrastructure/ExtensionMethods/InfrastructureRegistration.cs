@@ -1,6 +1,9 @@
 ﻿using CoffeeBlog.Application.ExtensionMethods;
+using CoffeeBlog.Application.Interfaces.Authentication;
 using CoffeeBlog.Application.Interfaces.Helpers;
 using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
+using CoffeeBlog.Domain.SettingsOptions.Authentication;
+using CoffeeBlog.Infrastructure.Authentication;
 using CoffeeBlog.Infrastructure.Helpers;
 using CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
 using CoffeeBlog.Infrastructure.Persistence.Repositories;
@@ -15,6 +18,8 @@ public static class InfrastructureRegistration
     public static IServiceCollection AddInfrastructureDI(this IServiceCollection services,
                                                          IConfiguration configuration)
     {
+        services.Configure<AuthenticationOptions>(configuration.GetSection(AuthenticationOptions.AppsettingsKey));
+
         services.AddDbContext<CoffeeBlogDbContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("CoffeeBlogDbConnectionString"),
@@ -28,6 +33,8 @@ public static class InfrastructureRegistration
         services.AddScoped<IUserRepository, UserRepository>();
 
         services.AddScoped<IDateTimeHelper, DateTimeHelper>();
+
+        services.AddScoped<IJwtService, JwtService>();
 
         return services;
     }
