@@ -1,4 +1,4 @@
-﻿using CoffeeBlog.Application.Dtos;
+﻿using CoffeeBlog.Application.Dtos.Authentication;
 using CoffeeBlog.Application.Interfaces.Authentication;
 using CoffeeBlog.Application.Interfaces.Helpers;
 using CoffeeBlog.Domain.SettingsOptions.Authentication;

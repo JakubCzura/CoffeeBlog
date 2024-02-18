@@ -1,4 +1,4 @@
-﻿using CoffeeBlog.Application.Dtos;
+﻿using CoffeeBlog.Application.Dtos.Authentication;
 using System.Security.Claims;
 
 namespace CoffeeBlog.Application.Interfaces.Authentication;

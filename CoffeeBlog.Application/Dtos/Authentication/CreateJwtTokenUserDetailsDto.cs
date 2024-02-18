@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Application.Dtos;
+﻿namespace CoffeeBlog.Application.Dtos.Authentication;
 
 public record CreateJwtTokenUserDetailsDto(int Id,
                                            string Username,
