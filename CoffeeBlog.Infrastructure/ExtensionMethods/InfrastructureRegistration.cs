@@ -35,7 +35,7 @@ public static class InfrastructureRegistration
 
         services.AddScoped<IDateTimeProvider, DateTimeProvider>();
 
-        services.ConfigureAuthentication(configuration.GetSection(AuthenticationOptions.AppsettingsKey).Get<AuthenticationOptions>()!);
+        services.ConfigureAuthentication();
         services.AddScoped<IJwtService, JwtService>();
 
         services.AddScoped<IEmailMessageFactory, EmailMessageFactory>();
