@@ -1,9 +1,11 @@
-﻿using CoffeeBlog.Application.Factories.Email;
+﻿using CoffeeBlog.Application.Email;
+using CoffeeBlog.Application.Factories.Email;
 using CoffeeBlog.Application.Interfaces.Authentication;
 using CoffeeBlog.Application.Interfaces.Helpers;
 using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 using CoffeeBlog.Domain.SettingsOptions.Authentication;
 using CoffeeBlog.Infrastructure.Authentication;
+using CoffeeBlog.Infrastructure.Email;
 using CoffeeBlog.Infrastructure.Factories;
 using CoffeeBlog.Infrastructure.Helpers;
 using CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
@@ -39,6 +41,7 @@ public static class InfrastructureRegistration
         services.AddScoped<IJwtService, JwtService>();
 
         services.AddScoped<IEmailMessageFactory, EmailMessageFactory>();
+        services.AddScoped<IEmailServiceProvider, EmailServiceProvider>();
 
         return services;
     }
