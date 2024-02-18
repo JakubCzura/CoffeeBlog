@@ -11,10 +11,10 @@ using System.Text;
 namespace CoffeeBlog.Infrastructure.Authentication;
 
 public class JwtService(IOptions<AuthenticationOptions> authenticationOptions,
-                        IDateTimeHelper dateTimeHelper) : IJwtService
+                        IDateTimeProvider dateTimeHelper) : IJwtService
 {
     private readonly AuthenticationOptions _authenticationOptions = authenticationOptions.Value;
-    private readonly IDateTimeHelper _dateTimeHelper = dateTimeHelper;
+    private readonly IDateTimeProvider _dateTimeHelper = dateTimeHelper;
 
     public string CreateToken(CreateJwtTokenUserDetailsDto createJwtTokenUserDetailsDto,
                               IEnumerable<string>? roles = null,

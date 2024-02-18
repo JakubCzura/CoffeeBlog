@@ -5,7 +5,7 @@ namespace CoffeeBlog.Infrastructure.Helpers;
 /// <summary>
 /// Delivers default implementation for time and date properties.
 /// </summary>
-public class DateTimeHelper : IDateTimeHelper
+public class DateTimeProvider : IDateTimeProvider
 {
     public DateTime UtcNow => DateTime.UtcNow;
 
