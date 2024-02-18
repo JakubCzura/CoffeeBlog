@@ -11,9 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Commands\User\" />
     <Folder Include="MapperProfiles\" />
-    <Folder Include="Commands\" />
-    <Folder Include="Queries\" />
+    <Folder Include="Queries\User\" />
   </ItemGroup>
 
   <ItemGroup>
