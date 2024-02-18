@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 
-namespace CoffeeBlog.Infrastructure.Authentication;
+namespace CoffeeBlog.Infrastructure.Security.Authentication;
 
 public sealed class JwtAuthenticationConfiguration : IConfigureNamedOptions<AuthenticationOptions>
 {

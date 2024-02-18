@@ -1,6 +1,6 @@
 ﻿using CoffeeBlog.Application.Dtos.Authentication;
-using CoffeeBlog.Application.Interfaces.Authentication;
 using CoffeeBlog.Application.Interfaces.Helpers;
+using CoffeeBlog.Application.Interfaces.Security.Authentication;
 using CoffeeBlog.Domain.SettingsOptions.Authentication;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -8,7 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace CoffeeBlog.Infrastructure.Authentication;
+namespace CoffeeBlog.Infrastructure.Security.Authentication;
 
 public class JwtService(IOptions<AuthenticationOptions> authenticationOptions,
                         IDateTimeProvider dateTimeHelper) : IJwtService

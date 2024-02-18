@@ -6,11 +6,11 @@ using System.Security.Claims;
 using System.Text;
 using CoffeeBlog.Application.ExtensionMethods.Helpers;
 
-namespace CoffeeBlog.Infrastructure.Authentication;
+namespace CoffeeBlog.Infrastructure.Security.Authentication;
 
 public sealed class JwtValidationConfiguration(IOptions<AuthenticationOptions> authenticationOptions) : IConfigureNamedOptions<JwtBearerOptions>
 {
-    private readonly AuthenticationOptions _authenticationOptions = authenticationOptions.Value;   
+    private readonly AuthenticationOptions _authenticationOptions = authenticationOptions.Value;
 
     public void Configure(string? name, JwtBearerOptions options)
         => Configure(options);
@@ -36,7 +36,7 @@ public sealed class JwtValidationConfiguration(IOptions<AuthenticationOptions> a
                 string? email = context?.Principal?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
 
                 //Don't authorize user without valid user's details in JWT
-                if (new string?[] {userId, username, email}.IsAnyElementNullOrWhiteSpace())
+                if (new string?[] { userId, username, email }.IsAnyElementNullOrWhiteSpace())
                 {
                     context?.Fail("Unauthorized. User's claims had invalid value");
                     return Task.CompletedTask;

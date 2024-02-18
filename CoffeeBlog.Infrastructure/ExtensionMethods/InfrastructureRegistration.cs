@@ -1,15 +1,18 @@
 ﻿using CoffeeBlog.Application.Email;
 using CoffeeBlog.Application.Factories.Email;
-using CoffeeBlog.Application.Interfaces.Authentication;
 using CoffeeBlog.Application.Interfaces.Helpers;
 using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
+using CoffeeBlog.Application.Interfaces.Security.Authentication;
+using CoffeeBlog.Application.Interfaces.Security.Password;
 using CoffeeBlog.Domain.SettingsOptions.Authentication;
-using CoffeeBlog.Infrastructure.Authentication;
+using CoffeeBlog.Domain.SettingsOptions.PasswordHasher;
 using CoffeeBlog.Infrastructure.Email;
 using CoffeeBlog.Infrastructure.Factories;
 using CoffeeBlog.Infrastructure.Helpers;
 using CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
 using CoffeeBlog.Infrastructure.Persistence.Repositories;
+using CoffeeBlog.Infrastructure.Security.Authentication;
+using CoffeeBlog.Infrastructure.Security.Password;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +25,7 @@ public static class InfrastructureRegistration
                                                          IConfiguration configuration)
     {
         services.Configure<AuthenticationOptions>(configuration.GetSection(AuthenticationOptions.AppsettingsKey));
+        services.Configure<PasswordHasherOptions>(configuration.GetSection(PasswordHasherOptions.AppsettingsKey));
 
         services.AddDbContext<CoffeeBlogDbContext>(options =>
         {
@@ -39,6 +43,7 @@ public static class InfrastructureRegistration
 
         services.ConfigureAuthentication();
         services.AddScoped<IJwtService, JwtService>();
+        services.AddScoped<IPasswordHasher, PasswordHasher>();
 
         services.AddScoped<IEmailMessageFactory, EmailMessageFactory>();
         services.AddScoped<IEmailServiceProvider, EmailServiceProvider>();

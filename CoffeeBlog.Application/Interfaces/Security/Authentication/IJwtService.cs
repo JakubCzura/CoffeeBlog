@@ -1,7 +1,7 @@
 ﻿using CoffeeBlog.Application.Dtos.Authentication;
 using System.Security.Claims;
 
-namespace CoffeeBlog.Application.Interfaces.Authentication;
+namespace CoffeeBlog.Application.Interfaces.Security.Authentication;
 
 public interface IJwtService
 {
