@@ -11,6 +11,11 @@ public class PasswordHasher(IOptions<PasswordHasherOptions> passwordHasherOption
 
     public string HashPassword(string password)
     {
+        if (string.IsNullOrWhiteSpace(password))
+        {
+            throw new ArgumentNullException(nameof(password));
+        }
+
         byte[] salt = RandomNumberGenerator.GetBytes(_passwordHasherOptions.KeySize);
         byte[] hash = CreateHash(password, salt);
 
@@ -19,12 +24,22 @@ public class PasswordHasher(IOptions<PasswordHasherOptions> passwordHasherOption
 
     public bool VerifyPassword(string password, string passwordHash)
     {
+        if (string.IsNullOrWhiteSpace(password))
+        {
+            throw new ArgumentNullException(nameof(password));
+        }
+
+        if (string.IsNullOrWhiteSpace(passwordHash))
+        {
+            throw new ArgumentNullException(nameof(passwordHash));
+        }
+
         string[] saltAndHash = passwordHash.Split(_passwordHasherOptions.Delimiter);
 
         byte[] salt = Convert.FromBase64String(saltAndHash[0]);
         byte[] hash = Convert.FromBase64String(saltAndHash[1]);
 
-        byte[] hashToVerify = CreateHash(password,salt);
+        byte[] hashToVerify = CreateHash(password, salt);
 
         return CryptographicOperations.FixedTimeEquals(hash, hashToVerify);
     }

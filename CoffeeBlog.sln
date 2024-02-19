@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeBlog.API", "CoffeeBlog.API\CoffeeBlog.API.csproj", "{2EE9214D-991A-4F72-9454-9DC216F51D38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeeBlog.API", "CoffeeBlog.API\CoffeeBlog.API.csproj", "{2EE9214D-991A-4F72-9454-9DC216F51D38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeBlog.Domain", "CoffeeBlog.Domain\CoffeeBlog.Domain.csproj", "{421722D4-B183-4470-9E5E-E5D6994FB750}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeeBlog.Domain", "CoffeeBlog.Domain\CoffeeBlog.Domain.csproj", "{421722D4-B183-4470-9E5E-E5D6994FB750}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeBlog.Application", "CoffeeBlog.Application\CoffeeBlog.Application.csproj", "{0E4C625A-BECE-4B33-B8BE-436D915407D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeeBlog.Application", "CoffeeBlog.Application\CoffeeBlog.Application.csproj", "{0E4C625A-BECE-4B33-B8BE-436D915407D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeBlog.Infrastructure", "CoffeeBlog.Infrastructure\CoffeeBlog.Infrastructure.csproj", "{D2CCA768-4BE7-4F3E-8013-3E4DCD9390B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeeBlog.Infrastructure", "CoffeeBlog.Infrastructure\CoffeeBlog.Infrastructure.csproj", "{D2CCA768-4BE7-4F3E-8013-3E4DCD9390B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeBlog.Infrastructure.UnitTests", "CoffeeBlog.Infrastructure.UnitTests\CoffeeBlog.Infrastructure.UnitTests.csproj", "{7096B800-B253-4051-921D-723D6CDB9116}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D2CCA768-4BE7-4F3E-8013-3E4DCD9390B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2CCA768-4BE7-4F3E-8013-3E4DCD9390B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2CCA768-4BE7-4F3E-8013-3E4DCD9390B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7096B800-B253-4051-921D-723D6CDB9116}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7096B800-B253-4051-921D-723D6CDB9116}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7096B800-B253-4051-921D-723D6CDB9116}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7096B800-B253-4051-921D-723D6CDB9116}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
