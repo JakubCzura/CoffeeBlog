@@ -4,8 +4,8 @@ namespace CoffeeBlog.Infrastructure.UnitTests.HelpersForTests;
 
 public class ConfigurationProviderHelper
 {
-    public static IConfiguration InitConfiguration()
-        => new ConfigurationBuilder().AddJsonFile(@"HelpersForTests\appsettings.tests.json")
+    public static IConfiguration InitializeConfiguration()
+        => new ConfigurationBuilder().AddJsonFile(Path.Combine("HelpersForTests", "appsettings.tests.json"))
                                      .AddEnvironmentVariables()
                                      .Build();
 }

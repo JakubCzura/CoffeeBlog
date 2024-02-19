@@ -9,7 +9,7 @@ namespace CoffeeBlog.Infrastructure.UnitTests.Security.Password;
 
 public class PasswordHasherTests
 {
-    private readonly IOptions<PasswordHasherOptions> _passwordHasherOptions = Options.Create(ConfigurationProviderHelper.InitConfiguration()
+    private readonly IOptions<PasswordHasherOptions> _passwordHasherOptions = Options.Create(ConfigurationProviderHelper.InitializeConfiguration()
                                                                                                                         .GetSection(PasswordHasherOptions.AppsettingsKey)
                                                                                                                         .Get<PasswordHasherOptions>()!);
 
@@ -77,7 +77,7 @@ public class PasswordHasherTests
     [InlineData("")]
     [InlineData(" ")]
     public void VerifyPassword_should_ThrowArgumentNullException_when_GivenPasswordIsEmpty(string password)
-        => _passwordHasher.Invoking(x => x.VerifyPassword(password, "PasswordIsNotEmpty"))
+        => _passwordHasher.Invoking(x => x.VerifyPassword(password, "PasswordHashIsNotEmpty"))
                           .Should()
                           .Throw<ArgumentNullException>();
 
@@ -86,7 +86,7 @@ public class PasswordHasherTests
     [InlineData("")]
     [InlineData(" ")]
     public void VerifyPassword_should_ThrowArgumentNullException_when_GivenPasswordHashIsEmpty(string passwordHash)
-        => _passwordHasher.Invoking(x => x.VerifyPassword("PasswordIsNotNull", passwordHash))
+        => _passwordHasher.Invoking(x => x.VerifyPassword("PasswordIsNotEmpty", passwordHash))
                           .Should()
                           .Throw<ArgumentNullException>();
 }
