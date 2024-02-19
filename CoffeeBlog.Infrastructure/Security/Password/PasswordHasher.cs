@@ -12,11 +12,7 @@ public class PasswordHasher(IOptions<PasswordHasherOptions> passwordHasherOption
     public string HashPassword(string password)
     {
         byte[] salt = RandomNumberGenerator.GetBytes(_passwordHasherOptions.KeySize);
-        byte[] hash = Rfc2898DeriveBytes.Pbkdf2(password,
-                                                salt,
-                                                _passwordHasherOptions.Iterations,
-                                                _passwordHasherOptions.HashAlgorithmName,
-                                                _passwordHasherOptions.KeySize);
+        byte[] hash = CreateHash(password, salt);
 
         return string.Join(_passwordHasherOptions.Delimiter, Convert.ToBase64String(salt), Convert.ToBase64String(hash));
     }
@@ -28,12 +24,15 @@ public class PasswordHasher(IOptions<PasswordHasherOptions> passwordHasherOption
         byte[] salt = Convert.FromBase64String(saltAndHash[0]);
         byte[] hash = Convert.FromBase64String(saltAndHash[1]);
 
-        byte[] hashToVerify = Rfc2898DeriveBytes.Pbkdf2(password,
-                                                        salt,
-                                                        _passwordHasherOptions.Iterations,
-                                                        _passwordHasherOptions.HashAlgorithmName,
-                                                        _passwordHasherOptions.KeySize);
+        byte[] hashToVerify = CreateHash(password,salt);
 
         return CryptographicOperations.FixedTimeEquals(hash, hashToVerify);
     }
+
+    private byte[] CreateHash(string password, byte[] salt)
+        => Rfc2898DeriveBytes.Pbkdf2(password,
+                                     salt,
+                                     _passwordHasherOptions.Iterations,
+                                     _passwordHasherOptions.HashAlgorithmName,
+                                     _passwordHasherOptions.KeySize);
 }
