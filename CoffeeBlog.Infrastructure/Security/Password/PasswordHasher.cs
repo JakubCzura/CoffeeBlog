@@ -28,11 +28,11 @@ public class PasswordHasher(IOptions<PasswordHasherOptions> passwordHasherOption
         byte[] salt = Convert.FromBase64String(saltAndHash[0]);
         byte[] hash = Convert.FromBase64String(saltAndHash[1]);
 
-        var inputHash = Rfc2898DeriveBytes.Pbkdf2(password,
-                                                  salt,
-                                                  _passwordHasherOptions.Iterations,
-                                                  _passwordHasherOptions.HashAlgorithmName,
-                                                  _passwordHasherOptions.KeySize);
+        byte[] inputHash = Rfc2898DeriveBytes.Pbkdf2(password,
+                                                     salt,
+                                                     _passwordHasherOptions.Iterations,
+                                                     _passwordHasherOptions.HashAlgorithmName,
+                                                     _passwordHasherOptions.KeySize);
 
         return CryptographicOperations.FixedTimeEquals(hash, inputHash);
     }
