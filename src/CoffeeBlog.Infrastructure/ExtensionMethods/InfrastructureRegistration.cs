@@ -27,11 +27,7 @@ public static class InfrastructureRegistration
         services.Configure<AuthenticationOptions>(configuration.GetSection(AuthenticationOptions.AppsettingsKey));
         services.Configure<PasswordHasherOptions>(configuration.GetSection(PasswordHasherOptions.AppsettingsKey));
 
-        services.AddDbContext<CoffeeBlogDbContext>(options =>
-        {
-            options.UseSqlServer(configuration.GetConnectionString("CoffeeBlogDbConnectionString"),
-                                 builer => builer.MigrationsAssembly(typeof(CoffeeBlogDbContext).Assembly.FullName));
-        });
+        services.ConfigureDbContext(configuration);
 
         services.AddScoped<IApiErrorRepository, ApiErrorRepository>();
         services.AddScoped<IRequestDetailRepository, RequestDetailRepository>();
