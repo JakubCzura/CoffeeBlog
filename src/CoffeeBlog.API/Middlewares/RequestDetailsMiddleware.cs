@@ -15,13 +15,13 @@ public class RequestDetailsMiddleware : IMiddleware
         string? requestBody = null;
         string? responseBody = null;
 
+        context.Request.EnableBuffering();
         if (!string.IsNullOrWhiteSpace(context.Request.ContentType) && context.Request.ContentType.Equals(Constants.ContentType.ApplicationJson, StringComparison.OrdinalIgnoreCase))
         {
-            context.Request.EnableBuffering();
             context.Request.Body.Position = 0;
             requestBody = await context.Request.Body.ReadAsStringAsync();
-            context.Request.Body.Position = 0;
         }
+        context.Request.Body.Position = 0;
 
         Stream originalBodyStream = context.Response.Body;
         await using (MemoryStream responseBodyStream = new())
@@ -34,8 +34,8 @@ public class RequestDetailsMiddleware : IMiddleware
             {
                 context.Response.Body.Seek(0, SeekOrigin.Begin);
                 responseBody = await context.Response.Body.ReadAsStringAsync();
-                context.Response.Body.Seek(0, SeekOrigin.Begin);
             }
+            context.Response.Body.Seek(0, SeekOrigin.Begin);
 
             await responseBodyStream.CopyToAsync(originalBodyStream);
         }
