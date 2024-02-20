@@ -2,17 +2,16 @@
 
 namespace CoffeeBlog.API.Middlewares;
 
-public class ExceptionMiddleware(RequestDelegate next,
-                                 ILogger<ExceptionMiddleware> logger)
+public class ExceptionMiddleware(ILogger<ExceptionMiddleware> logger) : IMiddleware
 {
-    private readonly RequestDelegate _next = next;
     private readonly ILogger<ExceptionMiddleware> _logger = logger;
 
-    public async Task InvokeAsync(HttpContext httpContext)
+    public async Task InvokeAsync(HttpContext context,
+                                  RequestDelegate next)
     {
         try
         {
-            await _next(httpContext);
+            await next.Invoke(context);
         }
         catch (Exception exception)
         {

@@ -4,42 +4,40 @@ using System.Diagnostics;
 
 namespace CoffeeBlog.API.Middlewares;
 
-public class RequestDetailsMiddleware(RequestDelegate next)
+public class RequestDetailsMiddleware : IMiddleware
 {
-    private readonly RequestDelegate _next = next;
-
-    public async Task InvokeAsync(HttpContext httpContext)
+    public async Task InvokeAsync(HttpContext context,
+                                  RequestDelegate next)
     {
         Stopwatch stopwatch = Stopwatch.StartNew();
 
-        httpContext.Request.EnableBuffering();
-        httpContext.Request.Body.Position = 0;
-        string requestBody = await httpContext.Request.Body.ReadAsStringAsync();
-        httpContext.Request.Body.Position = 0;
+        context.Request.EnableBuffering();
+        context.Request.Body.Position = 0;
+        string requestBody = await context.Request.Body.ReadAsStringAsync();
+        context.Request.Body.Position = 0;
 
         string responseBody = string.Empty;
-        Stream originalBodyStream = httpContext.Response.Body;
+        Stream originalBodyStream = context.Response.Body;
         using (MemoryStream responseBodyStream = new())
         {
-            httpContext.Response.Body = responseBodyStream;
+            context.Response.Body = responseBodyStream;
+            await next.Invoke(context);
 
-            await _next(httpContext);
-
-            httpContext.Response.Body.Seek(0, SeekOrigin.Begin);
-            responseBody = await httpContext.Response.Body.ReadAsStringAsync();
-            httpContext.Response.Body.Seek(0, SeekOrigin.Begin);
+            context.Response.Body.Seek(0, SeekOrigin.Begin);
+            responseBody = await context.Response.Body.ReadAsStringAsync();
+            context.Response.Body.Seek(0, SeekOrigin.Begin);
             await responseBodyStream.CopyToAsync(originalBodyStream);
         }
 
         stopwatch.Stop();
-        RequestDetail requestDetail = new(httpContext.GetRouteData().Values["controller"]?.ToString() ?? string.Empty,
-                                          httpContext.Request.Path,
-                                          httpContext.Request.Method,
-                                          httpContext.Response.StatusCode,
+        RequestDetail requestDetail = new(context.GetRouteData().Values["controller"]?.ToString() ?? string.Empty,
+                                          context.Request.Path,
+                                          context.Request.Method,
+                                          context.Response.StatusCode,
                                           requestBody,
-                                          httpContext.Request.ContentType,
+                                          context.Request.ContentType,
                                           responseBody,
-                                          httpContext.Response.ContentType,
+                                          context.Response.ContentType,
                                           stopwatch.ElapsedMilliseconds,
                                           DateTime.UtcNow);
 

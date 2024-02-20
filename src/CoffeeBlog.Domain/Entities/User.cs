@@ -9,5 +9,7 @@ public class User : DbEntityBase
     public string Password { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
-    public List<UserToRole> UserToRoles { get; set; } = [];
+
+    public virtual List<UserLastCredential> LastCredentials { get; set; } = [];
+    public virtual List<UserToRole> UserToRoles { get; set; } = [];
 }
