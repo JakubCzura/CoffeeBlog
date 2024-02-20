@@ -2,7 +2,7 @@
 
 public interface IEmailMessage
 {
-    string? To { get; init; }
+    string To { get; init; }
     string? Subject { get; init; }
     string? Body { get; init; }
 }
