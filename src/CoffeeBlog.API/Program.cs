@@ -23,6 +23,9 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        builder.Services.AddSingleton<ExceptionMiddleware>();
+        builder.Services.AddSingleton<RequestDetailsMiddleware>();
+
         WebApplication app = builder.Build();
 
         app.UseMiddleware<ExceptionMiddleware>();
