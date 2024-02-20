@@ -1,4 +1,5 @@
 ﻿using CoffeeBlog.API.ExtensionMethods;
+using CoffeeBlog.Domain.Constants;
 using CoffeeBlog.Domain.Entities;
 using System.Diagnostics;
 
@@ -11,21 +12,31 @@ public class RequestDetailsMiddleware : IMiddleware
     {
         Stopwatch stopwatch = Stopwatch.StartNew();
 
-        context.Request.EnableBuffering();
-        context.Request.Body.Position = 0;
-        string requestBody = await context.Request.Body.ReadAsStringAsync();
-        context.Request.Body.Position = 0;
+        string? requestBody = null;
+        string? responseBody = null;
 
-        string responseBody = string.Empty;
+        if (!string.IsNullOrWhiteSpace(context.Request.ContentType) && context.Request.ContentType.Equals(Constants.ContentType.ApplicationJson, StringComparison.OrdinalIgnoreCase))
+        {
+            context.Request.EnableBuffering();
+            context.Request.Body.Position = 0;
+            requestBody = await context.Request.Body.ReadAsStringAsync();
+            context.Request.Body.Position = 0;
+        }
+
         Stream originalBodyStream = context.Response.Body;
-        using (MemoryStream responseBodyStream = new())
+        await using (MemoryStream responseBodyStream = new())
         {
             context.Response.Body = responseBodyStream;
+
             await next.Invoke(context);
 
-            context.Response.Body.Seek(0, SeekOrigin.Begin);
-            responseBody = await context.Response.Body.ReadAsStringAsync();
-            context.Response.Body.Seek(0, SeekOrigin.Begin);
+            if (!string.IsNullOrWhiteSpace(context.Response.ContentType) && context.Response.ContentType.Equals(Constants.ContentType.ApplicationJson, StringComparison.OrdinalIgnoreCase))
+            {
+                context.Response.Body.Seek(0, SeekOrigin.Begin);
+                responseBody = await context.Response.Body.ReadAsStringAsync();
+                context.Response.Body.Seek(0, SeekOrigin.Begin);
+            }
+
             await responseBodyStream.CopyToAsync(originalBodyStream);
         }
 
