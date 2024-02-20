@@ -1,5 +1,6 @@
 ﻿using CoffeeBlog.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
 
@@ -13,7 +14,5 @@ public class CoffeeBlogDbContext(DbContextOptions<CoffeeBlogDbContext> options) 
     public DbSet<UserToRole> UserToRoles { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
-    }
+        => modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 }
