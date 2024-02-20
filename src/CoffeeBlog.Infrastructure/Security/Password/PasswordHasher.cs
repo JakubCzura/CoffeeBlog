@@ -22,7 +22,8 @@ public class PasswordHasher(IOptions<PasswordHasherOptions> passwordHasherOption
         return string.Join(_passwordHasherOptions.Delimiter, Convert.ToBase64String(salt), Convert.ToBase64String(hash));
     }
 
-    public bool VerifyPassword(string password, string passwordHash)
+    public bool VerifyPassword(string password,
+                               string passwordHash)
     {
         if (string.IsNullOrWhiteSpace(password))
         {
@@ -44,7 +45,8 @@ public class PasswordHasher(IOptions<PasswordHasherOptions> passwordHasherOption
         return CryptographicOperations.FixedTimeEquals(hash, hashToVerify);
     }
 
-    private byte[] CreateHash(string password, byte[] salt)
+    private byte[] CreateHash(string password,
+                              byte[] salt)
         => Rfc2898DeriveBytes.Pbkdf2(password,
                                      salt,
                                      _passwordHasherOptions.Iterations,
