@@ -11,17 +11,12 @@ public class RequestDetailsMiddleware : IMiddleware
                                   RequestDelegate next)
     {
         Stopwatch stopwatch = Stopwatch.StartNew();
-
-        string? requestBody = null;
         string? responseBody = null;
 
         context.Request.EnableBuffering();
-        if (!string.IsNullOrWhiteSpace(context.Request.ContentType) && context.Request.ContentType.Equals(Constants.ContentType.ApplicationJson, StringComparison.OrdinalIgnoreCase))
-        {
-            context.Request.Body.Position = 0;
-            requestBody = await context.Request.Body.ReadAsStringAsync();
-        }
-        context.Request.Body.Position = 0;
+
+        string? requestBody = await ReadBodyAsString(context.Request.ContentType,
+                                                     context.Request.Body);
 
         Stream originalBodyStream = context.Response.Body;
         await using (MemoryStream responseBodyStream = new())
@@ -30,12 +25,8 @@ public class RequestDetailsMiddleware : IMiddleware
 
             await next.Invoke(context);
 
-            if (!string.IsNullOrWhiteSpace(context.Response.ContentType) && context.Response.ContentType.Equals(Constants.ContentType.ApplicationJson, StringComparison.OrdinalIgnoreCase))
-            {
-                context.Response.Body.Seek(0, SeekOrigin.Begin);
-                responseBody = await context.Response.Body.ReadAsStringAsync();
-            }
-            context.Response.Body.Seek(0, SeekOrigin.Begin);
+            responseBody = await ReadBodyAsString(context.Request.ContentType,
+                                                  context.Response.Body);
 
             await responseBodyStream.CopyToAsync(originalBodyStream);
         }
@@ -53,5 +44,22 @@ public class RequestDetailsMiddleware : IMiddleware
                                           DateTime.UtcNow);
 
         //Write data to database
+    }
+
+    private static bool IsJson(string? contentType)
+        => !string.IsNullOrWhiteSpace(contentType) 
+           && contentType.Equals(Constants.ContentType.ApplicationJson, StringComparison.OrdinalIgnoreCase);
+
+    private static async Task<string?> ReadBodyAsString(string? contentType,
+                                                        Stream body)
+    {
+        string? bodyAsString = null;
+        if (IsJson(contentType))
+        {
+            body.Seek(0, SeekOrigin.Begin);
+            bodyAsString = await body.ReadAsStringAsync();
+        }
+        body.Seek(0, SeekOrigin.Begin);
+        return bodyAsString;
     }
 }
