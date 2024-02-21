@@ -9,13 +9,13 @@ namespace CoffeeBlog.Infrastructure.UnitTests.Security.Password;
 
 public class PasswordHasherTests
 {
-    private readonly IOptions<PasswordHasherOptions> _passwordHasherOptions = Options.Create(ConfigurationProviderHelper.InitializeConfiguration()
-                                                                                                                        .GetSection(PasswordHasherOptions.AppsettingsKey)
-                                                                                                                        .Get<PasswordHasherOptions>()!);
+    private readonly PasswordHasherOptions _passwordHasherOptions = ConfigurationProviderHelper.InitializeConfiguration()
+                                                                                               .GetSection(PasswordHasherOptions.AppsettingsKey)
+                                                                                               .Get<PasswordHasherOptions>()!;
 
     private readonly PasswordHasher _passwordHasher;
 
-    public PasswordHasherTests() => _passwordHasher = new PasswordHasher(_passwordHasherOptions);
+    public PasswordHasherTests() => _passwordHasher = new PasswordHasher(Options.Create(_passwordHasherOptions));
 
     [Theory]
     [InlineData("1")]
@@ -30,7 +30,7 @@ public class PasswordHasherTests
         // Assert
         result.Should().NotBeNullOrEmpty();
         result.Should().NotBe(password);
-        result.Split(_passwordHasherOptions.Value.Delimiter).Should().HaveCount(2);
+        result.Split(_passwordHasherOptions.Delimiter).Should().HaveCount(2);
     }
 
     [Theory]
