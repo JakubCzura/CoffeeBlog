@@ -32,16 +32,16 @@ public class RequestDetailsMiddleware : IMiddleware
         }
 
         stopwatch.Stop();
-        RequestDetail requestDetail = new(context.GetRouteData().Values["controller"]?.ToString() ?? string.Empty,
-                                          context.Request.Path,
-                                          context.Request.Method,
-                                          context.Response.StatusCode,
-                                          requestBody,
-                                          context.Request.ContentType,
-                                          responseBody,
-                                          context.Response.ContentType,
-                                          stopwatch.ElapsedMilliseconds,
-                                          DateTime.UtcNow);
+        RequestDetailEntity requestDetail = new(context.GetRouteData().Values["controller"]?.ToString() ?? string.Empty,
+                                                context.Request.Path,
+                                                context.Request.Method,
+                                                context.Response.StatusCode,
+                                                requestBody,
+                                                context.Request.ContentType,
+                                                responseBody,
+                                                context.Response.ContentType,
+                                                stopwatch.ElapsedMilliseconds,
+                                                DateTime.UtcNow);
 
         //Write data to database
     }

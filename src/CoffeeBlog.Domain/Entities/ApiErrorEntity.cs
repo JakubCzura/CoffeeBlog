@@ -2,10 +2,10 @@
 
 namespace CoffeeBlog.Domain.Entities;
 
-public class ApiError(string exception,
-                      string message,
-                      string description,
-                      DateTime createdAt) : DbEntityBase
+public class ApiErrorEntity(string exception,
+                            string message,
+                            string description,
+                            DateTime createdAt) : DbEntityBase
 {
     public string Exception { get; set; } = exception;
     public string Message { get; set; } = message;

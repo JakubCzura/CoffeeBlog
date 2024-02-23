@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoffeeBlog.Infrastructure.Persistence.EntitiesConfigurations;
 
-public class ApiErrorConfiguration : IEntityTypeConfiguration<ApiError>
+public class ApiErrorConfiguration : IEntityTypeConfiguration<ApiErrorEntity>
 {
-    public void Configure(EntityTypeBuilder<ApiError> builder)
+    public void Configure(EntityTypeBuilder<ApiErrorEntity> builder)
     {
         throw new NotImplementedException();
     }

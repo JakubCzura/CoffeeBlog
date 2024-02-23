@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoffeeBlog.Infrastructure.Persistence.EntitiesConfigurations;
 
-public class RequestDetailConfiguration : IEntityTypeConfiguration<RequestDetail>
+public class RequestDetailConfiguration : IEntityTypeConfiguration<RequestDetailEntity>
 {
-    public void Configure(EntityTypeBuilder<RequestDetail> builder)
+    public void Configure(EntityTypeBuilder<RequestDetailEntity> builder)
     {
         throw new NotImplementedException();
     }

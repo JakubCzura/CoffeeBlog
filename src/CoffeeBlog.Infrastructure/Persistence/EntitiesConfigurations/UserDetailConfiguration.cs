@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoffeeBlog.Infrastructure.Persistence.EntitiesConfigurations;
 
-public class UserDetailConfiguration : IEntityTypeConfiguration<UserDetail>
+public class UserDetailConfiguration : IEntityTypeConfiguration<UserDetailEntity>
 {
-    public void Configure(EntityTypeBuilder<UserDetail> builder)
+    public void Configure(EntityTypeBuilder<UserDetailEntity> builder)
     {
         throw new NotImplementedException();
     }

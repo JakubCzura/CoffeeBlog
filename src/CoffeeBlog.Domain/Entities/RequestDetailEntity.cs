@@ -2,16 +2,16 @@
 
 namespace CoffeeBlog.Domain.Entities;
 
-public class RequestDetail(string controllerName,
-                           string path,
-                           string httpMethod,
-                           int statusCode,
-                           string? requestBody,
-                           string? requestContentType,
-                           string? responseBody,
-                           string? responseContentType,
-                           long requestTimeInMiliseconds,
-                           DateTime sentAt) : DbEntityBase
+public class RequestDetailEntity(string controllerName,
+                                 string path,
+                                 string httpMethod,
+                                 int statusCode,
+                                 string? requestBody,
+                                 string? requestContentType,
+                                 string? responseBody,
+                                 string? responseContentType,
+                                 long requestTimeInMiliseconds,
+                                 DateTime sentAt) : DbEntityBase
 {
     public string ControllerName { get; set; } = controllerName;
     public string Path { get; set; } = path;

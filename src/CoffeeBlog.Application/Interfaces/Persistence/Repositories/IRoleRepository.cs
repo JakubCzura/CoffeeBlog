@@ -2,6 +2,6 @@
 
 namespace CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 
-public interface IRoleRepository : IDbEntityBaseRepository<Role>
+public interface IRoleRepository : IDbEntityBaseRepository<RoleEntity>
 {
 }
