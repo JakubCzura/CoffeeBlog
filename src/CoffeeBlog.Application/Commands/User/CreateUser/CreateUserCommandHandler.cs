@@ -12,7 +12,8 @@ public class CreateUserCommandHandler(IUserRepository userRepository,
     private readonly IUserRepository _userRepository = userRepository;
     private readonly IMapper _mapper = mapper;
 
-    public async Task<CreateUserViewModel> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public async Task<CreateUserViewModel> Handle(CreateUserCommand request,
+                                                  CancellationToken cancellationToken)
     {
         UserEntity user = _mapper.Map<UserEntity>(request);
         await _userRepository.CreateAsync(user, cancellationToken);
