@@ -14,14 +14,17 @@ public interface IUserRepository : IDbEntityBaseRepository<UserEntity>
                                                 CancellationToken cancellationToken);
 
     /// <summary>
-    /// Checks if user with given e-mail or username exists.
-    /// <para>Usernames and e-mails are unique in database. Moreover there must not be any username equal to any e-mail as it can cause many issues.</para>
+    /// Checks if given email and username are unique in database and they are not equal.
+    /// <para>Usernames and e-mails are unique in database. Moreover there must not be any username equal to any e-mail as it can cause many issues.
+    /// That's why email are compared with username in the query.</para>
+    /// <para>If this method returns false then new user must not be created in database.</para>
     /// </summary>
-    /// <param name="usernameOrEmail">User's e-mail or username.</param>
+    /// <param name="username">User's username.</param>
+    /// <param name="email">User's e-mail.</param>
     /// <param name="cancellationToken"><see cref="CancellationToken"/></param>
-    /// <returns>True if user with given username or e-mail exists.</returns>
-    Task<bool> AreUsernameAndEmailUniqueAndDifferentAsync(string email,
-                                                          string username,
+    /// <returns>True if email and username are unique and different, otherwise false.</returns>
+    Task<bool> AreUsernameAndEmailUniqueAndDifferentAsync(string username,
+                                                          string email,
                                                           CancellationToken cancellationToken);
 
 }
