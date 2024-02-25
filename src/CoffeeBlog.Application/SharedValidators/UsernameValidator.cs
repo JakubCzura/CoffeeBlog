@@ -10,5 +10,5 @@ public class UsernameValidator : AbstractValidator<string>
 {
     public UsernameValidator()
         => RuleFor(username => username).NotEmpty().WithMessage("Username is required.")
-                                        .Length(3, 100).WithMessage("Username must be between 3 and 100 characters long");
+                                        .MaximumLength(100).WithMessage("Username can't have more than 100 characters");
 }
