@@ -1,9 +1,9 @@
 ﻿using CoffeeBlog.Application.ViewModels.User;
 using MediatR;
 
-namespace CoffeeBlog.Application.Commands.User.LogInUser;
+namespace CoffeeBlog.Application.Queries.User.LogInUser;
 
-public class LogInUserCommand : IRequest<LogInUserViewModel>
+public class LogInUserQuery : IRequest<LogInUserViewModel>
 {
     /// <summary>
     /// User can log in with either username or email.

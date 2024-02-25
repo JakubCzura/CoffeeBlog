@@ -6,6 +6,7 @@ namespace CoffeeBlog.API.Controllers.ControllersBase;
 
 [ApiController]
 [Route(Constants.Route.ApiController)]
+[Produces(Constants.ContentType.ApplicationJson)]
 [Authorize]
 public class ApiControllerBase : ControllerBase
 {

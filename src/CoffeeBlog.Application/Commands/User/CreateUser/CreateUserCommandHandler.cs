@@ -16,6 +16,11 @@ public class CreateUserCommandHandler(IUserRepository userRepository,
                                                   CancellationToken cancellationToken)
     {
         UserEntity user = _mapper.Map<UserEntity>(request);
+        if(await _userRepository.AreUsernameAndEmailUniqueAndDifferentAsync(request.Email, request.Username, cancellationToken))
+        {
+            throw new Exception("User with given e-mail or username already exists. Email must be different from username.");
+        }
+
         await _userRepository.CreateAsync(user, cancellationToken);
         CreateUserViewModel result = _mapper.Map<CreateUserViewModel>(request);
         return result;

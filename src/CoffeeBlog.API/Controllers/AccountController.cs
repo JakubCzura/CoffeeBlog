@@ -1,6 +1,6 @@
 ﻿using CoffeeBlog.API.Controllers.ControllersBase;
 using CoffeeBlog.Application.Commands.User.CreateUser;
-using CoffeeBlog.Application.Commands.User.LogInUser;
+using CoffeeBlog.Application.Queries.User.LogInUser;
 using CoffeeBlog.Application.ViewModels.User;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -27,7 +27,7 @@ public class AccountController(IMediator mediator) : ApiControllerBase
 
     [AllowAnonymous]
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LogInUserCommand logInUserCommand)
+    public async Task<IActionResult> Login([FromBody] LogInUserQuery logInUserCommand)
     {
         LogInUserViewModel result = await _mediator.Send(logInUserCommand);
         return Ok(result);
