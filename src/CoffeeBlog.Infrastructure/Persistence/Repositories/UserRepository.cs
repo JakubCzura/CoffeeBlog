@@ -34,8 +34,8 @@ public class UserRepository(CoffeeBlogDbContext coffeeBlogDbContext) : DbEntityB
                                                                        string email,
                                                                        CancellationToken cancellationToken)
         => email != username && await _coffeeBlogDbContext.Users.AsNoTracking()
-                                                                .AllAsync(x => x.Email != email
-                                                                            && x.Email != username
+                                                                .AllAsync(x => x.Username != username
                                                                             && x.Username != email
-                                                                            && x.Username != username, cancellationToken);
+                                                                            && x.Email != email
+                                                                            && x.Email != username, cancellationToken);
 }
