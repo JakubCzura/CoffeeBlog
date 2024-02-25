@@ -2,6 +2,10 @@
 
 namespace CoffeeBlog.Application.SharedValidators;
 
+/// <summary>
+/// Validator to validate user's password.
+/// Should be used to validate password when creating new user or updating existing one.
+/// </summary>
 public class PasswordValidator : AbstractValidator<string>
 {
     public PasswordValidator()
