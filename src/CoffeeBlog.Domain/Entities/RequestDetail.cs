@@ -2,7 +2,7 @@
 
 namespace CoffeeBlog.Domain.Entities;
 
-public class RequestDetailEntity(string controllerName,
+public class RequestDetail(string controllerName,
                                  string path,
                                  string httpMethod,
                                  int statusCode,

@@ -2,7 +2,7 @@
 
 namespace CoffeeBlog.Domain.Entities;
 
-public class UserDetailEntity : DbEntityBase
+public class UserDetail : DbEntityBase
 {
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime LastSuccessfullSignIn { get; set; } = DateTime.UtcNow;

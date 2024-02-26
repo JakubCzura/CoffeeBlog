@@ -35,7 +35,7 @@ public class RequestDetailsMiddleware : IMiddleware
         string? userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
         stopwatch.Stop();
-        RequestDetailEntity requestDetail = new(context.GetRouteData().Values["controller"]?.ToString() ?? string.Empty,
+        RequestDetail requestDetail = new(context.GetRouteData().Values["controller"]?.ToString() ?? string.Empty,
                                                 context.Request.Path,
                                                 context.Request.Method,
                                                 context.Response.StatusCode,

@@ -2,7 +2,7 @@
 
 namespace CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 
-public interface IUserRepository : IDbEntityBaseRepository<UserEntity>
+public interface IUserRepository : IDbEntityBaseRepository<User>
 {
     /// <summary>
     /// Returns a user by email or username.
@@ -10,7 +10,7 @@ public interface IUserRepository : IDbEntityBaseRepository<UserEntity>
     /// <param name="usernameOrEmail">User's email or username.</param>
     /// <param name="cancellationToken"><see cref="CancellationToken"/></param>
     /// <returns>User if found, otherwise null.</returns>
-    Task<UserEntity?> GetByEmailOrUsernameAsync(string usernameOrEmail,
+    Task<User?> GetByEmailOrUsernameAsync(string usernameOrEmail,
                                                 CancellationToken cancellationToken);
 
     /// <summary>

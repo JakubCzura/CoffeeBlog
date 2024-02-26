@@ -2,7 +2,7 @@
 
 namespace CoffeeBlog.Domain.Entities;
 
-public class UserEntity : DbEntityBase
+public class User : DbEntityBase
 {
     public string Username { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
@@ -10,7 +10,7 @@ public class UserEntity : DbEntityBase
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime? UpdatedAt { get; set; }
 
-    public virtual List<UserLastCredentialEntity> LastCredentials { get; set; } = [];
-    public virtual List<RoleEntity> Roles { get; set; } = [];
-    public virtual List<RequestDetailEntity> RequestDetails { get; set; } = [];
+    public virtual List<UserLastCredential> LastCredentials { get; set; } = [];
+    public virtual List<Role> Roles { get; set; } = [];
+    public virtual List<RequestDetail> RequestDetails { get; set; } = [];
 }

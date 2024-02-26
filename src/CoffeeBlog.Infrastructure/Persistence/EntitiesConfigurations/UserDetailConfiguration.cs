@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoffeeBlog.Infrastructure.Persistence.EntitiesConfigurations;
 
-public class UserDetailConfiguration : IEntityTypeConfiguration<UserDetailEntity>
+public class UserDetailConfiguration : IEntityTypeConfiguration<UserDetail>
 {
-    public void Configure(EntityTypeBuilder<UserDetailEntity> builder)
+    public void Configure(EntityTypeBuilder<UserDetail> builder)
     {
         builder.Property(x => x.CreatedAt).IsRequired();
 

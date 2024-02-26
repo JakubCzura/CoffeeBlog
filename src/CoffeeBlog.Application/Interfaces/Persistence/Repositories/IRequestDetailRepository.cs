@@ -2,6 +2,6 @@
 
 namespace CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 
-public interface IRequestDetailRepository : IDbEntityBaseRepository<RequestDetailEntity>
+public interface IRequestDetailRepository : IDbEntityBaseRepository<RequestDetail>
 {
 }

@@ -2,7 +2,7 @@
 
 namespace CoffeeBlog.Domain.Entities;
 
-public class UserToRoleEntity : DbEntityBase
+public class UserToRole : DbEntityBase
 {
     public int UserId { get; set; }
     public int RoleId { get; set; }

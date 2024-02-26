@@ -1,7 +1,7 @@
 ﻿using CoffeeBlog.API.Controllers.ControllersBase;
-using CoffeeBlog.Application.Commands.User.CreateUser;
-using CoffeeBlog.Application.Queries.User.LogInUser;
-using CoffeeBlog.Application.ViewModels.User;
+using CoffeeBlog.Application.Commands.UserCommands.CreateUser;
+using CoffeeBlog.Application.Queries.UserQueries.LogInUser;
+using CoffeeBlog.Application.ViewModels.UserViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

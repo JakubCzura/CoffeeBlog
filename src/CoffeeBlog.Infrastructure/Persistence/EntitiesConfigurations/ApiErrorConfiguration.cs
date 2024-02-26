@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoffeeBlog.Infrastructure.Persistence.EntitiesConfigurations;
 
-public class ApiErrorConfiguration : IEntityTypeConfiguration<ApiErrorEntity>
+public class ApiErrorConfiguration : IEntityTypeConfiguration<ApiError>
 {
-    public void Configure(EntityTypeBuilder<ApiErrorEntity> builder)
+    public void Configure(EntityTypeBuilder<ApiError> builder)
     {
         builder.ToTable("ApiErrors");
 

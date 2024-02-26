@@ -1,10 +1,10 @@
 ﻿using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 using CoffeeBlog.Application.Interfaces.Security.Authentication;
-using CoffeeBlog.Application.ViewModels.User;
+using CoffeeBlog.Application.ViewModels.UserViewModels;
 using CoffeeBlog.Domain.Entities;
 using MediatR;
 
-namespace CoffeeBlog.Application.Queries.User.LogInUser;
+namespace CoffeeBlog.Application.Queries.UserQueries.LogInUser;
 
 public class LogInUserQueryHandler(IUserRepository userRepository,
                                    IJwtService jwtService) : IRequestHandler<LogInUserQuery, LogInUserViewModel>
@@ -15,7 +15,7 @@ public class LogInUserQueryHandler(IUserRepository userRepository,
     public async Task<LogInUserViewModel> Handle(LogInUserQuery request,
                                            CancellationToken cancellationToken)
     {
-        UserEntity? user = await _userRepository.GetByEmailOrUsernameAsync(request.UsernameOrNickname, cancellationToken);
+        User? user = await _userRepository.GetByEmailOrUsernameAsync(request.UsernameOrNickname, cancellationToken);
         if (user == null)
         {
             throw new Exception("User with given e-mail or username does not exist.");

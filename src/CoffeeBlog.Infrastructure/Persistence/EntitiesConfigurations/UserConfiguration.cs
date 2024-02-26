@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoffeeBlog.Infrastructure.Persistence.EntitiesConfigurations;
 
-public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
+public class UserConfiguration : IEntityTypeConfiguration<User>
 {
-    public void Configure(EntityTypeBuilder<UserEntity> builder)
+    public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.ToTable("Users");
 
@@ -26,7 +26,7 @@ public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
 
         builder.HasMany(x => x.Roles)
                .WithMany(x => x.Users)
-               .UsingEntity<UserToRoleEntity>();
+               .UsingEntity<UserToRole>();
 
         builder.HasMany(x => x.RequestDetails)
                .WithOne()

@@ -2,6 +2,6 @@
 
 namespace CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 
-public interface IUserDetailRepository : IDbEntityBaseRepository<UserDetailEntity>
+public interface IUserDetailRepository : IDbEntityBaseRepository<UserDetail>
 {
 }

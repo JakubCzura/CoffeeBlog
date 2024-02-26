@@ -2,9 +2,9 @@
 
 namespace CoffeeBlog.Domain.Entities;
 
-public class RoleEntity : DbEntityBase
+public class Role : DbEntityBase
 {
     public string Name { get; set; } = string.Empty;
 
-    public List<UserEntity> Users { get; set; } = [];
+    public List<User> Users { get; set; } = [];
 }

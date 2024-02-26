@@ -17,7 +17,7 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> logger) : IMiddlew
         {
             _logger.LogError(exception, "Exception caught by exception middleware");
 
-            ApiErrorEntity error = new(exception.ToString(),
+            ApiError error = new(exception.ToString(),
                                        exception.Message,
                                        "Exception caught by exception middleware",
                                        DateTime.UtcNow);

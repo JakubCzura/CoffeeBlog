@@ -1,7 +1,7 @@
-﻿using CoffeeBlog.Application.ViewModels.User;
+﻿using CoffeeBlog.Application.ViewModels.UserViewModels;
 using MediatR;
 
-namespace CoffeeBlog.Application.Queries.User.LogInUser;
+namespace CoffeeBlog.Application.Queries.UserQueries.LogInUser;
 
 public class LogInUserQuery : IRequest<LogInUserViewModel>
 {

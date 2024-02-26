@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoffeeBlog.Infrastructure.Persistence.EntitiesConfigurations;
 
-public class RoleConfiguration : IEntityTypeConfiguration<RoleEntity>
+public class RoleConfiguration : IEntityTypeConfiguration<Role>
 {
-    public void Configure(EntityTypeBuilder<RoleEntity> builder)
+    public void Configure(EntityTypeBuilder<Role> builder)
     {
         builder.ToTable("Roles");
 

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeBlog.Infrastructure.Persistence.Repositories;
 
-public class UserRepository(CoffeeBlogDbContext coffeeBlogDbContext) : DbEntityBaseRepository<UserEntity>(coffeeBlogDbContext), IUserRepository
+public class UserRepository(CoffeeBlogDbContext coffeeBlogDbContext) : DbEntityBaseRepository<User>(coffeeBlogDbContext), IUserRepository
 {
     private readonly CoffeeBlogDbContext _coffeeBlogDbContext = coffeeBlogDbContext;
 
@@ -15,7 +15,7 @@ public class UserRepository(CoffeeBlogDbContext coffeeBlogDbContext) : DbEntityB
     /// <param name="usernameOrEmail">User's e-mail or username.</param>
     /// <param name="cancellationToken"><see cref="CancellationToken"/></param>
     /// <returns>User if found, otherwise null.</returns>
-    public async Task<UserEntity?> GetByEmailOrUsernameAsync(string usernameOrEmail,
+    public async Task<User?> GetByEmailOrUsernameAsync(string usernameOrEmail,
                                                              CancellationToken cancellationToken)
         => await _coffeeBlogDbContext.Users.AsNoTracking()
                                            .FirstOrDefaultAsync(x => x.Email == usernameOrEmail || x.Username == usernameOrEmail, cancellationToken);

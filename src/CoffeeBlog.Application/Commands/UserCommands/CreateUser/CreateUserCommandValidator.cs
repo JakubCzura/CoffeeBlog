@@ -1,7 +1,7 @@
 ﻿using CoffeeBlog.Application.SharedValidators;
 using FluentValidation;
 
-namespace CoffeeBlog.Application.Commands.User.CreateUser;
+namespace CoffeeBlog.Application.Commands.UserCommands.CreateUser;
 
 public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
 {

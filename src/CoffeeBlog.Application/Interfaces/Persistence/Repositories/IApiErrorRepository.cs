@@ -2,6 +2,6 @@
 
 namespace CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 
-public interface IApiErrorRepository : IDbEntityBaseRepository<ApiErrorEntity>
+public interface IApiErrorRepository : IDbEntityBaseRepository<ApiError>
 {
 }
