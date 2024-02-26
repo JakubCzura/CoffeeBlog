@@ -8,6 +8,18 @@ public class UserDetailConfiguration : IEntityTypeConfiguration<UserDetailEntity
 {
     public void Configure(EntityTypeBuilder<UserDetailEntity> builder)
     {
-        throw new NotImplementedException();
+        builder.Property(x => x.CreatedAt).IsRequired();
+
+        builder.Property(x => x.LastSuccessfullSignIn).IsRequired();
+
+        builder.Property(x => x.LastFailedSignIn).IsRequired(false);
+
+        builder.Property(x => x.LastUsernameChange).IsRequired(false);
+
+        builder.Property(x => x.LastPasswordChange).IsRequired(false);
+
+        builder.Property(x => x.LastEmailChange).IsRequired(false);
+
+        builder.Property(x => x.UserId).IsRequired();
     }
 }
