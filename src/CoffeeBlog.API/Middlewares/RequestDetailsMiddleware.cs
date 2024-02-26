@@ -2,6 +2,7 @@
 using CoffeeBlog.Domain.Constants;
 using CoffeeBlog.Domain.Entities;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace CoffeeBlog.API.Middlewares;
 
@@ -31,6 +32,8 @@ public class RequestDetailsMiddleware : IMiddleware
             await responseBodyStream.CopyToAsync(originalBodyStream);
         }
 
+        string? userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
         stopwatch.Stop();
         RequestDetailEntity requestDetail = new(context.GetRouteData().Values["controller"]?.ToString() ?? string.Empty,
                                                 context.Request.Path,
@@ -41,7 +44,8 @@ public class RequestDetailsMiddleware : IMiddleware
                                                 responseBody,
                                                 context.Response.ContentType,
                                                 stopwatch.ElapsedMilliseconds,
-                                                DateTime.UtcNow);
+                                                DateTime.UtcNow,
+                                                userId is not null ? int.Parse(userId) : null);
 
         //Write data to database
     }

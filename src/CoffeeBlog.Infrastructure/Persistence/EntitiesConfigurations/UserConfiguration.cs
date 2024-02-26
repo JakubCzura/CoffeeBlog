@@ -19,5 +19,18 @@ public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
         builder.Property(x => x.Password).IsRequired();
 
         builder.HasIndex(x => new { x.Username, x.Email }).IsUnique();
+
+        builder.HasMany(x => x.LastCredentials)
+               .WithOne()
+               .HasForeignKey(x => x.UserId);
+
+        builder.HasMany(x => x.Roles)
+               .WithMany(x => x.Users)
+               .UsingEntity<UserToRoleEntity>();
+
+        builder.HasMany(x => x.RequestDetails)
+               .WithOne()
+               .HasForeignKey(x => x.UserId)
+               .IsRequired(false);
     }
 };

@@ -11,7 +11,8 @@ public class RequestDetailEntity(string controllerName,
                                  string? responseBody,
                                  string? responseContentType,
                                  long requestTimeInMiliseconds,
-                                 DateTime sentAt) : DbEntityBase
+                                 DateTime sentAt,
+                                 int? userId) : DbEntityBase
 {
     public string ControllerName { get; set; } = controllerName;
     public string Path { get; set; } = path;
@@ -23,4 +24,9 @@ public class RequestDetailEntity(string controllerName,
     public string? ResponseContentType { get; set; } = responseContentType;
     public long RequestTimeInMiliseconds { get; set; } = requestTimeInMiliseconds;
     public DateTime SentAt { get; set; } = sentAt;
+
+    /// <summary>
+    /// Request can be sent by a user who is not logged in yet, so the property is nullable.
+    /// </summary>
+    public int? UserId { get; set; } = userId;
 }

@@ -11,5 +11,6 @@ public class UserEntity : DbEntityBase
     public DateTime? UpdatedAt { get; set; }
 
     public virtual List<UserLastCredentialEntity> LastCredentials { get; set; } = [];
-    public virtual List<UserToRoleEntity> UserToRoles { get; set; } = [];
+    public virtual List<RoleEntity> Roles { get; set; } = [];
+    public virtual List<RequestDetailEntity> RequestDetails { get; set; } = [];
 }

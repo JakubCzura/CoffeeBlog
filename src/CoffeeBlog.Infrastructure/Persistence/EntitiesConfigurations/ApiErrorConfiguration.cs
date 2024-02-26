@@ -8,6 +8,14 @@ public class ApiErrorConfiguration : IEntityTypeConfiguration<ApiErrorEntity>
 {
     public void Configure(EntityTypeBuilder<ApiErrorEntity> builder)
     {
-        throw new NotImplementedException();
+        builder.ToTable("ApiErrors");
+
+        builder.Property(x => x.Exception).IsRequired();
+
+        builder.Property(x => x.Message).IsRequired();
+
+        builder.Property(x => x.Description).IsRequired();
+
+        builder.Property(x => x.Exception).IsRequired();
     }
 }
