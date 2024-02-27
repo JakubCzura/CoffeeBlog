@@ -29,6 +29,12 @@ public class AccountController(IMediator mediator) : ApiControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LogInUserQuery logInUserCommand)
     {
+        //bool isValid = ModelState.IsValid;
+        //if (!isValid)
+        //{
+        //    return BadRequest(string.Join(Environment.NewLine, ModelState.Values.SelectMany(x => x.Errors)));
+        //}
+
         LogInUserViewModel result = await _mediator.Send(logInUserCommand);
         return Ok(result);
     }

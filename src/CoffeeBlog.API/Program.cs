@@ -1,6 +1,7 @@
 using CoffeeBlog.API.Middlewares;
 using CoffeeBlog.Application.ExtensionMethods;
 using CoffeeBlog.Infrastructure.ExtensionMethods;
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
 namespace CoffeeBlog.API;
@@ -18,6 +19,15 @@ public class Program
 
         builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
         builder.Services.AddControllers();
+        builder.Services.Configure<ApiBehaviorOptions>(config =>
+        {
+            config.InvalidModelStateResponseFactory = context =>
+            {
+                string result = string.Join(";", context.ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage));
+                return new BadRequestObjectResult(result);
+            };
+            //config.SuppressModelStateInvalidFilter = true;
+        });
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
