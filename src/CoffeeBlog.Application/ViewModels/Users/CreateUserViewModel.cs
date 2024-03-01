@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Application.ViewModels.UserViewModels;
+﻿namespace CoffeeBlog.Application.ViewModels.Users;
 
 public class CreateUserViewModel
 {

@@ -1,6 +1,6 @@
 ﻿using CoffeeBlog.Domain.Models.Email;
 
-namespace CoffeeBlog.Application.Factories.Email;
+namespace CoffeeBlog.Application.Factories.Emails;
 
 public interface IEmailMessageFactory
 {

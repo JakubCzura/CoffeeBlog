@@ -1,7 +1,7 @@
-﻿using CoffeeBlog.Application.Factories.Email;
+﻿using CoffeeBlog.Application.Factories.Emails;
 using CoffeeBlog.Domain.Models.Email;
 
-namespace CoffeeBlog.Infrastructure.Factories;
+namespace CoffeeBlog.Infrastructure.Factories.Emails;
 
 public class EmailMessageFactory : IEmailMessageFactory
 {

@@ -1,5 +1,5 @@
 ﻿using CoffeeBlog.Application.Email;
-using CoffeeBlog.Application.Factories.Email;
+using CoffeeBlog.Application.Factories.Emails;
 using CoffeeBlog.Application.Interfaces.Helpers;
 using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 using CoffeeBlog.Application.Interfaces.Security.Authentication;
@@ -7,7 +7,7 @@ using CoffeeBlog.Application.Interfaces.Security.Password;
 using CoffeeBlog.Domain.SettingsOptions.Authentication;
 using CoffeeBlog.Domain.SettingsOptions.PasswordHasher;
 using CoffeeBlog.Infrastructure.Email;
-using CoffeeBlog.Infrastructure.Factories;
+using CoffeeBlog.Infrastructure.Factories.Emails;
 using CoffeeBlog.Infrastructure.Helpers;
 using CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
 using CoffeeBlog.Infrastructure.Persistence.Repositories;

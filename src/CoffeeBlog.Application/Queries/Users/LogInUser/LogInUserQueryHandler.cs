@@ -1,10 +1,10 @@
 ﻿using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 using CoffeeBlog.Application.Interfaces.Security.Authentication;
-using CoffeeBlog.Application.ViewModels.UserViewModels;
+using CoffeeBlog.Application.ViewModels.Users;
 using CoffeeBlog.Domain.Entities;
 using MediatR;
 
-namespace CoffeeBlog.Application.Queries.UserQueries.LogInUser;
+namespace CoffeeBlog.Application.Queries.Users.LogInUser;
 
 public class LogInUserQueryHandler(IUserRepository userRepository,
                                    IJwtService jwtService) : IRequestHandler<LogInUserQuery, LogInUserViewModel>
