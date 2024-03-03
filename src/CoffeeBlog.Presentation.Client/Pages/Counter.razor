@@ -1,5 +1,7 @@
 ﻿@page "/counter"
-@rendermode InteractiveWebAssembly
+@using CoffeeBlog.Domain.ViewModels
+@inject HttpClient httpClient
+@rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
 
 <PageTitle>Counter</PageTitle>
 
@@ -9,11 +11,59 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
+<br />
+<br />
+
+<h1>Weather forecast</h1>
+
+@if(weatherForecasts.Count == 0)
+{
+    <p><em>Loading weater forecast...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Temp. (C)</th>
+                <th>Temp. (F)</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in weatherForecasts)
+            {
+                <tr>
+                    <td>@forecast.Date.ToShortDateString()</td>
+                    <td>@forecast.TemperatureC</td>
+                    <td>@forecast.TemperatureF</td>
+                    <td>@forecast.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
 @code {
     private int currentCount = 0;
+    private List<WeatherForecast> weatherForecasts = [];
 
     private void IncrementCount()
     {
         currentCount++;
     }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //Simulate a delay of loading huge weather forecast data
+        await Task.Delay(1000);
+
+        List<WeatherForecast>? response = await httpClient.GetFromJsonAsync<List<WeatherForecast>>("api/WeatherForecast/All");
+        if(response != null)
+        {           
+            weatherForecasts = response;
+        }
+    }
 }
+

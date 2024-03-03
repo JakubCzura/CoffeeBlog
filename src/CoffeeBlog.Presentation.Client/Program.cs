@@ -1,5 +1,10 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-var builder = WebAssemblyHostBuilder.CreateDefault(args);
+WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
+
+builder.Services.AddScoped(sp =>
+{
+    return new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) };
+});
 
 await builder.Build().RunAsync();

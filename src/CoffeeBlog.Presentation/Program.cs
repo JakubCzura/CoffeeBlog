@@ -8,11 +8,11 @@ using CoffeeBlog.Presentation.Middlewares;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorComponents()
-    .AddInteractiveWebAssemblyComponents();
-
 builder.Services.AddApplicationDI(builder.Configuration);
 builder.Services.AddInfrastructureDI(builder.Configuration);
+
+builder.Services.AddRazorComponents()
+    .AddInteractiveWebAssemblyComponents();
 
 builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
 builder.Services.AddControllers();
@@ -29,7 +29,6 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSingleton<ExceptionMiddleware>();
 builder.Services.AddSingleton<RequestDetailsMiddleware>();
-
 
 WebApplication app = builder.Build();
 
@@ -48,17 +47,19 @@ else
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-
 app.UseStaticFiles();
 app.UseAntiforgery();
+
+app.UseHttpsRedirection();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.MapControllers();
 
 app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(CoffeeBlog.Presentation.Client._Imports).Assembly);
-
-app.UseHttpsRedirection();
 
 app.Run();

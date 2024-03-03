@@ -1,4 +1,4 @@
-namespace CoffeeBlog.Presentation;
+﻿namespace CoffeeBlog.Domain.ViewModels;
 
 public class WeatherForecast
 {
