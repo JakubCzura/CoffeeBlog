@@ -1,7 +1,7 @@
-﻿using CoffeeBlog.Application.ViewModels.Users;
+﻿using CoffeeBlog.Domain.ViewModels.Users;
 using MediatR;
 
-namespace CoffeeBlog.Application.Commands.Users.CreateUser;
+namespace CoffeeBlog.Domain.Commands.Users;
 
 public class CreateUserCommand : IRequest<CreateUserViewModel>
 {

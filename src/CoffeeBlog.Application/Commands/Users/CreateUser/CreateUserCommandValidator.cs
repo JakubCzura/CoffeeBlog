@@ -1,4 +1,5 @@
 ﻿using CoffeeBlog.Application.SharedValidators;
+using CoffeeBlog.Domain.Commands.Users;
 using FluentValidation;
 
 namespace CoffeeBlog.Application.Commands.Users.CreateUser;

@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
-using CoffeeBlog.Application.ViewModels.Users;
+using CoffeeBlog.Domain.Commands.Users;
 using CoffeeBlog.Domain.Entities;
+using CoffeeBlog.Domain.ViewModels.Users;
 using MediatR;
 
 namespace CoffeeBlog.Application.Commands.Users.CreateUser;

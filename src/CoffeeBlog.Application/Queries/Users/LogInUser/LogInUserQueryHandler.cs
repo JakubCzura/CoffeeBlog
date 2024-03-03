@@ -1,7 +1,8 @@
 ﻿using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 using CoffeeBlog.Application.Interfaces.Security.Authentication;
-using CoffeeBlog.Application.ViewModels.Users;
 using CoffeeBlog.Domain.Entities;
+using CoffeeBlog.Domain.Queries.Users;
+using CoffeeBlog.Domain.ViewModels.Users;
 using MediatR;
 
 namespace CoffeeBlog.Application.Queries.Users.LogInUser;
