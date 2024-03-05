@@ -5,7 +5,7 @@ using CoffeeBlog.Domain.Queries.Users;
 using CoffeeBlog.Domain.ViewModels.Users;
 using MediatR;
 
-namespace CoffeeBlog.Application.Queries.Users.LogInUser;
+namespace CoffeeBlog.Application.Handlers.Queries.Users;
 
 public class LogInUserQueryHandler(IUserRepository userRepository,
                                    IJwtService jwtService) : IRequestHandler<LogInUserQuery, LogInUserViewModel>

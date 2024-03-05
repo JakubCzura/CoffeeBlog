@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace CoffeeBlog.Application.SharedValidators;
+namespace CoffeeBlog.Application.Validators.SharedValidators;
 
 /// <summary>
 /// Validator to validate user's password.

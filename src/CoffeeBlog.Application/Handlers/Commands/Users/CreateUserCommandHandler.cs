@@ -5,7 +5,7 @@ using CoffeeBlog.Domain.Entities;
 using CoffeeBlog.Domain.ViewModels.Users;
 using MediatR;
 
-namespace CoffeeBlog.Application.Commands.Users.CreateUser;
+namespace CoffeeBlog.Application.Handlers.Commands.Users;
 
 public class CreateUserCommandHandler(IUserRepository userRepository,
                                       IMapper mapper) : IRequestHandler<CreateUserCommand, CreateUserViewModel>
