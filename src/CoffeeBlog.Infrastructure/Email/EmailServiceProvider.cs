@@ -8,7 +8,7 @@ using MimeKit.Text;
 
 namespace CoffeeBlog.Infrastructure.Email;
 
-public class EmailServiceProvider(IOptions<EmailOptions> emailOptions) : IEmailServiceProvider
+internal class EmailServiceProvider(IOptions<EmailOptions> emailOptions) : IEmailServiceProvider
 {
     private readonly EmailOptions _emailOptions = emailOptions.Value;
 
@@ -27,6 +27,7 @@ public class EmailServiceProvider(IOptions<EmailOptions> emailOptions) : IEmailS
         await smtp.AuthenticateAsync(_emailOptions.CoffeeBlog.Email, _emailOptions.CoffeeBlog.Password);
         string result = await smtp.SendAsync(emailToSend);
         await smtp.DisconnectAsync(true);
+
         return result;
     }
 }

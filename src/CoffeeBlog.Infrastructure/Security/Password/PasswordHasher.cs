@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 namespace CoffeeBlog.Infrastructure.Security.Password;
 
-public class PasswordHasher(IOptions<PasswordHasherOptions> passwordHasherOptions) : IPasswordHasher
+internal class PasswordHasher(IOptions<PasswordHasherOptions> passwordHasherOptions) : IPasswordHasher
 {
     private readonly PasswordHasherOptions _passwordHasherOptions = passwordHasherOptions.Value;
 

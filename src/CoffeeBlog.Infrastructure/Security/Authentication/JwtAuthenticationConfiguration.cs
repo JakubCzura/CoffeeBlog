@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 
 namespace CoffeeBlog.Infrastructure.Security.Authentication;
 
-public sealed class JwtAuthenticationConfiguration : IConfigureNamedOptions<AuthenticationOptions>
+internal sealed class JwtAuthenticationConfiguration : IConfigureNamedOptions<AuthenticationOptions>
 {
     public void Configure(string? name, AuthenticationOptions options)
         => Configure(options);

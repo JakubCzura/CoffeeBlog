@@ -3,7 +3,7 @@ using CoffeeBlog.Domain.Models.Email;
 
 namespace CoffeeBlog.Infrastructure.Factories.Emails;
 
-public class EmailMessageFactory : IEmailMessageFactory
+internal class EmailMessageFactory : IEmailMessageFactory
 {
     public IEmailMessage CreateWelcomeEmailMessage(string to,
                                                    string nickname)

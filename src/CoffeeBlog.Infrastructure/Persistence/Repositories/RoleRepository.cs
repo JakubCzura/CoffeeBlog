@@ -4,6 +4,6 @@ using CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
 
 namespace CoffeeBlog.Infrastructure.Persistence.Repositories;
 
-public class RoleRepository(CoffeeBlogDbContext coffeeBlogDbContext) : DbEntityBaseRepository<Role>(coffeeBlogDbContext), IRoleRepository
+internal class RoleRepository(CoffeeBlogDbContext coffeeBlogDbContext) : DbEntityBaseRepository<Role>(coffeeBlogDbContext), IRoleRepository
 {
 }

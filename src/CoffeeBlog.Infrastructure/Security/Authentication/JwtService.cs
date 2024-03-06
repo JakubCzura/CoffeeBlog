@@ -10,8 +10,8 @@ using System.Text;
 
 namespace CoffeeBlog.Infrastructure.Security.Authentication;
 
-public class JwtService(IOptions<AuthenticationOptions> authenticationOptions,
-                        IDateTimeProvider dateTimeHelper) : IJwtService
+internal class JwtService(IOptions<AuthenticationOptions> authenticationOptions,
+                          IDateTimeProvider dateTimeHelper) : IJwtService
 {
     private readonly AuthenticationOptions _authenticationOptions = authenticationOptions.Value;
     private readonly IDateTimeProvider _dateTimeHelper = dateTimeHelper;

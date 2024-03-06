@@ -8,7 +8,7 @@ using CoffeeBlog.Application.ExtensionMethods.Helpers;
 
 namespace CoffeeBlog.Infrastructure.Security.Authentication;
 
-public sealed class JwtValidationConfiguration(IOptions<AuthenticationOptions> authenticationOptions) : IConfigureNamedOptions<JwtBearerOptions>
+internal sealed class JwtValidationConfiguration(IOptions<AuthenticationOptions> authenticationOptions) : IConfigureNamedOptions<JwtBearerOptions>
 {
     private readonly AuthenticationOptions _authenticationOptions = authenticationOptions.Value;
 

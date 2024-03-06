@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CoffeeBlog.Infrastructure.Persistence.EntitiesConfigurations;
 
-public class UserDetailConfiguration : IEntityTypeConfiguration<UserDetail>
+internal class UserDetailConfiguration : IEntityTypeConfiguration<UserDetail>
 {
     public void Configure(EntityTypeBuilder<UserDetail> builder)
     {

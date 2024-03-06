@@ -4,6 +4,6 @@ using CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
 
 namespace CoffeeBlog.Infrastructure.Persistence.Repositories;
 
-public class UserDetailRepository(CoffeeBlogDbContext coffeeBlogDbContext) : DbEntityBaseRepository<UserDetail>(coffeeBlogDbContext), IUserDetailRepository
+internal class UserDetailRepository(CoffeeBlogDbContext coffeeBlogDbContext) : DbEntityBaseRepository<UserDetail>(coffeeBlogDbContext), IUserDetailRepository
 {
 }

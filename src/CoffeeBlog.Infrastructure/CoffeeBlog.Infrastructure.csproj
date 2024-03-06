@@ -22,4 +22,7 @@
     <ProjectReference Include="..\CoffeeBlog.Application\CoffeeBlog.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="CoffeeBlog.Infrastructure.UnitTests"/>
+  </ItemGroup>
 </Project>

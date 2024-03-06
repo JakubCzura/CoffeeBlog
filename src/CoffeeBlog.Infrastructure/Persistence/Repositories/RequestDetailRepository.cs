@@ -4,6 +4,6 @@ using CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
 
 namespace CoffeeBlog.Infrastructure.Persistence.Repositories;
 
-public class RequestDetailRepository(CoffeeBlogDbContext coffeeBlogDbContext) : DbEntityBaseRepository<RequestDetail>(coffeeBlogDbContext), IRequestDetailRepository
+internal class RequestDetailRepository(CoffeeBlogDbContext coffeeBlogDbContext) : DbEntityBaseRepository<RequestDetail>(coffeeBlogDbContext), IRequestDetailRepository
 {
 }

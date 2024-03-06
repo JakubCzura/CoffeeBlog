@@ -4,6 +4,6 @@ using CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
 
 namespace CoffeeBlog.Infrastructure.Persistence.Repositories;
 
-public class ApiErrorRepository(CoffeeBlogDbContext coffeeBlogDbContext) : DbEntityBaseRepository<ApiError>(coffeeBlogDbContext), IApiErrorRepository
+internal class ApiErrorRepository(CoffeeBlogDbContext coffeeBlogDbContext) : DbEntityBaseRepository<ApiError>(coffeeBlogDbContext), IApiErrorRepository
 {
 }

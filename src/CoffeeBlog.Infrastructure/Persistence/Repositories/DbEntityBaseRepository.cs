@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeBlog.Infrastructure.Persistence.Repositories;
 
-public class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : DbEntityBase
+internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : DbEntityBase
 {
     private readonly CoffeeBlogDbContext _coffeeBlogDbContext;
     private readonly DbSet<T> _dbSet;

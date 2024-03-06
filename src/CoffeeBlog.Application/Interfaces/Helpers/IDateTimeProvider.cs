@@ -5,7 +5,13 @@
 /// </summary>
 public interface IDateTimeProvider
 {
+    /// <summary>
+    /// The current time in UTC format.
+    /// </summary>
     public DateTime UtcNow { get; }
 
+    /// <summary>
+    /// The current time in local format.
+    /// </summary>
     public DateTime Now { get; }
 }

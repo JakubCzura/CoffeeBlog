@@ -9,11 +9,9 @@ using CoffeeBlog.Domain.SettingsOptions.PasswordHasher;
 using CoffeeBlog.Infrastructure.Email;
 using CoffeeBlog.Infrastructure.Factories.Emails;
 using CoffeeBlog.Infrastructure.Helpers;
-using CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
 using CoffeeBlog.Infrastructure.Persistence.Repositories;
 using CoffeeBlog.Infrastructure.Security.Authentication;
 using CoffeeBlog.Infrastructure.Security.Password;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

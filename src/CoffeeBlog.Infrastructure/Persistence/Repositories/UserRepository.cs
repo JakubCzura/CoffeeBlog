@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeBlog.Infrastructure.Persistence.Repositories;
 
-public class UserRepository(CoffeeBlogDbContext coffeeBlogDbContext) : DbEntityBaseRepository<User>(coffeeBlogDbContext), IUserRepository
+internal class UserRepository(CoffeeBlogDbContext coffeeBlogDbContext) : DbEntityBaseRepository<User>(coffeeBlogDbContext), IUserRepository
 {
     private readonly CoffeeBlogDbContext _coffeeBlogDbContext = coffeeBlogDbContext;
 
