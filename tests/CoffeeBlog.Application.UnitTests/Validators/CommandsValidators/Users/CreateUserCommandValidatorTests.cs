@@ -9,7 +9,7 @@ public class CreateUserCommandValidatorTests
     private readonly CreateUserCommandValidator _createUserCommandValidator = new();
 
     [Fact]
-    public void Validate_should_Pass_when_CommandIsValid()
+    public void Validate_should_Pass_when_CommandIsCorrect()
     {
         //Arrange
         CreateUserCommand command = new()
