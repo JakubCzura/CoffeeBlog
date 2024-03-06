@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
 
-internal class CoffeeBlogDbContext(DbContextOptions<CoffeeBlogDbContext> options) : DbContext(options)
+public class CoffeeBlogDbContext(DbContextOptions<CoffeeBlogDbContext> options) : DbContext(options)
 {
     public DbSet<ApiError> ApiErrors { get; set; }
     public DbSet<RequestDetail> RequestDetails { get; set; }
