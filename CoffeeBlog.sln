@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeeBlog.Presentation", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoffeeBlog.Presentation.Client", "src\CoffeeBlog.Presentation.Client\CoffeeBlog.Presentation.Client.csproj", "{1B85DE90-1C69-4741-A550-3AD252756E43}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeBlog.Application.UnitTests", "tests\CoffeeBlog.Application.UnitTests\CoffeeBlog.Application.UnitTests.csproj", "{7A8A147F-6B7F-44FF-853A-C776DF970176}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{1B85DE90-1C69-4741-A550-3AD252756E43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B85DE90-1C69-4741-A550-3AD252756E43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B85DE90-1C69-4741-A550-3AD252756E43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A8A147F-6B7F-44FF-853A-C776DF970176}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A8A147F-6B7F-44FF-853A-C776DF970176}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A8A147F-6B7F-44FF-853A-C776DF970176}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A8A147F-6B7F-44FF-853A-C776DF970176}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{7096B800-B253-4051-921D-723D6CDB9116} = {037FE616-C76C-4ED0-8AFF-ECAEA834E4EA}
 		{9C57905C-C7EE-469B-AE5E-98E16ED407F7} = {3E9A59FB-E8A5-416F-A3E4-FDF8DF703C65}
 		{1B85DE90-1C69-4741-A550-3AD252756E43} = {3E9A59FB-E8A5-416F-A3E4-FDF8DF703C65}
+		{7A8A147F-6B7F-44FF-853A-C776DF970176} = {037FE616-C76C-4ED0-8AFF-ECAEA834E4EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {65834F78-0330-46CA-A056-3269495743AD}
