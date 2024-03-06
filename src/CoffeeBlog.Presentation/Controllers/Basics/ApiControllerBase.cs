@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace CoffeeBlog.Presentation.Controllers.Basics;
 
 [ApiController]
-[Route(Constants.Route.ApiController)]
-[Produces(Constants.ContentType.ApplicationJson)]
+[Route(RouteConstants.ApiController)]
+[Produces(ContentTypeConstants.ApplicationJson)]
 [Authorize]
 public class ApiControllerBase : ControllerBase
 {

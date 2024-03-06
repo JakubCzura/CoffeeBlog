@@ -52,7 +52,7 @@ public class RequestDetailsMiddleware : IMiddleware
 
     private static bool IsJson(string? contentType)
         => !string.IsNullOrWhiteSpace(contentType)
-           && contentType.Equals(Constants.ContentType.ApplicationJson, StringComparison.OrdinalIgnoreCase);
+           && contentType.Equals(ContentTypeConstants.ApplicationJson, StringComparison.OrdinalIgnoreCase);
 
     private static async Task<string?> ReadBodyAsString(string? contentType,
                                                         Stream body)
