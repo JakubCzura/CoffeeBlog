@@ -13,6 +13,7 @@ public class PasswordValidatorTests
         yield return new object[] { "Jo@2d" };
         yield return new object[] { "ok2!!!!D" };
         yield return new object[] { "St@4Tp" };
+        yield return new object[] { new string('k', 45) + "$1D3@" };
     }
 
     [Theory]
