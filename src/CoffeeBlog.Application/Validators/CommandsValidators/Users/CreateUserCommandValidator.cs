@@ -2,7 +2,7 @@
 using CoffeeBlog.Domain.Commands.Users;
 using FluentValidation;
 
-namespace CoffeeBlog.Application.Validators.CommandsValidators;
+namespace CoffeeBlog.Application.Validators.CommandsValidators.Users;
 
 public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
 {
