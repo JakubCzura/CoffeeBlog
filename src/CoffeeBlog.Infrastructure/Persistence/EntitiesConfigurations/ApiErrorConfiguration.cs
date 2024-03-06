@@ -8,7 +8,7 @@ internal class ApiErrorConfiguration : IEntityTypeConfiguration<ApiError>
 {
     public void Configure(EntityTypeBuilder<ApiError> builder)
     {
-        builder.ToTable("ApiErrors");
+        builder.ToTable("ApiError");
 
         builder.Property(x => x.Exception).IsRequired();
 

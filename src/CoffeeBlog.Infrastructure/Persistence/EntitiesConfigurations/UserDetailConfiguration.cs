@@ -8,6 +8,8 @@ internal class UserDetailConfiguration : IEntityTypeConfiguration<UserDetail>
 {
     public void Configure(EntityTypeBuilder<UserDetail> builder)
     {
+        builder.ToTable("UserDetail");
+
         builder.Property(x => x.CreatedAt).IsRequired();
 
         builder.Property(x => x.LastSuccessfullSignIn).IsRequired();

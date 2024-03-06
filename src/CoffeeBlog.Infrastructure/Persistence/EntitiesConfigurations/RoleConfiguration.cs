@@ -8,7 +8,7 @@ internal class RoleConfiguration : IEntityTypeConfiguration<Role>
 {
     public void Configure(EntityTypeBuilder<Role> builder)
     {
-        builder.ToTable("Roles");
+        builder.ToTable("Role");
 
         builder.Property(x => x.Name).IsRequired()
                                      .HasMaxLength(100);

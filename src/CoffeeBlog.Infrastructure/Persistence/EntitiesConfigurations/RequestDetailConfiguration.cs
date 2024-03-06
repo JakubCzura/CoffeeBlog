@@ -8,7 +8,7 @@ internal class RequestDetailConfiguration : IEntityTypeConfiguration<RequestDeta
 {
     public void Configure(EntityTypeBuilder<RequestDetail> builder)
     {
-        builder.ToTable("RequestDetails");
+        builder.ToTable("RequestDetail");
 
         builder.Property(x => x.ControllerName).IsRequired()
                                                .HasMaxLength(100);
