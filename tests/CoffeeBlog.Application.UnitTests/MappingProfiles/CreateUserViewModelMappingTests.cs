@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using CoffeeBlog.Application.MapperProfiles;
+using CoffeeBlog.Application.MappingProfiles;
 using CoffeeBlog.Domain.Entities;
 using CoffeeBlog.Domain.ViewModels.Users;
 using FluentAssertions;
 
-namespace CoffeeBlog.Application.UnitTests.MapperProfiles;
+namespace CoffeeBlog.Application.UnitTests.MappingProfiles;
 
 public class CreateUserViewModelMappingTests
 {
@@ -12,7 +12,7 @@ public class CreateUserViewModelMappingTests
 
     public CreateUserViewModelMappingTests()
     {
-        MapperConfiguration configurationProvider = new(cfg => cfg.AddProfile<CreateUserViewModelMapping>());
+        MapperConfiguration configurationProvider = new(cfg => cfg.AddProfile<CreateUserViewModelMappingProfile>());
         _mapper = configurationProvider.CreateMapper();
     }
 

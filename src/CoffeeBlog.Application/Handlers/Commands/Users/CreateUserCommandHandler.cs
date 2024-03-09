@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CoffeeBlog.Application.ExtensionMethods.Automapper;
+using CoffeeBlog.Application.ExtensionMethods.AutoMapper;
 using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 using CoffeeBlog.Application.Interfaces.Security.Authentication;
 using CoffeeBlog.Domain.Commands.Users;

@@ -1,19 +1,19 @@
 ﻿using AutoMapper;
-using CoffeeBlog.Application.MapperProfiles;
+using CoffeeBlog.Application.ExtensionMethods.AutoMapper;
+using CoffeeBlog.Application.MappingProfiles;
 using CoffeeBlog.Domain.Entities;
 using CoffeeBlog.Domain.ViewModels.Users;
-using CoffeeBlog.Application.ExtensionMethods.Automapper;
 using FluentAssertions;
 
-namespace CoffeeBlog.Application.UnitTests.ExtensionMethods.Automapper;
+namespace CoffeeBlog.Application.UnitTests.ExtensionMethods.AutoMapper;
 
-public class AutomapperExtensionTests
+public class AutoMapperExtensionTests
 {
     private readonly IMapper _mapper;
 
-    public AutomapperExtensionTests()
+    public AutoMapperExtensionTests()
     {
-        MapperConfiguration configurationProvider = new(cfg => cfg.AddProfile<CreateUserViewModelMapping>());
+        MapperConfiguration configurationProvider = new(cfg => cfg.AddProfile<CreateUserViewModelMappingProfile>());
         _mapper = configurationProvider.CreateMapper();
     }
 

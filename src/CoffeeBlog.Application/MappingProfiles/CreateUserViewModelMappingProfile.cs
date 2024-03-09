@@ -2,11 +2,11 @@
 using CoffeeBlog.Domain.Entities;
 using CoffeeBlog.Domain.ViewModels.Users;
 
-namespace CoffeeBlog.Application.MapperProfiles;
+namespace CoffeeBlog.Application.MappingProfiles;
 
-public class CreateUserViewModelMapping : Profile
+public class CreateUserViewModelMappingProfile : Profile
 {
-    public CreateUserViewModelMapping()
+    public CreateUserViewModelMappingProfile()
     {
         CreateMap<User, CreateUserViewModel>()
             .ForCtorParam(nameof(CreateUserViewModel.UserId), opt => opt.MapFrom(src => src.Id))
