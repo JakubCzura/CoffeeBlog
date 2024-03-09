@@ -9,7 +9,9 @@ public class CreateUserViewModelMapping : Profile
     public CreateUserViewModelMapping()
     {
         CreateMap<User, CreateUserViewModel>()
-            .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id))
-            .ForMember(dest => dest.JwtToken, opt => opt.MapFrom((src, dest, destMember, context) => context.Items[nameof(CreateUserViewModel.JwtToken)]));
+            .ForCtorParam(nameof(CreateUserViewModel.UserId), opt => opt.MapFrom(src => src.Id))
+            .ForCtorParam(nameof(CreateUserViewModel.Username), opt => opt.MapFrom(src => src.Username))
+            .ForCtorParam(nameof(CreateUserViewModel.Email), opt => opt.MapFrom(src => src.Email))
+            .ForCtorParam(nameof(CreateUserViewModel.JwtToken), opt => opt.MapFrom((src, context) => context.Items[nameof(CreateUserViewModel.JwtToken)]));
     }
 }
