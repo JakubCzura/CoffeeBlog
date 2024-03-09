@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Application.ExtensionMethods.Helpers;
+﻿namespace CoffeeBlog.Application.ExtensionMethods.Collections;
 
 /// <summary>
 /// Extension methods for <see cref="IEnumerable{T}"/>.

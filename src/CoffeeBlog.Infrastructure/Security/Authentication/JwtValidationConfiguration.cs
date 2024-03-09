@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
-using CoffeeBlog.Application.ExtensionMethods.Helpers;
+using CoffeeBlog.Application.ExtensionMethods.Collections;
 
 namespace CoffeeBlog.Infrastructure.Security.Authentication;
 
