@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using CoffeeBlog.Domain.Resources;
+using FluentValidation;
 
 namespace CoffeeBlog.Application.Validators.SharedValidators;
 
@@ -9,6 +10,6 @@ namespace CoffeeBlog.Application.Validators.SharedValidators;
 public class UsernameValidator : AbstractValidator<string>
 {
     public UsernameValidator()
-        => RuleFor(username => username).NotEmpty().WithMessage("Username is required.")
-                                        .MaximumLength(100).WithMessage("Username can't have more than 100 characters");
+        => RuleFor(username => username).NotEmpty().WithMessage(ValidatorMessages.UsernameIsRequired)
+                                        .MaximumLength(100).WithMessage(ValidatorMessages.UsernameCantContainMoreThan100Characters);
 }

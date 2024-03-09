@@ -1,4 +1,5 @@
 ﻿using CoffeeBlog.Domain.Constants;
+using CoffeeBlog.Domain.Resources;
 using FluentValidation;
 
 namespace CoffeeBlog.Application.Validators.SharedValidators;
@@ -10,10 +11,10 @@ namespace CoffeeBlog.Application.Validators.SharedValidators;
 public class PasswordValidator : AbstractValidator<string>
 {
     public PasswordValidator()
-        => RuleFor(password => password).NotEmpty().WithMessage("Password is required.")
-                                        .Length(5, 50).WithMessage("Password must be between 5 and 50 characters long")
-                                        .Must(y => y.Any(char.IsAsciiLetterUpper)).WithMessage("Password must have at least one upper letter")
-                                        .Must(y => y.Any(char.IsAsciiLetterLower)).WithMessage("Password must have at least one lower letter")
-                                        .Must(y => y.Any(char.IsDigit)).WithMessage("Password must have at least one digit")
-                                        .Must(y => y.Any(x => PasswordConstants.SpecialCharacters.Contains(x))).WithMessage($"Password must have at least one of special characters: {PasswordConstants.SpecialCharacters}");
+        => RuleFor(password => password).NotEmpty().WithMessage(ValidatorMessages.PasswordIsRequired)
+                                        .Length(5, 50).WithMessage(ValidatorMessages.PasswordMustBeBetween5And50CharactersLong)
+                                        .Must(y => y.Any(char.IsAsciiLetterUpper)).WithMessage(ValidatorMessages.PasswordMustContainAtLeastOneUpperLetter)
+                                        .Must(y => y.Any(char.IsAsciiLetterLower)).WithMessage(ValidatorMessages.PasswordMustContainAtLeastOneLowerLetter)
+                                        .Must(y => y.Any(char.IsDigit)).WithMessage(ValidatorMessages.PasswordMustContainAtLeastOneDigit)
+                                        .Must(y => y.Any(x => PasswordConstants.SpecialCharacters.Contains(x))).WithMessage($"{ValidatorMessages.PasswordMustContainAtLeastOneOfSpecialCharacters}: {PasswordConstants.SpecialCharacters}");
 }

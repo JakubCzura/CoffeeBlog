@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using CoffeeBlog.Domain.Resources;
+using FluentValidation;
 
 namespace CoffeeBlog.Application.Validators.SharedValidators;
 
@@ -9,7 +10,7 @@ namespace CoffeeBlog.Application.Validators.SharedValidators;
 public class EmailValidator : AbstractValidator<string>
 {
     public EmailValidator()
-        => RuleFor(email => email).NotEmpty().WithMessage("Email is required.")
-                                  .MaximumLength(320).WithMessage("E-mail can't have more than 320 characters")
-                                  .EmailAddress().WithMessage("E-mail must be in valid format");
+        => RuleFor(email => email).NotEmpty().WithMessage(ValidatorMessages.EmailIsRequired)
+                                  .MaximumLength(320).WithMessage(ValidatorMessages.EmailCantContainMoreThan320Characters)
+                                  .EmailAddress().WithMessage(ValidatorMessages.EmailMustBeInValidFormat);
 }
