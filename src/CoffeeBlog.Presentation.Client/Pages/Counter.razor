@@ -33,14 +33,14 @@ else
         </thead>
         <tbody>
             @foreach (var forecast in weatherForecasts)
-        {
-            <tr>
+    {
+        <tr>
                     <td>@forecast.Date.ToShortDateString()</td>
                     <td>@forecast.TemperatureC</td>
                     <td>@forecast.TemperatureF</td>
                     <td>@forecast.Summary</td>
                 </tr>
-        }
+    }
         </tbody>
     </table>
 }
@@ -51,19 +51,19 @@ private List<WeatherForecast> weatherForecasts = [];
 
 private void IncrementCount()
 {
-    currentCount++;
+currentCount++;
 }
 
 protected override async Task OnInitializedAsync()
 {
-    //Simulate a delay of loading huge weather forecast data
-    await Task.Delay(1000);
+//Simulate a delay of loading huge weather forecast data
+await Task.Delay(1000);
 
-    List<WeatherForecast>? response = await httpClient.GetFromJsonAsync<List<WeatherForecast>>("api/v1.0/WeatherForecast/All");
-    if(response != null)
-    {           
-        weatherForecasts = response;
-    }
+List<WeatherForecast>? response = await httpClient.GetFromJsonAsync<List<WeatherForecast>>("api/v1.0/WeatherForecast/All");
+if(response != null)
+{           
+    weatherForecasts = response;
+}
 }
 }
 

@@ -4,8 +4,9 @@ using CoffeeBlog.Infrastructure.ExtensionMethods;
 using Serilog;
 using Microsoft.AspNetCore.Mvc;
 using CoffeeBlog.Presentation.Middlewares;
-using Microsoft.OpenApi.Models;
 using CoffeeBlog.Presentation.Versioning;
+using CoffeeBlog.Presentation.Swagger;
+using FluentValidation.AspNetCore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -16,13 +17,13 @@ builder.Services.AddInfrastructureDI(builder.Configuration);
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
-builder.Services.AddSwaggerGen(options => options.SwaggerDoc("v1", new OpenApiInfo { Title = "CoffeeBlog documentation", Version = "v1" }));
-
 builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddApiVersion();
+builder.Services.AddSwagger();
 
 builder.Services.Configure<ApiBehaviorOptions>(config =>
 {
@@ -46,8 +47,7 @@ app.UseMiddleware<RequestDetailsMiddleware>();
 if (app.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();
-    app.UseSwagger();
-    app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v1/swagger.json", "Version 1.0"));
+    app.UseSwaggerInterface();
 }
 else
 {

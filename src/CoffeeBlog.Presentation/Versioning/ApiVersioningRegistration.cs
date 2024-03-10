@@ -19,9 +19,8 @@ public static class ApiVersioningRegistration
             config.AssumeDefaultVersionWhenUnspecified = true;
             config.DefaultApiVersion = ApiVersioningInfo.CurrentVersion;
             config.ReportApiVersions = true;
-            config.ApiVersionReader = new UrlSegmentApiVersionReader();
+            config.ApiVersionReader = new HeaderApiVersionReader("x-API-Version");
         });
-        //.AddMvc();
 
         return services;
     }

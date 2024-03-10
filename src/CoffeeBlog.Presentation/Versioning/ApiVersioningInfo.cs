@@ -6,7 +6,7 @@ namespace CoffeeBlog.Presentation.Versioning;
 /// <summary>
 /// Informatin about API versioning.
 /// </summary>
-public class ApiVersioningInfo
+public static class ApiVersioningInfo
 {
     private const string _title = "CoffeeBlog API";
 
