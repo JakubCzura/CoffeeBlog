@@ -59,7 +59,7 @@ protected override async Task OnInitializedAsync()
     //Simulate a delay of loading huge weather forecast data
     await Task.Delay(1000);
 
-    List<WeatherForecast>? response = await httpClient.GetFromJsonAsync<List<WeatherForecast>>("api/WeatherForecast/All");
+    List<WeatherForecast>? response = await httpClient.GetFromJsonAsync<List<WeatherForecast>>("api/v1.0/WeatherForecast/All");
     if(response != null)
     {           
         weatherForecasts = response;

@@ -5,6 +5,7 @@ using Serilog;
 using Microsoft.AspNetCore.Mvc;
 using CoffeeBlog.Presentation.Middlewares;
 using Microsoft.OpenApi.Models;
+using CoffeeBlog.Presentation.Versioning;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +19,11 @@ builder.Services.AddRazorComponents()
 builder.Services.AddSwaggerGen(options => options.SwaggerDoc("v1", new OpenApiInfo { Title = "CoffeeBlog documentation", Version = "v1" }));
 
 builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
+
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddApiVersion();
+
 builder.Services.Configure<ApiBehaviorOptions>(config =>
 {
     config.InvalidModelStateResponseFactory = context =>
@@ -28,7 +33,6 @@ builder.Services.Configure<ApiBehaviorOptions>(config =>
     };
     //config.SuppressModelStateInvalidFilter = true;
 });
-builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSingleton<ExceptionMiddleware>();
 builder.Services.AddSingleton<RequestDetailsMiddleware>();

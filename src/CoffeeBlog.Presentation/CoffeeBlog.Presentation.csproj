@@ -10,6 +10,7 @@
     <ProjectReference Include="..\CoffeeBlog.Application\CoffeeBlog.Application.csproj" />
     <ProjectReference Include="..\CoffeeBlog.Infrastructure\CoffeeBlog.Infrastructure.csproj" />
     <ProjectReference Include="..\CoffeeBlog.Presentation.Client\CoffeeBlog.Presentation.Client.csproj" />
+    <PackageReference Include="Asp.Versioning.Mvc" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.2">
       <PrivateAssets>all</PrivateAssets>

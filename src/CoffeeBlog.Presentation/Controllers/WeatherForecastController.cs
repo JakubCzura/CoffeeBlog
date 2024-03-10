@@ -1,11 +1,14 @@
-﻿using CoffeeBlog.Domain.ViewModels;
+﻿using Asp.Versioning;
+using CoffeeBlog.Domain.ViewModels;
 using CoffeeBlog.Presentation.Controllers.Basics;
+using CoffeeBlog.Presentation.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeBlog.Presentation.Controllers;
 
 [AllowAnonymous]
+[ApiVersion(ApiVersioningInfo.Version_1_0)]
 public class WeatherForecastController(ILogger<WeatherForecastController> logger) : ApiControllerBase
 {
     private static readonly string[] Summaries =

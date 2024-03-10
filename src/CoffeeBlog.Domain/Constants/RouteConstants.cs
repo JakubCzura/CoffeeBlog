@@ -8,5 +8,5 @@ public class RouteConstants
     /// <summary>
     /// Base route for API controllers.
     /// </summary>
-    public const string ApiController = "api/[controller]";
+    public const string ApiController = "api/v{version:apiVersion}/[controller]";
 }
