@@ -17,7 +17,8 @@ internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : 
         _dbSet = _coffeeBlogDbContext.Set<T>();
     }
 
-    public async Task<int> CreateAsync(T entity, CancellationToken cancellationToken)
+    public async Task<int> CreateAsync(T entity,
+                                       CancellationToken cancellationToken = default)
     {
         if (entity is null)
         {
@@ -28,15 +29,17 @@ internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : 
         return await _coffeeBlogDbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<T?> GetAsync(int id, CancellationToken cancellationToken)
+    public async Task<T?> GetAsync(int id,
+                                   CancellationToken cancellationToken = default)
         => await _dbSet.AsNoTracking()
                        .FirstOrDefaultAsync(entity => entity.Id == id, cancellationToken);
 
-    public Task<List<T>> GetAllAsync(CancellationToken cancellationToken)
+    public Task<List<T>> GetAllAsync(CancellationToken cancellationToken = default)
         => _dbSet.AsNoTracking()
                  .ToListAsync(cancellationToken);
 
-    public Task<int> UpdateAsync(T entity, CancellationToken cancellationToken)
+    public Task<int> UpdateAsync(T entity, 
+                                 CancellationToken cancellationToken = default)
     {
         if (entity is null)
         {
@@ -47,7 +50,8 @@ internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : 
         return _coffeeBlogDbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<int> DeleteAsync(int id, CancellationToken cancellationToken)
+    public async Task<int> DeleteAsync(int id, 
+                                       CancellationToken cancellationToken = default)
         => await _dbSet.Where(entity => entity.Id == id)
                        .ExecuteDeleteAsync(cancellationToken);
 }
