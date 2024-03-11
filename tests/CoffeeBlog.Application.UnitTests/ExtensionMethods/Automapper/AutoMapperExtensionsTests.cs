@@ -7,11 +7,11 @@ using FluentAssertions;
 
 namespace CoffeeBlog.Application.UnitTests.ExtensionMethods.AutoMapper;
 
-public class AutoMapperExtensionTests
+public class AutoMapperExtensionsTests
 {
     private readonly IMapper _mapper;
 
-    public AutoMapperExtensionTests()
+    public AutoMapperExtensionsTests()
     {
         MapperConfiguration configurationProvider = new(cfg => cfg.AddProfile<CreateUserViewModelMappingProfile>());
         _mapper = configurationProvider.CreateMapper();

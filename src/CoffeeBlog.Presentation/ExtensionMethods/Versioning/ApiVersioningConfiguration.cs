@@ -1,11 +1,11 @@
 ﻿using Asp.Versioning;
 
-namespace CoffeeBlog.Presentation.Versioning;
+namespace CoffeeBlog.Presentation.ExtensionMethods.Versioning;
 
 /// <summary>
 /// Extension methods to register API versioning.
 /// </summary>
-public static class ApiVersioningRegistration
+public static class ApiVersioningConfiguration
 {
     /// <summary>
     /// Configures API versioning.

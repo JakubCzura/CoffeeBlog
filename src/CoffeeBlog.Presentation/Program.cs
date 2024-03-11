@@ -1,12 +1,12 @@
 using CoffeeBlog.Presentation.Components;
-using CoffeeBlog.Application.ExtensionMethods;
-using CoffeeBlog.Infrastructure.ExtensionMethods;
 using Serilog;
 using Microsoft.AspNetCore.Mvc;
 using CoffeeBlog.Presentation.Middlewares;
-using CoffeeBlog.Presentation.Versioning;
-using CoffeeBlog.Presentation.Swagger;
 using FluentValidation.AspNetCore;
+using CoffeeBlog.Presentation.ExtensionMethods.Swagger;
+using CoffeeBlog.Presentation.ExtensionMethods.Versioning;
+using CoffeeBlog.Application.ExtensionMethods.LayerRegistration;
+using CoffeeBlog.Infrastructure.ExtensionMethods.LayerRegistration;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 

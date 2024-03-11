@@ -1,6 +1,6 @@
 ﻿using CoffeeBlog.Domain.Constants;
 using CoffeeBlog.Domain.Entities;
-using CoffeeBlog.Presentation.ExtensionMethods;
+using CoffeeBlog.Presentation.ExtensionMethods.Request;
 using System.Diagnostics;
 using System.Security.Claims;
 

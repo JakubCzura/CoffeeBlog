@@ -4,13 +4,13 @@ using CoffeeBlog.Application.Interfaces.Helpers;
 using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 using CoffeeBlog.Application.Interfaces.Security.Authentication;
 using CoffeeBlog.Application.Interfaces.Security.Password;
-using CoffeeBlog.Infrastructure.ExtensionMethods;
+using CoffeeBlog.Infrastructure.ExtensionMethods.LayerRegistration;
 using CoffeeBlog.Infrastructure.UnitTests.HelpersForTests;
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CoffeeBlog.Infrastructure.UnitTests.ExtensionMethods;
+namespace CoffeeBlog.Infrastructure.UnitTests.ExtensionMethods.LayerRegistration;
 
 public class InfrastructureRegistrationTests
 {

@@ -1,20 +1,21 @@
 ﻿using Asp.Versioning;
+using CoffeeBlog.Application.ExtensionMethods.LayerRegistration;
+using CoffeeBlog.Presentation.ExtensionMethods.Versioning;
 using CoffeeBlog.Presentation.Filters;
-using CoffeeBlog.Presentation.Versioning;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
 
-namespace CoffeeBlog.Presentation.Swagger;
+namespace CoffeeBlog.Presentation.ExtensionMethods.Swagger;
 
-public static class SwaggerRegistration
+public static class SwaggerConfiguration
 {
     private static string GetProjectXmlDocumentation(Assembly projectAssembly)
         => Path.Combine(AppContext.BaseDirectory, $"{projectAssembly.GetName().Name}.xml");
 
-    private static void AddProjectsXmlDocumentations(this SwaggerGenOptions swaggerGenOptions, 
+    private static void AddProjectsXmlDocumentations(this SwaggerGenOptions swaggerGenOptions,
                                                      params Assembly[] projectsAssemblies)
     {
         foreach (Assembly projectAssembly in projectsAssemblies)
@@ -60,7 +61,7 @@ public static class SwaggerRegistration
 
             swaggerGenOptions.AddProjectsXmlDocumentations(Assembly.GetExecutingAssembly(),
                                                            Assembly.GetAssembly(typeof(Domain.Entities.DbEntitiesBase.DbEntityBase))!,
-                                                           Assembly.GetAssembly(typeof(Application.ExtensionMethods.ApplicationRegistration))!);
+                                                           Assembly.GetAssembly(typeof(ApplicationRegistration))!);
 
             swaggerGenOptions.SchemaFilter<JsonIgnoreFilter>();
 

@@ -3,7 +3,7 @@ using CoffeeBlog.Domain.Commands.Users;
 using CoffeeBlog.Domain.Queries.Users;
 using CoffeeBlog.Domain.ViewModels.Users;
 using CoffeeBlog.Presentation.Controllers.Basics;
-using CoffeeBlog.Presentation.Versioning;
+using CoffeeBlog.Presentation.ExtensionMethods.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -7,6 +7,8 @@ using CoffeeBlog.Application.Interfaces.Security.Password;
 using CoffeeBlog.Domain.SettingsOptions.Authentication;
 using CoffeeBlog.Domain.SettingsOptions.PasswordHasher;
 using CoffeeBlog.Infrastructure.Email;
+using CoffeeBlog.Infrastructure.ExtensionMethods.Authentication;
+using CoffeeBlog.Infrastructure.ExtensionMethods.Database;
 using CoffeeBlog.Infrastructure.Factories.Emails;
 using CoffeeBlog.Infrastructure.Helpers;
 using CoffeeBlog.Infrastructure.Persistence.Repositories;
@@ -15,7 +17,7 @@ using CoffeeBlog.Infrastructure.Security.Password;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CoffeeBlog.Infrastructure.ExtensionMethods;
+namespace CoffeeBlog.Infrastructure.ExtensionMethods.LayerRegistration;
 
 public static class InfrastructureRegistration
 {

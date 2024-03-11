@@ -3,7 +3,7 @@ using FluentAssertions;
 
 namespace CoffeeBlog.Application.UnitTests.ExtensionMethods.Collections;
 
-public class IEnumerableExtensionTests
+public class IEnumerableExtensionsTests
 {
     public static IEnumerable<object[]> IsAnyElementNullOrWhiteSpace_Data()
     {

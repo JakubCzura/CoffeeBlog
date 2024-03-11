@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Presentation.ExtensionMethods;
+﻿namespace CoffeeBlog.Presentation.ExtensionMethods.Request;
 
 public static class RequestExtensions
 {

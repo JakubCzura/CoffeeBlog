@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CoffeeBlog.Infrastructure.ExtensionMethods;
+namespace CoffeeBlog.Infrastructure.ExtensionMethods.Database;
 
 public static class DbContextConfiguration
 {
-    public static IServiceCollection ConfigureDbContext(this IServiceCollection services, 
+    public static IServiceCollection ConfigureDbContext(this IServiceCollection services,
                                                         IConfiguration configuration)
     {
         services.AddDbContext<CoffeeBlogDbContext>(options =>

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace CoffeeBlog.Application.ExtensionMethods;
+namespace CoffeeBlog.Application.ExtensionMethods.LayerRegistration;
 
 public static class ApplicationRegistration
 {
@@ -15,7 +15,7 @@ public static class ApplicationRegistration
 
         //Don't perform auto validation to have more control over the validation process.
         //Prefer injection IValidator<T> via constructor and use it explicitly.
-        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly()); 
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         return services;
     }

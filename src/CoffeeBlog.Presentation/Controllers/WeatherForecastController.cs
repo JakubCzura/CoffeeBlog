@@ -1,7 +1,7 @@
 ﻿using Asp.Versioning;
 using CoffeeBlog.Domain.ViewModels;
 using CoffeeBlog.Presentation.Controllers.Basics;
-using CoffeeBlog.Presentation.Versioning;
+using CoffeeBlog.Presentation.ExtensionMethods.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
 
-namespace CoffeeBlog.Presentation.Swagger;
+namespace CoffeeBlog.Presentation.ExtensionMethods.Swagger;
 
 public static class SwaggerInfo
 {

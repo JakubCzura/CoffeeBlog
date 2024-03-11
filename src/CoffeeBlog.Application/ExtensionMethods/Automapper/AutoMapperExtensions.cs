@@ -7,7 +7,7 @@ namespace CoffeeBlog.Application.ExtensionMethods.AutoMapper;
 /// <summary>
 /// Extension methods for <see cref="IMapper"/>.
 /// </summary>
-public static class AutoMapperExtension
+public static class AutoMapperExtensions
 {
     public static CreateUserViewModel Map<T>(this IMapper mapper,
                                              User user,
