@@ -2,6 +2,9 @@
 
 namespace CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 
+/// <summary>
+/// Repository for <see cref="User"/> for database operations.
+/// </summary>
 public interface IUserRepository : IDbEntityBaseRepository<User>
 {
     /// <summary>
@@ -14,17 +17,21 @@ public interface IUserRepository : IDbEntityBaseRepository<User>
                                                 CancellationToken cancellationToken);
 
     /// <summary>
-    /// Checks if given email and username are unique in database and they are not equal.
-    /// <para>Usernames and e-mails are unique in database. Moreover there must not be any username equal to any e-mail as it can cause many issues.
-    /// That's why email are compared with username in the query.</para>
-    /// <para>If this method returns false then new user must not be created in database.</para>
+    /// Checks if given username exists in database.
     /// </summary>
     /// <param name="username">User's username.</param>
+    /// <param name="cancellationToken"><see cref="CancellationToken"/></param>
+    /// <returns>True if username exists in database, otherwise false.</returns>
+    Task<bool> UsernameExistsAsync(string username,
+                                   CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Checks if given e-mail exists in database.
+    /// </summary>
     /// <param name="email">User's e-mail.</param>
     /// <param name="cancellationToken"><see cref="CancellationToken"/></param>
-    /// <returns>True if email and username are unique and different, otherwise false.</returns>
-    Task<bool> AreUsernameAndEmailUniqueAndDifferentAsync(string username,
-                                                          string email,
-                                                          CancellationToken cancellationToken);
+    /// <returns>True if e-mail exists in database, otherwise false.</returns>
+    Task<bool> EmailExistsAsync(string email,
+                                CancellationToken cancellationToken);
 
 }
