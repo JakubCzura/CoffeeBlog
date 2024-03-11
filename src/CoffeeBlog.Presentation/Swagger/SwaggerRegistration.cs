@@ -1,4 +1,5 @@
 ﻿using Asp.Versioning;
+using CoffeeBlog.Presentation.Filters;
 using CoffeeBlog.Presentation.Versioning;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
@@ -60,6 +61,8 @@ public static class SwaggerRegistration
             swaggerGenOptions.AddProjectsXmlDocumentations(Assembly.GetExecutingAssembly(),
                                                            Assembly.GetAssembly(typeof(Domain.Entities.DbEntitiesBase.DbEntityBase))!,
                                                            Assembly.GetAssembly(typeof(Application.ExtensionMethods.ApplicationRegistration))!);
+
+            swaggerGenOptions.SchemaFilter<JsonIgnoreFilter>();
 
             swaggerGenOptions.AddSecurity();
 
