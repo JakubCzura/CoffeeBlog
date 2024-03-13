@@ -24,7 +24,7 @@ internal class JwtService(IOptions<AuthenticationOptions> authenticationOptions,
 
         List<Claim> tokenClaims =
         [
-            new Claim(ClaimTypes.NameIdentifier, createJwtTokenUserDetailsDto.Id.ToString()),
+            new Claim(ClaimTypes.NameIdentifier, createJwtTokenUserDetailsDto.UserId.ToString()),
             new Claim(ClaimTypes.Name, createJwtTokenUserDetailsDto.Username),
             new Claim(ClaimTypes.Email, createJwtTokenUserDetailsDto.Email),
         ];

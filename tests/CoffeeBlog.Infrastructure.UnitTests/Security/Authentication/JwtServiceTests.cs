@@ -65,7 +65,7 @@ public class JwtServiceTests
 
         ClaimsPrincipal claimsPrincipal = new JwtSecurityTokenHandler().ValidateToken(token, tokenValidationParameters, out SecurityToken validatedToken);
 
-        claimsPrincipal.FindFirst(ClaimTypes.NameIdentifier)!.Value.Should().Be(createJwtTokenUserDetailsDto.Id.ToString());
+        claimsPrincipal.FindFirst(ClaimTypes.NameIdentifier)!.Value.Should().Be(createJwtTokenUserDetailsDto.UserId.ToString());
         claimsPrincipal.FindFirst(ClaimTypes.Name)!.Value.Should().Be(createJwtTokenUserDetailsDto.Username);
         claimsPrincipal.FindFirst(ClaimTypes.Email)!.Value.Should().Be(createJwtTokenUserDetailsDto.Email);
 
@@ -110,7 +110,7 @@ public class JwtServiceTests
 
         ClaimsPrincipal claimsPrincipal = new JwtSecurityTokenHandler().ValidateToken(token, tokenValidationParameters, out SecurityToken validatedToken);
 
-        claimsPrincipal.FindFirst(ClaimTypes.NameIdentifier)!.Value.Should().Be(createJwtTokenUserDetailsDto.Id.ToString());
+        claimsPrincipal.FindFirst(ClaimTypes.NameIdentifier)!.Value.Should().Be(createJwtTokenUserDetailsDto.UserId.ToString());
         claimsPrincipal.FindFirst(ClaimTypes.Name)!.Value.Should().Be(createJwtTokenUserDetailsDto.Username);
         claimsPrincipal.FindFirst(ClaimTypes.Email)!.Value.Should().Be(createJwtTokenUserDetailsDto.Email);
 
