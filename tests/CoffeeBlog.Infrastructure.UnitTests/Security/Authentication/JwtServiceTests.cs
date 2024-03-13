@@ -31,14 +31,14 @@ public class JwtServiceTests
         _jwtService = new(Options.Create(_authenticationOptions), _dateTimeProviderMock.Object);
     }
 
-    public static IEnumerable<object[]> RolesAndClaims()
+    public static TheoryData<IEnumerable<string>, IEnumerable<Claim>> CreateToken_should_ReturnToken_when_RolesAndClaimsAreGiven_Data => new()
     {
-        yield return new object[] { new List<string>() { "User" }, new List<Claim>() { new("MyClaim", "MyClaimValue") } };
-        yield return new object[] { new List<string>() { "User", "Admin" }, new List<Claim>() { new("ClaimForTest", "ClaimForTestValue"), new("SuperClaim", "SuperClaimValue") } };
-    }
+        { new List<string>() { "User" }, new List<Claim>() { new("MyClaim", "MyClaimValue") } },
+        { new List<string>() { "User", "Admin" }, new List<Claim>() { new("ClaimForTest", "ClaimForTestValue"), new("SuperClaim", "SuperClaimValue") } }
+    };
 
     [Theory]
-    [MemberData(nameof(RolesAndClaims))]
+    [MemberData(nameof(CreateToken_should_ReturnToken_when_RolesAndClaimsAreGiven_Data))]
     public void CreateToken_should_ReturnToken_when_RolesAndClaimsAreGiven(IEnumerable<string> userRoles, IEnumerable<Claim> claims)
     {
         //Arrange
@@ -76,14 +76,14 @@ public class JwtServiceTests
         claimsFromToken.Select(x => x.Value).Should().BeEquivalentTo(claims.Select(x => x.Value));
     }
 
-    public static IEnumerable<object[]> EmptyRolesAndClaims()
+    public static TheoryData<IEnumerable<string>?> CreateToken_should_ReturnToken_when_RolesOrClaimsAreEmpty_Data() => new()
     {
-        yield return new object[] { null! };
-        yield return new object[] { new List<string>() };
-    }
+        null,
+        new List<string>()
+    };
 
     [Theory]
-    [MemberData(nameof(EmptyRolesAndClaims))]
+    [MemberData(nameof(CreateToken_should_ReturnToken_when_RolesOrClaimsAreEmpty_Data))]
     public void CreateToken_should_ReturnToken_when_RolesOrClaimsAreEmpty(IEnumerable<string>? userRoles)
     {
         //Arrange

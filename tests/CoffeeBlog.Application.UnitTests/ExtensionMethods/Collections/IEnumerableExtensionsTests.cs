@@ -5,16 +5,16 @@ namespace CoffeeBlog.Application.UnitTests.ExtensionMethods.Collections;
 
 public class IEnumerableExtensionsTests
 {
-    public static IEnumerable<object[]> IsAnyElementNullOrWhiteSpace_Data()
-    {
-        yield return new object[] { new string?[] { "", "b", "c", "d", "e" } };
-        yield return new object[] { new string?[] { "a", "b", "c", " ", "e" } };
-        yield return new object[] { new string?[] { "a", "b", "c", null, "e" } };
-    }
+    public static TheoryData<string?[]> IsAnyElementNullOrWhiteSpace_Data =>
+    [
+        ["", "b", "c", "d", "e"],
+        ["a", "b", "c", " ", "e"],
+        ["a", "b", "c", null, "e"]
+    ];
 
     [Theory]
     [MemberData(nameof(IsAnyElementNullOrWhiteSpace_Data))]
-    public void IsAnyElementNullOrWhiteSpace_should_ReturnTrue_when_AnyElementIsNullOrWhiteSpace(IEnumerable<string> collection)
+    public void IsAnyElementNullOrWhiteSpace_should_ReturnTrue_when_AnyElementIsNullOrWhiteSpace(string?[] collection)
     {
         // Act
         bool result = collection.IsAnyElementNullOrWhiteSpace();

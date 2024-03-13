@@ -8,12 +8,12 @@ public class UsernameValidatorTests
 {
     private readonly UsernameValidator _usernameValidator = new();
 
-    public static IEnumerable<object[]> Validate_should_Pass_when_UsernameIsCorrect_Data()
+    public static TheoryData<string> Validate_should_Pass_when_UsernameIsCorrect_Data => new()
     {
-        yield return new object[] { "Johny" };
-        yield return new object[] { "J" };
-        yield return new object[] { new string('K', 100) };
-    }
+        "Johny",
+        "J",
+        new string('K', 100)
+    };
 
     [Theory]
     [MemberData(nameof(Validate_should_Pass_when_UsernameIsCorrect_Data))]
@@ -21,11 +21,11 @@ public class UsernameValidatorTests
         => _usernameValidator.TestValidate(username)
                              .ShouldNotHaveAnyValidationErrors();
 
-    public static IEnumerable<object[]> Validate_should_Fail_when_UsernameIsIncorrect_Data()
+    public static TheoryData<string> Validate_should_Fail_when_UsernameIsIncorrect_Data => new()
     {
-        yield return new object[] { "" };
-        yield return new object[] { new string('k', 101) };
-    }
+        "" ,
+        new string('k', 101)
+    };
 
     [Theory]
     [MemberData(nameof(Validate_should_Fail_when_UsernameIsIncorrect_Data))]

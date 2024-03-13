@@ -8,13 +8,13 @@ public class PasswordValidatorTests
 {
     private readonly PasswordValidator _passwordValidator = new();
 
-    public static IEnumerable<object[]> Validate_should_Pass_when_PasswordIsCorrect_Data()
+    public static TheoryData<string> Validate_should_Pass_when_PasswordIsCorrect_Data => new()
     {
-        yield return new object[] { "Jo@2d" };
-        yield return new object[] { "ok2!!!!D" };
-        yield return new object[] { "St@4Tp" };
-        yield return new object[] { new string('k', 45) + "$1D3@" };
-    }
+       "Jo@2d",
+        "ok2!!!!D" ,
+        "St@4Tp" ,
+        new string('k', 45) + "$1D3@"
+    };
 
     [Theory]
     [MemberData(nameof(Validate_should_Pass_when_PasswordIsCorrect_Data))]
@@ -22,26 +22,26 @@ public class PasswordValidatorTests
         => _passwordValidator.TestValidate(password)
                              .ShouldNotHaveAnyValidationErrors();
 
-    public static IEnumerable<object[]> Validate_should_Fail_when_PasswordIsIncorrect_Data()
+    public static TheoryData<string> Validate_should_Fail_when_PasswordIsIncorrect_Data => new()
     {
-        yield return new object[] { "" };
-        yield return new object[] { " " };
-        yield return new object[] { "  " };
-        yield return new object[] { "s" };
-        yield return new object[] { " d" };
-        yield return new object[] { "d s" };
-        yield return new object[] { "4" };
-        yield return new object[] { "1234" };
-        yield return new object[] { "1234" };
-        yield return new object[] { "12345" };
-        yield return new object[] { "Johny1" };
-        yield return new object[] { "!y1" };
-        yield return new object[] { "!y1    " };
-        yield return new object[] { "!#" };
-        yield return new object[] { "k^" };
-        yield return new object[] { "K^ 1" };
-        yield return new object[] { new string('k', 321) };
-    }
+        "",
+        " ",
+        "  ",
+        "s" ,
+        " d" ,
+        "d s" ,
+        "4" ,
+        "1234" ,
+        "1234" ,
+        "12345",
+        "Johny1" ,
+        "!y1" ,
+        "!y1    " ,
+        "!#" ,
+        "k^" ,
+        "K^ 1" ,
+        new string('k', 321)
+    };
 
     [Theory]
     [MemberData(nameof(Validate_should_Fail_when_PasswordIsIncorrect_Data))]
