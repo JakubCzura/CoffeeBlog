@@ -9,6 +9,9 @@ namespace CoffeeBlog.Domain.Entities.DbEntitiesBase;
 /// </summary>
 public abstract class DbEntityBase
 {
+    /// <summary>
+    /// Primary key of the entity.
+    /// </summary>
     [Key]
     public int Id { get; set; }
 }

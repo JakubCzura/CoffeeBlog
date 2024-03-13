@@ -5,8 +5,14 @@ using FluentValidation;
 
 namespace CoffeeBlog.Application.Validators.CommandsValidators.Users;
 
+/// <summary>
+/// Validator to validate <see cref="CreateUserCommand"/>.
+/// </summary>
 public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
 {
+    /// <summary>
+    /// Default constructor.
+    /// </summary>
     public CreateUserCommandValidator()
     {
         RuleFor(x => x.Username).SetValidator(new UsernameValidator());

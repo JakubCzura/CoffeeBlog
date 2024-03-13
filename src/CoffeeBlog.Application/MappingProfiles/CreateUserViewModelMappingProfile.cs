@@ -4,8 +4,14 @@ using CoffeeBlog.Domain.ViewModels.Users;
 
 namespace CoffeeBlog.Application.MappingProfiles;
 
+/// <summary>
+/// Mapping profile to map from <see cref="User"/> to <see cref="CreateUserViewModel"/>.
+/// </summary>
 public class CreateUserViewModelMappingProfile : Profile
 {
+    /// <summary>
+    /// Default constructor.
+    /// </summary>
     public CreateUserViewModelMappingProfile()
     {
         CreateMap<User, CreateUserViewModel>()

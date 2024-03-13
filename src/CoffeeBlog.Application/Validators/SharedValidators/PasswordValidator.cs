@@ -6,10 +6,12 @@ namespace CoffeeBlog.Application.Validators.SharedValidators;
 
 /// <summary>
 /// Validator to validate user's password.
-/// Should be used to validate password when creating new user or updating existing one.
 /// </summary>
 public class PasswordValidator : AbstractValidator<string>
 {
+    /// <summary>
+    /// Default constructor.
+    /// </summary>  
     public PasswordValidator()
         => RuleFor(password => password).NotEmpty().WithMessage(ValidatorMessages.PasswordIsRequired)
                                         .Length(5, 50).WithMessage(ValidatorMessages.PasswordMustBeBetween5And50CharactersLong)
