@@ -19,13 +19,13 @@ internal sealed class JwtValidationConfiguration(IOptions<AuthenticationOptions>
     {
         options.TokenValidationParameters = new()
         {
-            ValidateIssuer = true,
+            ValidateIssuer = _authenticationOptions.Jwt.ValidateIssuer,
             ValidIssuer = _authenticationOptions.Jwt.Issuer,
-            ValidateAudience = true,
+            ValidateAudience = _authenticationOptions.Jwt.ValidateAudience,
             ValidAudience = _authenticationOptions.Jwt.Audience,
-            ValidateLifetime = true,
+            ValidateLifetime = _authenticationOptions.Jwt.ValidateLifetime,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_authenticationOptions.Jwt.SecretKey)),
-            ValidateIssuerSigningKey = true
+            ValidateIssuerSigningKey = _authenticationOptions.Jwt.ValidateIssuerSigningKey
         };
         options.Events = new JwtBearerEvents()
         {
