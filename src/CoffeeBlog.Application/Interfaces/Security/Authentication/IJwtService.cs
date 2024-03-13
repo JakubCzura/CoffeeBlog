@@ -5,7 +5,7 @@ namespace CoffeeBlog.Application.Interfaces.Security.Authentication;
 
 public interface IJwtService
 {
-    public string CreateToken(CreateJwtTokenUserDetailsDto createJwtTokenUserDetailsDto,
+    public string CreateToken(CreateJwtTokenDto createJwtTokenUserDetailsDto,
                               IEnumerable<string>? roles = null,
                               IEnumerable<Claim>? claims = null);
 }

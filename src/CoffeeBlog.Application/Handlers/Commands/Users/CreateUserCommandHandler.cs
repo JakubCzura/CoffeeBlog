@@ -11,6 +11,14 @@ using MediatR;
 
 namespace CoffeeBlog.Application.Handlers.Commands.Users;
 
+/// <summary>
+/// Command handler for creating a new user.
+/// </summary>
+/// <param name="_userRepository">Interface to perform user's operations in database.</param>
+/// <param name="_jwtService">Interface to create JWT token.</param>
+/// <param name="_passwordHasher">Interface to hash password.</param>
+/// <param name="_mapper">AutoMapper to map classes.</param>
+/// <param name="_dateTimeProvider">Interface to provide date and time.</param>
 public class CreateUserCommandHandler(IUserRepository _userRepository,
                                       IJwtService _jwtService,
                                       IPasswordHasher _passwordHasher,
@@ -23,6 +31,13 @@ public class CreateUserCommandHandler(IUserRepository _userRepository,
     private readonly IMapper _mapper = _mapper;
     private readonly IDateTimeProvider _dateTimeProvider = _dateTimeProvider;
 
+    /// <summary>
+    /// Handles request to create a new user.
+    /// </summary>
+    /// <param name="request">Request command with details to create a new user.</param>
+    /// <param name="cancellationToken">Token to cancel operation.</param>
+    /// <returns>Instance of <see cref="CreateUserViewModel"/></returns>
+    /// <exception cref="Exception">When username or e-mail already exists in database or username and e-mail are the same.</exception>
     public async Task<CreateUserViewModel> Handle(CreateUserCommand request,
                                                   CancellationToken cancellationToken)
     {
@@ -36,7 +51,7 @@ public class CreateUserCommandHandler(IUserRepository _userRepository,
 
         if(request.Username == request.Email)
         {
-            throw new Exception("Username and e-mail cannot be same.");
+            throw new Exception("Username and e-mail cannot be the same.");
         }
         if (await _userRepository.UsernameExistsAsync(request.Username, cancellationToken))
         {

@@ -16,7 +16,7 @@ internal class JwtService(IOptions<AuthenticationOptions> authenticationOptions,
     private readonly AuthenticationOptions _authenticationOptions = authenticationOptions.Value;
     private readonly IDateTimeProvider _dateTimeHelper = dateTimeHelper;
 
-    public string CreateToken(CreateJwtTokenUserDetailsDto createJwtTokenUserDetailsDto,
+    public string CreateToken(CreateJwtTokenDto createJwtTokenUserDetailsDto,
                               IEnumerable<string>? roles = null,
                               IEnumerable<Claim>? claims = null)
     {

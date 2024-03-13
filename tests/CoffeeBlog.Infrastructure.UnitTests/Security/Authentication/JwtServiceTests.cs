@@ -42,7 +42,7 @@ public class JwtServiceTests
     public void CreateToken_should_ReturnToken_when_RolesAndClaimsAreGiven(IEnumerable<string> userRoles, IEnumerable<Claim> claims)
     {
         //Arrange
-        CreateJwtTokenUserDetailsDto createJwtTokenUserDetailsDto = new(1, "Username", "email@email.com");
+        CreateJwtTokenDto createJwtTokenUserDetailsDto = new(1, "Username", "email@email.com");
 
         TokenValidationParameters tokenValidationParameters = new()
         {
@@ -87,7 +87,7 @@ public class JwtServiceTests
     public void CreateToken_should_ReturnToken_when_RolesOrClaimsAreEmpty(IEnumerable<string>? userRoles)
     {
         //Arrange
-        CreateJwtTokenUserDetailsDto createJwtTokenUserDetailsDto = new(1, "Username", "email@email.com");
+        CreateJwtTokenDto createJwtTokenUserDetailsDto = new(1, "Username", "email@email.com");
 
         TokenValidationParameters tokenValidationParameters = new()
         {

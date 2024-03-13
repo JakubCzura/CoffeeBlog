@@ -9,6 +9,14 @@ namespace CoffeeBlog.Application.ExtensionMethods.AutoMapper;
 /// </summary>
 public static class AutoMapperExtensions
 {
+    /// <summary>
+    /// Maps <see cref="User"/> to <see cref="CreateUserViewModel"/>.
+    /// </summary>
+    /// <typeparam name="T"><see cref="CreateUserViewModel"/></typeparam>
+    /// <param name="mapper"><see cref="IMapper"/></param>
+    /// <param name="user">User entity.</param>
+    /// <param name="jwtToken">JWT token for authorized user.</param>
+    /// <returns></returns>
     public static CreateUserViewModel Map<T>(this IMapper mapper,
                                              User user,
                                              string jwtToken) where T : CreateUserViewModel
