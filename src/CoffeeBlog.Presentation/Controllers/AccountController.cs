@@ -30,7 +30,7 @@ public class AccountController(IMediator mediator) : ApiControllerBase
 
     [AllowAnonymous]
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LogInUserQuery logInUserCommand)
+    public async Task<IActionResult> Login([FromBody] SignInUserQuery logInUserCommand)
     {
         //bool isValid = ModelState.IsValid;
         //if (!isValid)
@@ -38,7 +38,7 @@ public class AccountController(IMediator mediator) : ApiControllerBase
         //    return BadRequest(string.Join(Environment.NewLine, ModelState.Values.SelectMany(x => x.Errors)));
         //}
 
-        LogInUserViewModel result = await _mediator.Send(logInUserCommand);
+        SignInUserViewModel result = await _mediator.Send(logInUserCommand);
         return Ok(result);
     }
 }

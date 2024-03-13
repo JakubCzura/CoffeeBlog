@@ -3,7 +3,7 @@
 namespace CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 
 /// <summary>
-/// Repository for <see cref="User"/> for database operations.
+/// Interface for repository to perform database operations related to <see cref="User"/>.
 /// </summary>
 public interface IUserRepository : IDbEntityBaseRepository<User>
 {
@@ -14,7 +14,7 @@ public interface IUserRepository : IDbEntityBaseRepository<User>
     /// <param name="cancellationToken"><see cref="CancellationToken"/></param>
     /// <returns>User if found, otherwise null.</returns>
     Task<User?> GetByEmailOrUsernameAsync(string usernameOrEmail,
-                                                CancellationToken cancellationToken);
+                                          CancellationToken cancellationToken);
 
     /// <summary>
     /// Checks if given username exists in database.

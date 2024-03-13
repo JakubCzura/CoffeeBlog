@@ -12,7 +12,7 @@ public interface IDbEntityBaseRepository<T> where T : DbEntityBase
     /// Adds new entity to database.
     /// </summary>
     /// <param name="entity">Entity to add to database.</param>
-    /// <param name="cancellationToken">Token to cancel operation.</param>
+    /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Id of added entity.</returns>
     Task<int> CreateAsync(T entity, 
                           CancellationToken cancellationToken);
@@ -21,7 +21,7 @@ public interface IDbEntityBaseRepository<T> where T : DbEntityBase
     /// Returns entity from database by id.
     /// </summary>
     /// <param name="id">Entity's id.</param>
-    /// <param name="cancellationToken">Token to cancel operation.</param>
+    /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Entity if found, otherwise null.</returns>
     Task<T?> GetAsync(int id, 
                       CancellationToken cancellationToken);
@@ -29,7 +29,7 @@ public interface IDbEntityBaseRepository<T> where T : DbEntityBase
     /// <summary>
     /// Returns all rows for specified entity's type from database.
     /// </summary>
-    /// <param name="cancellationToken">Token to cancel operation.</param>
+    /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>List of all entities for specified type.</returns>
     Task<List<T>> GetAllAsync(CancellationToken cancellationToken);
 
@@ -37,7 +37,7 @@ public interface IDbEntityBaseRepository<T> where T : DbEntityBase
     /// Updates entity in database.
     /// </summary>
     /// <param name="entity">Entity to update.</param>
-    /// <param name="cancellationToken">Token to cancel operation.</param>
+    /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Number of state entries written to database.</returns>
     Task<int> UpdateAsync(T entity, 
                           CancellationToken cancellationToken);
@@ -46,7 +46,7 @@ public interface IDbEntityBaseRepository<T> where T : DbEntityBase
     /// Deletes entity in database by id.
     /// </summary>
     /// <param name="id">Entity's id.</param>
-    /// <param name="cancellationToken">Token to cancel operation.</param>
+    /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Number of rows deleted in database.</returns>
     Task<int> DeleteAsync(int id, 
                           CancellationToken cancellationToken);

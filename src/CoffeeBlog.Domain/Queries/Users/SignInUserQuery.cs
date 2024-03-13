@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CoffeeBlog.Domain.Queries.Users;
 
-public class LogInUserQuery : IRequest<LogInUserViewModel>
+public class SignInUserQuery : IRequest<SignInUserViewModel>
 {
     /// <summary>
     /// User can log in with either username or email.

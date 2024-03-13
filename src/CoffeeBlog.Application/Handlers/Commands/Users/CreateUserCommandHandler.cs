@@ -26,7 +26,7 @@ public class CreateUserCommandHandler(IUserRepository _userRepository,
                                       IDateTimeProvider _dateTimeProvider) : IRequestHandler<CreateUserCommand, CreateUserViewModel>
 {
     private readonly IUserRepository _userRepository = _userRepository;
-    private readonly IJwtService _service = _jwtService;
+    private readonly IJwtService _jwtService = _jwtService;
     private readonly IPasswordHasher _passwordHasher = _passwordHasher;
     private readonly IMapper _mapper = _mapper;
     private readonly IDateTimeProvider _dateTimeProvider = _dateTimeProvider;
@@ -35,7 +35,7 @@ public class CreateUserCommandHandler(IUserRepository _userRepository,
     /// Handles request to create a new user.
     /// </summary>
     /// <param name="request">Request command with details to create a new user.</param>
-    /// <param name="cancellationToken">Token to cancel operation.</param>
+    /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Instance of <see cref="CreateUserViewModel"/></returns>
     /// <exception cref="Exception">When username or e-mail already exists in database or username and e-mail are the same.</exception>
     public async Task<CreateUserViewModel> Handle(CreateUserCommand request,
@@ -63,7 +63,7 @@ public class CreateUserCommandHandler(IUserRepository _userRepository,
         }
 
         int userId = await _userRepository.CreateAsync(user, cancellationToken);
-        string jwtToken = _service.CreateToken(new(userId, request.Username, request.Email));
+        string jwtToken = _jwtService.CreateToken(new(userId, request.Username, request.Email));
 
         CreateUserViewModel result = _mapper.Map<CreateUserViewModel>(user, jwtToken);
 

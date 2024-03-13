@@ -1,5 +1,5 @@
 ﻿namespace CoffeeBlog.Domain.ViewModels.Users;
 
-public class LogInUserViewModel
+public class SignInUserViewModel
 {
 }
