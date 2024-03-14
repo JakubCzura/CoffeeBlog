@@ -1,9 +1,11 @@
 ﻿using Asp.Versioning;
 using CoffeeBlog.Domain.Commands.Users;
+using CoffeeBlog.Domain.Errors.Users;
 using CoffeeBlog.Domain.Queries.Users;
 using CoffeeBlog.Domain.ViewModels.Users;
 using CoffeeBlog.Presentation.Controllers.Basics;
 using CoffeeBlog.Presentation.ExtensionMethods.Versioning;
+using FluentResults;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,10 +24,22 @@ public class AccountController(IMediator mediator) : ApiControllerBase
     [AllowAnonymous]
     [HttpPost("register/user")]
     public async Task<ActionResult<CreateUserViewModel>> Register([FromBody] CreateUserCommand createUserCommand,
-                                              CancellationToken cancellationToken)
+                                                                  CancellationToken cancellationToken)
     {
-        CreateUserViewModel result = await _mediator.Send(createUserCommand, cancellationToken);
-        return Ok(result);
+        Result<CreateUserViewModel> result = await _mediator.Send(createUserCommand, cancellationToken);
+
+        if (result.IsSuccess)
+        {
+            return Ok(result.Value);
+        }
+
+        IError error = result.Errors[0];
+        return error switch
+        {
+            UsernameExistsError => Conflict(error.Message),
+            EmailExistsError => Conflict(error.Message),
+            _ => BadRequest(string.Join(";", result.Errors.Select(x => x.Message)))
+        };
     }
 
     [AllowAnonymous]

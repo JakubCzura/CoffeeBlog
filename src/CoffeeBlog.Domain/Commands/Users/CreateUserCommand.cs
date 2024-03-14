@@ -1,4 +1,5 @@
 ﻿using CoffeeBlog.Domain.ViewModels.Users;
+using FluentResults;
 using MediatR;
 
 namespace CoffeeBlog.Domain.Commands.Users;
@@ -6,7 +7,7 @@ namespace CoffeeBlog.Domain.Commands.Users;
 /// <summary>
 /// Request command to create a new user. It's handled using Mediatr and CQRS pattern.
 /// </summary>
-public class CreateUserCommand : IRequest<CreateUserViewModel>
+public class CreateUserCommand : IRequest<Result<CreateUserViewModel>>
 {
     /// <summary>
     /// User's username. It's unique in database.
