@@ -27,12 +27,12 @@ builder.Services.AddSwagger();
 
 builder.Services.Configure<ApiBehaviorOptions>(config =>
 {
+    config.SuppressModelStateInvalidFilter = false;  //False to perform auto validation. Added for readability and code clear behaviour despite False is default value.
     config.InvalidModelStateResponseFactory = context =>
     {
         string result = string.Join(";", context.ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage));
         return new BadRequestObjectResult(result);
     };
-    //config.SuppressModelStateInvalidFilter = true;
 });
 
 builder.Services.AddSingleton<ExceptionMiddleware>();
