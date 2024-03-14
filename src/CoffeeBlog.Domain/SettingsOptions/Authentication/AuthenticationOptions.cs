@@ -1,12 +1,12 @@
 ﻿namespace CoffeeBlog.Domain.SettingsOptions.Authentication;
 
 /// <summary>
-/// Class to hold authentication options based on appsettings.json.
+/// Configuration options for authentication based on appsettings.json.
 /// </summary>
 public class AuthenticationOptions
 {
     /// <summary>
-    /// Configuration key in appsettings.json.
+    /// Key for authentication options in appsettings.json.
     /// </summary>
     public const string AppsettingsKey = "Authentication";
 

@@ -1,7 +1,7 @@
 ﻿namespace CoffeeBlog.Domain.SettingsOptions.Authentication;
 
 /// <summary>
-/// Class to hold JWT authentication options based on appsettings.json.
+/// Configuration options for JWT authentication based on appsettings.json.
 /// </summary>
 public class AuthenticationJwtOptions
 {
