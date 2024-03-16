@@ -1,5 +1,5 @@
-﻿using CoffeeBlog.Application.Interfaces.CurrentUsers;
-using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
+﻿using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
+using CoffeeBlog.Application.Interfaces.Security.CurrentUsers;
 using CoffeeBlog.Domain.Commands.Users;
 using CoffeeBlog.Domain.Errors.Users;
 using CoffeeBlog.Domain.Exceptions;
