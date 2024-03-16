@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CoffeeBlog.Application.ExtensionMethods.AutoMapper;
+using CoffeeBlog.Application.ExtensionMethods.Automapper.Users;
 using CoffeeBlog.Application.Interfaces.Helpers;
 using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 using CoffeeBlog.Application.Interfaces.Security.Authentication;
@@ -45,20 +45,14 @@ public class CreateUserCommandHandler(IUserRepository _userRepository,
     {
         if (await _userRepository.UsernameExistsAsync(request.Username, cancellationToken))
         {
-            return Result.Fail<CreateUserViewModel>(new UsernameExistsError("Username already exists."));
+            return Result.Fail<CreateUserViewModel>(new UsernameExistsError());
         }
         if (await _userRepository.EmailExistsAsync(request.Email, cancellationToken))
         {
-            return Result.Fail<CreateUserViewModel>(new EmailExistsError("E-mail already exists."));
+            return Result.Fail<CreateUserViewModel>(new EmailExistsError());
         }
 
-        User user = new()
-        {
-            Username = request.Username,
-            Email = request.Email,
-            Password = _passwordHasher.HashPassword(request.Password),
-            CreatedAt = _dateTimeProvider.UtcNow
-        };
+        User user = _mapper.Map<User>(request, _passwordHasher.HashPassword(request.Password), _dateTimeProvider.UtcNow);
 
         int userId = await _userRepository.CreateAsync(user, cancellationToken);
         string jwtToken = _jwtService.CreateToken(new(userId, request.Username, request.Email));

@@ -1,24 +1,24 @@
 ﻿using AutoMapper;
-using CoffeeBlog.Application.ExtensionMethods.AutoMapper;
-using CoffeeBlog.Application.MappingProfiles;
+using CoffeeBlog.Application.ExtensionMethods.Automapper.Users;
+using CoffeeBlog.Application.Mapping.Users;
 using CoffeeBlog.Domain.Entities;
 using CoffeeBlog.Domain.ViewModels.Users;
 using FluentAssertions;
 
-namespace CoffeeBlog.Application.UnitTests.ExtensionMethods.AutoMapper;
+namespace CoffeeBlog.Application.UnitTests.ExtensionMethods.Automapper.Users;
 
-public class AutoMapperExtensionsTests
+public class AutoMapperForCreateUserViewModelExtensionsTests
 {
     private readonly IMapper _mapper;
 
-    public AutoMapperExtensionsTests()
+    public AutoMapperForCreateUserViewModelExtensionsTests()
     {
         MapperConfiguration configurationProvider = new(cfg => cfg.AddProfile<CreateUserViewModelMappingProfile>());
         _mapper = configurationProvider.CreateMapper();
     }
 
     [Fact]
-    public void Map_should_MapUserWithAdditionalPropertiesToCreateUserViewModel_when_AdditionalPropertiesAreSpecified()
+    public void Map_should_MapUserToCreateUserViewModel_when_AdditionalPropertiesAreSpecified()
     {
         // Arrange
         string jwtToken = "jwtToken";

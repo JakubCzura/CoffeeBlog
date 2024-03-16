@@ -2,10 +2,10 @@
 using CoffeeBlog.Domain.Entities;
 using CoffeeBlog.Domain.ViewModels.Users;
 
-namespace CoffeeBlog.Application.MappingProfiles;
+namespace CoffeeBlog.Application.Mapping.Users;
 
 /// <summary>
-/// Mapping profile to map from <see cref="User"/> to <see cref="CreateUserViewModel"/>.
+/// Mapping profile for <see cref="CreateUserViewModel"/>.
 /// </summary>
 public class CreateUserViewModelMappingProfile : Profile
 {

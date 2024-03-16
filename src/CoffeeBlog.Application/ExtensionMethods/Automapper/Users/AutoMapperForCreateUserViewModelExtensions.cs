@@ -2,12 +2,12 @@
 using CoffeeBlog.Domain.Entities;
 using CoffeeBlog.Domain.ViewModels.Users;
 
-namespace CoffeeBlog.Application.ExtensionMethods.AutoMapper;
+namespace CoffeeBlog.Application.ExtensionMethods.Automapper.Users;
 
 /// <summary>
 /// Extension methods for <see cref="IMapper"/>.
 /// </summary>
-public static class AutoMapperExtensions
+public static class AutoMapperForCreateUserViewModelExtensions
 {
     /// <summary>
     /// Maps <see cref="User"/> to <see cref="CreateUserViewModel"/>.
