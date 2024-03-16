@@ -38,7 +38,7 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> logger) : IMiddlew
 
         ErrorDetailsViewModel errorDetailsViewModel = exception switch
         {
-            NullEntityException nullEntityException => CreateErrorDetailsResponse(httpContext, HttpStatusCode.BadRequest, exception.Message),
+            NullEntityException => CreateErrorDetailsResponse(httpContext, HttpStatusCode.BadRequest, exception.Message),
             _ => CreateErrorDetailsResponse(httpContext, HttpStatusCode.InternalServerError, "Internal server exception.")
         };
 
