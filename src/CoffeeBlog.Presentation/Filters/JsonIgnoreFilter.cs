@@ -8,7 +8,7 @@ namespace CoffeeBlog.Presentation.Filters;
 
 public class JsonIgnoreFilter : ISchemaFilter
 {
-    public void Apply(OpenApiSchema schema, 
+    public void Apply(OpenApiSchema schema,
                       SchemaFilterContext schemaFilterContext)
     {
         if (schema.Properties.Count == 0)
@@ -24,8 +24,5 @@ public class JsonIgnoreFilter : ISchemaFilter
                                 {
                                     schema.Properties.Remove(propertyName);
                                 });
-
     }
 }
-
-

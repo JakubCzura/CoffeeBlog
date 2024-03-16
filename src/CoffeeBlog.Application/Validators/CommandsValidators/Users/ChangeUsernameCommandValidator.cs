@@ -12,6 +12,6 @@ public class ChangeUsernameCommandValidator : AbstractValidator<ChangeUsernameCo
     ///<summary>
     /// Default constructor.
     /// </summary>
-    public ChangeUsernameCommandValidator() 
+    public ChangeUsernameCommandValidator()
         => RuleFor(x => x.NewUsername).SetValidator(new UsernameValidator());
 }

@@ -13,10 +13,12 @@ internal class UserRepository(CoffeeBlogDbContext coffeeBlogDbContext) : DbEntit
                                                        CancellationToken cancellationToken)
         => await _coffeeBlogDbContext.Users.AsNoTracking()
                                            .FirstOrDefaultAsync(user => user.Email == usernameOrEmail || user.Username == usernameOrEmail, cancellationToken);
+
     public async Task<bool> UsernameExistsAsync(string username,
                                                 CancellationToken cancellationToken = default)
         => await _coffeeBlogDbContext.Users.AsNoTracking()
                                            .AnyAsync(user => user.Username == username, cancellationToken);
+
     public async Task<bool> EmailExistsAsync(string email,
                                              CancellationToken cancellationToken = default)
         => await _coffeeBlogDbContext.Users.AsNoTracking()

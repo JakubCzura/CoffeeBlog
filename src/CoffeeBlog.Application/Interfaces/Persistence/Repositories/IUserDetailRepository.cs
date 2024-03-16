@@ -15,6 +15,7 @@ public interface IUserDetailRepository : IDbEntityBaseRepository<UserDetail>
     /// <returns>Total number of rows updated in database.</returns>
     Task<int> UpdateLastSuccessfullSignInAsync(int userId,
                                                CancellationToken cancellationToken);
+
     /// <summary>
     /// Updates the date and time when user failed to sign in last time and sets it to current UTC datetime.
     /// </summary>

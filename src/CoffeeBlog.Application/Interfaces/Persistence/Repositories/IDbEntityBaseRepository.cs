@@ -14,7 +14,7 @@ public interface IDbEntityBaseRepository<T> where T : DbEntityBase
     /// <param name="entity">Entity to add to database.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Id of added entity.</returns>
-    Task<int> CreateAsync(T entity, 
+    Task<int> CreateAsync(T entity,
                           CancellationToken cancellationToken);
 
     /// <summary>
@@ -23,7 +23,7 @@ public interface IDbEntityBaseRepository<T> where T : DbEntityBase
     /// <param name="id">Entity's id.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Entity if found, otherwise null.</returns>
-    Task<T?> GetAsync(int id, 
+    Task<T?> GetAsync(int id,
                       CancellationToken cancellationToken);
 
     /// <summary>
@@ -39,7 +39,7 @@ public interface IDbEntityBaseRepository<T> where T : DbEntityBase
     /// <param name="entity">Entity to update.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Number of state entries written to database.</returns>
-    Task<int> UpdateAsync(T entity, 
+    Task<int> UpdateAsync(T entity,
                           CancellationToken cancellationToken);
 
     /// <summary>
@@ -48,6 +48,6 @@ public interface IDbEntityBaseRepository<T> where T : DbEntityBase
     /// <param name="id">Entity's id.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Number of rows deleted in database.</returns>
-    Task<int> DeleteAsync(int id, 
+    Task<int> DeleteAsync(int id,
                           CancellationToken cancellationToken);
 }

@@ -19,13 +19,11 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> logger) : IMiddlew
         }
         catch (Exception exception)
         {
-
             //TODO: Write data to database in HandleExceptionAsync()
             ApiError error = new(exception.ToString(),
                                  exception.Message,
                                  "Exception caught by exception middleware",
                                  DateTime.UtcNow);
-
 
             await HandleExceptionAsync(context, exception);
         }

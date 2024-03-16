@@ -11,6 +11,7 @@ internal class UserDetailRepository(CoffeeBlogDbContext _coffeeBlogDbContext,
 {
     private readonly CoffeeBlogDbContext _coffeeBlogDbContext = _coffeeBlogDbContext;
     private readonly IDateTimeProvider _dateTimeProvider = _dateTimeProvider;
+
     public async Task<int> UpdateLastSuccessfullSignInAsync(int userId,
                                                             CancellationToken cancellationToken = default)
        => await _coffeeBlogDbContext.UserDetails.Where(userDetail => userDetail.UserId == userId)

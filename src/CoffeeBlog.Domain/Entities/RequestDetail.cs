@@ -32,7 +32,7 @@ public class RequestDetail(string controllerName,
     /// Name of controller that handles request.
     /// </summary>
     public string ControllerName { get; set; } = controllerName;
-    
+
     /// <summary>
     /// Path of request like /api/MyController/GetWeatherForecast.
     /// </summary>

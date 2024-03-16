@@ -1,10 +1,10 @@
-﻿using CoffeeBlog.Domain.SettingsOptions.Authentication;
+﻿using CoffeeBlog.Application.ExtensionMethods.Collections;
+using CoffeeBlog.Domain.SettingsOptions.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
-using CoffeeBlog.Application.ExtensionMethods.Collections;
 
 namespace CoffeeBlog.Infrastructure.Security.Authentication;
 

@@ -1,6 +1,5 @@
 ﻿namespace CoffeeBlog.Domain.Models.Users;
 
-
 /// <summary>
 /// Information about current signed in user.
 /// </summary>

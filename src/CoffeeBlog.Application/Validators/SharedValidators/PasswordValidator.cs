@@ -11,7 +11,7 @@ public class PasswordValidator : AbstractValidator<string>
 {
     /// <summary>
     /// Default constructor.
-    /// </summary>  
+    /// </summary>
     public PasswordValidator()
         => RuleFor(password => password).NotEmpty().WithMessage(ValidatorMessages.PasswordIsRequired)
                                         .Length(5, 50).WithMessage(ValidatorMessages.PasswordMustBeBetween5And50CharactersLong)

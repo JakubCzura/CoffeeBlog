@@ -38,7 +38,7 @@ internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : 
         => _dbSet.AsNoTracking()
                  .ToListAsync(cancellationToken);
 
-    public Task<int> UpdateAsync(T entity, 
+    public Task<int> UpdateAsync(T entity,
                                  CancellationToken cancellationToken = default)
     {
         if (entity is null)
@@ -50,7 +50,7 @@ internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : 
         return _coffeeBlogDbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<int> DeleteAsync(int id, 
+    public async Task<int> DeleteAsync(int id,
                                        CancellationToken cancellationToken = default)
         => await _dbSet.Where(entity => entity.Id == id)
                        .ExecuteDeleteAsync(cancellationToken);
