@@ -39,7 +39,6 @@ public class CreateUserCommandHandler(IUserRepository _userRepository,
     /// <param name="request">Request command with details to create a new user.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Instance of <see cref="CreateUserViewModel"/></returns>
-    /// <exception cref="Exception">When username or e-mail already exists in database or username and e-mail are the same.</exception>
     public async Task<Result<CreateUserViewModel>> Handle(CreateUserCommand request,
                                                           CancellationToken cancellationToken)
     {
@@ -59,6 +58,6 @@ public class CreateUserCommandHandler(IUserRepository _userRepository,
 
         CreateUserViewModel result = _mapper.Map<CreateUserViewModel>(user, jwtToken);
 
-        return result;
+        return Result.Ok(result);
     }
 }

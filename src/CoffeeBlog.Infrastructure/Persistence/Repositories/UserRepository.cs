@@ -12,13 +12,31 @@ internal class UserRepository(CoffeeBlogDbContext coffeeBlogDbContext) : DbEntit
     public async Task<User?> GetByEmailOrUsernameAsync(string usernameOrEmail,
                                                        CancellationToken cancellationToken)
         => await _coffeeBlogDbContext.Users.AsNoTracking()
-                                           .FirstOrDefaultAsync(x => x.Email == usernameOrEmail || x.Username == usernameOrEmail, cancellationToken);
+                                           .FirstOrDefaultAsync(user => user.Email == usernameOrEmail || user.Username == usernameOrEmail, cancellationToken);
     public async Task<bool> UsernameExistsAsync(string username,
                                                 CancellationToken cancellationToken = default)
         => await _coffeeBlogDbContext.Users.AsNoTracking()
-                                           .AnyAsync(x => x.Username == username, cancellationToken);
+                                           .AnyAsync(user => user.Username == username, cancellationToken);
     public async Task<bool> EmailExistsAsync(string email,
                                              CancellationToken cancellationToken = default)
         => await _coffeeBlogDbContext.Users.AsNoTracking()
-                                           .AnyAsync(x => x.Email == email, cancellationToken);
+                                           .AnyAsync(user => user.Email == email, cancellationToken);
+
+    public async Task<int> UpdateUsernameAsync(int id,
+                                               string username,
+                                               CancellationToken cancellationToken = default)
+        => await _coffeeBlogDbContext.Users.Where(user => user.Id == id)
+                                           .ExecuteUpdateAsync(user => user.SetProperty(property => property.Username, username), cancellationToken);
+
+    public async Task<int> UpdateEmailAsync(int id,
+                                            string email,
+                                            CancellationToken cancellationToken = default)
+        => await _coffeeBlogDbContext.Users.Where(user => user.Id == id)
+                                           .ExecuteUpdateAsync(user => user.SetProperty(property => property.Email, email), cancellationToken);
+
+    public async Task<int> UpdatePasswordAsync(int id,
+                                               string password,
+                                               CancellationToken cancellationToken = default)
+        => await _coffeeBlogDbContext.Users.Where(user => user.Id == id)
+                                           .ExecuteUpdateAsync(user => user.SetProperty(property => property.Password, password), cancellationToken);
 }
