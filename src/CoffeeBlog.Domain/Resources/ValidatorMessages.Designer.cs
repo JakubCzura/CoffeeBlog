@@ -70,15 +70,6 @@ namespace CoffeeBlog.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to E-mail already exists.
-        /// </summary>
-        public static string EmailAlreadyExists {
-            get {
-                return ResourceManager.GetString("EmailAlreadyExists", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to E-mail can&apos;t contain more than 320 characters.
         /// </summary>
         public static string EmailCantContainMoreThan320Characters {
@@ -174,15 +165,6 @@ namespace CoffeeBlog.Domain.Resources {
         public static string PasswordMustContainAtLeastOneUpperLetter {
             get {
                 return ResourceManager.GetString("PasswordMustContainAtLeastOneUpperLetter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Username already exists.
-        /// </summary>
-        public static string UsernameAlreadyExists {
-            get {
-                return ResourceManager.GetString("UsernameAlreadyExists", resourceCulture);
             }
         }
         

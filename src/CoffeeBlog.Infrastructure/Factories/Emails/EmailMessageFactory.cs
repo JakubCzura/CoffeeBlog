@@ -1,5 +1,5 @@
 ﻿using CoffeeBlog.Application.Factories.Emails;
-using CoffeeBlog.Domain.Models.Email;
+using CoffeeBlog.Domain.Models.Emails;
 
 namespace CoffeeBlog.Infrastructure.Factories.Emails;
 

@@ -5,4 +5,5 @@
 /// </summary>
 public class SignInUserViewModel
 {
+    public string JwtToken { get; set; } = string.Empty;
 }

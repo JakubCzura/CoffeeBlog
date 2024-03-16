@@ -117,46 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ConfirmPasswordIsRequired" xml:space="preserve">
-    <value>Confirm password is required</value>
-  </data>
-  <data name="EmailCantContainMoreThan320Characters" xml:space="preserve">
-    <value>E-mail can't contain more than 320 characters</value>
-  </data>
-  <data name="EmailIsRequired" xml:space="preserve">
-    <value>E-mail is required</value>
-  </data>
-  <data name="EmailMustBeDifferentFromUsername" xml:space="preserve">
-    <value>E-mail must be different from username</value>
-  </data>
-  <data name="EmailMustBeInValidFormat" xml:space="preserve">
-    <value>E-mail must be in valid format</value>
-  </data>
-  <data name="PasswordAndConfirmPasswordMustMatch" xml:space="preserve">
-    <value>Password and confirm password must match</value>
-  </data>
-  <data name="PasswordIsRequired" xml:space="preserve">
-    <value>Password is required</value>
-  </data>
-  <data name="PasswordMustBeBetween5And50CharactersLong" xml:space="preserve">
-    <value>Password must be between 5 and 50 characters long</value>
-  </data>
-  <data name="PasswordMustContainAtLeastOneDigit" xml:space="preserve">
-    <value>Password must contain at least one digit</value>
-  </data>
-  <data name="PasswordMustContainAtLeastOneLowerLetter" xml:space="preserve">
-    <value>Password must contain at least one lower letter</value>
-  </data>
-  <data name="PasswordMustContainAtLeastOneOfSpecialCharacters" xml:space="preserve">
-    <value>Password must contain at least one of special characters</value>
-  </data>
-  <data name="PasswordMustContainAtLeastOneUpperLetter" xml:space="preserve">
-    <value>Password must contain at least one upper letter</value>
-  </data>
-  <data name="UsernameCantContainMoreThan100Characters" xml:space="preserve">
-    <value>Username can't contain more than 100 characters</value>
-  </data>
-  <data name="UsernameIsRequired" xml:space="preserve">
-    <value>Username is required</value>
+  <data name="UsernameHasBeenChanged" xml:space="preserve">
+    <value>Username has been changed</value>
   </data>
 </root>

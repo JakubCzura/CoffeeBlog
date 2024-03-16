@@ -1,4 +1,5 @@
 ﻿using CoffeeBlog.Domain.ViewModels.Users;
+using FluentResults;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,7 +8,7 @@ namespace CoffeeBlog.Domain.Queries.Users;
 /// <summary>
 /// Request query to sign in a user. It's handled using Mediatr and CQRS pattern.
 /// </summary>
-public class SignInUserQuery : IRequest<SignInUserViewModel>
+public class SignInUserQuery : IRequest<Result<SignInUserViewModel>>
 {
     /// <summary>
     /// User can log in with either username or email.

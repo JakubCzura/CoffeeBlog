@@ -17,9 +17,9 @@ namespace CoffeeBlog.Presentation.Controllers;
 /// When defining operations like getting user details or getting list of users, we should use <see cref="UserController"/>.
 /// </summary>
 [ApiVersion(ApiVersioningInfo.Version_1_0)]
-public class AccountController(IMediator mediator) : ApiControllerBase
+public class AccountController(IMediator _mediator) : ApiControllerBase
 {
-    private readonly IMediator _mediator = mediator;
+    private readonly IMediator _mediator = _mediator;
 
     [AllowAnonymous]
     [HttpPost("register/user")]
@@ -52,7 +52,18 @@ public class AccountController(IMediator mediator) : ApiControllerBase
         //    return BadRequest(string.Join(Environment.NewLine, ModelState.Values.SelectMany(x => x.Errors)));
         //}
 
-        SignInUserViewModel result = await _mediator.Send(logInUserCommand);
-        return Ok(result);
+        Result<SignInUserViewModel> result = await _mediator.Send(logInUserCommand);
+
+        if (result.IsSuccess)
+        {
+            return Ok(result.Value);
+        }
+
+        IError error = result.Errors[0];
+        return error switch
+        {
+            UserNotFoundError => Conflict(error.Message),
+            _ => BadRequest(string.Join(";", result.Errors.Select(x => x.Message)))
+        };
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Domain.Models.Email;
+﻿namespace CoffeeBlog.Domain.Models.Emails;
 
 /// <summary>
 /// Interface for email message. Helpful for factories for email's messages.

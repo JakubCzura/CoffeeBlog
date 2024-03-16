@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Domain.Models.Email;
+﻿namespace CoffeeBlog.Domain.Models.Emails;
 
 /// <summary>
 /// Email message for user who wants to reset password.

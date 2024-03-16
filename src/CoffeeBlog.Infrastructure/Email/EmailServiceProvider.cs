@@ -1,5 +1,5 @@
 ﻿using CoffeeBlog.Application.Email;
-using CoffeeBlog.Domain.Models.Email;
+using CoffeeBlog.Domain.Models.Emails;
 using CoffeeBlog.Domain.SettingsOptions.Email;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;

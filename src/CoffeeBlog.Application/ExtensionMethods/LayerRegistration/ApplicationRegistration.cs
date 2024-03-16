@@ -21,9 +21,6 @@ public static class ApplicationRegistration
     {
         services.AddMediatR(config => config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
-        //Don't perform auto validation to have more control over the validation process.
-        //Prefer injection IValidator<T> via constructor and use it explicitly.
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         return services;

@@ -3,6 +3,6 @@ using FluentResults;
 
 namespace CoffeeBlog.Domain.Errors.Users;
 
-public class UsernameExistsError() : Error(ErrorMessages.UsernameAlreadyExists)
+public class UserNotFoundError() : Error(ErrorMessages.UserNotFound)
 {
 }

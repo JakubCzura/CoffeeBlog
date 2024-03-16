@@ -3,4 +3,4 @@ using FluentResults;
 
 namespace CoffeeBlog.Domain.Errors.Users;
 
-public class EmailExistsError() : Error(ValidatorMessages.EmailAlreadyExists);
+public class EmailExistsError() : Error(ErrorMessages.EmailAlreadyExists);

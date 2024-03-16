@@ -1,4 +1,4 @@
-﻿using CoffeeBlog.Domain.Models.Email;
+﻿using CoffeeBlog.Domain.Models.Emails;
 
 namespace CoffeeBlog.Application.Factories.Emails;
 
