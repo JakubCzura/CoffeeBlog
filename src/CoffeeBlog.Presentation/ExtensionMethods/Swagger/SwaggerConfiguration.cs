@@ -10,6 +10,9 @@ using System.Reflection;
 
 namespace CoffeeBlog.Presentation.ExtensionMethods.Swagger;
 
+/// <summary>
+/// Configuration of Swagger.
+/// </summary>
 public static class SwaggerConfiguration
 {
     private static string GetProjectXmlDocumentation(Assembly projectAssembly)
@@ -17,13 +20,12 @@ public static class SwaggerConfiguration
 
     private static void AddProjectsXmlDocumentations(this SwaggerGenOptions swaggerGenOptions,
                                                      params Assembly[] projectsAssemblies)
-    {
-        foreach (Assembly projectAssembly in projectsAssemblies)
-        {
-            string xmlDocumentationPath = GetProjectXmlDocumentation(projectAssembly);
-            swaggerGenOptions.IncludeXmlComments(xmlDocumentationPath);
-        }
-    }
+        => projectsAssemblies.ToList()
+                             .ForEach(projectAssembly =>
+                             {
+                                 string xmlDocumentationPath = GetProjectXmlDocumentation(projectAssembly);
+                                 swaggerGenOptions.IncludeXmlComments(xmlDocumentationPath);
+                             });
 
     private static void AddSecurity(this SwaggerGenOptions swaggerGenOptions)
     {
@@ -52,6 +54,11 @@ public static class SwaggerConfiguration
         });
     }
 
+    /// <summary>
+    /// Registers Swagger in dependency injection services.
+    /// </summary>
+    /// <param name="services">Instance of <see cref="IServiceCollection"/></param>
+    /// <returns>Instance of <see cref="IServiceCollection"/></returns>
     public static IServiceCollection AddSwagger(this IServiceCollection services)
     {
         services.AddSwaggerGen(swaggerGenOptions =>
@@ -100,6 +107,11 @@ public static class SwaggerConfiguration
         return services;
     }
 
+    /// <summary>
+    /// Configures Swagger UI and launches Swagger UI in browser using configured path.
+    /// </summary>
+    /// <param name="webApplication">Instance of <see cref="WebApplication"/></param>
+    /// <returns>Instance of <see cref="WebApplication"/></returns>
     public static WebApplication UseSwaggerInterface(this WebApplication webApplication)
     {
         webApplication.UseSwagger(options => options.RouteTemplate = SwaggerInfo.RouteTemplate);
