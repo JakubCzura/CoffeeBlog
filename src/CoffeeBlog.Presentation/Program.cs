@@ -35,13 +35,13 @@ builder.Services.Configure<ApiBehaviorOptions>(config =>
     };
 });
 
-builder.Services.AddSingleton<ExceptionMiddleware>();
-builder.Services.AddSingleton<RequestDetailsMiddleware>();
+builder.Services.AddTransient<ExceptionMiddleware>();
+builder.Services.AddTransient<RequestDetailsMiddleware>();
 
 WebApplication app = builder.Build();
 
-app.UseMiddleware<ExceptionMiddleware>();
 app.UseMiddleware<RequestDetailsMiddleware>();
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
