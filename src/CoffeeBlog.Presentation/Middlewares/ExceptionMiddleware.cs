@@ -6,9 +6,9 @@ using System.Net;
 
 namespace CoffeeBlog.Presentation.Middlewares;
 
-public class ExceptionMiddleware(ILogger<ExceptionMiddleware> logger) : IMiddleware
+public class ExceptionMiddleware(ILogger<ExceptionMiddleware> _logger) : IMiddleware
 {
-    private readonly ILogger<ExceptionMiddleware> _logger = logger;
+    private readonly ILogger<ExceptionMiddleware> _logger = _logger;
 
     public async Task InvokeAsync(HttpContext context,
                                   RequestDelegate next)

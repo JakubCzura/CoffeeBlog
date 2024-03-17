@@ -6,48 +6,56 @@ using System.Security.Claims;
 
 namespace CoffeeBlog.Presentation.Middlewares;
 
-public class RequestDetailsMiddleware : IMiddleware
+public class RequestDetailsMiddleware(ILogger<RequestDetailsMiddleware> _logger) : IMiddleware
 {
+    private readonly ILogger<RequestDetailsMiddleware> _logger = _logger;
+
     public async Task InvokeAsync(HttpContext context,
                                   RequestDelegate next)
     {
-        Stopwatch stopwatch = Stopwatch.StartNew();
-        string? responseBody = null;
-
-        context.Request.EnableBuffering();
-
-        string? requestBody = await ReadBodyAsString(context.Request.ContentType,
-                                                     context.Request.Body);
-
-        Stream originalBodyStream = context.Response.Body;
-        await using (MemoryStream responseBodyStream = new())
+        try
         {
-            context.Response.Body = responseBodyStream;
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            string? responseBody = null;
 
-            await next.Invoke(context);
+            context.Request.EnableBuffering();
 
-            responseBody = await ReadBodyAsString(context.Request.ContentType,
-                                                  context.Response.Body);
+            string? requestBody = await ReadBodyAsString(context.Request.ContentType,
+                                                         context.Request.Body);
 
-            await responseBodyStream.CopyToAsync(originalBodyStream);
+            Stream originalBodyStream = context.Response.Body;
+            await using (MemoryStream responseBodyStream = new())
+            {
+                context.Response.Body = responseBodyStream;
+
+                await next.Invoke(context);
+
+                responseBody = await ReadBodyAsString(context.Request.ContentType,
+                                                      context.Response.Body);
+
+                await responseBodyStream.CopyToAsync(originalBodyStream);
+            }
+
+            string? userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            stopwatch.Stop();
+            RequestDetail requestDetail = new(context.GetRouteData().Values["controller"]?.ToString() ?? string.Empty,
+                                                    context.Request.Path,
+                                                    context.Request.Method,
+                                                    context.Response.StatusCode,
+                                                    requestBody,
+                                                    context.Request.ContentType,
+                                                    responseBody,
+                                                    context.Response.ContentType,
+                                                    stopwatch.ElapsedMilliseconds,
+                                                    DateTime.UtcNow,
+                                                    userId is not null ? int.Parse(userId) : null);
+            //Write data to database
         }
-
-        string? userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        stopwatch.Stop();
-        RequestDetail requestDetail = new(context.GetRouteData().Values["controller"]?.ToString() ?? string.Empty,
-                                                context.Request.Path,
-                                                context.Request.Method,
-                                                context.Response.StatusCode,
-                                                requestBody,
-                                                context.Request.ContentType,
-                                                responseBody,
-                                                context.Response.ContentType,
-                                                stopwatch.ElapsedMilliseconds,
-                                                DateTime.UtcNow,
-                                                userId is not null ? int.Parse(userId) : null);
-
-        //Write data to database
+        catch (Exception exception)
+        {
+            _logger.LogError(exception, "Exception while saving request's data.");
+        }
     }
 
     private static bool IsJson(string? contentType)
