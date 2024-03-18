@@ -24,5 +24,6 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="CoffeeBlog.Infrastructure.UnitTests" />
+    <InternalsVisibleTo Include="CoffeeBlog.Infrastructure.IntegrationTests" />
   </ItemGroup>
 </Project>

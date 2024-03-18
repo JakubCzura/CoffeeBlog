@@ -13,7 +13,7 @@ public interface IDbEntityBaseRepository<T> where T : DbEntityBase
     /// </summary>
     /// <param name="entity">Entity to add to database.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
-    /// <returns>Id of added entity.</returns>
+    /// <returns>Number of state entries written to database.</returns>
     Task<int> CreateAsync(T entity,
                           CancellationToken cancellationToken);
 
