@@ -5,7 +5,7 @@ using System.Data.Common;
 
 namespace CoffeeBlog.Infrastructure.IntegrationTests.HelpersForTests;
 
-public class CoffeeBlogDatabaseFixture : IAsyncLifetime
+public class TestingDatabaseFixture : IAsyncLifetime
 {
     public readonly CoffeeBlogDbContext CoffeeBlogContext;
     private static string CoffeeBlogDbConnectionString => $"Server=(localdb)\\MSSQLLocalDB;Database=PersistenceIntegrationTests;Integrated Security=True;TrustServerCertificate=True";
@@ -13,21 +13,21 @@ public class CoffeeBlogDatabaseFixture : IAsyncLifetime
     private Respawner _respawner = default!;
     private DbConnection _connection = default!;
 
-    public CoffeeBlogDatabaseFixture()
+    public TestingDatabaseFixture()
     {
         DbContextOptions<CoffeeBlogDbContext> options = new DbContextOptionsBuilder<CoffeeBlogDbContext>()
                                                            .UseSqlServer(CoffeeBlogDbConnectionString)
                                                            .Options;
         CoffeeBlogContext = new(options);
 
-        CoffeeBlogContext.Database.EnsureDeleted();
-        CoffeeBlogContext.Database.EnsureCreated();
+        //CoffeeBlogContext.Database.EnsureDeleted();
+        //CoffeeBlogContext.Database.EnsureCreated();
     }
 
     public async Task DisposeAsync()
     {
         //await CoffeeBlogContext.Database.EnsureDeletedAsync();
-        //await CoffeeBlogContext.DisposeAsync();
+        await CoffeeBlogContext.DisposeAsync();
 
         await _connection.CloseAsync();
     }
@@ -37,8 +37,8 @@ public class CoffeeBlogDatabaseFixture : IAsyncLifetime
 
     public async Task InitializeAsync()
     {
-        //await CoffeeBlogContext.Database.EnsureDeletedAsync();
-        //await CoffeeBlogContext.Database.EnsureCreatedAsync();
+        await CoffeeBlogContext.Database.EnsureDeletedAsync();
+        await CoffeeBlogContext.Database.EnsureCreatedAsync();
 
         RespawnerOptions respawnerOptions = new()
         {

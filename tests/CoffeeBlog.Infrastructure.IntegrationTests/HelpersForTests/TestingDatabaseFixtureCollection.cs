@@ -1,6 +1,6 @@
 ﻿namespace CoffeeBlog.Infrastructure.IntegrationTests.HelpersForTests;
 
-[CollectionDefinition("Testing database collection")]
-public class TestingDatabaseFixtureCollection : ICollectionFixture<CoffeeBlogDatabaseFixture>
+[CollectionDefinition(TestingConstants.TestingCollectionName)]
+public class TestingDatabaseFixtureCollection : ICollectionFixture<TestingDatabaseFixture>
 {
 }

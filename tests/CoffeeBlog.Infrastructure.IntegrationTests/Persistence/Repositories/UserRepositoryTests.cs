@@ -7,7 +7,7 @@ using FluentAssertions;
 
 namespace CoffeeBlog.Infrastructure.IntegrationTests.Persistence.Repositories;
 
-[Collection("Testing database collection")]
+[Collection(TestingConstants.TestingCollectionName)]
 public class UserRepositoryTests : IAsyncLifetime
 {
     private readonly Func<Task> _resetDatabase;
@@ -16,17 +16,17 @@ public class UserRepositoryTests : IAsyncLifetime
 
     private readonly DateTime _utcNow = DateTime.UtcNow;
 
-    public UserRepositoryTests(CoffeeBlogDatabaseFixture coffeeBlogDatabaseFixture)
+    public UserRepositoryTests(TestingDatabaseFixture coffeeBlogDatabaseFixture)
     {
         _resetDatabase = coffeeBlogDatabaseFixture.ResetDatabaseAsync;
         _coffeeBlogDbContext = coffeeBlogDatabaseFixture.CoffeeBlogContext;
         _userRepository = new UserRepository(_coffeeBlogDbContext);
     }
 
-    public Task InitializeAsync()
+    public Task InitializeAsync() 
         => Task.CompletedTask;
 
-    public async Task DisposeAsync()
+    public async Task DisposeAsync() 
         => await _resetDatabase();
 
     [Fact]
