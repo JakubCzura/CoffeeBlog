@@ -23,19 +23,9 @@ public class User : DbEntityBase
     public string Password { get; set; } = string.Empty;
 
     /// <summary>
-    /// Date and time when the user created an account.
-    /// </summary>
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-    /// <summary>
-    /// Date and time when the user's account was last updated. It can be for example password change.
-    /// </summary>
-    public DateTime? UpdatedAt { get; set; }
-
-    /// <summary>
     /// List of user's last credentials. It's used to prevent user from using the same password when changing it.
     /// </summary>
-    public virtual List<UserLastCredential> LastCredentials { get; set; } = [];
+    public virtual List<UserLastPassword> LastPasswords { get; set; } = [];
 
     /// <summary>
     /// Roles assigned to the user. It's used to define user's permissions.

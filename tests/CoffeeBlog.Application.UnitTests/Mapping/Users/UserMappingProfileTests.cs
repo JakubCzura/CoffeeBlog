@@ -39,16 +39,14 @@ public class UserMappingProfileTests
         //Act
         User result = _mapper.Map<User>(createUserCommand, opt =>
         {
-            opt.Items[MappingConstants.HashedPassword] = hashedPassword;
-            opt.Items[MappingConstants.CreatedAt] = createdAt;
+            opt.Items[MappingConstants.HashedPassword] = hashedPassword;        
         });
 
         //Assert
         result.Username.Should().Be(createUserCommand.Username);
         result.Email.Should().Be(createUserCommand.Email);
         result.Password.Should().Be(hashedPassword);
-        result.CreatedAt.Should().Be(createdAt);
-    }
+        }
 
     [Fact]
     public void Map_should_ThrowAutoMapperMappingException_when_AdditionalPropertiesAreNotSpecified()

@@ -12,6 +12,8 @@ internal class UserDetailConfiguration : IEntityTypeConfiguration<UserDetail>
 
         builder.Property(x => x.CreatedAt).IsRequired();
 
+        builder.Property(x => x.UpdatedAt).IsRequired(false);
+
         builder.Property(x => x.LastSuccessfullSignIn).IsRequired();
 
         builder.Property(x => x.LastFailedSignIn).IsRequired(false);

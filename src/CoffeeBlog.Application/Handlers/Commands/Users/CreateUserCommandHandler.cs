@@ -51,7 +51,7 @@ public class CreateUserCommandHandler(IUserRepository _userRepository,
             return Result.Fail<CreateUserViewModel>(new EmailExistsError());
         }
 
-        User user = _mapper.Map<User>(request, _passwordHasher.HashPassword(request.Password), _dateTimeProvider.UtcNow);
+        User user = _mapper.Map<User>(request, _passwordHasher.HashPassword(request.Password));
 
         int userId = await _userRepository.CreateAsync(user, cancellationToken);
         string jwtToken = _jwtService.CreateToken(new(userId, request.Username, request.Email));

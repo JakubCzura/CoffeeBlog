@@ -36,6 +36,7 @@ public static class InfrastructureRegistration
         services.AddScoped<IRequestDetailRepository, RequestDetailRepository>();
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IUserDetailRepository, UserDetailRepository>();
+        services.AddScoped<IUserLastPasswordRepository, UserLastPasswordRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
 
         services.AddScoped<IDateTimeProvider, DateTimeProvider>();

@@ -17,11 +17,9 @@ public class UserMappingProfile : Profile
     {
         CreateMap<CreateUserCommand, User>()
             .ForMember(dest => dest.Id, opt => opt.Ignore())
-            .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
-            .ForMember(dest => dest.LastCredentials, opt => opt.Ignore())
+            .ForMember(dest => dest.LastPasswords, opt => opt.Ignore())
             .ForMember(dest => dest.Roles, opt => opt.Ignore())
             .ForMember(dest => dest.RequestDetails, opt => opt.Ignore())
-            .ForMember(dest => dest.Password, opt => opt.MapFrom((src, dest, destMember, context) => context.Items[MappingConstants.HashedPassword]))
-            .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom((src, dest, destMember, context) => context.Items[MappingConstants.CreatedAt]));
+            .ForMember(dest => dest.Password, opt => opt.MapFrom((src, dest, destMember, context) => context.Items[MappingConstants.HashedPassword]));
     }
 }

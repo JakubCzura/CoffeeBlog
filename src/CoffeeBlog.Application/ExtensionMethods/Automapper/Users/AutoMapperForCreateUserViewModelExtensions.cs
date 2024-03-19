@@ -16,7 +16,7 @@ public static class AutoMapperForCreateUserViewModelExtensions
     /// <param name="mapper"><see cref="IMapper"/></param>
     /// <param name="user">User entity.</param>
     /// <param name="jwtToken">JWT token for authorized user.</param>
-    /// <returns></returns>
+    /// <returns>Instance of <see cref="CreateUserViewModel"/></returns>
     public static CreateUserViewModel Map<T>(this IMapper mapper,
                                              User user,
                                              string jwtToken) where T : CreateUserViewModel

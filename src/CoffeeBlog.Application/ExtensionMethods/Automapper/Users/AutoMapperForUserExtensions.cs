@@ -17,15 +17,12 @@ public static class AutoMapperForUserExtensions
     /// <param name="mapper"><see cref="IMapper"/></param>
     /// <param name="createUserCommand">Request command to create a new user.</param>
     /// <param name="hashedPassword">User's password after it was hashed .</param>
-    /// <param name="createdAt">Date and time when user is going to be created.</param>
-    /// <returns></returns>
+    /// <returns>Instance of <see cref="User"/></returns>
     public static User Map<T>(this IMapper mapper,
                               CreateUserCommand createUserCommand,
-                              string hashedPassword,
-                              DateTime createdAt) where T : User
+                              string hashedPassword) where T : User
         => mapper.Map<User>(createUserCommand, opt =>
         {
             opt.Items[MappingConstants.HashedPassword] = hashedPassword;
-            opt.Items[MappingConstants.CreatedAt] = createdAt;
         });
 }

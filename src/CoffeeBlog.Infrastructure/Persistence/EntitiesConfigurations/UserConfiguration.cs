@@ -20,7 +20,7 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.HasIndex(x => new { x.Username, x.Email }).IsUnique();
 
-        builder.HasMany(x => x.LastCredentials)
+        builder.HasMany(x => x.LastPasswords)
                .WithOne()
                .HasForeignKey(x => x.UserId);
 

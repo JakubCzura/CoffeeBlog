@@ -14,8 +14,6 @@ public class UserRepositoryTests : IAsyncLifetime
     private readonly CoffeeBlogDbContext _coffeeBlogDbContext;
     private readonly UserRepository _userRepository;
 
-    private readonly DateTime _utcNow = DateTime.UtcNow;
-
     public UserRepositoryTests(TestingDatabaseFixture coffeeBlogDatabaseFixture)
     {
         _resetDatabase = coffeeBlogDatabaseFixture.ResetDatabaseAsync;
@@ -37,8 +35,7 @@ public class UserRepositoryTests : IAsyncLifetime
         {
             Username = "usernameTest",
             Email = "emailtest@email.com",
-            Password = "dsadasd@#!@#dsaldasn@#!#",
-            CreatedAt = _utcNow
+            Password = "dsadasd@#!@#dsaldasn@#!#"       
         };
 
         // Act
@@ -64,8 +61,7 @@ public class UserRepositoryTests : IAsyncLifetime
         {
             Username = "usernameTest",
             Email = "emailtest@email.com",
-            Password = "dsadasd@#!@#dsaldasn@#!#",
-            CreatedAt = _utcNow
+            Password = "dsadasd@#!@#dsaldasn@#!#"
         };
 
         _coffeeBlogDbContext.Add(user);
@@ -88,8 +84,7 @@ public class UserRepositoryTests : IAsyncLifetime
         {
             Username = "usernameTest",
             Email = "emailtest@email.com",
-            Password = "dsadasd@#!@#dsaldasn@#!#",
-            CreatedAt = _utcNow
+            Password = "dsadasd@#!@#dsaldasn@#!#"
         };
 
         _coffeeBlogDbContext.Add(user);
@@ -112,15 +107,13 @@ public class UserRepositoryTests : IAsyncLifetime
             {
                 Username = "usernameTest",
                 Email = "emailtest@email.com",
-                Password = "dsadasd@#!@#dsaldasn@#!#",
-                CreatedAt = _utcNow
+                Password = "dsadasd@#!@#dsaldasn@#!#"           
             },
             new()
             {
                 Username = "usernameTest2",
                 Email = "email2test@email.com",
-                Password = "ds23212adasd@#!@#dsaldasn@#!#",
-                CreatedAt = _utcNow.AddHours(3)
+                Password = "ds23212adasd@#!@#dsaldasn@#!#"
             }
         ];
 
@@ -142,8 +135,7 @@ public class UserRepositoryTests : IAsyncLifetime
         {
             Username = "usernameTest",
             Email = "emailtest@email.com",
-            Password = "dsad@##@!#",
-            CreatedAt = _utcNow
+            Password = "dsad@##@!#"
         };
 
         _coffeeBlogDbContext.Add(user);
@@ -177,8 +169,7 @@ public class UserRepositoryTests : IAsyncLifetime
         {
             Username = "usernameTest",
             Email = "email@email.com",
-            Password = "dsad@##@!#",
-            CreatedAt = _utcNow
+            Password = "dsad@##@!#"
         };
 
         _coffeeBlogDbContext.Add(user);

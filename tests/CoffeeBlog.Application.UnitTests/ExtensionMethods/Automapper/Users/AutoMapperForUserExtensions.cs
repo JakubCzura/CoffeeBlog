@@ -22,7 +22,6 @@ public class AutoMapperForUserExtensions
     {
         // Arrange
         string hashedPassword = "hjsda@#!@dasdn2#!@da@#!";
-        DateTime createdAt = DateTime.UtcNow;
 
         CreateUserCommand createUserCommand = new()
         {
@@ -31,12 +30,11 @@ public class AutoMapperForUserExtensions
         };
 
         //Act
-        User result = _mapper.Map<User>(createUserCommand, hashedPassword, createdAt);
+        User result = _mapper.Map<User>(createUserCommand, hashedPassword);
 
         //Assert
         result.Username.Should().Be(createUserCommand.Username);
         result.Email.Should().Be(createUserCommand.Email);
         result.Password.Should().Be(hashedPassword);
-        result.CreatedAt.Should().Be(createdAt);
     }
 }

@@ -13,6 +13,11 @@ public class UserDetail : DbEntityBase
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     /// <summary>
+    /// Date and time when the user's account was last updated. It can be for example password change.
+    /// </summary>
+    public DateTime? UpdatedAt { get; set; }
+
+    /// <summary>
     /// Date and time when user last successfully signed in.
     /// </summary>
     public DateTime LastSuccessfullSignIn { get; set; } = DateTime.UtcNow;

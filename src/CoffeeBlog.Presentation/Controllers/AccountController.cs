@@ -63,7 +63,7 @@ public class AccountController(IMediator _mediator) : ApiControllerBase
     }
 
     [Authorize]
-    [HttpPut("username/edit")]
+    [HttpPost("username/edit")]
     public async Task<IActionResult> EditUsername([FromBody] EditUsernameCommand changeUsernameCommand,
                                                   CancellationToken cancellationToken)
     {
@@ -83,7 +83,7 @@ public class AccountController(IMediator _mediator) : ApiControllerBase
     }
 
     [Authorize]
-    [HttpPut("email/edit")]
+    [HttpPost("email/edit")]
     public async Task<IActionResult> EditEmail([FromBody] EditEmailCommand editEmailCommand,
                                                CancellationToken cancellationToken)
     {
@@ -103,7 +103,7 @@ public class AccountController(IMediator _mediator) : ApiControllerBase
     }
 
     [Authorize]
-    [HttpPut("password/edit")]
+    [HttpPost("password/edit")]
     public async Task<IActionResult> EditPassword([FromBody] EditPasswordCommand editPasswordCommand,
                                                   CancellationToken cancellationToken)
     {
