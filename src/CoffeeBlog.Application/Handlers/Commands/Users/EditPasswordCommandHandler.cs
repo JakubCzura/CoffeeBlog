@@ -1,7 +1,7 @@
 ﻿using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 using CoffeeBlog.Application.Interfaces.Security.CurrentUsers;
+using CoffeeBlog.Application.Interfaces.Security.Password;
 using CoffeeBlog.Domain.Commands.Users;
-using CoffeeBlog.Domain.Errors.Users;
 using CoffeeBlog.Domain.Exceptions;
 using CoffeeBlog.Domain.Models.Users;
 using CoffeeBlog.Domain.Resources;
@@ -11,40 +11,36 @@ using MediatR;
 
 namespace CoffeeBlog.Application.Handlers.Commands.Users;
 
-public class EditEmailCommandHandler(IUserRepository _userRepository,
-                                     IUserDetailRepository _userDetailRepository,
-                                     ICurrentUserContext _currentUserContext) : IRequestHandler<EditEmailCommand, Result<ViewModelBase>>
+public class EditPasswordCommandHandler(IUserRepository _userRepository,
+                                        IUserDetailRepository _userDetailRepository,
+                                        ICurrentUserContext _currentUserContext,
+                                        IPasswordHasher _passwordHasher) : IRequestHandler<EditPasswordCommand, Result<ViewModelBase>>
 {
     private readonly IUserRepository _userRepository = _userRepository;
     private readonly IUserDetailRepository _userDetailRepository = _userDetailRepository;
     private readonly ICurrentUserContext _currentUserContext = _currentUserContext;
+    private readonly IPasswordHasher _passwordHasher = _passwordHasher;
 
     /// <summary>
-    /// Handles request to edit user's e-mail.
+    /// Handles request to edit user's password.
     /// </summary>
-    /// <param name="request">Request command with details to edit user's e-mail.</param>
+    /// <param name="request">Request command with details to edit user's password.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Instance of <see cref="ViewModelBase"/></returns>
     /// <exception cref="UserUnauthorizedException">When user is not authorized.</exception>
-    public async Task<Result<ViewModelBase>> Handle(EditEmailCommand request,
+    public async Task<Result<ViewModelBase>> Handle(EditPasswordCommand request,
                                                     CancellationToken cancellationToken)
     {
         CurrentAuthorizedUser currentAuthorizedUser = _currentUserContext.GetCurrentAuthorizedUser();
 
-        if (await _userRepository.EmailExistsAsync(request.NewEmail, cancellationToken))
-        {
-            return Result.Fail<ViewModelBase>(new EmailExistsError());
-        }
+        string hashedPassword = _passwordHasher.HashPassword(request.NewPassword);
 
-        //TODO: check if email is not the same as the previous one
+        await _userRepository.UpdatePasswordAsync(currentAuthorizedUser.Id, hashedPassword, cancellationToken);
 
-        await _userRepository.UpdateEmailAsync(currentAuthorizedUser.Id, request.NewEmail, cancellationToken);
-
-        await _userDetailRepository.UpdateLastPasswordChangeAsync(currentAuthorizedUser.Id, cancellationToken);
+        await _userDetailRepository.UpdateLastEmailChangeAsync(currentAuthorizedUser.Id, cancellationToken);
 
         ViewModelBase result = new(ResponseMessages.EmailHasBeenChanged);
 
-        throw new NotImplementedException();
         return Result.Ok(result);
     }
 }

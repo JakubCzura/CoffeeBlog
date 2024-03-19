@@ -101,4 +101,19 @@ public class AccountController(IMediator _mediator) : ApiControllerBase
             _ => BadRequest(string.Join(";", result.Errors.Select(x => x.Message)))
         };
     }
+
+    [Authorize]
+    [HttpPut("password/edit")]
+    public async Task<IActionResult> EditPassword([FromBody] EditPasswordCommand editPasswordCommand,
+                                                  CancellationToken cancellationToken)
+    {
+        Result<ViewModelBase> result = await _mediator.Send(editPasswordCommand, cancellationToken);
+
+        if (result.IsSuccess)
+        {
+            return Ok(result.Value);
+        }
+
+        return BadRequest(string.Join(";", result.Errors.Select(x => x.Message)));
+    }
 }
