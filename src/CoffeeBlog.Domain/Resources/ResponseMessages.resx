@@ -120,6 +120,9 @@
   <data name="EmailHasBeenChanged" xml:space="preserve">
     <value>E-mail has been changed</value>
   </data>
+  <data name="PasswordHasBeenChanged" xml:space="preserve">
+    <value>Password has been changed</value>
+  </data>
   <data name="UsernameHasBeenChanged" xml:space="preserve">
     <value>Username has been changed</value>
   </data>

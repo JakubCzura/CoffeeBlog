@@ -126,4 +126,7 @@
   <data name="UserNotFound" xml:space="preserve">
     <value>User not found</value>
   </data>
+  <data name="YouHaveAlreadyUsedThisPassword" xml:space="preserve">
+    <value>You have already used this password</value>
+  </data>
 </root>

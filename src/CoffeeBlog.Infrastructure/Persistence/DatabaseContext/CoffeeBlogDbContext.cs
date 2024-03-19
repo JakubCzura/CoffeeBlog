@@ -12,6 +12,7 @@ public class CoffeeBlogDbContext(DbContextOptions<CoffeeBlogDbContext> options) 
     public DbSet<User> Users { get; set; }
     public DbSet<UserDetail> UserDetails { get; set; }
     public DbSet<UserToRole> UserToRoles { get; set; }
+    public DbSet<UserLastPassword> UserLastPasswords { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
         => modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

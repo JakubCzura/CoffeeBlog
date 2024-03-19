@@ -2,6 +2,8 @@
 using CoffeeBlog.Application.Interfaces.Security.CurrentUsers;
 using CoffeeBlog.Application.Interfaces.Security.Password;
 using CoffeeBlog.Domain.Commands.Users;
+using CoffeeBlog.Domain.Entities;
+using CoffeeBlog.Domain.Errors.Users;
 using CoffeeBlog.Domain.Exceptions;
 using CoffeeBlog.Domain.Models.Users;
 using CoffeeBlog.Domain.Resources;
@@ -13,11 +15,13 @@ namespace CoffeeBlog.Application.Handlers.Commands.Users;
 
 public class EditPasswordCommandHandler(IUserRepository _userRepository,
                                         IUserDetailRepository _userDetailRepository,
+                                        IUserLastPasswordRepository _userLastPasswordRepository,
                                         ICurrentUserContext _currentUserContext,
                                         IPasswordHasher _passwordHasher) : IRequestHandler<EditPasswordCommand, Result<ViewModelBase>>
 {
     private readonly IUserRepository _userRepository = _userRepository;
     private readonly IUserDetailRepository _userDetailRepository = _userDetailRepository;
+    private readonly IUserLastPasswordRepository _userLastPasswordRepository = _userLastPasswordRepository;
     private readonly ICurrentUserContext _currentUserContext = _currentUserContext;
     private readonly IPasswordHasher _passwordHasher = _passwordHasher;
 
@@ -35,11 +39,26 @@ public class EditPasswordCommandHandler(IUserRepository _userRepository,
 
         string hashedPassword = _passwordHasher.HashPassword(request.NewPassword);
 
+        IEnumerable<string> userLastPasswords = (await _userLastPasswordRepository.GetUserLastPasswordsAsync(currentAuthorizedUser.Id, cancellationToken))
+                                                                                  .Select(userLastPassword => userLastPassword.LastPassword);
+
+        if (userLastPasswords.Contains(hashedPassword))
+        {
+            return Result.Fail<ViewModelBase>(new PasswordAlreadyUsedError());
+        }
+
         await _userRepository.UpdatePasswordAsync(currentAuthorizedUser.Id, hashedPassword, cancellationToken);
 
-        await _userDetailRepository.UpdateLastEmailChangeAsync(currentAuthorizedUser.Id, cancellationToken);
+        UserLastPassword userLastPassword = new()
+        {
+            LastPassword = hashedPassword,
+            UserId = currentAuthorizedUser.Id
+        };
+        await _userLastPasswordRepository.CreateAsync(userLastPassword, cancellationToken);
 
-        ViewModelBase result = new(ResponseMessages.EmailHasBeenChanged);
+        await _userDetailRepository.UpdateLastPasswordChangeAsync(currentAuthorizedUser.Id, cancellationToken);
+
+        ViewModelBase result = new(ResponseMessages.PasswordHasBeenChanged);
 
         return Result.Ok(result);
     }

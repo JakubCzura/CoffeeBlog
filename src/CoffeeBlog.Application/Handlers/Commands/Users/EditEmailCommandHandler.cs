@@ -36,15 +36,12 @@ public class EditEmailCommandHandler(IUserRepository _userRepository,
             return Result.Fail<ViewModelBase>(new EmailExistsError());
         }
 
-        //TODO: check if email is not the same as the previous one
-
         await _userRepository.UpdateEmailAsync(currentAuthorizedUser.Id, request.NewEmail, cancellationToken);
 
-        await _userDetailRepository.UpdateLastPasswordChangeAsync(currentAuthorizedUser.Id, cancellationToken);
+        await _userDetailRepository.UpdateLastEmailChangeAsync(currentAuthorizedUser.Id, cancellationToken);
 
         ViewModelBase result = new(ResponseMessages.EmailHasBeenChanged);
 
-        throw new NotImplementedException();
         return Result.Ok(result);
     }
 }
