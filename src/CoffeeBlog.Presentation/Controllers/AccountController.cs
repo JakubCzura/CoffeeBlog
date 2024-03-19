@@ -2,6 +2,7 @@
 using CoffeeBlog.Domain.Commands.Users;
 using CoffeeBlog.Domain.Errors.Users;
 using CoffeeBlog.Domain.Queries.Users;
+using CoffeeBlog.Domain.ViewModels.Basics;
 using CoffeeBlog.Domain.ViewModels.Users;
 using CoffeeBlog.Presentation.Controllers.Basics;
 using CoffeeBlog.Presentation.ExtensionMethods.Versioning;
@@ -22,9 +23,9 @@ public class AccountController(IMediator _mediator) : ApiControllerBase
     private readonly IMediator _mediator = _mediator;
 
     [AllowAnonymous]
-    [HttpPost("register/user")]
-    public async Task<ActionResult<CreateUserViewModel>> Register([FromBody] CreateUserCommand createUserCommand,
-                                                                  CancellationToken cancellationToken)
+    [HttpPost("signup")]
+    public async Task<ActionResult<CreateUserViewModel>> SignUp([FromBody] CreateUserCommand createUserCommand,
+                                                                 CancellationToken cancellationToken)
     {
         Result<CreateUserViewModel> result = await _mediator.Send(createUserCommand, cancellationToken);
 
@@ -43,16 +44,10 @@ public class AccountController(IMediator _mediator) : ApiControllerBase
     }
 
     [AllowAnonymous]
-    [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] SignInUserQuery logInUserCommand)
+    [HttpPost("signin")]
+    public async Task<IActionResult> SignIn([FromBody] SignInUserQuery signInUserQuery)
     {
-        //bool isValid = ModelState.IsValid;
-        //if (!isValid)
-        //{
-        //    return BadRequest(string.Join(Environment.NewLine, ModelState.Values.SelectMany(x => x.Errors)));
-        //}
-
-        Result<SignInUserViewModel> result = await _mediator.Send(logInUserCommand);
+        Result<SignInUserViewModel> result = await _mediator.Send(signInUserQuery);
 
         if (result.IsSuccess)
         {
@@ -63,6 +58,46 @@ public class AccountController(IMediator _mediator) : ApiControllerBase
         return error switch
         {
             UserNotFoundError => Conflict(error.Message),
+            _ => BadRequest(string.Join(";", result.Errors.Select(x => x.Message)))
+        };
+    }
+
+    [Authorize]
+    [HttpPut("username/edit")]
+    public async Task<IActionResult> EditUsername([FromBody] EditUsernameCommand changeUsernameCommand,
+                                                  CancellationToken cancellationToken)
+    {
+        Result<ViewModelBase> result = await _mediator.Send(changeUsernameCommand, cancellationToken);
+
+        if (result.IsSuccess)
+        {
+            return Ok(result.Value);
+        }
+
+        IError error = result.Errors[0];
+        return error switch
+        {
+            UsernameExistsError => Conflict(error.Message),
+            _ => BadRequest(string.Join(";", result.Errors.Select(x => x.Message)))
+        };
+    }
+
+    [Authorize]
+    [HttpPut("email/edit")]
+    public async Task<IActionResult> EditEmail([FromBody] EditEmailCommand editEmailCommand,
+                                               CancellationToken cancellationToken)
+    {
+        Result<ViewModelBase> result = await _mediator.Send(editEmailCommand, cancellationToken);
+
+        if (result.IsSuccess)
+        {
+            return Ok(result.Value);
+        }
+
+        IError error = result.Errors[0];
+        return error switch
+        {
+            EmailExistsError => Conflict(error.Message),
             _ => BadRequest(string.Join(";", result.Errors.Select(x => x.Message)))
         };
     }

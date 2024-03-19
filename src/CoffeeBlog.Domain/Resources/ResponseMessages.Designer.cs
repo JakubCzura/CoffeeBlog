@@ -61,6 +61,15 @@ namespace CoffeeBlog.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to E-mail has been changed.
+        /// </summary>
+        public static string EmailHasBeenChanged {
+            get {
+                return ResourceManager.GetString("EmailHasBeenChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username has been changed.
         /// </summary>
         public static string UsernameHasBeenChanged {

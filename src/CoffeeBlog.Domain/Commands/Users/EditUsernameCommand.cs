@@ -5,9 +5,9 @@ using MediatR;
 namespace CoffeeBlog.Domain.Commands.Users;
 
 /// <summary>
-/// Request command to change user's nickname. It's handled using Mediatr and CQRS pattern.
+/// Request command to edit user's username. It's handled using Mediatr and CQRS pattern.
 /// </summary>
-public class ChangeUsernameCommand : IRequest<Result<ViewModelBase>>
+public class EditUsernameCommand : IRequest<Result<ViewModelBase>>
 {
     /// <summary>
     /// User's new username.

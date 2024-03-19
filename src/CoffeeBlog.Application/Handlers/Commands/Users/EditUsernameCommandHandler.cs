@@ -11,22 +11,22 @@ using MediatR;
 
 namespace CoffeeBlog.Application.Handlers.Commands.Users;
 
-public class ChangeUsernameCommandHandler(IUserRepository _userRepository,
-                                          IUserDetailRepository _userDetailRepository,
-                                          ICurrentUserContext _currentUserContext) : IRequestHandler<ChangeUsernameCommand, Result<ViewModelBase>>
+public class EditUsernameCommandHandler(IUserRepository _userRepository,
+                                        IUserDetailRepository _userDetailRepository,
+                                        ICurrentUserContext _currentUserContext) : IRequestHandler<EditUsernameCommand, Result<ViewModelBase>>
 {
     private readonly IUserRepository _userRepository = _userRepository;
     private readonly IUserDetailRepository _userDetailRepository = _userDetailRepository;
     private readonly ICurrentUserContext _currentUserContext = _currentUserContext;
 
     /// <summary>
-    /// Handles request to change user's username.
+    /// Handles request to edit user's username.
     /// </summary>
-    /// <param name="request">Request command with details to change user's username.</param>
+    /// <param name="request">Request command with details to edit user's username.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Instance of <see cref="ViewModelBase"/></returns>
     /// <exception cref="UserUnauthorizedException">When user is not authorized.</exception>
-    public async Task<Result<ViewModelBase>> Handle(ChangeUsernameCommand request,
+    public async Task<Result<ViewModelBase>> Handle(EditUsernameCommand request,
                                                     CancellationToken cancellationToken)
     {
         CurrentAuthorizedUser currentAuthorizedUser = _currentUserContext.GetCurrentAuthorizedUser();
