@@ -15,6 +15,11 @@ public class UserLastPassword : DbEntityBase
     public string LastPassword { get; set; } = string.Empty;
 
     /// <summary>
+    /// Date and time when the last password was created. First time when user creates account, it is also the first password. Then when user changes password.
+    /// </summary>
+    public DateTime CreatedAt { get; set; }
+
+    /// <summary>
     /// User's id.
     /// </summary>
     public int UserId { get; set; }

@@ -1,4 +1,5 @@
 ﻿using CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
+using CoffeeBlog.Infrastructure.Persistence.Triggers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +14,8 @@ public static class DbContextConfiguration
         services.AddDbContext<CoffeeBlogDbContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("CoffeeBlogDbConnectionString"),
-                                 builer => builer.MigrationsAssembly(typeof(CoffeeBlogDbContext).Assembly.FullName));
+                                 builder => builder.MigrationsAssembly(typeof(CoffeeBlogDbContext).Assembly.FullName));
+            options.UseTriggers(triggerOptions => triggerOptions.AddTrigger<AdjustUserLastPasswordCount>());
         });
 
         return services;

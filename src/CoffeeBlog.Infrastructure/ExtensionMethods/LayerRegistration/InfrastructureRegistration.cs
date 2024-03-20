@@ -7,6 +7,7 @@ using CoffeeBlog.Application.Interfaces.Security.CurrentUsers;
 using CoffeeBlog.Application.Interfaces.Security.Password;
 using CoffeeBlog.Domain.SettingsOptions.Authentication;
 using CoffeeBlog.Domain.SettingsOptions.PasswordHasher;
+using CoffeeBlog.Domain.SettingsOptions.UserCredential;
 using CoffeeBlog.Infrastructure.Email;
 using CoffeeBlog.Infrastructure.ExtensionMethods.Authentication;
 using CoffeeBlog.Infrastructure.ExtensionMethods.Database;
@@ -29,6 +30,7 @@ public static class InfrastructureRegistration
     {
         services.Configure<AuthenticationOptions>(configuration.GetSection(AuthenticationOptions.AppsettingsKey));
         services.Configure<PasswordHasherOptions>(configuration.GetSection(PasswordHasherOptions.AppsettingsKey));
+        services.Configure<UserCredentialOptions>(configuration.GetSection(UserCredentialOptions.AppsettingsKey));
 
         services.ConfigureDbContext(configuration);
 

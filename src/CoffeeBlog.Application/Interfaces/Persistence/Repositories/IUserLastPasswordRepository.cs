@@ -1,4 +1,5 @@
 ﻿using CoffeeBlog.Domain.Entities;
+using CoffeeBlog.Domain.SettingsOptions.UserCredential;
 
 namespace CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 
@@ -15,4 +16,15 @@ public interface IUserLastPasswordRepository : IDbEntityBaseRepository<UserLastP
     /// <returns>All the last hashed passwords of user with specified id.</returns>
     Task<List<UserLastPassword>> GetUserLastPasswordsAsync(int userId,
                                                            CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Adjust count of last hashed passwords of user with specified id.
+    /// When user changes password, this method should be called to adjust the count of last hashed passwords.
+    /// Count of last hashed passwords is specified in appsettings.json and can be read from <see cref="UserCredentialOptions.LastPasswordCount"/>.
+    /// </summary>
+    /// <param name="userId">User's id.</param>
+    /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
+    /// <returns>Total number of rows deleted in database.</returns>
+    Task<int> AdjustUserLastPasswordCountByUserIdAsync(int userId,
+                                                       CancellationToken cancellationToken);
 }
