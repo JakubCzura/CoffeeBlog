@@ -6,6 +6,16 @@
 public static class RoleConstants
 {
     /// <summary>
+    /// Owner role.
+    /// </summary>
+    public const string Owner = "Owner";
+
+    /// <summary>
+    /// Producer role - company which delivers CoffeeBlog
+    /// </summary>
+    public const string Producer = "Producer";
+
+    /// <summary>
     /// Admin role.
     /// </summary>
     public const string Admin = "Admin";
