@@ -14,7 +14,11 @@ public static class DbContextConfiguration
         services.AddDbContext<CoffeeBlogDbContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("CoffeeBlogDbConnectionString"),
-                                 builder => builder.MigrationsAssembly(typeof(CoffeeBlogDbContext).Assembly.FullName));
+                                 sqlServerOptionsBuilder =>
+                                 {
+                                     sqlServerOptionsBuilder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                                     sqlServerOptionsBuilder.MigrationsAssembly(typeof(CoffeeBlogDbContext).Assembly.FullName);
+                                 });
             options.UseTriggers(triggerOptions => triggerOptions.AddTrigger<AdjustUserLastPasswordCount>());
         });
 
