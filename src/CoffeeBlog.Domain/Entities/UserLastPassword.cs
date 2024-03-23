@@ -17,7 +17,7 @@ public class UserLastPassword : DbEntityBase
     /// <summary>
     /// Date and time when the last password was created. First time when user creates account, it is also the first password. Then when user changes password.
     /// </summary>
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     /// <summary>
     /// User's id.

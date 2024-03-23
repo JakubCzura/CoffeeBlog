@@ -23,6 +23,11 @@ public class User : DbEntityBase
     public string Password { get; set; } = string.Empty;
 
     /// <summary>
+    /// Date and time when the user was created.
+    /// </summary>
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+    /// <summary>
     /// List of user's last credentials. It's used to prevent user from using the same password when changing it.
     /// </summary>
     public virtual List<UserLastPassword> LastPasswords { get; set; } = [];

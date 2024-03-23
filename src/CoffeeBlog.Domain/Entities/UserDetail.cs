@@ -4,19 +4,11 @@ namespace CoffeeBlog.Domain.Entities;
 
 /// <summary>
 /// Entity to store user details like last sign in, last password change etc.
+/// This entity should be created only once when user creates an account, then it should be updated.
+/// When user creates an account this fact should be noticed as <see cref="LastSuccessfullSignIn"/> .
 /// </summary>
 public class UserDetail : DbEntityBase
 {
-    /// <summary>
-    /// Date and time when user created account.
-    /// </summary>
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-    /// <summary>
-    /// Date and time when the user's account was last updated. It can be for example password change.
-    /// </summary>
-    public DateTime? UpdatedAt { get; set; }
-
     /// <summary>
     /// Date and time when user last successfully signed in.
     /// </summary>

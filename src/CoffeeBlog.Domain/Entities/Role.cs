@@ -13,6 +13,11 @@ public class Role : DbEntityBase
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
+    /// Date and time when the role was created.
+    /// </summary>
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+    /// <summary>
     /// Users who have this role.
     /// </summary>
     public List<User> Users { get; set; } = [];

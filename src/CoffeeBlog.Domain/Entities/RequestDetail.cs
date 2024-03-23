@@ -14,7 +14,6 @@ namespace CoffeeBlog.Domain.Entities;
 /// <param name="responseBody">Response's body.</param>
 /// <param name="responseContentType">Response's content type.</param>
 /// <param name="requestTimeInMiliseconds">Request's time specified in miliseconds.</param>
-/// <param name="sentAt">Date and time when request was sent.</param>
 /// <param name="userId">Id of user who sends request.</param>
 public class RequestDetail(string controllerName,
                            string path,
@@ -25,7 +24,6 @@ public class RequestDetail(string controllerName,
                            string? responseBody,
                            string? responseContentType,
                            long requestTimeInMiliseconds,
-                           DateTime sentAt,
                            int? userId) : DbEntityBase
 {
     /// <summary>
@@ -76,7 +74,7 @@ public class RequestDetail(string controllerName,
     /// <summary>
     /// Date and time when request was sent.
     /// </summary>
-    public DateTime SentAt { get; set; } = sentAt;
+    public DateTime SentAt { get; set; } = DateTime.UtcNow;
 
     /// <summary>
     /// User's id. Request can be sent by a user who is not signed in yet, so the property is nullable.

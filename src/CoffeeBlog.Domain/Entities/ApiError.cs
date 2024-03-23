@@ -8,11 +8,9 @@ namespace CoffeeBlog.Domain.Entities;
 /// <param name="exception">Exception thrown by application.</param>
 /// <param name="message">Message of thrown exception.</param>
 /// <param name="description">Exception's description defined in code.</param>
-/// <param name="createdAt">Date and time when the error was thrown.</param>
 public class ApiError(string exception,
                       string message,
-                      string description,
-                      DateTime createdAt) : DbEntityBase
+                      string description) : DbEntityBase
 {
     /// <summary>
     /// Exception thrown by application. It should be achieved by calling <c>exception.ToString()</c>.
@@ -32,5 +30,5 @@ public class ApiError(string exception,
     /// <summary>
     /// Date and time when the error was thrown.
     /// </summary>
-    public DateTime CreatedAt { get; set; } = createdAt;
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }
