@@ -1,4 +1,5 @@
-﻿using CoffeeBlog.Domain.Entities;
+﻿using CoffeeBlog.Domain.Constants;
+using CoffeeBlog.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -16,6 +17,7 @@ internal class ApiErrorConfiguration : IEntityTypeConfiguration<ApiError>
 
         builder.Property(x => x.Description).IsRequired();
 
-        builder.Property(x => x.Exception).IsRequired();
+        builder.Property(x => x.CreatedAt).IsRequired()
+                                          .HasDefaultValueSql(SqlConstants.GetUtcDate);
     }
 }

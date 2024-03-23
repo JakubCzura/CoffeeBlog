@@ -13,6 +13,11 @@ public class Role : DbEntityBase
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
+    /// Description of the role. It can provide additional information.
+    /// </summary>
+    public string Description { get; set; } = string.Empty;
+
+    /// <summary>
     /// Date and time when the role was created.
     /// </summary>
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

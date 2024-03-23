@@ -1,4 +1,5 @@
-﻿using CoffeeBlog.Domain.Entities;
+﻿using CoffeeBlog.Domain.Constants;
+using CoffeeBlog.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,6 +18,9 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
                                       .HasMaxLength(320);
 
         builder.Property(x => x.Password).IsRequired();
+
+        builder.Property(x => x.CreatedAt).IsRequired()
+                                          .HasDefaultValueSql(SqlConstants.GetUtcDate);
 
         builder.HasIndex(x => new { x.Username, x.Email }).IsUnique();
 

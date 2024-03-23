@@ -1,4 +1,5 @@
-﻿using CoffeeBlog.Domain.Entities;
+﻿using CoffeeBlog.Domain.Constants;
+using CoffeeBlog.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,11 +11,8 @@ internal class UserDetailConfiguration : IEntityTypeConfiguration<UserDetail>
     {
         builder.ToTable("UserDetail");
 
-        builder.Property(x => x.CreatedAt).IsRequired();
-
-        builder.Property(x => x.UpdatedAt).IsRequired(false);
-
-        builder.Property(x => x.LastSuccessfullSignIn).IsRequired();
+        builder.Property(x => x.LastSuccessfullSignIn).IsRequired()
+                                                      .HasDefaultValueSql(SqlConstants.GetUtcDate);
 
         builder.Property(x => x.LastFailedSignIn).IsRequired(false);
 

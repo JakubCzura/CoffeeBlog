@@ -1,4 +1,5 @@
-﻿using CoffeeBlog.Domain.Entities;
+﻿using CoffeeBlog.Domain.Constants;
+using CoffeeBlog.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -31,7 +32,8 @@ internal class RequestDetailConfiguration : IEntityTypeConfiguration<RequestDeta
 
         builder.Property(x => x.RequestTimeInMiliseconds).IsRequired();
 
-        builder.Property(x => x.SentAt).IsRequired();
+        builder.Property(x => x.SentAt).IsRequired()
+                                       .HasDefaultValueSql(SqlConstants.GetUtcDate);
 
         builder.Property(x => x.UserId).IsRequired(false);
     }
