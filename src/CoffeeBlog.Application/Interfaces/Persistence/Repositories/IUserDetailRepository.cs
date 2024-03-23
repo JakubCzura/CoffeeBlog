@@ -22,7 +22,7 @@ public interface IUserDetailRepository : IDbEntityBaseRepository<UserDetail>
     /// <param name="userId">User's id.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Total number of rows updated in database.</returns>
-    Task<int> UpdateLastLastFailedSignInAsync(int userId,
+    Task<int> UpdateLastFailedSignInAsync(int userId,
                                               CancellationToken cancellationToken);
 
     /// <summary>

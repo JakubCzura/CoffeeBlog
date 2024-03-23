@@ -17,7 +17,7 @@ internal class UserDetailRepository(CoffeeBlogDbContext _coffeeBlogDbContext,
        => await _coffeeBlogDbContext.UserDetails.Where(userDetail => userDetail.UserId == userId)
                                                 .ExecuteUpdateAsync(userDetail => userDetail.SetProperty(property => property.LastSuccessfullSignIn, _dateTimeProvider.UtcNow), cancellationToken);
 
-    public async Task<int> UpdateLastLastFailedSignInAsync(int userId,
+    public async Task<int> UpdateLastFailedSignInAsync(int userId,
                                                            CancellationToken cancellationToken = default)
         => await _coffeeBlogDbContext.UserDetails.Where(userDetail => userDetail.UserId == userId)
                                                  .ExecuteUpdateAsync(userDetail => userDetail.SetProperty(property => property.LastFailedSignIn, _dateTimeProvider.UtcNow), cancellationToken);

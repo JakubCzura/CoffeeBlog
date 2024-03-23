@@ -3,6 +3,7 @@ using CoffeeBlog.Application.Interfaces.Security.Authentication;
 using CoffeeBlog.Application.Interfaces.Security.Password;
 using CoffeeBlog.Domain.Entities;
 using CoffeeBlog.Domain.Errors.Users;
+using CoffeeBlog.Domain.Models.Users;
 using CoffeeBlog.Domain.Queries.Users;
 using CoffeeBlog.Domain.ViewModels.Users;
 using FluentResults;
@@ -15,15 +16,18 @@ namespace CoffeeBlog.Application.Handlers.Queries.Users;
 /// </summary>
 /// <param name="_userRepository">Interface to perform user's operations in database.</param>
 /// <param name="_roleRepository">Interface to perform authorization roles' operations in database.</param>
+/// <param name="_userDetailRepository">Interface to perform user's details operations in database.</param>
 /// <param name="_passwordHasher">Interface to verify password.</param>
 /// <param name="_jwtService">Interface to create JWT token.</param>
 public class SignInUserQueryHandler(IUserRepository _userRepository,
                                     IRoleRepository _roleRepository,
+                                    IUserDetailRepository _userDetailRepository,
                                     IPasswordHasher _passwordHasher,
                                     IJwtService _jwtService) : IRequestHandler<SignInUserQuery, Result<SignInUserViewModel>>
 {
     private readonly IUserRepository _userRepository = _userRepository;
     private readonly IRoleRepository _roleRepository = _roleRepository;
+    private readonly IUserDetailRepository _userDetailRepository = _userDetailRepository;
     private readonly IPasswordHasher _passwordHasher = _passwordHasher;
     private readonly IJwtService _jwtService = _jwtService;
 
@@ -44,13 +48,14 @@ public class SignInUserQueryHandler(IUserRepository _userRepository,
         //Just say that user was not found.
         if (user == null || !_passwordHasher.VerifyPassword(request.Password, user.Password))
         {
+            await _userDetailRepository.UpdateLastFailedSignInAsync(user.Id, cancellationToken);
             return Result.Fail<SignInUserViewModel>(new UserNotFoundError());
         }
 
-        IEnumerable<string> userRoles = (await _roleRepository.GetAllByUserId(user.Id, cancellationToken))
-                                                              .Select(role => role.Name);
+        await _userDetailRepository.UpdateLastSuccessfullSignInAsync(user.Id, cancellationToken);
 
-        string jwtToken = _jwtService.CreateToken(new(user.Id, user.Username, user.Email), userRoles);
+        List<string> userRolesNames = await _roleRepository.GetAllRolesNamesByUserId(user.Id, cancellationToken);
+        string jwtToken = _jwtService.CreateToken(new(user.Id, user.Username, user.Email), userRolesNames);
 
         SignInUserViewModel result = new() { JwtToken = jwtToken };
         return Result.Ok(result);

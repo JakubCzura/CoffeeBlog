@@ -49,12 +49,7 @@ public class EditPasswordCommandHandler(IUserRepository _userRepository,
 
         await _userRepository.UpdatePasswordAsync(currentAuthorizedUser.Id, hashedPassword, cancellationToken);
 
-        UserLastPassword userLastPassword = new()
-        {
-            LastPassword = hashedPassword,
-            UserId = currentAuthorizedUser.Id
-        };
-        await _userLastPasswordRepository.CreateAsync(userLastPassword, cancellationToken);
+        await _userLastPasswordRepository.CreateAsync(new(hashedPassword, currentAuthorizedUser.Id), cancellationToken);
 
         await _userDetailRepository.UpdateLastPasswordChangeAsync(currentAuthorizedUser.Id, cancellationToken);
 

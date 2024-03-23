@@ -9,9 +9,11 @@ internal class RoleRepository(CoffeeBlogDbContext _coffeeBlogDbContext) : DbEnti
 {
     private readonly CoffeeBlogDbContext _coffeeBlogDbContext = _coffeeBlogDbContext;
 
-    public async Task<IEnumerable<Role>> GetAllByUserId(int userId,
-                                                        CancellationToken cancellationToken = default)
-        => (await _coffeeBlogDbContext.Users.AsNoTracking()
-                                            .Include(user => user.Roles)
-                                            .FirstOrDefaultAsync(user => user.Id == userId, cancellationToken))?.Roles ?? Enumerable.Empty<Role>();
+    public async Task<List<string>> GetAllRolesNamesByUserId(int userId,
+                                                             CancellationToken cancellationToken = default)
+        => await _coffeeBlogDbContext.Users.Where(user => user.Id == userId)
+                                           .Include(user => user.Roles)
+                                           .SelectMany(user => user.Roles)
+                                           .Select(userRole => userRole.Name)
+                                           .ToListAsync(cancellationToken);
 }

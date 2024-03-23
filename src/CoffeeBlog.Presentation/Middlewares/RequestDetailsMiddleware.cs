@@ -61,7 +61,6 @@ public class RequestDetailsMiddleware(ILogger<RequestDetailsMiddleware> _logger)
                                                     responseBody,
                                                     context.Response.ContentType,
                                                     stopwatch.ElapsedMilliseconds,
-                                                    DateTime.UtcNow,
                                                     userId is not null ? int.Parse(userId) : null);
             //Write data to database
         }

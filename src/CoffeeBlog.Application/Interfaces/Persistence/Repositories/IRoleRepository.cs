@@ -8,11 +8,11 @@ namespace CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 public interface IRoleRepository : IDbEntityBaseRepository<Role>
 {
     /// <summary>
-    /// Returns all roles that are assigned to the user with given id.
+    /// Returns all roles' names that are assigned to the user with given id.
     /// </summary>
     /// <param name="userId">User's id.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
-    /// <returns>User's all roles or empty collection if user with given id doesn't exist in database.</returns>
-    Task<IEnumerable<Role>> GetAllByUserId(int userId,
-                                           CancellationToken cancellationToken);
+    /// <returns>User's all roles' names or empty collection if user with given id doesn't exist in database.</returns>
+    Task<List<string>> GetAllRolesNamesByUserId(int userId,
+                                                CancellationToken cancellationToken);
 }

@@ -7,8 +7,9 @@ namespace CoffeeBlog.Domain.Entities;
 /// This entity should be created only once when user creates an account, then it should be updated.
 /// When user creates an account this fact should be noticed as <see cref="LastSuccessfullSignIn"/> .
 /// </summary>
-public class UserDetail : DbEntityBase
+public class UserDetail(int userId) : DbEntityBase
 {
+
     /// <summary>
     /// Date and time when user last successfully signed in.
     /// </summary>
@@ -37,5 +38,5 @@ public class UserDetail : DbEntityBase
     /// <summary>
     /// User's id.
     /// </summary>
-    public int UserId { get; set; }
+    public int UserId { get; set; } = userId;
 }
