@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CoffeeBlog.Application.ExtensionMethods.Automapper.Users;
+using CoffeeBlog.Application.Handlers.Basics;
 using CoffeeBlog.Application.Interfaces.Helpers;
 using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 using CoffeeBlog.Application.Interfaces.Security.Authentication;
@@ -29,7 +30,7 @@ public class SignUpUserCommandHandler(IUserRepository _userRepository,
                                       IUserDetailRepository _userDetailRepository,
                                       IJwtService _jwtService,
                                       IPasswordHasher _passwordHasher,
-                                      IMapper _mapper) : IRequestHandler<SignUpUserCommand, Result<SignUpUserViewModel>>
+                                      IMapper _mapper) : CommandHandlerBase(_mapper), IRequestHandler<SignUpUserCommand, Result<SignUpUserViewModel>>
 {
     private readonly IUserRepository _userRepository = _userRepository;
     private readonly IUserLastPasswordRepository _userLastPasswordRepository = _userLastPasswordRepository;
@@ -37,7 +38,6 @@ public class SignUpUserCommandHandler(IUserRepository _userRepository,
     private readonly IUserDetailRepository _userDetailRepository = _userDetailRepository;
     private readonly IJwtService _jwtService = _jwtService;
     private readonly IPasswordHasher _passwordHasher = _passwordHasher;
-    private readonly IMapper _mapper = _mapper;
 
     /// <summary>
     /// Handles request to sign up a new user and add this user to database.
@@ -57,7 +57,7 @@ public class SignUpUserCommandHandler(IUserRepository _userRepository,
             return Result.Fail<SignUpUserViewModel>(new EmailExistsError());
         }
 
-        User user = _mapper.Map<User>(request, _passwordHasher.HashPassword(request.Password));
+        User user = Mapper.Map<User>(request, _passwordHasher.HashPassword(request.Password));
 
         await _userRepository.CreateAsync(user, cancellationToken);
 
@@ -68,7 +68,7 @@ public class SignUpUserCommandHandler(IUserRepository _userRepository,
         List<string> userRolesNames = await _roleRepository.GetAllRolesNamesByUserId(user.Id, cancellationToken);
         string jwtToken = _jwtService.CreateToken(new(user.Id, request.Username, request.Email), userRolesNames);
 
-        SignUpUserViewModel result = _mapper.Map<SignUpUserViewModel>(user, jwtToken);
+        SignUpUserViewModel result = Mapper.Map<SignUpUserViewModel>(user, jwtToken);
 
         return Result.Ok(result);
     }

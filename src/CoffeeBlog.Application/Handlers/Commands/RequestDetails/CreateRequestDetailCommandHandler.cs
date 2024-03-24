@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CoffeeBlog.Application.Handlers.Basics;
 using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
 using CoffeeBlog.Domain.Commands.RequestDetails;
 using CoffeeBlog.Domain.Entities;
@@ -12,10 +13,9 @@ namespace CoffeeBlog.Application.Handlers.Commands.RequestDetails;
 /// <param name="_requestDetailRepository">Interface to perform request's details operations in database.</param>
 /// <param name="_mapper">AutoMapper to map classes.</param>
 public class CreateRequestDetailCommandHandler(IRequestDetailRepository _requestDetailRepository,
-                                               IMapper _mapper) : IRequestHandler<CreateRequestDetailCommand, Unit>
+                                               IMapper _mapper) : CommandHandlerBase(_mapper), IRequestHandler<CreateRequestDetailCommand, Unit>
 {
     private readonly IRequestDetailRepository _requestDetailRepository = _requestDetailRepository;
-    private readonly IMapper _mapper = _mapper;
 
     /// <summary>
     /// Handles request to create new request's details and save it to database.
@@ -26,7 +26,7 @@ public class CreateRequestDetailCommandHandler(IRequestDetailRepository _request
     public async Task<Unit> Handle(CreateRequestDetailCommand request,
                                    CancellationToken cancellationToken)
     {
-        RequestDetail requestDetail = _mapper.Map<RequestDetail>(request);
+        RequestDetail requestDetail = Mapper.Map<RequestDetail>(request);
 
         await _requestDetailRepository.CreateAsync(requestDetail, cancellationToken);
 
