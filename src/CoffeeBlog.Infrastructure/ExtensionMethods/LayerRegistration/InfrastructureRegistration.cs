@@ -10,6 +10,7 @@ using CoffeeBlog.Domain.SettingsOptions.PasswordHasher;
 using CoffeeBlog.Domain.SettingsOptions.UserCredential;
 using CoffeeBlog.Infrastructure.Email;
 using CoffeeBlog.Infrastructure.ExtensionMethods.Authentication;
+using CoffeeBlog.Infrastructure.ExtensionMethods.BackgroundWorkers;
 using CoffeeBlog.Infrastructure.ExtensionMethods.Database;
 using CoffeeBlog.Infrastructure.Factories.Emails;
 using CoffeeBlog.Infrastructure.Helpers;
@@ -52,6 +53,8 @@ public static class InfrastructureRegistration
 
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddScoped<ICurrentUserContext, CurrentUserContext>();
+
+        services.ConfigureBackgroundWorkers(configuration);
 
         return services;
     }
