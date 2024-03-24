@@ -3,7 +3,7 @@
 namespace CoffeeBlog.Domain.Commands.ApiErrors;
 
 /// <summary>
-/// Request command to create API error. It's handled using Mediatr and CQRS pattern.
+/// Request command to save API error to database. It's handled using Mediatr and CQRS pattern.
 /// </summary>
 public class CreateApiErrorCommand : IRequest<Unit>
 {

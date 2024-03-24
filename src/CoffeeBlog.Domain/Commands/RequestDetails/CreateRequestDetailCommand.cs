@@ -3,7 +3,7 @@
 namespace CoffeeBlog.Domain.Commands.RequestDetails;
 
 /// <summary>
-/// Request command to create request details. It's handled using Mediatr and CQRS pattern.
+/// Request command to save request details to database. It's handled using Mediatr and CQRS pattern.
 /// </summary>
 public class CreateRequestDetailCommand : IRequest<Unit>
 {

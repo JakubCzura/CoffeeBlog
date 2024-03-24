@@ -5,7 +5,7 @@ using MediatR;
 namespace CoffeeBlog.Domain.Commands.Users;
 
 /// <summary>
-/// Request command to sign up a new user and add this user to database. It's handled using Mediatr and CQRS pattern.
+/// Request command to sign up a new user and save this user to database. It's handled using Mediatr and CQRS pattern.
 /// </summary>
 public class SignUpUserCommand : IRequest<Result<SignUpUserViewModel>>
 {
