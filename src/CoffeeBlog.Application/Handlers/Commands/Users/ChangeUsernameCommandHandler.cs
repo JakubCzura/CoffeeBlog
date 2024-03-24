@@ -11,9 +11,15 @@ using MediatR;
 
 namespace CoffeeBlog.Application.Handlers.Commands.Users;
 
+/// <summary>
+/// Command handler to change user's username. It's related to <see cref="ChangeUsernameCommand"/>.
+/// </summary>
+/// <param name="_userRepository">Interface to perform user operations in database.</param>
+/// <param name="_userDetailRepository">Interface to perform user's details operations in database.</param>
+/// <param name="_currentUserContext">Interface to get information about current signed in user.</param>
 public class ChangeUsernameCommandHandler(IUserRepository _userRepository,
-                                        IUserDetailRepository _userDetailRepository,
-                                        ICurrentUserContext _currentUserContext) : IRequestHandler<ChangeUsernameCommand, Result<ViewModelBase>>
+                                          IUserDetailRepository _userDetailRepository,
+                                          ICurrentUserContext _currentUserContext) : IRequestHandler<ChangeUsernameCommand, Result<ViewModelBase>>
 {
     private readonly IUserRepository _userRepository = _userRepository;
     private readonly IUserDetailRepository _userDetailRepository = _userDetailRepository;

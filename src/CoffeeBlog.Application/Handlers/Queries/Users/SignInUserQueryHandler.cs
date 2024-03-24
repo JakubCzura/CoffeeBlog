@@ -3,7 +3,6 @@ using CoffeeBlog.Application.Interfaces.Security.Authentication;
 using CoffeeBlog.Application.Interfaces.Security.Password;
 using CoffeeBlog.Domain.Entities;
 using CoffeeBlog.Domain.Errors.Users;
-using CoffeeBlog.Domain.Models.Users;
 using CoffeeBlog.Domain.Queries.Users;
 using CoffeeBlog.Domain.ViewModels.Users;
 using FluentResults;
@@ -12,7 +11,7 @@ using MediatR;
 namespace CoffeeBlog.Application.Handlers.Queries.Users;
 
 /// <summary>
-/// Query handler for signing in a user.
+/// Query handler to sign in a user. It's related to <see cref="SignInUserQuery"/>.
 /// </summary>
 /// <param name="_userRepository">Interface to perform user's operations in database.</param>
 /// <param name="_roleRepository">Interface to perform authorization roles' operations in database.</param>
@@ -32,13 +31,11 @@ public class SignInUserQueryHandler(IUserRepository _userRepository,
     private readonly IJwtService _jwtService = _jwtService;
 
     /// <summary>
-    /// Handles request to signing in a user.
+    /// Handles request to sign in a user.
     /// </summary>
     /// <param name="request">Request query with details to sign in a user.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    /// <exception cref="NotImplementedException"></exception>
+    /// <returns>Instance of <see cref="SignInUserViewModel"/></returns>
     public async Task<Result<SignInUserViewModel>> Handle(SignInUserQuery request,
                                                           CancellationToken cancellationToken)
     {
@@ -46,7 +43,12 @@ public class SignInUserQueryHandler(IUserRepository _userRepository,
 
         //Don't reveal whether user was not found or password was incorrect due to potential security risks.
         //Just say that user was not found.
-        if (user == null || !_passwordHasher.VerifyPassword(request.Password, user.Password))
+        //If statements are splitted to log failed sign in attempts if user was found but password was incorrect.
+        if (user == null)
+        {
+            return Result.Fail<SignInUserViewModel>(new UserNotFoundError());
+        }
+        if (!_passwordHasher.VerifyPassword(request.Password, user.Password))
         {
             await _userDetailRepository.UpdateLastFailedSignInAsync(user.Id, cancellationToken);
             return Result.Fail<SignInUserViewModel>(new UserNotFoundError());

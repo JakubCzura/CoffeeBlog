@@ -14,9 +14,9 @@ using MediatR;
 namespace CoffeeBlog.Application.Handlers.Commands.Users;
 
 /// <summary>
-/// Command handler to sign up a new user and add this user to database.
+/// Command handler to sign up a new user and add this user to database. It's related to <see cref="SignUpUserCommand"/>.
 /// </summary>
-/// <param name="_userRepository">Interface to perform user's operations in database.</param>
+/// <param name="_userRepository">Interface to perform user operations in database.</param>
 /// <param name="_userLastPasswordRepository">Interface to perform user's last passwords operations in database.</param>
 /// <param name="_roleRepository">Interface to perform authorization roles operations in database.</param>
 /// <param name="_userDetailRepository">Interface to perform user's details operations in database.</param>

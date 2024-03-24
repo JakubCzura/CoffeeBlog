@@ -13,6 +13,14 @@ using MediatR;
 
 namespace CoffeeBlog.Application.Handlers.Commands.Users;
 
+/// <summary>
+/// Command handler to change user's password. It's related to <see cref="ChangePasswordCommand"/>.
+/// </summary>
+/// <param name="_userRepository">Interface to perform user operations in database.</param>
+/// <param name="_userDetailRepository">Interface to perform user's details operations in database.</param>
+/// <param name="_userLastPasswordRepository">Interface to perform user's last passwords operations in database.</param>
+/// <param name="_currentUserContext">Interface to get information about current signed in user.</param>
+/// <param name="_passwordHasher">Interface hash user's password.</param>
 public class ChangePasswordCommandHandler(IUserRepository _userRepository,
                                          IUserDetailRepository _userDetailRepository,
                                          IUserLastPasswordRepository _userLastPasswordRepository,

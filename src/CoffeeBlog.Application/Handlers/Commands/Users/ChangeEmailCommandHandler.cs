@@ -11,6 +11,12 @@ using MediatR;
 
 namespace CoffeeBlog.Application.Handlers.Commands.Users;
 
+/// <summary>
+/// Command handler to change user's e-mail. It's related to <see cref="ChangeEmailCommand"/>.
+/// </summary>
+/// <param name="_userRepository">Interface to perform user operations in database.</param>
+/// <param name="_userDetailRepository">Interface to perform user's details operations in database.</param>
+/// <param name="_currentUserContext">Interface to get information about current signed in user.</param>
 public class ChangeEmailCommandHandler(IUserRepository _userRepository,
                                        IUserDetailRepository _userDetailRepository,
                                        ICurrentUserContext _currentUserContext) : IRequestHandler<ChangeEmailCommand, Result<ViewModelBase>>
