@@ -14,7 +14,7 @@ using MediatR;
 namespace CoffeeBlog.Application.Handlers.Commands.Users;
 
 /// <summary>
-/// Command handler for creating a new user.
+/// Command handler to sign up a new user and add this user to database.
 /// </summary>
 /// <param name="_userRepository">Interface to perform user's operations in database.</param>
 /// <param name="_userLastPasswordRepository">Interface to perform user's last passwords operations in database.</param>
@@ -23,13 +23,13 @@ namespace CoffeeBlog.Application.Handlers.Commands.Users;
 /// <param name="_jwtService">Interface to create JWT token.</param>
 /// <param name="_passwordHasher">Interface to hash password.</param>
 /// <param name="_mapper">AutoMapper to map classes.</param>
-public class CreateUserCommandHandler(IUserRepository _userRepository,
+public class SignUpUserCommandHandler(IUserRepository _userRepository,
                                       IUserLastPasswordRepository _userLastPasswordRepository,
                                       IRoleRepository _roleRepository,
                                       IUserDetailRepository _userDetailRepository,
                                       IJwtService _jwtService,
                                       IPasswordHasher _passwordHasher,
-                                      IMapper _mapper) : IRequestHandler<CreateUserCommand, Result<CreateUserViewModel>>
+                                      IMapper _mapper) : IRequestHandler<SignUpUserCommand, Result<SignUpUserViewModel>>
 {
     private readonly IUserRepository _userRepository = _userRepository;
     private readonly IUserLastPasswordRepository _userLastPasswordRepository = _userLastPasswordRepository;
@@ -40,21 +40,21 @@ public class CreateUserCommandHandler(IUserRepository _userRepository,
     private readonly IMapper _mapper = _mapper;
 
     /// <summary>
-    /// Handles request to create a new user.
+    /// Handles request to sign up a new user and add this user to database.
     /// </summary>
-    /// <param name="request">Request command with details to create a new user.</param>
+    /// <param name="request">Request command with details to sign up a new user.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
-    /// <returns>Instance of <see cref="CreateUserViewModel"/></returns>
-    public async Task<Result<CreateUserViewModel>> Handle(CreateUserCommand request,
+    /// <returns>Instance of <see cref="SignUpUserViewModel"/></returns>
+    public async Task<Result<SignUpUserViewModel>> Handle(SignUpUserCommand request,
                                                           CancellationToken cancellationToken)
     {
         if (await _userRepository.UsernameExistsAsync(request.Username, cancellationToken))
         {
-            return Result.Fail<CreateUserViewModel>(new UsernameExistsError());
+            return Result.Fail<SignUpUserViewModel>(new UsernameExistsError());
         }
         if (await _userRepository.EmailExistsAsync(request.Email, cancellationToken))
         {
-            return Result.Fail<CreateUserViewModel>(new EmailExistsError());
+            return Result.Fail<SignUpUserViewModel>(new EmailExistsError());
         }
 
         User user = _mapper.Map<User>(request, _passwordHasher.HashPassword(request.Password));
@@ -68,7 +68,7 @@ public class CreateUserCommandHandler(IUserRepository _userRepository,
         List<string> userRolesNames = await _roleRepository.GetAllRolesNamesByUserId(user.Id, cancellationToken);
         string jwtToken = _jwtService.CreateToken(new(user.Id, request.Username, request.Email), userRolesNames);
 
-        CreateUserViewModel result = _mapper.Map<CreateUserViewModel>(user, jwtToken);
+        SignUpUserViewModel result = _mapper.Map<SignUpUserViewModel>(user, jwtToken);
 
         return Result.Ok(result);
     }

@@ -13,11 +13,11 @@ using MediatR;
 
 namespace CoffeeBlog.Application.Handlers.Commands.Users;
 
-public class EditPasswordCommandHandler(IUserRepository _userRepository,
-                                        IUserDetailRepository _userDetailRepository,
-                                        IUserLastPasswordRepository _userLastPasswordRepository,
-                                        ICurrentUserContext _currentUserContext,
-                                        IPasswordHasher _passwordHasher) : IRequestHandler<EditPasswordCommand, Result<ViewModelBase>>
+public class ChangePasswordCommandHandler(IUserRepository _userRepository,
+                                         IUserDetailRepository _userDetailRepository,
+                                         IUserLastPasswordRepository _userLastPasswordRepository,
+                                         ICurrentUserContext _currentUserContext,
+                                         IPasswordHasher _passwordHasher) : IRequestHandler<ChangePasswordCommand, Result<ViewModelBase>>
 {
     private readonly IUserRepository _userRepository = _userRepository;
     private readonly IUserDetailRepository _userDetailRepository = _userDetailRepository;
@@ -26,13 +26,13 @@ public class EditPasswordCommandHandler(IUserRepository _userRepository,
     private readonly IPasswordHasher _passwordHasher = _passwordHasher;
 
     /// <summary>
-    /// Handles request to edit user's password.
+    /// Handles request to change user's password.
     /// </summary>
-    /// <param name="request">Request command with details to edit user's password.</param>
+    /// <param name="request">Request command with details to change user's password.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Instance of <see cref="ViewModelBase"/></returns>
     /// <exception cref="UserUnauthorizedException">When user is not authorized.</exception>
-    public async Task<Result<ViewModelBase>> Handle(EditPasswordCommand request,
+    public async Task<Result<ViewModelBase>> Handle(ChangePasswordCommand request,
                                                     CancellationToken cancellationToken)
     {
         CurrentAuthorizedUser currentAuthorizedUser = _currentUserContext.GetCurrentAuthorizedUser();

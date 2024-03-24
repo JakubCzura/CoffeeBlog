@@ -5,9 +5,9 @@ using MediatR;
 namespace CoffeeBlog.Domain.Commands.Users;
 
 /// <summary>
-/// Request command to edit user's password. It's handled using Mediatr and CQRS pattern.
+/// Request command to change user's password. It's handled using Mediatr and CQRS pattern.
 /// </summary>
-public class EditPasswordCommand : IRequest<Result<ViewModelBase>>
+public class ChangePasswordCommand : IRequest<Result<ViewModelBase>>
 {
     /// <summary>
     /// User's new password. It's going to be hashed when saving to database.

@@ -23,11 +23,11 @@ public class AccountController(IMediator _mediator) : ApiControllerBase
     private readonly IMediator _mediator = _mediator;
 
     [AllowAnonymous]
-    [HttpPost("signup")]
-    public async Task<ActionResult<CreateUserViewModel>> SignUp([FromBody] CreateUserCommand createUserCommand,
-                                                                 CancellationToken cancellationToken)
+    [HttpPost("sign-up")]
+    public async Task<ActionResult<SignUpUserViewModel>> SignUp([FromBody] SignUpUserCommand signUpUserCommand,
+                                                                CancellationToken cancellationToken)
     {
-        Result<CreateUserViewModel> result = await _mediator.Send(createUserCommand, cancellationToken);
+        Result<SignUpUserViewModel> result = await _mediator.Send(signUpUserCommand, cancellationToken);
 
         if (result.IsSuccess)
         {
@@ -44,7 +44,7 @@ public class AccountController(IMediator _mediator) : ApiControllerBase
     }
 
     [AllowAnonymous]
-    [HttpPost("signin")]
+    [HttpPost("sign-in")]
     public async Task<IActionResult> SignIn([FromBody] SignInUserQuery signInUserQuery)
     {
         Result<SignInUserViewModel> result = await _mediator.Send(signInUserQuery);
@@ -63,9 +63,9 @@ public class AccountController(IMediator _mediator) : ApiControllerBase
     }
 
     [Authorize]
-    [HttpPost("username/edit")]
-    public async Task<IActionResult> EditUsername([FromBody] EditUsernameCommand changeUsernameCommand,
-                                                  CancellationToken cancellationToken)
+    [HttpPost("username/change")]
+    public async Task<IActionResult> ChangeUsername([FromBody] ChangeUsernameCommand changeUsernameCommand,
+                                                    CancellationToken cancellationToken)
     {
         Result<ViewModelBase> result = await _mediator.Send(changeUsernameCommand, cancellationToken);
 
@@ -83,11 +83,11 @@ public class AccountController(IMediator _mediator) : ApiControllerBase
     }
 
     [Authorize]
-    [HttpPost("email/edit")]
-    public async Task<IActionResult> EditEmail([FromBody] EditEmailCommand editEmailCommand,
-                                               CancellationToken cancellationToken)
+    [HttpPost("email/change")]
+    public async Task<IActionResult> ChangeEmail([FromBody] ChangeEmailCommand changeEmailCommand,
+                                                 CancellationToken cancellationToken)
     {
-        Result<ViewModelBase> result = await _mediator.Send(editEmailCommand, cancellationToken);
+        Result<ViewModelBase> result = await _mediator.Send(changeEmailCommand, cancellationToken);
 
         if (result.IsSuccess)
         {
@@ -103,11 +103,11 @@ public class AccountController(IMediator _mediator) : ApiControllerBase
     }
 
     [Authorize]
-    [HttpPost("password/edit")]
-    public async Task<IActionResult> EditPassword([FromBody] EditPasswordCommand editPasswordCommand,
-                                                  CancellationToken cancellationToken)
+    [HttpPost("password/change")]
+    public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordCommand changePasswordCommand,
+                                                    CancellationToken cancellationToken)
     {
-        Result<ViewModelBase> result = await _mediator.Send(editPasswordCommand, cancellationToken);
+        Result<ViewModelBase> result = await _mediator.Send(changePasswordCommand, cancellationToken);
 
         if (result.IsSuccess)
         {

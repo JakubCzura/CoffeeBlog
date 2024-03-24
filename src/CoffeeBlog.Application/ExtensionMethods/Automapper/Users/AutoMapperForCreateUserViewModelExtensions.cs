@@ -10,18 +10,18 @@ namespace CoffeeBlog.Application.ExtensionMethods.Automapper.Users;
 public static class AutoMapperForCreateUserViewModelExtensions
 {
     /// <summary>
-    /// Maps <see cref="User"/> to <see cref="CreateUserViewModel"/>.
+    /// Maps <see cref="User"/> to <see cref="SignUpUserViewModel"/>.
     /// </summary>
-    /// <typeparam name="T"><see cref="CreateUserViewModel"/></typeparam>
+    /// <typeparam name="T"><see cref="SignUpUserViewModel"/></typeparam>
     /// <param name="mapper"><see cref="IMapper"/></param>
     /// <param name="user">User entity.</param>
     /// <param name="jwtToken">JWT token for authorized user.</param>
-    /// <returns>Instance of <see cref="CreateUserViewModel"/></returns>
-    public static CreateUserViewModel Map<T>(this IMapper mapper,
+    /// <returns>Instance of <see cref="SignUpUserViewModel"/></returns>
+    public static SignUpUserViewModel Map<T>(this IMapper mapper,
                                              User user,
-                                             string jwtToken) where T : CreateUserViewModel
-        => mapper.Map<CreateUserViewModel>(user, opt =>
+                                             string jwtToken) where T : SignUpUserViewModel
+        => mapper.Map<SignUpUserViewModel>(user, opt =>
         {
-            opt.Items[nameof(CreateUserViewModel.JwtToken)] = jwtToken;
+            opt.Items[nameof(SignUpUserViewModel.JwtToken)] = jwtToken;
         });
 }

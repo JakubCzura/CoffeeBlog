@@ -6,14 +6,14 @@ using FluentValidation;
 namespace CoffeeBlog.Application.Validators.CommandsValidators.Users;
 
 /// <summary>
-/// Validator to validate <see cref="CreateUserCommand"/>.
+/// Validator to validate <see cref="SignUpUserCommand"/>.
 /// </summary>
-public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
+public class SignUpUserCommandValidator : AbstractValidator<SignUpUserCommand>
 {
     /// <summary>
     /// Default constructor.
     /// </summary>
-    public CreateUserCommandValidator()
+    public SignUpUserCommandValidator()
     {
         RuleFor(x => x.Username).SetValidator(new UsernameValidator());
 

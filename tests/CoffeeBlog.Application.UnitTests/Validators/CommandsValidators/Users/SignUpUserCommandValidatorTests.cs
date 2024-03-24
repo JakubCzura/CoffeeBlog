@@ -6,15 +6,15 @@ using FluentValidation.TestHelper;
 
 namespace CoffeeBlog.Application.UnitTests.Validators.CommandsValidators.Users;
 
-public class CreateUserCommandValidatorTests
+public class SignUpUserCommandValidatorTests
 {
-    private readonly CreateUserCommandValidator _createUserCommandValidator = new();
+    private readonly SignUpUserCommandValidator _createUserCommandValidator = new();
 
     [Fact]
     public void Validate_should_Pass_when_CommandIsCorrect()
     {
         //Arrange
-        CreateUserCommand command = new()
+        SignUpUserCommand command = new()
         {
             Username = "Johny",
             Email = "jemail@email.com",
@@ -23,7 +23,7 @@ public class CreateUserCommandValidatorTests
         };
 
         //Act
-        TestValidationResult<CreateUserCommand> result = _createUserCommandValidator.TestValidate(command);
+        TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
 
         //Assert
         result.ShouldNotHaveAnyValidationErrors();
@@ -33,7 +33,7 @@ public class CreateUserCommandValidatorTests
     public void Validate_should_Fail_when_UsernameIsIncorrect()
     {
         //Arrange
-        CreateUserCommand command = new()
+        SignUpUserCommand command = new()
         {
             Username = new string('k', 200),
             Email = "myemail@email.com",
@@ -42,7 +42,7 @@ public class CreateUserCommandValidatorTests
         };
 
         //Act
-        TestValidationResult<CreateUserCommand> result = _createUserCommandValidator.TestValidate(command);
+        TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
 
         //Assert
         result.ShouldHaveValidationErrorFor(x => x.Username);
@@ -53,7 +53,7 @@ public class CreateUserCommandValidatorTests
     public void Validate_should_Fail_when_EmailIsIncorrect()
     {
         //Arrange
-        CreateUserCommand command = new()
+        SignUpUserCommand command = new()
         {
             Username = "Johny",
             Email = "myemail.com",
@@ -62,7 +62,7 @@ public class CreateUserCommandValidatorTests
         };
 
         //Act
-        TestValidationResult<CreateUserCommand> result = _createUserCommandValidator.TestValidate(command);
+        TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
 
         //Assert
         result.ShouldHaveValidationErrorFor(x => x.Email);
@@ -73,7 +73,7 @@ public class CreateUserCommandValidatorTests
     public void Validate_should_Fail_when_EmailIsSameAsUsername()
     {
         //Arrange
-        CreateUserCommand command = new()
+        SignUpUserCommand command = new()
         {
             Username = "myemail@mail.com",
             Email = "myemail@mail.com",
@@ -82,7 +82,7 @@ public class CreateUserCommandValidatorTests
         };
 
         //Act
-        TestValidationResult<CreateUserCommand> result = _createUserCommandValidator.TestValidate(command);
+        TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
 
         //Assert
         result.ShouldHaveValidationErrorFor(x => x.Email);
@@ -93,7 +93,7 @@ public class CreateUserCommandValidatorTests
     public void Validate_should_Fail_when_PasswordIsIncorrect()
     {
         //Arrange
-        CreateUserCommand command = new()
+        SignUpUserCommand command = new()
         {
             Username = "Johny",
             Email = "myemail@emai.com",
@@ -102,7 +102,7 @@ public class CreateUserCommandValidatorTests
         };
 
         //Act
-        TestValidationResult<CreateUserCommand> result = _createUserCommandValidator.TestValidate(command);
+        TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
 
         //Assert
         result.ShouldHaveValidationErrorFor(x => x.Password);
@@ -113,7 +113,7 @@ public class CreateUserCommandValidatorTests
     public void Validate_should_Fail_when_ConfirmPasswordIsIncorrect()
     {
         //Arrange
-        CreateUserCommand command = new()
+        SignUpUserCommand command = new()
         {
             Username = "Johny",
             Email = "myemail@email.com",
@@ -122,7 +122,7 @@ public class CreateUserCommandValidatorTests
         };
 
         //Act
-        TestValidationResult<CreateUserCommand> result = _createUserCommandValidator.TestValidate(command);
+        TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
 
         //Assert
         result.ShouldHaveValidationErrorFor(x => x.ConfirmPassword);
@@ -133,7 +133,7 @@ public class CreateUserCommandValidatorTests
     public void Validate_should_Fail_when_ConfirmPasswordIsDifferentFromPassword()
     {
         //Arrange
-        CreateUserCommand command = new()
+        SignUpUserCommand command = new()
         {
             Username = "Johny",
             Email = "myemail@email.com",
@@ -142,7 +142,7 @@ public class CreateUserCommandValidatorTests
         };
 
         //Act
-        TestValidationResult<CreateUserCommand> result = _createUserCommandValidator.TestValidate(command);
+        TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
 
         //Assert
         result.ShouldHaveValidationErrorFor(x => x.ConfirmPassword);

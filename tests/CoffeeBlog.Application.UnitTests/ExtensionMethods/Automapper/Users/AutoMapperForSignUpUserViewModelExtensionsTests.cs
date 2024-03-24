@@ -7,18 +7,18 @@ using FluentAssertions;
 
 namespace CoffeeBlog.Application.UnitTests.ExtensionMethods.Automapper.Users;
 
-public class AutoMapperForCreateUserViewModelExtensionsTests
+public class AutoMapperForSignUpUserViewModelExtensionsTests
 {
     private readonly IMapper _mapper;
 
-    public AutoMapperForCreateUserViewModelExtensionsTests()
+    public AutoMapperForSignUpUserViewModelExtensionsTests()
     {
-        MapperConfiguration configurationProvider = new(cfg => cfg.AddProfile<CreateUserViewModelMappingProfile>());
+        MapperConfiguration configurationProvider = new(cfg => cfg.AddProfile<SignUpUserViewModelMappingProfile>());
         _mapper = configurationProvider.CreateMapper();
     }
 
     [Fact]
-    public void Map_should_MapUserToCreateUserViewModel_when_AdditionalPropertiesAreSpecified()
+    public void Map_should_MapUserToSignUpUserViewModel_when_AdditionalPropertiesAreSpecified()
     {
         // Arrange
         string jwtToken = "jwtToken";
@@ -31,7 +31,7 @@ public class AutoMapperForCreateUserViewModelExtensionsTests
         };
 
         //Act
-        CreateUserViewModel result = _mapper.Map<CreateUserViewModel>(user, jwtToken);
+        SignUpUserViewModel result = _mapper.Map<SignUpUserViewModel>(user, jwtToken);
 
         //Assert
         result.UserId.Should().Be(user.Id);

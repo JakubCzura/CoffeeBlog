@@ -11,36 +11,36 @@ using MediatR;
 
 namespace CoffeeBlog.Application.Handlers.Commands.Users;
 
-public class EditEmailCommandHandler(IUserRepository _userRepository,
-                                     IUserDetailRepository _userDetailRepository,
-                                     ICurrentUserContext _currentUserContext) : IRequestHandler<EditEmailCommand, Result<ViewModelBase>>
+public class ChangeUsernameCommandHandler(IUserRepository _userRepository,
+                                        IUserDetailRepository _userDetailRepository,
+                                        ICurrentUserContext _currentUserContext) : IRequestHandler<ChangeUsernameCommand, Result<ViewModelBase>>
 {
     private readonly IUserRepository _userRepository = _userRepository;
     private readonly IUserDetailRepository _userDetailRepository = _userDetailRepository;
     private readonly ICurrentUserContext _currentUserContext = _currentUserContext;
 
     /// <summary>
-    /// Handles request to edit user's e-mail.
+    /// Handles request to change user's username.
     /// </summary>
-    /// <param name="request">Request command with details to edit user's e-mail.</param>
+    /// <param name="request">Request command with details to change user's username.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Instance of <see cref="ViewModelBase"/></returns>
     /// <exception cref="UserUnauthorizedException">When user is not authorized.</exception>
-    public async Task<Result<ViewModelBase>> Handle(EditEmailCommand request,
+    public async Task<Result<ViewModelBase>> Handle(ChangeUsernameCommand request,
                                                     CancellationToken cancellationToken)
     {
         CurrentAuthorizedUser currentAuthorizedUser = _currentUserContext.GetCurrentAuthorizedUser();
 
-        if (await _userRepository.EmailExistsAsync(request.NewEmail, cancellationToken))
+        if (await _userRepository.UsernameExistsAsync(request.NewUsername, cancellationToken))
         {
-            return Result.Fail<ViewModelBase>(new EmailExistsError());
+            return Result.Fail<ViewModelBase>(new UsernameExistsError());
         }
 
-        await _userRepository.UpdateEmailAsync(currentAuthorizedUser.Id, request.NewEmail, cancellationToken);
+        await _userRepository.UpdateUsernameAsync(currentAuthorizedUser.Id, request.NewUsername, cancellationToken);
 
-        await _userDetailRepository.UpdateLastEmailChangeAsync(currentAuthorizedUser.Id, cancellationToken);
+        await _userDetailRepository.UpdateLastUsernameChangeAsync(currentAuthorizedUser.Id, cancellationToken);
 
-        ViewModelBase result = new(ResponseMessages.EmailHasBeenChanged);
+        ViewModelBase result = new(ResponseMessages.UsernameHasBeenChanged);
 
         return Result.Ok(result);
     }

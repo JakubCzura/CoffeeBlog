@@ -22,13 +22,12 @@ public class UserMappingProfileTests
         => _mapper.ConfigurationProvider.AssertConfigurationIsValid();
 
     [Fact]
-    public void Map_should_MapCreateUserCommandToUser_when_AdditionalPropertiesAreSpecified()
+    public void Map_should_MapSignUpUserCommandToUser_when_AdditionalPropertiesAreSpecified()
     {
         //Arrange
         string hashedPassword = "#$#@sdasdjsahd218732DSADASD@#dksadha23!@#das";
-        DateTime createdAt = DateTime.UtcNow;
 
-        CreateUserCommand createUserCommand = new()
+        SignUpUserCommand signUpUserCommand = new()
         {
             Username = "Johny",
             Email = "johny@email.com",
@@ -37,29 +36,29 @@ public class UserMappingProfileTests
         };
 
         //Act
-        User result = _mapper.Map<User>(createUserCommand, opt =>
+        User result = _mapper.Map<User>(signUpUserCommand, opt =>
         {
-            opt.Items[MappingConstants.HashedPassword] = hashedPassword;        
+            opt.Items[MappingConstants.HashedPassword] = hashedPassword;
         });
 
         //Assert
-        result.Username.Should().Be(createUserCommand.Username);
-        result.Email.Should().Be(createUserCommand.Email);
+        result.Username.Should().Be(signUpUserCommand.Username);
+        result.Email.Should().Be(signUpUserCommand.Email);
         result.Password.Should().Be(hashedPassword);
-        }
+    }
 
     [Fact]
     public void Map_should_ThrowAutoMapperMappingException_when_AdditionalPropertiesAreNotSpecified()
     {
         //Arrange
-        CreateUserCommand createUserCommand = new()
+        SignUpUserCommand signUpUserCommand = new()
         {
             Username = "Johny",
             Email = "johny@email.com"
         };
 
         //Act
-        Func<User> action = () => _mapper.Map<User>(createUserCommand);
+        Func<User> action = () => _mapper.Map<User>(signUpUserCommand);
 
         //Assert
         action.Should().Throw<AutoMapperMappingException>();

@@ -18,23 +18,23 @@ public class AutoMapperForUserExtensions
     }
 
     [Fact]
-    public void Map_should_MapCreateUserCommandToUser_when_AdditionalPropertiesAreSpecified()
+    public void Map_should_MapSignUpUserCommandToUser_when_AdditionalPropertiesAreSpecified()
     {
         // Arrange
         string hashedPassword = "hjsda@#!@dasdn2#!@da@#!";
 
-        CreateUserCommand createUserCommand = new()
+        SignUpUserCommand signUpUserCommand = new()
         {
             Username = "username",
             Email = "myemail@email.com"
         };
 
         //Act
-        User result = _mapper.Map<User>(createUserCommand, hashedPassword);
+        User result = _mapper.Map<User>(signUpUserCommand, hashedPassword);
 
         //Assert
-        result.Username.Should().Be(createUserCommand.Username);
-        result.Email.Should().Be(createUserCommand.Email);
+        result.Username.Should().Be(signUpUserCommand.Username);
+        result.Email.Should().Be(signUpUserCommand.Email);
         result.Password.Should().Be(hashedPassword);
     }
 }

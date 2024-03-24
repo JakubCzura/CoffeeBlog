@@ -5,13 +5,13 @@ using FluentValidation;
 namespace CoffeeBlog.Application.Validators.CommandsValidators.Users;
 
 /// <summary>
-/// Validator to validate <see cref="EditUsernameCommand"/>.
+/// Validator to validate <see cref="ChangeEmailCommand"/>.
 /// </summary>
-public class EditUsernameCommandValidator : AbstractValidator<EditUsernameCommand>
+public class ChangeEmailCommandValidator : AbstractValidator<ChangeEmailCommand>
 {
     ///<summary>
     /// Default constructor.
     /// </summary>
-    public EditUsernameCommandValidator()
-        => RuleFor(x => x.NewUsername).SetValidator(new UsernameValidator());
+    public ChangeEmailCommandValidator()
+        => RuleFor(x => x.NewEmail).SetValidator(new EmailValidator());
 }

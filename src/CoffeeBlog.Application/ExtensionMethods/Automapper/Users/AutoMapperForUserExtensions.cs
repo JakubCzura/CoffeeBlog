@@ -11,15 +11,15 @@ namespace CoffeeBlog.Application.ExtensionMethods.Automapper.Users;
 public static class AutoMapperForUserExtensions
 {
     /// <summary>
-    /// Maps <see cref="CreateUserCommand"/> to <see cref="User"/>.
+    /// Maps <see cref="SignUpUserCommand"/> to <see cref="User"/>.
     /// </summary>
-    /// <typeparam name="T"><see cref="CreateUserCommand"/></typeparam>
+    /// <typeparam name="T"><see cref="SignUpUserCommand"/></typeparam>
     /// <param name="mapper"><see cref="IMapper"/></param>
     /// <param name="createUserCommand">Request command to create a new user.</param>
     /// <param name="hashedPassword">User's password after it was hashed .</param>
     /// <returns>Instance of <see cref="User"/></returns>
     public static User Map<T>(this IMapper mapper,
-                              CreateUserCommand createUserCommand,
+                              SignUpUserCommand createUserCommand,
                               string hashedPassword) where T : User
         => mapper.Map<User>(createUserCommand, opt =>
         {

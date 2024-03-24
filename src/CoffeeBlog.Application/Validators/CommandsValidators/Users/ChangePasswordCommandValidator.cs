@@ -6,14 +6,14 @@ using FluentValidation;
 namespace CoffeeBlog.Application.Validators.CommandsValidators.Users;
 
 /// <summary>
-/// Validator to validate <see cref="EditPasswordCommand"/>.
+/// Validator to validate <see cref="ChangePasswordCommand"/>.
 /// </summary>
-public class EditPasswordCommandValidator : AbstractValidator<EditPasswordCommand>
+public class ChangePasswordCommandValidator : AbstractValidator<ChangePasswordCommand>
 {
     ///<summary>
     /// Default constructor.
     /// </summary>
-    public EditPasswordCommandValidator()
+    public ChangePasswordCommandValidator()
     {
         RuleFor(x => x.NewPassword).SetValidator(new PasswordValidator());
 

@@ -5,9 +5,9 @@ using MediatR;
 namespace CoffeeBlog.Domain.Commands.Users;
 
 /// <summary>
-/// Request command to create a new user. It's handled using Mediatr and CQRS pattern.
+/// Request command to sign up a new user and add this user to database. It's handled using Mediatr and CQRS pattern.
 /// </summary>
-public class CreateUserCommand : IRequest<Result<CreateUserViewModel>>
+public class SignUpUserCommand : IRequest<Result<SignUpUserViewModel>>
 {
     /// <summary>
     /// User's username. It's unique in database.
