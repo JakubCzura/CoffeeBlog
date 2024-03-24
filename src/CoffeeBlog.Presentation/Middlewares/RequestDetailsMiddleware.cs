@@ -75,7 +75,7 @@ public class RequestDetailsMiddleware(ILogger<RequestDetailsMiddleware> _logger,
         }
         catch (Exception exception)
         {
-            _logger.LogCritical(exception, "Exception while saving request's data.");
+            _logger.LogCritical(exception, $"{nameof(RequestDetailsMiddleware)}: Exception while saving request's data to database.");
         }
     }
 

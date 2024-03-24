@@ -1,13 +1,11 @@
-﻿using CoffeeBlog.Domain.ViewModels.Basics;
-using FluentResults;
-using MediatR;
+﻿using MediatR;
 
 namespace CoffeeBlog.Domain.Commands.RequestDetails;
 
 /// <summary>
 /// Request command to create request details. It's handled using Mediatr and CQRS pattern.
 /// </summary>
-public class CreateRequestDetailCommand : IRequest<Result<ViewModelBase>>
+public class CreateRequestDetailCommand : IRequest<Unit>
 {
     /// <summary>
     /// Name of controller that handled request.

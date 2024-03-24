@@ -11,13 +11,15 @@ internal class ApiErrorConfiguration : IEntityTypeConfiguration<ApiError>
     {
         builder.ToTable("ApiError");
 
+        builder.Property(x => x.Name).IsRequired();
+        
         builder.Property(x => x.Exception).IsRequired();
 
         builder.Property(x => x.Message).IsRequired();
 
         builder.Property(x => x.Description).IsRequired();
 
-        builder.Property(x => x.CreatedAt).IsRequired()
-                                          .HasDefaultValueSql(SqlConstants.GetUtcDate);
+        builder.Property(x => x.ThrownAt).IsRequired()
+                                         .HasDefaultValueSql(SqlConstants.GetUtcDate);
     }
 }

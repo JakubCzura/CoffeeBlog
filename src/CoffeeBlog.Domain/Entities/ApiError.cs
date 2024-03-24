@@ -5,30 +5,30 @@ namespace CoffeeBlog.Domain.Entities;
 /// <summary>
 /// Entity for API error for example when an exception is thrown.
 /// </summary>
-/// <param name="exception">Exception thrown by application.</param>
-/// <param name="message">Message of thrown exception.</param>
-/// <param name="description">Exception's description defined in code.</param>
-public class ApiError(string exception,
-                      string message,
-                      string description) : DbEntityBase
+public class ApiError : DbEntityBase
 {
     /// <summary>
-    /// Exception thrown by application. It should be achieved by calling <c>exception.ToString()</c>.
+    /// Full name of exception.
     /// </summary>
-    public string Exception { get; set; } = exception;
+    public string Name { get; set; } = string.Empty;
 
     /// <summary>
-    /// Message of thrown exception. It should be achieved by calling <c>exception.Message</c>.
+    /// Exception thrown by application.
     /// </summary>
-    public string Message { get; set; } = message;
+    public string Exception { get; set; } = string.Empty;
 
     /// <summary>
-    /// Additional information about error. For example there can be given information about situation or class where the exception was thrown.
+    /// Message of thrown exception.
     /// </summary>
-    public string Description { get; set; } = description;
+    public string Message { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Additional information about error.
+    /// </summary>
+    public string Description { get; set; } = string.Empty;
 
     /// <summary>
     /// Date and time when the error was thrown.
     /// </summary>
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime ThrownAt { get; set; } = DateTime.UtcNow;
 }

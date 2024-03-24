@@ -1,7 +1,8 @@
-﻿using CoffeeBlog.Domain.Constants;
-using CoffeeBlog.Domain.Entities;
+﻿using CoffeeBlog.Domain.Commands.ApiErrors;
+using CoffeeBlog.Domain.Constants;
 using CoffeeBlog.Domain.Exceptions;
 using CoffeeBlog.Domain.ViewModels.Errors;
+using MediatR;
 using System.Net;
 
 namespace CoffeeBlog.Presentation.Middlewares;
@@ -10,9 +11,12 @@ namespace CoffeeBlog.Presentation.Middlewares;
 /// Middleware to handle request's exception. It logs the exception and returns a response with exception's details.
 /// </summary>
 /// <param name="_logger">Logger to log exceptions.</param>
-public class ExceptionMiddleware(ILogger<ExceptionMiddleware> _logger) : IMiddleware
+/// <param name="_mediator">Mediator to handle command to save API error in database.</param>
+public class ExceptionMiddleware(ILogger<ExceptionMiddleware> _logger,
+                                 IMediator _mediator) : IMiddleware
 {
     private readonly ILogger<ExceptionMiddleware> _logger = _logger;
+    private readonly IMediator _mediator = _mediator;
 
     /// <summary>
     /// Handles request's exception.
@@ -29,11 +33,6 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> _logger) : IMiddle
         }
         catch (Exception exception)
         {
-            //TODO: Write data to database in HandleExceptionAsync()
-            ApiError error = new(exception.ToString(),
-                                 exception.Message,
-                                 "Exception caught by exception middleware");
-
             await HandleExceptionAsync(httpContext, exception);
         }
     }
@@ -42,6 +41,22 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> _logger) : IMiddle
                                             Exception exception)
     {
         _logger.LogError(exception, "Exception caught by exception middleware");
+
+        try
+        {
+            CreateApiErrorCommand createApiErrorCommand = new()
+            {
+                Name = exception.GetType().Name,
+                Exception = exception.ToString(),
+                Message = exception.Message,
+                Description = "Exception caught by exception middleware"
+            };
+            await _mediator.Send(createApiErrorCommand, httpContext.RequestAborted);
+        }
+        catch (Exception)
+        {
+            _logger.LogCritical(exception, $"{nameof(ExceptionMiddleware)}: Exception while saving API exception's data to database.");
+        }
 
         ErrorDetailsViewModel errorDetailsViewModel = exception switch
         {

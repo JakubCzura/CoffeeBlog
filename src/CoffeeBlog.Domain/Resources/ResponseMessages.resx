@@ -123,9 +123,6 @@
   <data name="PasswordHasBeenChanged" xml:space="preserve">
     <value>Password has been changed</value>
   </data>
-  <data name="RequestDetailsHaveBeenSaved" xml:space="preserve">
-    <value>Request's details have been saved.</value>
-  </data>
   <data name="UsernameHasBeenChanged" xml:space="preserve">
     <value>Username has been changed</value>
   </data>
