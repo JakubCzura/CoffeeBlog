@@ -18,16 +18,14 @@ namespace CoffeeBlog.Presentation.Controllers;
 /// When defining operations like getting user details or getting list of users, we should use <see cref="UserController"/>.
 /// </summary>
 [ApiVersion(ApiVersioningInfo.Version_1_0)]
-public class AccountController(IMediator _mediator) : ApiControllerBase
+public class AccountController(IMediator _mediator) : ApiControllerBase(_mediator)
 {
-    private readonly IMediator _mediator = _mediator;
-
     [AllowAnonymous]
     [HttpPost("sign-up")]
     public async Task<ActionResult<SignUpUserViewModel>> SignUp([FromBody] SignUpUserCommand signUpUserCommand,
                                                                 CancellationToken cancellationToken)
     {
-        Result<SignUpUserViewModel> result = await _mediator.Send(signUpUserCommand, cancellationToken);
+        Result<SignUpUserViewModel> result = await Mediator.Send(signUpUserCommand, cancellationToken);
 
         if (result.IsSuccess)
         {
@@ -47,7 +45,7 @@ public class AccountController(IMediator _mediator) : ApiControllerBase
     [HttpPost("sign-in")]
     public async Task<IActionResult> SignIn([FromBody] SignInUserQuery signInUserQuery)
     {
-        Result<SignInUserViewModel> result = await _mediator.Send(signInUserQuery);
+        Result<SignInUserViewModel> result = await Mediator.Send(signInUserQuery);
 
         if (result.IsSuccess)
         {
@@ -67,7 +65,7 @@ public class AccountController(IMediator _mediator) : ApiControllerBase
     public async Task<IActionResult> ChangeUsername([FromBody] ChangeUsernameCommand changeUsernameCommand,
                                                     CancellationToken cancellationToken)
     {
-        Result<ViewModelBase> result = await _mediator.Send(changeUsernameCommand, cancellationToken);
+        Result<ViewModelBase> result = await Mediator.Send(changeUsernameCommand, cancellationToken);
 
         if (result.IsSuccess)
         {
@@ -87,7 +85,7 @@ public class AccountController(IMediator _mediator) : ApiControllerBase
     public async Task<IActionResult> ChangeEmail([FromBody] ChangeEmailCommand changeEmailCommand,
                                                  CancellationToken cancellationToken)
     {
-        Result<ViewModelBase> result = await _mediator.Send(changeEmailCommand, cancellationToken);
+        Result<ViewModelBase> result = await Mediator.Send(changeEmailCommand, cancellationToken);
 
         if (result.IsSuccess)
         {
@@ -107,7 +105,7 @@ public class AccountController(IMediator _mediator) : ApiControllerBase
     public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordCommand changePasswordCommand,
                                                     CancellationToken cancellationToken)
     {
-        Result<ViewModelBase> result = await _mediator.Send(changePasswordCommand, cancellationToken);
+        Result<ViewModelBase> result = await Mediator.Send(changePasswordCommand, cancellationToken);
 
         if (result.IsSuccess)
         {

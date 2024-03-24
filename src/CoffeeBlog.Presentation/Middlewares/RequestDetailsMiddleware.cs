@@ -1,6 +1,7 @@
-﻿using CoffeeBlog.Domain.Constants;
-using CoffeeBlog.Domain.Entities;
+﻿using CoffeeBlog.Domain.Commands.RequestDetails;
+using CoffeeBlog.Domain.Constants;
 using CoffeeBlog.Presentation.ExtensionMethods.Request;
+using MediatR;
 using System.Diagnostics;
 using System.Security.Claims;
 
@@ -10,20 +11,23 @@ namespace CoffeeBlog.Presentation.Middlewares;
 /// Middleware to measure request's details. It writes data like request's time, path, method etc. to database.
 /// </summary>
 /// <param name="_logger">Logger to log exceptions.</param>
-public class RequestDetailsMiddleware(ILogger<RequestDetailsMiddleware> _logger) : IMiddleware
+/// <param name="_mediator">Mediator to handle command to save request's details in database.</param>
+public class RequestDetailsMiddleware(ILogger<RequestDetailsMiddleware> _logger,
+                                      IMediator _mediator) : IMiddleware
 {
     private readonly ILogger<RequestDetailsMiddleware> _logger = _logger;
+    private readonly IMediator _mediator = _mediator;
 
     /// <summary>
     /// Measures request's details and writes them to database.
-    /// <para>Important: this middleware should not throw any exception. 
+    /// <para>Important: this middleware should not throw any exception.
     /// Requests' exceptions are handled by <see cref="ExceptionMiddleware"/> and proper response is returned informing that request failed.
     /// If an exception occurs in this middleware it should be checked and repaired as it might be a problem with database or processing requests.</para>
     /// </summary>
-    /// <param name="context">Request's context.</param>
+    /// <param name="httpContext">Request's context.</param>
     /// <param name="next">Delegate to process request.</param>
     /// <returns>Task.</returns>
-    public async Task InvokeAsync(HttpContext context,
+    public async Task InvokeAsync(HttpContext httpContext,
                                   RequestDelegate next)
     {
         try
@@ -31,38 +35,43 @@ public class RequestDetailsMiddleware(ILogger<RequestDetailsMiddleware> _logger)
             Stopwatch stopwatch = Stopwatch.StartNew();
             string? responseBody = null;
 
-            context.Request.EnableBuffering();
+            httpContext.Request.EnableBuffering();
 
-            string? requestBody = await ReadBodyAsString(context.Request.ContentType,
-                                                         context.Request.Body);
+            string? requestBody = await ReadBodyAsString(httpContext.Request.ContentType,
+                                                         httpContext.Request.Body);
 
-            Stream originalBodyStream = context.Response.Body;
+            Stream originalBodyStream = httpContext.Response.Body;
             await using (MemoryStream responseBodyStream = new())
             {
-                context.Response.Body = responseBodyStream;
+                httpContext.Response.Body = responseBodyStream;
 
-                await next.Invoke(context);
+                await next.Invoke(httpContext);
 
-                responseBody = await ReadBodyAsString(context.Request.ContentType,
-                                                      context.Response.Body);
+                responseBody = await ReadBodyAsString(httpContext.Request.ContentType,
+                                                      httpContext.Response.Body);
 
                 await responseBodyStream.CopyToAsync(originalBodyStream);
             }
 
-            string? userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string? userId = httpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             stopwatch.Stop();
-            RequestDetail requestDetail = new(context.GetRouteData().Values["controller"]?.ToString() ?? string.Empty,
-                                                    context.Request.Path,
-                                                    context.Request.Method,
-                                                    context.Response.StatusCode,
-                                                    requestBody,
-                                                    context.Request.ContentType,
-                                                    responseBody,
-                                                    context.Response.ContentType,
-                                                    stopwatch.ElapsedMilliseconds,
-                                                    userId is not null ? int.Parse(userId) : null);
+
             //Write data to database
+            CreateRequestDetailCommand createRequestDetailCommand = new()
+            {
+                ControllerName = httpContext.GetRouteData().Values["controller"]?.ToString() ?? string.Empty,
+                Path = httpContext.Request.Path,
+                HttpMethod = httpContext.Request.Method,
+                StatusCode = httpContext.Response.StatusCode,
+                RequestBody = requestBody,
+                RequestContentType = httpContext.Request.ContentType,
+                ResponseBody = responseBody,
+                ResponseContentType = httpContext.Response.ContentType,
+                RequestTimeInMiliseconds = stopwatch.ElapsedMilliseconds,
+                UserId = userId is not null ? int.Parse(userId) : null
+            };
+            await _mediator.Send(createRequestDetailCommand, httpContext.RequestAborted);
         }
         catch (Exception exception)
         {

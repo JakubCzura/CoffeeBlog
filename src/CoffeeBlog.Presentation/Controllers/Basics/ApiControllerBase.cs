@@ -1,13 +1,22 @@
 ﻿using CoffeeBlog.Domain.Constants;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeBlog.Presentation.Controllers.Basics;
 
+/// <summary>
+/// Base controller for all API controllers in the application.
+/// </summary>
+/// <param name="_mediator">Mediator to handle requests' commands and queries.</param>
 [ApiController]
 [Route(RouteConstants.ApiController)]
 [Produces(ContentTypeConstants.ApplicationJson)]
 [Authorize]
-public class ApiControllerBase : ControllerBase
+public class ApiControllerBase(IMediator _mediator) : ControllerBase
 {
+    /// <summary>
+    /// Mediator to handle commands and queries using CQRS pattern.
+    /// </summary>
+    protected readonly IMediator Mediator = _mediator;
 }

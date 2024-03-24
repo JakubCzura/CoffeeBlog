@@ -17,15 +17,15 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> _logger) : IMiddle
     /// <summary>
     /// Handles request's exception.
     /// </summary>
-    /// <param name="context">Request's context.</param>
+    /// <param name="httpContext">Request's context.</param>
     /// <param name="next">Delegate to process request.</param>
     /// <returns>Task.</returns>
-    public async Task InvokeAsync(HttpContext context,
+    public async Task InvokeAsync(HttpContext httpContext,
                                   RequestDelegate next)
     {
         try
         {
-            await next.Invoke(context);
+            await next.Invoke(httpContext);
         }
         catch (Exception exception)
         {
@@ -34,7 +34,7 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> _logger) : IMiddle
                                  exception.Message,
                                  "Exception caught by exception middleware");
 
-            await HandleExceptionAsync(context, exception);
+            await HandleExceptionAsync(httpContext, exception);
         }
     }
 

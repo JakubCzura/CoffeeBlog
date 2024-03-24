@@ -2,6 +2,7 @@
 using CoffeeBlog.Domain.ViewModels;
 using CoffeeBlog.Presentation.Controllers.Basics;
 using CoffeeBlog.Presentation.ExtensionMethods.Versioning;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +10,7 @@ namespace CoffeeBlog.Presentation.Controllers;
 
 [AllowAnonymous]
 [ApiVersion(ApiVersioningInfo.Version_1_0)]
-public class WeatherForecastController(ILogger<WeatherForecastController> logger) : ApiControllerBase
+public class WeatherForecastController(ILogger<WeatherForecastController> logger, IMediator _mediator) : ApiControllerBase(_mediator)
 {
     private static readonly string[] Summaries =
     [
