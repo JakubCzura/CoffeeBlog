@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Quartz;
 
-namespace CoffeeBlog.Infrastructure.BackgroundWorkers;
+namespace AuthService.Infrastructure.BackgroundWorkers;
 
 [DisallowConcurrentExecution]
 public class ApplicationDiagnosticsCollector(ILogger<ApplicationDiagnosticsCollector> _logger) : IJob

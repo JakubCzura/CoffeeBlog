@@ -1,9 +1,9 @@
-using CoffeeBlog.Application.ExtensionMethods.LayerRegistration;
-using CoffeeBlog.Infrastructure.ExtensionMethods.LayerRegistration;
-using CoffeeBlog.Presentation.Components;
-using CoffeeBlog.Presentation.ExtensionMethods.Swagger;
-using CoffeeBlog.Presentation.ExtensionMethods.Versioning;
-using CoffeeBlog.Presentation.Middlewares;
+using AuthService.Application.ExtensionMethods.LayerRegistration;
+using AuthService.Infrastructure.ExtensionMethods.LayerRegistration;
+using AuthService.Presentation.Components;
+using AuthService.Presentation.ExtensionMethods.Swagger;
+using AuthService.Presentation.ExtensionMethods.Versioning;
+using AuthService.Presentation.Middlewares;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
@@ -69,6 +69,6 @@ app.MapControllers();
 
 app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(CoffeeBlog.Presentation.Client._Imports).Assembly);
+    .AddAdditionalAssemblies(typeof(AuthService.Presentation.Client._Imports).Assembly);
 
 app.Run();

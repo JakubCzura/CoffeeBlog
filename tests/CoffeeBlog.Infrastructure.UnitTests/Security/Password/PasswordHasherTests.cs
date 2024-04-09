@@ -1,11 +1,11 @@
-﻿using CoffeeBlog.Domain.SettingsOptions.PasswordHasher;
-using CoffeeBlog.Infrastructure.Security.Password;
-using CoffeeBlog.Infrastructure.UnitTests.HelpersForTests;
+﻿using AuthService.Domain.SettingsOptions.PasswordHasher;
+using AuthService.Infrastructure.Security.Password;
+using AuthService.Infrastructure.UnitTests.HelpersForTests;
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
-namespace CoffeeBlog.Infrastructure.UnitTests.Security.Password;
+namespace AuthService.Infrastructure.UnitTests.Security.Password;
 
 public class PasswordHasherTests
 {

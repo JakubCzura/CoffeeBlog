@@ -1,12 +1,12 @@
-﻿using CoffeeBlog.Application.ExtensionMethods.Collections;
-using CoffeeBlog.Domain.SettingsOptions.Authentication;
+﻿using AuthService.Application.ExtensionMethods.Collections;
+using AuthService.Domain.SettingsOptions.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
 
-namespace CoffeeBlog.Infrastructure.Security.Authentication;
+namespace AuthService.Infrastructure.Security.Authentication;
 
 internal sealed class JwtValidationConfiguration(IOptions<AuthenticationOptions> authenticationOptions) : IConfigureNamedOptions<JwtBearerOptions>
 {

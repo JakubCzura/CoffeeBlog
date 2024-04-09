@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Application.ExtensionMethods.String;
+﻿namespace AuthService.Application.ExtensionMethods.String;
 
 /// <summary>
 /// Extension methods for <see cref="string"/>.

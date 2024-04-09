@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CoffeeBlog.Domain.Commands.RequestDetails;
+namespace AuthService.Domain.Commands.RequestDetails;
 
 /// <summary>
 /// Request command to save request details to database. It's handled using Mediatr and CQRS pattern.

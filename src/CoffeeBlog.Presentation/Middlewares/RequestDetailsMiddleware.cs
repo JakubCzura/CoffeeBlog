@@ -1,11 +1,11 @@
-﻿using CoffeeBlog.Domain.Commands.RequestDetails;
-using CoffeeBlog.Domain.Constants;
-using CoffeeBlog.Presentation.ExtensionMethods.Request;
+﻿using AuthService.Domain.Commands.RequestDetails;
+using AuthService.Domain.Constants;
+using AuthService.Presentation.ExtensionMethods.Request;
 using MediatR;
 using System.Diagnostics;
 using System.Security.Claims;
 
-namespace CoffeeBlog.Presentation.Middlewares;
+namespace AuthService.Presentation.Middlewares;
 
 /// <summary>
 /// Middleware to measure request's details. It writes data like request's time, path, method etc. to database.

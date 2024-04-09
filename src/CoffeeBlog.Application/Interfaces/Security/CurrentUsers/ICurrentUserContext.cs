@@ -1,6 +1,6 @@
-﻿using CoffeeBlog.Domain.Models.Users;
+﻿using AuthService.Domain.Models.Users;
 
-namespace CoffeeBlog.Application.Interfaces.Security.CurrentUsers;
+namespace AuthService.Application.Interfaces.Security.CurrentUsers;
 
 /// <summary>
 /// Interface to deliver information about current signed in, authorized user.

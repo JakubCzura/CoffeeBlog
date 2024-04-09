@@ -1,8 +1,8 @@
-﻿using CoffeeBlog.Domain.ViewModels.Basics;
+﻿using AuthService.Domain.ViewModels.Basics;
 using FluentResults;
 using MediatR;
 
-namespace CoffeeBlog.Domain.Commands.Users;
+namespace AuthService.Domain.Commands.Users;
 
 /// <summary>
 /// Request command to change user's username. It's handled using Mediatr and CQRS pattern.

@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Domain.Constants;
+﻿namespace AuthService.Domain.Constants;
 
 /// <summary>
 /// Constants for content types.

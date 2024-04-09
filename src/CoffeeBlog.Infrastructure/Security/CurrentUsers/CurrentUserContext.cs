@@ -1,10 +1,10 @@
-﻿using CoffeeBlog.Application.Interfaces.Security.CurrentUsers;
-using CoffeeBlog.Domain.Exceptions;
-using CoffeeBlog.Domain.Models.Users;
+﻿using AuthService.Application.Interfaces.Security.CurrentUsers;
+using AuthService.Domain.Exceptions;
+using AuthService.Domain.Models.Users;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 
-namespace CoffeeBlog.Infrastructure.Security.CurrentUsers;
+namespace AuthService.Infrastructure.Security.CurrentUsers;
 
 internal class CurrentUserContext(IHttpContextAccessor _httpContextAccessor) : ICurrentUserContext
 {

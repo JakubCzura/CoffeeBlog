@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Domain.Exceptions;
+﻿namespace AuthService.Domain.Exceptions;
 
 /// <summary>
 /// Exception thrown when an entity is null.

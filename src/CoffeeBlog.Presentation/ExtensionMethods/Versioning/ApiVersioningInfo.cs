@@ -1,7 +1,7 @@
 ﻿using Asp.Versioning;
 using Microsoft.OpenApi.Models;
 
-namespace CoffeeBlog.Presentation.ExtensionMethods.Versioning;
+namespace AuthService.Presentation.ExtensionMethods.Versioning;
 
 /// <summary>
 /// Informatin about API versioning.

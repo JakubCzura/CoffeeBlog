@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace CoffeeBlog.Infrastructure.Migrations;
+namespace AuthService.Infrastructure.Migrations;
 
 /// <inheritdoc />
 public partial class UserLastPasswords : Migration

@@ -1,9 +1,9 @@
-﻿using CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
+﻿using AuthService.Infrastructure.Persistence.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Respawn;
 using System.Data.Common;
 
-namespace CoffeeBlog.Infrastructure.IntegrationTests.HelpersForTests;
+namespace AuthService.Infrastructure.IntegrationTests.HelpersForTests;
 
 public class TestingDatabaseFixture : IAsyncLifetime
 {

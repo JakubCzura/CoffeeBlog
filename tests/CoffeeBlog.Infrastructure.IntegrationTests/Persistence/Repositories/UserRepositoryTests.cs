@@ -1,11 +1,11 @@
-﻿using CoffeeBlog.Domain.Entities;
-using CoffeeBlog.Domain.Exceptions;
-using CoffeeBlog.Infrastructure.IntegrationTests.HelpersForTests;
-using CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
-using CoffeeBlog.Infrastructure.Persistence.Repositories;
+﻿using AuthService.Domain.Entities;
+using AuthService.Domain.Exceptions;
+using AuthService.Infrastructure.IntegrationTests.HelpersForTests;
+using AuthService.Infrastructure.Persistence.DatabaseContext;
+using AuthService.Infrastructure.Persistence.Repositories;
 using FluentAssertions;
 
-namespace CoffeeBlog.Infrastructure.IntegrationTests.Persistence.Repositories;
+namespace AuthService.Infrastructure.IntegrationTests.Persistence.Repositories;
 
 [Collection(TestingConstants.TestingCollectionName)]
 public class UserRepositoryTests : IAsyncLifetime

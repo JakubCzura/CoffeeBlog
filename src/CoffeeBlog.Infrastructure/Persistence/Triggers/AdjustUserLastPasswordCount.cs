@@ -1,9 +1,9 @@
-﻿using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
-using CoffeeBlog.Application.Interfaces.Security.CurrentUsers;
-using CoffeeBlog.Domain.Entities;
+﻿using AuthService.Application.Interfaces.Persistence.Repositories;
+using AuthService.Application.Interfaces.Security.CurrentUsers;
+using AuthService.Domain.Entities;
 using EntityFrameworkCore.Triggered;
 
-namespace CoffeeBlog.Infrastructure.Persistence.Triggers;
+namespace AuthService.Infrastructure.Persistence.Triggers;
 
 internal class AdjustUserLastPasswordCount(ICurrentUserContext _currentUserContext,
                                            IUserLastPasswordRepository _userLastPasswordRepository) : IAfterSaveTrigger<UserLastPassword>

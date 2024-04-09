@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using CoffeeBlog.Domain.Commands.Users;
-using CoffeeBlog.Domain.Constants;
-using CoffeeBlog.Domain.Entities;
+using AuthService.Domain.Commands.Users;
+using AuthService.Domain.Constants;
+using AuthService.Domain.Entities;
 
-namespace CoffeeBlog.Application.Mapping.Users;
+namespace AuthService.Application.Mapping.Users;
 
 /// <summary>
 /// Mapping profile for <see cref="User"/>.

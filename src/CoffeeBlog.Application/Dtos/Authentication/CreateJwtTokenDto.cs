@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Application.Dtos.Authentication;
+﻿namespace AuthService.Application.Dtos.Authentication;
 
 /// <summary>
 /// Details for creating a JWT token.

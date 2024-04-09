@@ -1,8 +1,8 @@
-﻿using CoffeeBlog.Domain.Entities;
+﻿using AuthService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
+namespace AuthService.Infrastructure.Persistence.DatabaseContext;
 
 public class CoffeeBlogDbContext(DbContextOptions<CoffeeBlogDbContext> options) : DbContext(options)
 {

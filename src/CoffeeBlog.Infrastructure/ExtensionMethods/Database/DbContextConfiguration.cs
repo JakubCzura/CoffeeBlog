@@ -1,10 +1,10 @@
-﻿using CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
-using CoffeeBlog.Infrastructure.Persistence.Triggers;
+﻿using AuthService.Infrastructure.Persistence.DatabaseContext;
+using AuthService.Infrastructure.Persistence.Triggers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CoffeeBlog.Infrastructure.ExtensionMethods.Database;
+namespace AuthService.Infrastructure.ExtensionMethods.Database;
 
 public static class DbContextConfiguration
 {

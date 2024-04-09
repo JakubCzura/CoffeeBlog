@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using CoffeeBlog.Domain.Entities;
-using CoffeeBlog.Domain.ViewModels.Users;
+using AuthService.Domain.Entities;
+using AuthService.Domain.ViewModels.Users;
 
-namespace CoffeeBlog.Application.Mapping.Users;
+namespace AuthService.Application.Mapping.Users;
 
 /// <summary>
 /// Mapping profile for <see cref="SignUpUserViewModel"/>.

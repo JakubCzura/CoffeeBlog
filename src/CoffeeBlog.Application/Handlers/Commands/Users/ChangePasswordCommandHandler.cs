@@ -1,17 +1,17 @@
-﻿using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
-using CoffeeBlog.Application.Interfaces.Security.CurrentUsers;
-using CoffeeBlog.Application.Interfaces.Security.Password;
-using CoffeeBlog.Domain.Commands.Users;
-using CoffeeBlog.Domain.Entities;
-using CoffeeBlog.Domain.Errors.Users;
-using CoffeeBlog.Domain.Exceptions;
-using CoffeeBlog.Domain.Models.Users;
-using CoffeeBlog.Domain.Resources;
-using CoffeeBlog.Domain.ViewModels.Basics;
+﻿using AuthService.Application.Interfaces.Persistence.Repositories;
+using AuthService.Application.Interfaces.Security.CurrentUsers;
+using AuthService.Application.Interfaces.Security.Password;
+using AuthService.Domain.Commands.Users;
+using AuthService.Domain.Entities;
+using AuthService.Domain.Errors.Users;
+using AuthService.Domain.Exceptions;
+using AuthService.Domain.Models.Users;
+using AuthService.Domain.Resources;
+using AuthService.Domain.ViewModels.Basics;
 using FluentResults;
 using MediatR;
 
-namespace CoffeeBlog.Application.Handlers.Commands.Users;
+namespace AuthService.Application.Handlers.Commands.Users;
 
 /// <summary>
 /// Command handler to change user's password. It's related to <see cref="ChangePasswordCommand"/>.

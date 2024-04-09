@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using CoffeeBlog.Domain.Commands.RequestDetails;
-using CoffeeBlog.Domain.Entities;
+using AuthService.Domain.Commands.RequestDetails;
+using AuthService.Domain.Entities;
 
-namespace CoffeeBlog.Application.Mapping.RequestDetails;
+namespace AuthService.Application.Mapping.RequestDetails;
 
 /// <summary>
 /// Mapping profile for <see cref="RequestDetail"/>.

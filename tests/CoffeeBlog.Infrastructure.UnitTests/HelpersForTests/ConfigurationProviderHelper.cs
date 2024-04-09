@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace CoffeeBlog.Infrastructure.UnitTests.HelpersForTests;
+namespace AuthService.Infrastructure.UnitTests.HelpersForTests;
 
 public class ConfigurationProviderHelper
 {

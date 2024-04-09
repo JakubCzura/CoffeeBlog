@@ -1,8 +1,8 @@
-﻿using CoffeeBlog.Domain.Entities;
+﻿using AuthService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CoffeeBlog.Infrastructure.Persistence.EntitiesConfigurations;
+namespace AuthService.Infrastructure.Persistence.EntitiesConfigurations;
 
 internal class UserToRoleConfiguration : IEntityTypeConfiguration<UserToRole>
 {

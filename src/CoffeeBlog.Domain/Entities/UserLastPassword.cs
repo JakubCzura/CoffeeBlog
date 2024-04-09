@@ -1,6 +1,6 @@
-﻿using CoffeeBlog.Domain.Entities.DbEntitiesBase;
+﻿using AuthService.Domain.Entities.DbEntitiesBase;
 
-namespace CoffeeBlog.Domain.Entities;
+namespace AuthService.Domain.Entities;
 
 /// <summary>
 /// Entity to store the last passwords of user.

@@ -1,16 +1,16 @@
-﻿using CoffeeBlog.Application.Email;
-using CoffeeBlog.Application.Factories.Emails;
-using CoffeeBlog.Application.Interfaces.Helpers;
-using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
-using CoffeeBlog.Application.Interfaces.Security.Authentication;
-using CoffeeBlog.Application.Interfaces.Security.Password;
-using CoffeeBlog.Infrastructure.ExtensionMethods.LayerRegistration;
-using CoffeeBlog.Infrastructure.UnitTests.HelpersForTests;
+﻿using AuthService.Application.Email;
+using AuthService.Application.Factories.Emails;
+using AuthService.Application.Interfaces.Helpers;
+using AuthService.Application.Interfaces.Persistence.Repositories;
+using AuthService.Application.Interfaces.Security.Authentication;
+using AuthService.Application.Interfaces.Security.Password;
+using AuthService.Infrastructure.ExtensionMethods.LayerRegistration;
+using AuthService.Infrastructure.UnitTests.HelpersForTests;
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CoffeeBlog.Infrastructure.UnitTests.ExtensionMethods.LayerRegistration;
+namespace AuthService.Infrastructure.UnitTests.ExtensionMethods.LayerRegistration;
 
 public class InfrastructureRegistrationTests
 {

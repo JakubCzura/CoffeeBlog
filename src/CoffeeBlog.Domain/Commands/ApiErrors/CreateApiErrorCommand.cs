@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CoffeeBlog.Domain.Commands.ApiErrors;
+namespace AuthService.Domain.Commands.ApiErrors;
 
 /// <summary>
 /// Request command to save API error to database. It's handled using Mediatr and CQRS pattern.

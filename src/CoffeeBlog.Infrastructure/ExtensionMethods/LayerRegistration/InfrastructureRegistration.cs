@@ -1,28 +1,28 @@
-﻿using CoffeeBlog.Application.Email;
-using CoffeeBlog.Application.Factories.Emails;
-using CoffeeBlog.Application.Interfaces.Helpers;
-using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
-using CoffeeBlog.Application.Interfaces.Security.Authentication;
-using CoffeeBlog.Application.Interfaces.Security.CurrentUsers;
-using CoffeeBlog.Application.Interfaces.Security.Password;
-using CoffeeBlog.Domain.SettingsOptions.Authentication;
-using CoffeeBlog.Domain.SettingsOptions.PasswordHasher;
-using CoffeeBlog.Domain.SettingsOptions.UserCredential;
-using CoffeeBlog.Infrastructure.Email;
-using CoffeeBlog.Infrastructure.ExtensionMethods.Authentication;
-using CoffeeBlog.Infrastructure.ExtensionMethods.BackgroundWorkers;
-using CoffeeBlog.Infrastructure.ExtensionMethods.Database;
-using CoffeeBlog.Infrastructure.Factories.Emails;
-using CoffeeBlog.Infrastructure.Helpers;
-using CoffeeBlog.Infrastructure.Persistence.Repositories;
-using CoffeeBlog.Infrastructure.Security.Authentication;
-using CoffeeBlog.Infrastructure.Security.CurrentUsers;
-using CoffeeBlog.Infrastructure.Security.Password;
+﻿using AuthService.Application.Email;
+using AuthService.Application.Factories.Emails;
+using AuthService.Application.Interfaces.Helpers;
+using AuthService.Application.Interfaces.Persistence.Repositories;
+using AuthService.Application.Interfaces.Security.Authentication;
+using AuthService.Application.Interfaces.Security.CurrentUsers;
+using AuthService.Application.Interfaces.Security.Password;
+using AuthService.Domain.SettingsOptions.Authentication;
+using AuthService.Domain.SettingsOptions.PasswordHasher;
+using AuthService.Domain.SettingsOptions.UserCredential;
+using AuthService.Infrastructure.Email;
+using AuthService.Infrastructure.ExtensionMethods.Authentication;
+using AuthService.Infrastructure.ExtensionMethods.BackgroundWorkers;
+using AuthService.Infrastructure.ExtensionMethods.Database;
+using AuthService.Infrastructure.Factories.Emails;
+using AuthService.Infrastructure.Helpers;
+using AuthService.Infrastructure.Persistence.Repositories;
+using AuthService.Infrastructure.Security.Authentication;
+using AuthService.Infrastructure.Security.CurrentUsers;
+using AuthService.Infrastructure.Security.Password;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CoffeeBlog.Infrastructure.ExtensionMethods.LayerRegistration;
+namespace AuthService.Infrastructure.ExtensionMethods.LayerRegistration;
 
 public static class InfrastructureRegistration
 {
@@ -54,7 +54,7 @@ public static class InfrastructureRegistration
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddScoped<ICurrentUserContext, CurrentUserContext>();
 
-        services.ConfigureBackgroundWorkers(configuration);
+        //services.ConfigureBackgroundWorkers(configuration);
 
         return services;
     }

@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Application.Interfaces.Security.Password;
+﻿namespace AuthService.Application.Interfaces.Security.Password;
 
 /// <summary>
 /// Interface for hashing and verifying passwords.

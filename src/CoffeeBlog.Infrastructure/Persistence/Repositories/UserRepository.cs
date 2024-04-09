@@ -1,9 +1,9 @@
-﻿using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
-using CoffeeBlog.Domain.Entities;
-using CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
+﻿using AuthService.Application.Interfaces.Persistence.Repositories;
+using AuthService.Domain.Entities;
+using AuthService.Infrastructure.Persistence.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoffeeBlog.Infrastructure.Persistence.Repositories;
+namespace AuthService.Infrastructure.Persistence.Repositories;
 
 internal class UserRepository(CoffeeBlogDbContext coffeeBlogDbContext) : DbEntityBaseRepository<User>(coffeeBlogDbContext), IUserRepository
 {

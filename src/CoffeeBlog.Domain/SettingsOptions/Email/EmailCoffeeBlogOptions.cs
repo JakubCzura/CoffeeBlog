@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Domain.SettingsOptions.Email;
+﻿namespace AuthService.Domain.SettingsOptions.Email;
 
 /// <summary>
 /// Configuration options for e-mails sent by CoffeeBlog application based on appsettings.json.

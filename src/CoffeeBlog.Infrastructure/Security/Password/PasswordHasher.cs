@@ -1,9 +1,9 @@
-﻿using CoffeeBlog.Application.Interfaces.Security.Password;
-using CoffeeBlog.Domain.SettingsOptions.PasswordHasher;
+﻿using AuthService.Application.Interfaces.Security.Password;
+using AuthService.Domain.SettingsOptions.PasswordHasher;
 using Microsoft.Extensions.Options;
 using System.Security.Cryptography;
 
-namespace CoffeeBlog.Infrastructure.Security.Password;
+namespace AuthService.Infrastructure.Security.Password;
 
 internal class PasswordHasher(IOptions<PasswordHasherOptions> passwordHasherOptions) : IPasswordHasher
 {

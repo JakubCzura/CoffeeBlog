@@ -1,17 +1,17 @@
 ﻿using Asp.Versioning;
-using CoffeeBlog.Domain.Commands.Users;
-using CoffeeBlog.Domain.Errors.Users;
-using CoffeeBlog.Domain.Queries.Users;
-using CoffeeBlog.Domain.ViewModels.Basics;
-using CoffeeBlog.Domain.ViewModels.Users;
-using CoffeeBlog.Presentation.Controllers.Basics;
-using CoffeeBlog.Presentation.ExtensionMethods.Versioning;
+using AuthService.Domain.Commands.Users;
+using AuthService.Domain.Errors.Users;
+using AuthService.Domain.Queries.Users;
+using AuthService.Domain.ViewModels.Basics;
+using AuthService.Domain.ViewModels.Users;
+using AuthService.Presentation.Controllers.Basics;
+using AuthService.Presentation.ExtensionMethods.Versioning;
 using FluentResults;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CoffeeBlog.Presentation.Controllers;
+namespace AuthService.Presentation.Controllers;
 
 /// <summary>
 /// This controller is responsible for account related operations like creating new user, changing e-mail or changing username.

@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
-using CoffeeBlog.Domain.Commands.RequestDetails;
-using CoffeeBlog.Domain.Entities;
+using AuthService.Application.Interfaces.Persistence.Repositories;
+using AuthService.Domain.Commands.RequestDetails;
+using AuthService.Domain.Entities;
 using MediatR;
 
-namespace CoffeeBlog.Application.Handlers.Commands.RequestDetails;
+namespace AuthService.Application.Handlers.Commands.RequestDetails;
 
 /// <summary>
 /// Command handler to create new request's details and save it to database. It's related to <see cref="CreateRequestDetailCommand"/>.

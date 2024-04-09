@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace CoffeeBlog.Domain.SettingsOptions.PasswordHasher;
+namespace AuthService.Domain.SettingsOptions.PasswordHasher;
 
 /// <summary>
 /// Configuration options for password hashing.

@@ -1,11 +1,11 @@
-﻿using CoffeeBlog.Domain.Commands.ApiErrors;
-using CoffeeBlog.Domain.Constants;
-using CoffeeBlog.Domain.Exceptions;
-using CoffeeBlog.Domain.ViewModels.Errors;
+﻿using AuthService.Domain.Commands.ApiErrors;
+using AuthService.Domain.Constants;
+using AuthService.Domain.Exceptions;
+using AuthService.Domain.ViewModels.Errors;
 using MediatR;
 using System.Net;
 
-namespace CoffeeBlog.Presentation.Middlewares;
+namespace AuthService.Presentation.Middlewares;
 
 /// <summary>
 /// Middleware to handle request's exception. It logs the exception and returns a response with exception's details.

@@ -1,10 +1,10 @@
-﻿using CoffeeBlog.Application.Validators.CommandsValidators.Users;
-using CoffeeBlog.Domain.Commands.Users;
-using CoffeeBlog.Domain.Resources;
+﻿using AuthService.Application.Validators.CommandsValidators.Users;
+using AuthService.Domain.Commands.Users;
+using AuthService.Domain.Resources;
 using FluentAssertions;
 using FluentValidation.TestHelper;
 
-namespace CoffeeBlog.Application.UnitTests.Validators.CommandsValidators.Users;
+namespace AuthService.Application.UnitTests.Validators.CommandsValidators.Users;
 
 public class SignUpUserCommandValidatorTests
 {

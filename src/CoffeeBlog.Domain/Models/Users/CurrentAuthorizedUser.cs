@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Domain.Models.Users;
+﻿namespace AuthService.Domain.Models.Users;
 
 /// <summary>
 /// Information about current signed in user.

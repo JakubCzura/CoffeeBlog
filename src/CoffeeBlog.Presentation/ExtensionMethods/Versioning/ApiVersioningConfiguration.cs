@@ -1,6 +1,6 @@
 ﻿using Asp.Versioning;
 
-namespace CoffeeBlog.Presentation.ExtensionMethods.Versioning;
+namespace AuthService.Presentation.ExtensionMethods.Versioning;
 
 /// <summary>
 /// Extension methods to register API versioning.

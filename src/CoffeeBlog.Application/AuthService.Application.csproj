@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CoffeeBlog.Domain\CoffeeBlog.Domain.csproj" />
+    <ProjectReference Include="..\CoffeeBlog.Domain\AuthService.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

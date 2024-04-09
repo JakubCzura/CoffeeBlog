@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Domain.Constants;
+﻿namespace AuthService.Domain.Constants;
 
 /// <summary>
 /// Constants for roles needed for authorization purposes like Admin etc.

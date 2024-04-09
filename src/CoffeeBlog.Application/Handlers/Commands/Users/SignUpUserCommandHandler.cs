@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
-using CoffeeBlog.Application.ExtensionMethods.Automapper.Users;
-using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
-using CoffeeBlog.Application.Interfaces.Security.Authentication;
-using CoffeeBlog.Application.Interfaces.Security.Password;
-using CoffeeBlog.Domain.Commands.Users;
-using CoffeeBlog.Domain.Entities;
-using CoffeeBlog.Domain.Errors.Users;
-using CoffeeBlog.Domain.ViewModels.Users;
+using AuthService.Application.ExtensionMethods.Automapper.Users;
+using AuthService.Application.Interfaces.Persistence.Repositories;
+using AuthService.Application.Interfaces.Security.Authentication;
+using AuthService.Application.Interfaces.Security.Password;
+using AuthService.Domain.Commands.Users;
+using AuthService.Domain.Entities;
+using AuthService.Domain.Errors.Users;
+using AuthService.Domain.ViewModels.Users;
 using FluentResults;
 using MediatR;
 
-namespace CoffeeBlog.Application.Handlers.Commands.Users;
+namespace AuthService.Application.Handlers.Commands.Users;
 
 /// <summary>
 /// Command handler to sign up a new user and save this user to database. It's related to <see cref="SignUpUserCommand"/>.

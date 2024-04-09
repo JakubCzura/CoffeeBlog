@@ -1,7 +1,7 @@
-﻿using CoffeeBlog.Application.ExtensionMethods.String;
+﻿using AuthService.Application.ExtensionMethods.String;
 using FluentAssertions;
 
-namespace CoffeeBlog.Application.UnitTests.ExtensionMethods.String;
+namespace AuthService.Application.UnitTests.ExtensionMethods.String;
 
 public class StringExtensionsTests
 {

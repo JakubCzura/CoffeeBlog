@@ -1,8 +1,8 @@
-﻿using CoffeeBlog.Domain.Constants;
-using CoffeeBlog.Domain.Resources;
+﻿using AuthService.Domain.Constants;
+using AuthService.Domain.Resources;
 using FluentValidation;
 
-namespace CoffeeBlog.Application.Validators.SharedValidators;
+namespace AuthService.Application.Validators.SharedValidators;
 
 /// <summary>
 /// Validator to validate user's password.

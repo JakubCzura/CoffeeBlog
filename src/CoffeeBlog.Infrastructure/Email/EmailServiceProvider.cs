@@ -1,12 +1,12 @@
-﻿using CoffeeBlog.Application.Email;
-using CoffeeBlog.Domain.Models.Emails;
-using CoffeeBlog.Domain.SettingsOptions.Email;
+﻿using AuthService.Application.Email;
+using AuthService.Domain.Models.Emails;
+using AuthService.Domain.SettingsOptions.Email;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using MimeKit.Text;
 
-namespace CoffeeBlog.Infrastructure.Email;
+namespace AuthService.Infrastructure.Email;
 
 internal class EmailServiceProvider(IOptions<EmailOptions> emailOptions) : IEmailServiceProvider
 {

@@ -1,6 +1,6 @@
-﻿using CoffeeBlog.Domain.Entities.DbEntitiesBase;
+﻿using AuthService.Domain.Entities.DbEntitiesBase;
 
-namespace CoffeeBlog.Domain.Entities;
+namespace AuthService.Domain.Entities;
 
 /// <summary>
 /// Entity that represents user of the application who has created an account.

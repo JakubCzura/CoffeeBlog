@@ -1,8 +1,8 @@
-﻿using CoffeeBlog.Application.Validators.SharedValidators;
-using CoffeeBlog.Domain.Commands.Users;
+﻿using AuthService.Application.Validators.SharedValidators;
+using AuthService.Domain.Commands.Users;
 using FluentValidation;
 
-namespace CoffeeBlog.Application.Validators.CommandsValidators.Users;
+namespace AuthService.Application.Validators.CommandsValidators.Users;
 
 /// <summary>
 /// Validator to validate <see cref="ChangeUsernameCommand"/>.

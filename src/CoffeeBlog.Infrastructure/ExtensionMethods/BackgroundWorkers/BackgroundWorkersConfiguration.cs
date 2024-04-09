@@ -1,9 +1,9 @@
-﻿using CoffeeBlog.Infrastructure.BackgroundWorkers;
+﻿using AuthService.Infrastructure.BackgroundWorkers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 
-namespace CoffeeBlog.Infrastructure.ExtensionMethods.BackgroundWorkers;
+namespace AuthService.Infrastructure.ExtensionMethods.BackgroundWorkers;
 
 public static class BackgroundWorkersConfiguration
 {

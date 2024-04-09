@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using CoffeeBlog.Application.Mapping.RequestDetails;
-using CoffeeBlog.Domain.Commands.RequestDetails;
-using CoffeeBlog.Domain.Entities;
+using AuthService.Application.Mapping.RequestDetails;
+using AuthService.Domain.Commands.RequestDetails;
+using AuthService.Domain.Entities;
 using FluentAssertions;
 
-namespace CoffeeBlog.Application.UnitTests.Mapping.RequestDetails;
+namespace AuthService.Application.UnitTests.Mapping.RequestDetails;
 
 public class RequestDetailMappingProfileTests
 {

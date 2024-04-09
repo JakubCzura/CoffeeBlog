@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Domain.ViewModels.Basics;
+﻿namespace AuthService.Domain.ViewModels.Basics;
 
 /// <summary>
 /// Base class for view models.

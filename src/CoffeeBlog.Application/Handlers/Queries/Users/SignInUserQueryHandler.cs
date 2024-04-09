@@ -1,14 +1,14 @@
-﻿using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
-using CoffeeBlog.Application.Interfaces.Security.Authentication;
-using CoffeeBlog.Application.Interfaces.Security.Password;
-using CoffeeBlog.Domain.Entities;
-using CoffeeBlog.Domain.Errors.Users;
-using CoffeeBlog.Domain.Queries.Users;
-using CoffeeBlog.Domain.ViewModels.Users;
+﻿using AuthService.Application.Interfaces.Persistence.Repositories;
+using AuthService.Application.Interfaces.Security.Authentication;
+using AuthService.Application.Interfaces.Security.Password;
+using AuthService.Domain.Entities;
+using AuthService.Domain.Errors.Users;
+using AuthService.Domain.Queries.Users;
+using AuthService.Domain.ViewModels.Users;
 using FluentResults;
 using MediatR;
 
-namespace CoffeeBlog.Application.Handlers.Queries.Users;
+namespace AuthService.Application.Handlers.Queries.Users;
 
 /// <summary>
 /// Query handler to sign in a user. It's related to <see cref="SignInUserQuery"/>.

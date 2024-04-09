@@ -1,7 +1,7 @@
-﻿using CoffeeBlog.Infrastructure.Security.Authentication;
+﻿using AuthService.Infrastructure.Security.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CoffeeBlog.Infrastructure.ExtensionMethods.Authentication;
+namespace AuthService.Infrastructure.ExtensionMethods.Authentication;
 
 public static class AuthenticationConfiguration
 {

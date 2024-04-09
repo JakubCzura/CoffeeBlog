@@ -1,7 +1,7 @@
-﻿using CoffeeBlog.Domain.Resources;
+﻿using AuthService.Domain.Resources;
 using FluentValidation;
 
-namespace CoffeeBlog.Application.Validators.SharedValidators;
+namespace AuthService.Application.Validators.SharedValidators;
 
 /// <summary>
 /// Validator to validate user's username.

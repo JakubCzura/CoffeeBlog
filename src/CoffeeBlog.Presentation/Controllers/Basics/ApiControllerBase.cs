@@ -1,9 +1,9 @@
-﻿using CoffeeBlog.Domain.Constants;
+﻿using AuthService.Domain.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CoffeeBlog.Presentation.Controllers.Basics;
+namespace AuthService.Presentation.Controllers.Basics;
 
 /// <summary>
 /// Base controller for all API controllers in the application.

@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Domain.ViewModels;
+﻿namespace AuthService.Domain.ViewModels;
 
 /// <summary>
 /// View model for testing purposes. It will be removed in the future.

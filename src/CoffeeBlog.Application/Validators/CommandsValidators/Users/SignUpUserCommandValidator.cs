@@ -1,9 +1,9 @@
-﻿using CoffeeBlog.Application.Validators.SharedValidators;
-using CoffeeBlog.Domain.Commands.Users;
-using CoffeeBlog.Domain.Resources;
+﻿using AuthService.Application.Validators.SharedValidators;
+using AuthService.Domain.Commands.Users;
+using AuthService.Domain.Resources;
 using FluentValidation;
 
-namespace CoffeeBlog.Application.Validators.CommandsValidators.Users;
+namespace AuthService.Application.Validators.CommandsValidators.Users;
 
 /// <summary>
 /// Validator to validate <see cref="SignUpUserCommand"/>.

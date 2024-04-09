@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CoffeeBlog.Application\CoffeeBlog.Application.csproj" />
-    <ProjectReference Include="..\CoffeeBlog.Infrastructure\CoffeeBlog.Infrastructure.csproj" />
-    <ProjectReference Include="..\CoffeeBlog.Presentation.Client\CoffeeBlog.Presentation.Client.csproj" />
+    <ProjectReference Include="..\CoffeeBlog.Application\AuthService.Application.csproj" />
+    <ProjectReference Include="..\CoffeeBlog.Infrastructure\AuthService.Infrastructure.csproj" />
+    <ProjectReference Include="..\CoffeeBlog.Presentation.Client\AuthService.Presentation.Client.csproj" />
     <PackageReference Include="Asp.Versioning.Mvc" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">

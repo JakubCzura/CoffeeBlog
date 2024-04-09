@@ -1,7 +1,7 @@
-﻿using CoffeeBlog.Domain.ViewModels.Basics;
+﻿using AuthService.Domain.ViewModels.Basics;
 using System.Text.Json;
 
-namespace CoffeeBlog.Domain.ViewModels.Errors;
+namespace AuthService.Domain.ViewModels.Errors;
 
 /// <summary>
 /// View model when an error occurs while processing a request.

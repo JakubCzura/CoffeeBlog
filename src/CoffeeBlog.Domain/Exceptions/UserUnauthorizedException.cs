@@ -1,6 +1,6 @@
-﻿using CoffeeBlog.Domain.Resources;
+﻿using AuthService.Domain.Resources;
 
-namespace CoffeeBlog.Domain.Exceptions;
+namespace AuthService.Domain.Exceptions;
 
 /// <summary>
 /// Exception thrown when user is not authorized, for example when user is not signed in and tries to change e-mail.

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using CoffeeBlog.Domain.Commands.ApiErrors;
-using CoffeeBlog.Domain.Entities;
+using AuthService.Domain.Commands.ApiErrors;
+using AuthService.Domain.Entities;
 
-namespace CoffeeBlog.Application.Mapping.ApiErrors;
+namespace AuthService.Application.Mapping.ApiErrors;
 
 /// <summary>
 /// Mapping profile for <see cref="ApiError"/>.

@@ -1,8 +1,8 @@
-﻿using CoffeeBlog.Application.Validators.SharedValidators;
+﻿using AuthService.Application.Validators.SharedValidators;
 using FluentAssertions;
 using FluentValidation.TestHelper;
 
-namespace CoffeeBlog.Application.UnitTests.Validators.SharedValidators;
+namespace AuthService.Application.UnitTests.Validators.SharedValidators;
 
 public class UsernameValidatorTests
 {

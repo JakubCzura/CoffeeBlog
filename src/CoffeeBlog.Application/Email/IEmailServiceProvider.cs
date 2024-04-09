@@ -1,6 +1,6 @@
-﻿using CoffeeBlog.Domain.Models.Emails;
+﻿using AuthService.Domain.Models.Emails;
 
-namespace CoffeeBlog.Application.Email;
+namespace AuthService.Application.Email;
 
 /// <summary>
 /// Interface for operations related to e-mail for example sending e-mails.

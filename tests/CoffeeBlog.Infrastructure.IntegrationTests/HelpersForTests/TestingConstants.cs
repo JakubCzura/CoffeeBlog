@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Infrastructure.IntegrationTests.HelpersForTests;
+﻿namespace AuthService.Infrastructure.IntegrationTests.HelpersForTests;
 
 public static class TestingConstants
 {

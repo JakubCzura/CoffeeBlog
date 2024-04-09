@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Domain.ViewModels.Users;
+﻿namespace AuthService.Domain.ViewModels.Users;
 
 /// <summary>
 /// View model to return after a new user was signed up and added to database.

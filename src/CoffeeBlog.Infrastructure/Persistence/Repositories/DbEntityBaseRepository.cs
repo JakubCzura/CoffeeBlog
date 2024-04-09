@@ -1,10 +1,10 @@
-﻿using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
-using CoffeeBlog.Domain.Entities.DbEntitiesBase;
-using CoffeeBlog.Domain.Exceptions;
-using CoffeeBlog.Infrastructure.Persistence.DatabaseContext;
+﻿using AuthService.Application.Interfaces.Persistence.Repositories;
+using AuthService.Domain.Entities.DbEntitiesBase;
+using AuthService.Domain.Exceptions;
+using AuthService.Infrastructure.Persistence.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 
-namespace CoffeeBlog.Infrastructure.Persistence.Repositories;
+namespace AuthService.Infrastructure.Persistence.Repositories;
 
 internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : DbEntityBase
 {

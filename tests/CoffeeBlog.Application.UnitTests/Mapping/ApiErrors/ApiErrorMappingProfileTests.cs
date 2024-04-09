@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using CoffeeBlog.Application.Mapping.ApiErrors;
-using CoffeeBlog.Domain.Commands.ApiErrors;
-using CoffeeBlog.Domain.Entities;
+using AuthService.Application.Mapping.ApiErrors;
+using AuthService.Domain.Commands.ApiErrors;
+using AuthService.Domain.Entities;
 using FluentAssertions;
 
-namespace CoffeeBlog.Application.UnitTests.Mapping.ApiErrors;
+namespace AuthService.Application.UnitTests.Mapping.ApiErrors;
 
 public class ApiErrorMappingProfileTests
 {

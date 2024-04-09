@@ -1,14 +1,14 @@
 ﻿using Asp.Versioning;
-using CoffeeBlog.Application.ExtensionMethods.LayerRegistration;
-using CoffeeBlog.Presentation.ExtensionMethods.Versioning;
-using CoffeeBlog.Presentation.Filters;
+using AuthService.Application.ExtensionMethods.LayerRegistration;
+using AuthService.Presentation.ExtensionMethods.Versioning;
+using AuthService.Presentation.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
 
-namespace CoffeeBlog.Presentation.ExtensionMethods.Swagger;
+namespace AuthService.Presentation.ExtensionMethods.Swagger;
 
 /// <summary>
 /// Configuration of Swagger.

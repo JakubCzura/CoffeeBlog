@@ -1,6 +1,6 @@
 ﻿using MailKit.Security;
 
-namespace CoffeeBlog.Domain.SettingsOptions.Email;
+namespace AuthService.Domain.SettingsOptions.Email;
 
 /// <summary>
 /// Configuration options for SMTP server.

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace CoffeeBlog.Application.ExtensionMethods.LayerRegistration;
+namespace AuthService.Application.ExtensionMethods.LayerRegistration;
 
 /// <summary>
 /// Registration of application layer services.

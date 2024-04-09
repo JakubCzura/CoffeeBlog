@@ -1,12 +1,12 @@
 ﻿using Asp.Versioning;
-using CoffeeBlog.Domain.ViewModels;
-using CoffeeBlog.Presentation.Controllers.Basics;
-using CoffeeBlog.Presentation.ExtensionMethods.Versioning;
+using AuthService.Domain.ViewModels;
+using AuthService.Presentation.Controllers.Basics;
+using AuthService.Presentation.ExtensionMethods.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CoffeeBlog.Presentation.Controllers;
+namespace AuthService.Presentation.Controllers;
 
 [AllowAnonymous]
 [ApiVersion(ApiVersioningInfo.Version_1_0)]

@@ -35,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <ProjectReference Include="..\..\src\CoffeeBlog.Infrastructure\CoffeeBlog.Infrastructure.csproj" />
+	  <ProjectReference Include="..\..\src\CoffeeBlog.Infrastructure\AuthService.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

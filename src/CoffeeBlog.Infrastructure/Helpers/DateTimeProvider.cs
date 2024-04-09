@@ -1,6 +1,6 @@
-﻿using CoffeeBlog.Application.Interfaces.Helpers;
+﻿using AuthService.Application.Interfaces.Helpers;
 
-namespace CoffeeBlog.Infrastructure.Helpers;
+namespace AuthService.Infrastructure.Helpers;
 
 /// <summary>
 /// Delivers default implementation for time and date properties.

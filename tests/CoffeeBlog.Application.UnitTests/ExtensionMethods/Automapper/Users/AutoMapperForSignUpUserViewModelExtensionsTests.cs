@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using CoffeeBlog.Application.ExtensionMethods.Automapper.Users;
-using CoffeeBlog.Application.Mapping.Users;
-using CoffeeBlog.Domain.Entities;
-using CoffeeBlog.Domain.ViewModels.Users;
+using AuthService.Application.ExtensionMethods.Automapper.Users;
+using AuthService.Application.Mapping.Users;
+using AuthService.Domain.Entities;
+using AuthService.Domain.ViewModels.Users;
 using FluentAssertions;
 
-namespace CoffeeBlog.Application.UnitTests.ExtensionMethods.Automapper.Users;
+namespace AuthService.Application.UnitTests.ExtensionMethods.Automapper.Users;
 
 public class AutoMapperForSignUpUserViewModelExtensionsTests
 {

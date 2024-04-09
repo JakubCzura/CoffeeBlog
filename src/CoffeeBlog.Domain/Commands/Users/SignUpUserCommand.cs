@@ -1,8 +1,8 @@
-﻿using CoffeeBlog.Domain.ViewModels.Users;
+﻿using AuthService.Domain.ViewModels.Users;
 using FluentResults;
 using MediatR;
 
-namespace CoffeeBlog.Domain.Commands.Users;
+namespace AuthService.Domain.Commands.Users;
 
 /// <summary>
 /// Request command to sign up a new user and save this user to database. It's handled using Mediatr and CQRS pattern.

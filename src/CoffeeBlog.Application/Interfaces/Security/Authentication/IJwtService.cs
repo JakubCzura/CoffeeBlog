@@ -1,7 +1,7 @@
-﻿using CoffeeBlog.Application.Dtos.Authentication;
+﻿using AuthService.Application.Dtos.Authentication;
 using System.Security.Claims;
 
-namespace CoffeeBlog.Application.Interfaces.Security.Authentication;
+namespace AuthService.Application.Interfaces.Security.Authentication;
 
 /// <summary>
 /// Interface for JWT service to provide JWT token.

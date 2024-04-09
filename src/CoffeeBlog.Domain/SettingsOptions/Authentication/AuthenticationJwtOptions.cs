@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Domain.SettingsOptions.Authentication;
+﻿namespace AuthService.Domain.SettingsOptions.Authentication;
 
 /// <summary>
 /// Configuration options for JWT authentication based on appsettings.json.

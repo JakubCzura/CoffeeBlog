@@ -1,7 +1,7 @@
-﻿using CoffeeBlog.Infrastructure.Helpers;
+﻿using AuthService.Infrastructure.Helpers;
 using FluentAssertions;
 
-namespace CoffeeBlog.Infrastructure.UnitTests.Helpers;
+namespace AuthService.Infrastructure.UnitTests.Helpers;
 
 public class DateTimeProviderTests
 {

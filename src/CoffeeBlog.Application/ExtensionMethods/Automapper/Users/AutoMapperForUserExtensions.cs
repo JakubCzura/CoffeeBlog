@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using CoffeeBlog.Domain.Commands.Users;
-using CoffeeBlog.Domain.Constants;
-using CoffeeBlog.Domain.Entities;
+using AuthService.Domain.Commands.Users;
+using AuthService.Domain.Constants;
+using AuthService.Domain.Entities;
 
-namespace CoffeeBlog.Application.ExtensionMethods.Automapper.Users;
+namespace AuthService.Application.ExtensionMethods.Automapper.Users;
 
 /// <summary>
 /// Extension methods for <see cref="IMapper"/>.

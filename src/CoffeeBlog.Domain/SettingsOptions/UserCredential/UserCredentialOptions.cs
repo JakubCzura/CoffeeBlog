@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Domain.SettingsOptions.UserCredential;
+﻿namespace AuthService.Domain.SettingsOptions.UserCredential;
 
 /// <summary>
 /// Configuration options for user credential.

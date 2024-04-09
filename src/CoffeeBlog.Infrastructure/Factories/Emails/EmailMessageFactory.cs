@@ -1,7 +1,7 @@
-﻿using CoffeeBlog.Application.Factories.Emails;
-using CoffeeBlog.Domain.Models.Emails;
+﻿using AuthService.Application.Factories.Emails;
+using AuthService.Domain.Models.Emails;
 
-namespace CoffeeBlog.Infrastructure.Factories.Emails;
+namespace AuthService.Infrastructure.Factories.Emails;
 
 internal class EmailMessageFactory : IEmailMessageFactory
 {

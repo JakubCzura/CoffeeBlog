@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using CoffeeBlog.Application.Mapping.Users;
-using CoffeeBlog.Domain.Commands.Users;
-using CoffeeBlog.Domain.Constants;
-using CoffeeBlog.Domain.Entities;
+using AuthService.Application.Mapping.Users;
+using AuthService.Domain.Commands.Users;
+using AuthService.Domain.Constants;
+using AuthService.Domain.Entities;
 using FluentAssertions;
 
-namespace CoffeeBlog.Application.UnitTests.Mapping.Users;
+namespace AuthService.Application.UnitTests.Mapping.Users;
 
 public class UserMappingProfileTests
 {

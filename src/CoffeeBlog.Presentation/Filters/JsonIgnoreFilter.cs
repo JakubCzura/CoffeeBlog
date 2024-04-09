@@ -1,10 +1,10 @@
-﻿using CoffeeBlog.Application.ExtensionMethods.String;
+﻿using AuthService.Application.ExtensionMethods.String;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
-namespace CoffeeBlog.Presentation.Filters;
+namespace AuthService.Presentation.Filters;
 
 public class JsonIgnoreFilter : ISchemaFilter
 {

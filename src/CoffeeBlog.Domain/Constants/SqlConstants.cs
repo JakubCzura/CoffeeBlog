@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Domain.Constants;
+﻿namespace AuthService.Domain.Constants;
 
 /// <summary>
 /// Constants for SQL for example when configuring database require to use some SQL code.

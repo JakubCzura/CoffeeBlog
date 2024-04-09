@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using CoffeeBlog.Application.Interfaces.Persistence.Repositories;
-using CoffeeBlog.Domain.Commands.ApiErrors;
-using CoffeeBlog.Domain.Entities;
+using AuthService.Application.Interfaces.Persistence.Repositories;
+using AuthService.Domain.Commands.ApiErrors;
+using AuthService.Domain.Entities;
 using MediatR;
 
-namespace CoffeeBlog.Application.Handlers.Commands.ApiErrors;
+namespace AuthService.Application.Handlers.Commands.ApiErrors;
 
 /// <summary>
 /// Command handler to create new API error and save it to database. It's related to <see cref="CreateApiErrorCommand"/>.

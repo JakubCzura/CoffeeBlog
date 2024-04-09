@@ -1,4 +1,4 @@
-﻿namespace CoffeeBlog.Domain.Models.Emails;
+﻿namespace AuthService.Domain.Models.Emails;
 
 /// <summary>
 /// Email message for user who has just created a new account.

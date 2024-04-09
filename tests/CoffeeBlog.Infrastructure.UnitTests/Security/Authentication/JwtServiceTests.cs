@@ -1,8 +1,8 @@
-﻿using CoffeeBlog.Application.Dtos.Authentication;
-using CoffeeBlog.Application.Interfaces.Helpers;
-using CoffeeBlog.Domain.SettingsOptions.Authentication;
-using CoffeeBlog.Infrastructure.Security.Authentication;
-using CoffeeBlog.Infrastructure.UnitTests.HelpersForTests;
+﻿using AuthService.Application.Dtos.Authentication;
+using AuthService.Application.Interfaces.Helpers;
+using AuthService.Domain.SettingsOptions.Authentication;
+using AuthService.Infrastructure.Security.Authentication;
+using AuthService.Infrastructure.UnitTests.HelpersForTests;
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -12,7 +12,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace CoffeeBlog.Infrastructure.UnitTests.Security.Authentication;
+namespace AuthService.Infrastructure.UnitTests.Security.Authentication;
 
 public class JwtServiceTests
 {

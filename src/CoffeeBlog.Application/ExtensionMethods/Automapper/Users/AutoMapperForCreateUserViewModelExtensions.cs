@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using CoffeeBlog.Domain.Entities;
-using CoffeeBlog.Domain.ViewModels.Users;
+using AuthService.Domain.Entities;
+using AuthService.Domain.ViewModels.Users;
 
-namespace CoffeeBlog.Application.ExtensionMethods.Automapper.Users;
+namespace AuthService.Application.ExtensionMethods.Automapper.Users;
 
 /// <summary>
 /// Extension methods for <see cref="IMapper"/>.

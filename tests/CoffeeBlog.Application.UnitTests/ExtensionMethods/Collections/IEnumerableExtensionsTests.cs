@@ -1,7 +1,7 @@
-﻿using CoffeeBlog.Application.ExtensionMethods.Collections;
+﻿using AuthService.Application.ExtensionMethods.Collections;
 using FluentAssertions;
 
-namespace CoffeeBlog.Application.UnitTests.ExtensionMethods.Collections;
+namespace AuthService.Application.UnitTests.ExtensionMethods.Collections;
 
 public class IEnumerableExtensionsTests
 {
