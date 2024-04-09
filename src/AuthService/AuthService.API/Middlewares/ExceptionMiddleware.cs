@@ -5,7 +5,7 @@ using AuthService.Domain.ViewModels.Errors;
 using MediatR;
 using System.Net;
 
-namespace AuthService.Presentation.Middlewares;
+namespace AuthService.API.Middlewares;
 
 /// <summary>
 /// Middleware to handle request's exception. It logs the exception and returns a response with exception's details.

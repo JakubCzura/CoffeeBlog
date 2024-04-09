@@ -1,12 +1,12 @@
 ﻿using Asp.Versioning;
 using AuthService.Domain.ViewModels;
-using AuthService.Presentation.Controllers.Basics;
-using AuthService.Presentation.ExtensionMethods.Versioning;
+using AuthService.API.Controllers.Basics;
+using AuthService.API.ExtensionMethods.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AuthService.Presentation.Controllers;
+namespace AuthService.API.Controllers;
 
 [AllowAnonymous]
 [ApiVersion(ApiVersioningInfo.Version_1_0)]

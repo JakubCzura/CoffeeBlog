@@ -1,6 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
 
-namespace AuthService.Presentation.ExtensionMethods.Swagger;
+namespace AuthService.API.ExtensionMethods.Swagger;
 
 public static class SwaggerInfo
 {

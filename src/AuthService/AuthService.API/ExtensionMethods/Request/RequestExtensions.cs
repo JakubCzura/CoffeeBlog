@@ -1,4 +1,4 @@
-﻿namespace AuthService.Presentation.ExtensionMethods.Request;
+﻿namespace AuthService.API.ExtensionMethods.Request;
 
 public static class RequestExtensions
 {

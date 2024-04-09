@@ -1,14 +1,14 @@
 ﻿using Asp.Versioning;
 using AuthService.Application.ExtensionMethods.LayerRegistration;
-using AuthService.Presentation.ExtensionMethods.Versioning;
-using AuthService.Presentation.Filters;
+using AuthService.API.ExtensionMethods.Versioning;
+using AuthService.API.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
 
-namespace AuthService.Presentation.ExtensionMethods.Swagger;
+namespace AuthService.API.ExtensionMethods.Swagger;
 
 /// <summary>
 /// Configuration of Swagger.

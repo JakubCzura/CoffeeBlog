@@ -4,7 +4,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
-namespace AuthService.Presentation.Filters;
+namespace AuthService.API.Filters;
 
 public class JsonIgnoreFilter : ISchemaFilter
 {

@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AuthService.Presentation.Controllers.Basics;
+namespace AuthService.API.Controllers.Basics;
 
 /// <summary>
 /// Base controller for all API controllers in the application.

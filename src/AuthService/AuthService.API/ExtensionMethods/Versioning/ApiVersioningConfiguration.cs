@@ -1,6 +1,6 @@
 ﻿using Asp.Versioning;
 
-namespace AuthService.Presentation.ExtensionMethods.Versioning;
+namespace AuthService.API.ExtensionMethods.Versioning;
 
 /// <summary>
 /// Extension methods to register API versioning.

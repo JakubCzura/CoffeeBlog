@@ -1,9 +1,9 @@
 using AuthService.Application.ExtensionMethods.LayerRegistration;
 using AuthService.Infrastructure.ExtensionMethods.LayerRegistration;
-using AuthService.Presentation.Components;
-using AuthService.Presentation.ExtensionMethods.Swagger;
-using AuthService.Presentation.ExtensionMethods.Versioning;
-using AuthService.Presentation.Middlewares;
+using AuthService.API.Components;
+using AuthService.API.ExtensionMethods.Swagger;
+using AuthService.API.ExtensionMethods.Versioning;
+using AuthService.API.Middlewares;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
@@ -69,6 +69,6 @@ app.MapControllers();
 
 app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(AuthService.Presentation.Client._Imports).Assembly);
+    .AddAdditionalAssemblies(typeof(AuthService.API.Client._Imports).Assembly);
 
 app.Run();

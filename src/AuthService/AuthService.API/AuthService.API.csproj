@@ -10,7 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AuthService.Application\AuthService.Application.csproj" />
     <ProjectReference Include="..\AuthService.Infrastructure\AuthService.Infrastructure.csproj" />
-    <ProjectReference Include="..\AuthService.Presentation.Client\AuthService.Presentation.Client.csproj" />
+    <ProjectReference Include="..\AuthService.API.Client\AuthService.API.Client.csproj" />
     <PackageReference Include="Asp.Versioning.Mvc" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">

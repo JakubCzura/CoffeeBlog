@@ -1,7 +1,7 @@
 ﻿using Asp.Versioning;
 using Microsoft.OpenApi.Models;
 
-namespace AuthService.Presentation.ExtensionMethods.Versioning;
+namespace AuthService.API.ExtensionMethods.Versioning;
 
 /// <summary>
 /// Informatin about API versioning.

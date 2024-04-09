@@ -15,9 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3E9A59FB-E8A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{037FE616-C76C-4ED0-8AFF-ECAEA834E4EA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthService.Presentation", "src\AuthService\AuthService.Presentation\AuthService.Presentation.csproj", "{9C57905C-C7EE-469B-AE5E-98E16ED407F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthService.API", "src\AuthService\AuthService.API\AuthService.API.csproj", "{9C57905C-C7EE-469B-AE5E-98E16ED407F7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthService.Presentation.Client", "src\AuthService\AuthService.Presentation.Client\AuthService.Presentation.Client.csproj", "{1B85DE90-1C69-4741-A550-3AD252756E43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthService.API.Client", "src\AuthService\AuthService.API.Client\AuthService.API.Client.csproj", "{1B85DE90-1C69-4741-A550-3AD252756E43}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthService.Application.UnitTests", "tests\AuthService\AuthService.Application.UnitTests\AuthService.Application.UnitTests.csproj", "{7A8A147F-6B7F-44FF-853A-C776DF970176}"
 EndProject
