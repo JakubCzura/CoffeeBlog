@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -8,6 +8,16 @@
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="HelpersForTests\appsettings.tests.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="HelpersForTests\appsettings.tests.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.2">
@@ -25,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\AuthService\AuthService.Application\AuthService.Application.csproj" />
+	  <ProjectReference Include="..\..\..\src\AuthService\AuthService.Infrastructure\AuthService.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
