@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthService.Infrastructure.Persistence.Repositories;
 
-internal class RoleRepository(CoffeeBlogDbContext _coffeeBlogDbContext) : DbEntityBaseRepository<Role>(_coffeeBlogDbContext), IRoleRepository
+internal class RoleRepository(AuthServiceDbContext _authServiceDbContext) : DbEntityBaseRepository<Role>(_authServiceDbContext), IRoleRepository
 {
-    private readonly CoffeeBlogDbContext _coffeeBlogDbContext = _coffeeBlogDbContext;
+    private readonly AuthServiceDbContext _authServiceDbContext = _authServiceDbContext;
 
     public async Task<List<string>> GetAllRolesNamesByUserId(int userId,
                                                              CancellationToken cancellationToken = default)
-        => await _coffeeBlogDbContext.Users.Where(user => user.Id == userId)
+        => await _authServiceDbContext.Users.Where(user => user.Id == userId)
                                            .Include(user => user.Roles)
                                            .SelectMany(user => user.Roles)
                                            .Select(userRole => userRole.Name)

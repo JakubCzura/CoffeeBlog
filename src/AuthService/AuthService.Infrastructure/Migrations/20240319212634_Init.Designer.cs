@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AuthService.Infrastructure.Migrations;
 
-[DbContext(typeof(CoffeeBlogDbContext))]
+[DbContext(typeof(AuthServiceDbContext))]
 [Migration("20240319212634_Init")]
 partial class Init
 {

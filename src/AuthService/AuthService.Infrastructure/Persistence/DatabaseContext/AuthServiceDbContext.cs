@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace AuthService.Infrastructure.Persistence.DatabaseContext;
 
-public class CoffeeBlogDbContext(DbContextOptions<CoffeeBlogDbContext> options) : DbContext(options)
+public class AuthServiceDbContext(DbContextOptions<AuthServiceDbContext> options) : DbContext(options)
 {
     public DbSet<ApiError> ApiErrors { get; set; }
     public DbSet<RequestDetail> RequestDetails { get; set; }

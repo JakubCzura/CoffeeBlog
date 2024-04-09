@@ -7,7 +7,7 @@ namespace AuthService.Infrastructure.IntegrationTests.HelpersForTests;
 
 public class TestingDatabaseFixture : IAsyncLifetime
 {
-    public readonly CoffeeBlogDbContext CoffeeBlogContext;
+    public readonly AuthServiceDbContext AuthServiceDbContext;
     private static string CoffeeBlogDbConnectionString => $"Server=(localdb)\\MSSQLLocalDB;Database=PersistenceIntegrationTests;Integrated Security=True;TrustServerCertificate=True";
 
     private Respawner _respawner = default!;
@@ -15,19 +15,19 @@ public class TestingDatabaseFixture : IAsyncLifetime
 
     public TestingDatabaseFixture()
     {
-        DbContextOptions<CoffeeBlogDbContext> options = new DbContextOptionsBuilder<CoffeeBlogDbContext>()
+        DbContextOptions<AuthServiceDbContext> options = new DbContextOptionsBuilder<AuthServiceDbContext>()
                                                            .UseSqlServer(CoffeeBlogDbConnectionString)
                                                            .Options;
-        CoffeeBlogContext = new(options);
+        AuthServiceDbContext = new(options);
 
-        //CoffeeBlogContext.Database.EnsureDeleted();
-        //CoffeeBlogContext.Database.EnsureCreated();
+        //AuthServiceDbContext.Database.EnsureDeleted();
+        //AuthServiceDbContext.Database.EnsureCreated();
     }
 
     public async Task DisposeAsync()
     {
-        //await CoffeeBlogContext.Database.EnsureDeletedAsync();
-        await CoffeeBlogContext.DisposeAsync();
+        //await AuthServiceDbContext.Database.EnsureDeletedAsync();
+        await AuthServiceDbContext.DisposeAsync();
 
         await _connection.CloseAsync();
     }
@@ -37,15 +37,15 @@ public class TestingDatabaseFixture : IAsyncLifetime
 
     public async Task InitializeAsync()
     {
-        await CoffeeBlogContext.Database.EnsureDeletedAsync();
-        await CoffeeBlogContext.Database.EnsureCreatedAsync();
+        await AuthServiceDbContext.Database.EnsureDeletedAsync();
+        await AuthServiceDbContext.Database.EnsureCreatedAsync();
 
         RespawnerOptions respawnerOptions = new()
         {
             DbAdapter = DbAdapter.SqlServer
         };
 
-        _connection = CoffeeBlogContext.Database.GetDbConnection();
+        _connection = AuthServiceDbContext.Database.GetDbConnection();
         await _connection.OpenAsync();
         _respawner = await Respawner.CreateAsync(_connection, respawnerOptions);  
     }

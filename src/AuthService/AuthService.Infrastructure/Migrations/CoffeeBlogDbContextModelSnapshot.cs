@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AuthService.Infrastructure.Migrations;
 
-[DbContext(typeof(CoffeeBlogDbContext))]
-partial class CoffeeBlogDbContextModelSnapshot : ModelSnapshot
+[DbContext(typeof(AuthServiceDbContext))]
+partial class authServiceDbContextModelSnapshot : ModelSnapshot
 {
     protected override void BuildModel(ModelBuilder modelBuilder)
     {

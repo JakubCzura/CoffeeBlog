@@ -4,6 +4,6 @@ using AuthService.Infrastructure.Persistence.DatabaseContext;
 
 namespace AuthService.Infrastructure.Persistence.Repositories;
 
-internal class ApiErrorRepository(CoffeeBlogDbContext coffeeBlogDbContext) : DbEntityBaseRepository<ApiError>(coffeeBlogDbContext), IApiErrorRepository
+internal class ApiErrorRepository(AuthServiceDbContext authServiceDbContext) : DbEntityBaseRepository<ApiError>(authServiceDbContext), IApiErrorRepository
 {
 }

@@ -8,13 +8,13 @@ namespace AuthService.Infrastructure.Persistence.Repositories;
 
 internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : DbEntityBase
 {
-    private readonly CoffeeBlogDbContext _coffeeBlogDbContext;
+    private readonly AuthServiceDbContext _authServiceDbContext;
     private readonly DbSet<T> _dbSet;
 
-    public DbEntityBaseRepository(CoffeeBlogDbContext coffeeBlogDbContext)
+    public DbEntityBaseRepository(AuthServiceDbContext authServiceDbContext)
     {
-        _coffeeBlogDbContext = coffeeBlogDbContext;
-        _dbSet = _coffeeBlogDbContext.Set<T>();
+        _authServiceDbContext = authServiceDbContext;
+        _dbSet = _authServiceDbContext.Set<T>();
     }
 
     public async Task<int> CreateAsync(T entity,
@@ -26,7 +26,7 @@ internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : 
         }
 
         await _dbSet.AddAsync(entity, cancellationToken);
-        return await _coffeeBlogDbContext.SaveChangesAsync(cancellationToken);
+        return await _authServiceDbContext.SaveChangesAsync(cancellationToken);
     }
 
     public async Task<T?> GetAsync(int id,
@@ -47,7 +47,7 @@ internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : 
         }
 
         _dbSet.Update(entity);
-        return _coffeeBlogDbContext.SaveChangesAsync(cancellationToken);
+        return _authServiceDbContext.SaveChangesAsync(cancellationToken);
     }
 
     public async Task<int> DeleteAsync(int id,

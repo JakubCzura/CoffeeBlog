@@ -7,21 +7,21 @@ using Microsoft.Extensions.Options;
 
 namespace AuthService.Infrastructure.Persistence.Repositories;
 
-internal class UserLastPasswordRepository(CoffeeBlogDbContext _coffeeBlogDbContext,
-                                          IOptions<UserCredentialOptions> _userCredentialOptions) : DbEntityBaseRepository<UserLastPassword>(_coffeeBlogDbContext), IUserLastPasswordRepository
+internal class UserLastPasswordRepository(AuthServiceDbContext _authServiceDbContext,
+                                          IOptions<UserCredentialOptions> _userCredentialOptions) : DbEntityBaseRepository<UserLastPassword>(_authServiceDbContext), IUserLastPasswordRepository
 {
-    private readonly CoffeeBlogDbContext _coffeeBlogDbContext = _coffeeBlogDbContext;
+    private readonly AuthServiceDbContext _authServiceDbContext = _authServiceDbContext;
     private readonly UserCredentialOptions _userCredentialOptions = _userCredentialOptions.Value;
 
     public async Task<List<UserLastPassword>> GetUserLastPasswordsAsync(int userId,
                                                                         CancellationToken cancellationToken = default)
-        => await _coffeeBlogDbContext.UserLastPasswords.AsNoTracking()
+        => await _authServiceDbContext.UserLastPasswords.AsNoTracking()
                                                        .Where(userLastPassword => userLastPassword.UserId == userId)
                                                        .ToListAsync(cancellationToken);
 
     public async Task<int> AdjustUserLastPasswordCountByUserIdAsync(int userId,
                                                                     CancellationToken cancellationToken) 
-        => await _coffeeBlogDbContext.UserLastPasswords.Where(userLastPassword => userLastPassword.UserId == userId)
+        => await _authServiceDbContext.UserLastPasswords.Where(userLastPassword => userLastPassword.UserId == userId)
                                                        .OrderBy(userLastPassword => userLastPassword.CreatedAt)
                                                        .Skip(_userCredentialOptions.LastPasswordCount)
                                                        .ExecuteDeleteAsync(cancellationToken);

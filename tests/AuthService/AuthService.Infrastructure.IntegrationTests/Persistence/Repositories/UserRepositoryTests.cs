@@ -11,14 +11,14 @@ namespace AuthService.Infrastructure.IntegrationTests.Persistence.Repositories;
 public class UserRepositoryTests : IAsyncLifetime
 {
     private readonly Func<Task> _resetDatabase;
-    private readonly CoffeeBlogDbContext _coffeeBlogDbContext;
+    private readonly AuthServiceDbContext _authServiceDbContext;
     private readonly UserRepository _userRepository;
 
-    public UserRepositoryTests(TestingDatabaseFixture coffeeBlogDatabaseFixture)
+    public UserRepositoryTests(TestingDatabaseFixture testingDatabaseFixture)
     {
-        _resetDatabase = coffeeBlogDatabaseFixture.ResetDatabaseAsync;
-        _coffeeBlogDbContext = coffeeBlogDatabaseFixture.CoffeeBlogContext;
-        _userRepository = new UserRepository(_coffeeBlogDbContext);
+        _resetDatabase = testingDatabaseFixture.ResetDatabaseAsync;
+        _authServiceDbContext = testingDatabaseFixture.AuthServiceDbContext;
+        _userRepository = new UserRepository(_authServiceDbContext);
     }
 
     public Task InitializeAsync() 
@@ -43,7 +43,7 @@ public class UserRepositoryTests : IAsyncLifetime
 
         // Assert
         result.Should().BePositive();
-        User createdUser = _coffeeBlogDbContext.Users.First(x => x.Id == user.Id);
+        User createdUser = _authServiceDbContext.Users.First(x => x.Id == user.Id);
         createdUser.Should().BeEquivalentTo(user);
     }
 
@@ -64,8 +64,8 @@ public class UserRepositoryTests : IAsyncLifetime
             Password = "dsadasd@#!@#dsaldasn@#!#"
         };
 
-        _coffeeBlogDbContext.Add(user);
-        _coffeeBlogDbContext.SaveChanges();
+        _authServiceDbContext.Add(user);
+        _authServiceDbContext.SaveChanges();
 
         // Act
         User? result = await _userRepository.GetAsync(user.Id);
@@ -87,8 +87,8 @@ public class UserRepositoryTests : IAsyncLifetime
             Password = "dsadasd@#!@#dsaldasn@#!#"
         };
 
-        _coffeeBlogDbContext.Add(user);
-        _coffeeBlogDbContext.SaveChanges();
+        _authServiceDbContext.Add(user);
+        _authServiceDbContext.SaveChanges();
 
         // Act
         User? result = await _userRepository.GetAsync(invalidId);
@@ -117,8 +117,8 @@ public class UserRepositoryTests : IAsyncLifetime
             }
         ];
 
-        _coffeeBlogDbContext.AddRange(users);
-        _coffeeBlogDbContext.SaveChanges();
+        _authServiceDbContext.AddRange(users);
+        _authServiceDbContext.SaveChanges();
 
         // Act
         List<User> result = await _userRepository.GetAllAsync();
@@ -138,11 +138,11 @@ public class UserRepositoryTests : IAsyncLifetime
             Password = "dsad@##@!#"
         };
 
-        _coffeeBlogDbContext.Add(user);
-        _coffeeBlogDbContext.SaveChanges();
+        _authServiceDbContext.Add(user);
+        _authServiceDbContext.SaveChanges();
 
         // Act
-        User userToUpdate = _coffeeBlogDbContext.Users.First(x => x.Id == user.Id);
+        User userToUpdate = _authServiceDbContext.Users.First(x => x.Id == user.Id);
         userToUpdate.Username = "newUsername";
         userToUpdate.Email = "newemail@email.com";
         userToUpdate.Password = "kjfds@#!@#djsa#@!#!@DASDA";
@@ -151,7 +151,7 @@ public class UserRepositoryTests : IAsyncLifetime
 
         // Assert
         result.Should().BePositive();
-        User updatedUser = _coffeeBlogDbContext.Users.First(x => x.Id == result);
+        User updatedUser = _authServiceDbContext.Users.First(x => x.Id == result);
         updatedUser.Should().BeEquivalentTo(userToUpdate);
     }
 
@@ -172,15 +172,15 @@ public class UserRepositoryTests : IAsyncLifetime
             Password = "dsad@##@!#"
         };
 
-        _coffeeBlogDbContext.Add(user);
-        _coffeeBlogDbContext.SaveChanges();
+        _authServiceDbContext.Add(user);
+        _authServiceDbContext.SaveChanges();
 
         // Act
         int result = await _userRepository.DeleteAsync(user.Id);
 
         // Assert
         result.Should().BePositive();
-        User? deletedUser = _coffeeBlogDbContext.Users.FirstOrDefault(x => x.Id == user.Id);
+        User? deletedUser = _authServiceDbContext.Users.FirstOrDefault(x => x.Id == user.Id);
         deletedUser.Should().BeNull();
     }
 }
