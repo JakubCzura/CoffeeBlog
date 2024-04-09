@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\CoffeeBlog.Application\AuthService.Application.csproj" />
+    <ProjectReference Include="..\..\src\AuthService\AuthService.Application\AuthService.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
