@@ -1,12 +1,12 @@
-﻿using AuthService.Application.Email;
-using AuthService.Domain.Models.Emails;
-using AuthService.Domain.SettingsOptions.Email;
-using MailKit.Net.Smtp;
+﻿using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using MimeKit.Text;
+using NotificationProvider.Application.Interfaces.Email;
+using NotificationProvider.Domain.Models.Emails;
+using NotificationProvider.Domain.SettingsOptions.Email;
 
-namespace AuthService.Infrastructure.Email;
+namespace NotificationProvider.Infrastructure.Email;
 
 internal class EmailServiceProvider(IOptions<EmailOptions> emailOptions) : IEmailServiceProvider
 {

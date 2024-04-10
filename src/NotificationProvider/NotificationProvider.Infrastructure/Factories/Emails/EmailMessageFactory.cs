@@ -1,7 +1,7 @@
-﻿using AuthService.Application.Factories.Emails;
-using AuthService.Domain.Models.Emails;
+﻿using NotificationProvider.Application.Interfaces.Factories.Emails;
+using NotificationProvider.Domain.Models.Emails;
 
-namespace AuthService.Infrastructure.Factories.Emails;
+namespace NotificationProvider.Infrastructure.Factories.Emails;
 
 internal class EmailMessageFactory : IEmailMessageFactory
 {

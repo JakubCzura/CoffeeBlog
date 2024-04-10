@@ -1,6 +1,4 @@
-﻿using AuthService.Application.Email;
-using AuthService.Application.Factories.Emails;
-using AuthService.Application.Interfaces.Helpers;
+﻿using AuthService.Application.Interfaces.Helpers;
 using AuthService.Application.Interfaces.Persistence.Repositories;
 using AuthService.Application.Interfaces.Security.Authentication;
 using AuthService.Application.Interfaces.Security.Password;
@@ -36,7 +34,5 @@ public class InfrastructureRegistrationTests
         serviceProvider.GetService<IDateTimeProvider>().Should().NotBeNull();
         serviceProvider.GetService<IJwtService>().Should().NotBeNull();
         serviceProvider.GetService<IPasswordHasher>().Should().NotBeNull();
-        serviceProvider.GetService<IEmailMessageFactory>().Should().NotBeNull();
-        serviceProvider.GetService<IEmailServiceProvider>().Should().NotBeNull();
     }
 }

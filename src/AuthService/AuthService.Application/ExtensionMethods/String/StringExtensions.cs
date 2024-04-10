@@ -11,5 +11,5 @@ public static class StringExtensions
     /// <param name="value">String to convert.</param>
     /// <returns>Converted string with first letter as lowercase.</returns>
     public static string ToCamelCase(this string? value)
-        => string.IsNullOrWhiteSpace(value) ? string.Empty : char.ToLowerInvariant(value[0]) + value[1..];
+        => string.IsNullOrWhiteSpace(value) ? string.Empty : $"{char.ToLowerInvariant(value[0])}{value[1..]}";
 }

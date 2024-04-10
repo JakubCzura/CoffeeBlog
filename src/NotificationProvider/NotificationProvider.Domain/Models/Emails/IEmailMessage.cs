@@ -1,4 +1,4 @@
-﻿namespace AuthService.Domain.Models.Emails;
+﻿namespace NotificationProvider.Domain.Models.Emails;
 
 /// <summary>
 /// Interface for email message. Helpful for factories for email's messages.

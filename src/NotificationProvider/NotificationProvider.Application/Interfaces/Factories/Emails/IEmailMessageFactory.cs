@@ -1,6 +1,6 @@
-﻿using AuthService.Domain.Models.Emails;
+﻿using NotificationProvider.Domain.Models.Emails;
 
-namespace AuthService.Application.Factories.Emails;
+namespace NotificationProvider.Application.Interfaces.Factories.Emails;
 
 /// <summary>
 /// Interface for creating e-mail messages.

@@ -1,6 +1,6 @@
-﻿using AuthService.Domain.Models.Emails;
+﻿using NotificationProvider.Domain.Models.Emails;
 
-namespace AuthService.Application.Email;
+namespace NotificationProvider.Application.Interfaces.Email;
 
 /// <summary>
 /// Interface for operations related to e-mail for example sending e-mails.
