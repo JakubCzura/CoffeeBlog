@@ -9,7 +9,6 @@ namespace AuthService.Domain.Entities;
 /// </summary>
 public class UserDetail(int userId) : DbEntityBase
 {
-
     /// <summary>
     /// Date and time when user last successfully signed in.
     /// </summary>

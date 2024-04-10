@@ -2,7 +2,6 @@
 using AuthService.Application.Interfaces.Security.CurrentUsers;
 using AuthService.Application.Interfaces.Security.Password;
 using AuthService.Domain.Commands.Users;
-using AuthService.Domain.Entities;
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.Exceptions;
 using AuthService.Domain.Models.Users;

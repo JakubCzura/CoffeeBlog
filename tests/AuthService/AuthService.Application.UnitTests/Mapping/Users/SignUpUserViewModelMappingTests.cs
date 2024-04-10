@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using AuthService.Application.Mapping.Users;
+﻿using AuthService.Application.Mapping.Users;
 using AuthService.Domain.Entities;
 using AuthService.Domain.ViewModels.Users;
+using AutoMapper;
 using FluentAssertions;
 
 namespace AuthService.Application.UnitTests.Mapping.Users;

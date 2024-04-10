@@ -1,7 +1,7 @@
 ﻿using Asp.Versioning;
-using AuthService.Application.ExtensionMethods.LayerRegistration;
 using AuthService.API.ExtensionMethods.Versioning;
 using AuthService.API.Filters;
+using AuthService.Application.ExtensionMethods.LayerRegistration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;

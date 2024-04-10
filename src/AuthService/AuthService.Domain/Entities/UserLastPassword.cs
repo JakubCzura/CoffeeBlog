@@ -7,10 +7,9 @@ namespace AuthService.Domain.Entities;
 /// It is used to prevent the user from using the same credentials again.
 /// For example when user changes password, new password can't be the same as the last passwords.
 /// </summary>
-public class UserLastPassword(string lastPassword, 
+public class UserLastPassword(string lastPassword,
                               int userId) : DbEntityBase
 {
-
     /// <summary>
     /// User's last password which can't be used again.
     /// </summary>

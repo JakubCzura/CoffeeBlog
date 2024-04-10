@@ -32,7 +32,7 @@ public class TestingDatabaseFixture : IAsyncLifetime
         await _connection.CloseAsync();
     }
 
-    public async Task ResetDatabaseAsync() 
+    public async Task ResetDatabaseAsync()
         => await _respawner.ResetAsync(_connection);
 
     public async Task InitializeAsync()
@@ -47,6 +47,6 @@ public class TestingDatabaseFixture : IAsyncLifetime
 
         _connection = AuthServiceDbContext.Database.GetDbConnection();
         await _connection.OpenAsync();
-        _respawner = await Respawner.CreateAsync(_connection, respawnerOptions);  
+        _respawner = await Respawner.CreateAsync(_connection, respawnerOptions);
     }
 }

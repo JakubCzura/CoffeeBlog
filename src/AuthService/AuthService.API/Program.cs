@@ -1,16 +1,15 @@
-using AuthService.Application.ExtensionMethods.LayerRegistration;
-using AuthService.Infrastructure.ExtensionMethods.LayerRegistration;
 using AuthService.API.Components;
 using AuthService.API.ExtensionMethods.Swagger;
 using AuthService.API.ExtensionMethods.Versioning;
 using AuthService.API.Middlewares;
+using AuthService.Application.ExtensionMethods.LayerRegistration;
+using AuthService.Domain.SettingsOptions.Authentication;
+using AuthService.Domain.SettingsOptions.PasswordHasher;
+using AuthService.Domain.SettingsOptions.UserCredential;
+using AuthService.Infrastructure.ExtensionMethods.LayerRegistration;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
-using AuthService.Domain.SettingsOptions.UserCredential;
-using System.Configuration;
-using AuthService.Domain.SettingsOptions.Authentication;
-using AuthService.Domain.SettingsOptions.PasswordHasher;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 

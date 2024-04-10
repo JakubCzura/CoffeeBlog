@@ -1,11 +1,11 @@
 ﻿using Asp.Versioning;
+using AuthService.API.Controllers.Basics;
+using AuthService.API.ExtensionMethods.Versioning;
 using AuthService.Domain.Commands.Users;
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.Queries.Users;
 using AuthService.Domain.ViewModels.Basics;
 using AuthService.Domain.ViewModels.Users;
-using AuthService.API.Controllers.Basics;
-using AuthService.API.ExtensionMethods.Versioning;
 using FluentResults;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

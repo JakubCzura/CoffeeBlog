@@ -13,7 +13,7 @@ public static class BackgroundWorkersConfiguration
         services.AddQuartz(options =>
         {
             JobKey applicationDiagnosticsCollectorJobName = JobKey.Create(nameof(ApplicationDiagnosticsCollector));
-            
+
             options.AddJob<ApplicationDiagnosticsCollector>(applicationDiagnosticsCollectorJobName)
                    .AddTrigger(trigger => trigger.ForJob(applicationDiagnosticsCollectorJobName)
                                                  .WithCronSchedule("0 22 * * *"));

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using AuthService.Application.ExtensionMethods.Automapper.Users;
+﻿using AuthService.Application.ExtensionMethods.Automapper.Users;
 using AuthService.Application.Interfaces.Persistence.Repositories;
 using AuthService.Application.Interfaces.Security.Authentication;
 using AuthService.Application.Interfaces.Security.Password;
@@ -7,6 +6,7 @@ using AuthService.Domain.Commands.Users;
 using AuthService.Domain.Entities;
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.ViewModels.Users;
+using AutoMapper;
 using FluentResults;
 using MediatR;
 

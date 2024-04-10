@@ -1,6 +1,6 @@
-﻿using AuthService.Domain.Commands.RequestDetails;
+﻿using AuthService.API.ExtensionMethods.Request;
+using AuthService.Domain.Commands.RequestDetails;
 using AuthService.Domain.Constants;
-using AuthService.API.ExtensionMethods.Request;
 using MediatR;
 using System.Diagnostics;
 using System.Security.Claims;

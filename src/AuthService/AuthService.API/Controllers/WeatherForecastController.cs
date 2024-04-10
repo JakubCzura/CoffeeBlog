@@ -1,7 +1,7 @@
 ﻿using Asp.Versioning;
-using AuthService.Domain.ViewModels;
 using AuthService.API.Controllers.Basics;
 using AuthService.API.ExtensionMethods.Versioning;
+using AuthService.Domain.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

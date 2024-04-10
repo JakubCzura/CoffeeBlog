@@ -1,6 +1,6 @@
-﻿using AutoMapper;
-using AuthService.Domain.Commands.ApiErrors;
+﻿using AuthService.Domain.Commands.ApiErrors;
 using AuthService.Domain.Entities;
+using AutoMapper;
 
 namespace AuthService.Application.Mapping.ApiErrors;
 

@@ -1,6 +1,6 @@
-﻿using AutoMapper;
-using AuthService.Domain.Entities;
+﻿using AuthService.Domain.Entities;
 using AuthService.Domain.ViewModels.Users;
+using AutoMapper;
 
 namespace AuthService.Application.ExtensionMethods.Automapper.Users;
 

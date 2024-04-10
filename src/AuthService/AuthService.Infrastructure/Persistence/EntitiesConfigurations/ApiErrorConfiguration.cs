@@ -12,7 +12,7 @@ internal class ApiErrorConfiguration : IEntityTypeConfiguration<ApiError>
         builder.ToTable("ApiError");
 
         builder.Property(x => x.Name).IsRequired();
-        
+
         builder.Property(x => x.Exception).IsRequired();
 
         builder.Property(x => x.Message).IsRequired();

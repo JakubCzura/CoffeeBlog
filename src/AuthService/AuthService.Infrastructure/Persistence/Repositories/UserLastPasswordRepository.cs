@@ -20,7 +20,7 @@ internal class UserLastPasswordRepository(AuthServiceDbContext _authServiceDbCon
                                                        .ToListAsync(cancellationToken);
 
     public async Task<int> AdjustUserLastPasswordCountByUserIdAsync(int userId,
-                                                                    CancellationToken cancellationToken) 
+                                                                    CancellationToken cancellationToken)
         => await _authServiceDbContext.UserLastPasswords.Where(userLastPassword => userLastPassword.UserId == userId)
                                                        .OrderBy(userLastPassword => userLastPassword.CreatedAt)
                                                        .Skip(_userCredentialOptions.LastPasswordCount)

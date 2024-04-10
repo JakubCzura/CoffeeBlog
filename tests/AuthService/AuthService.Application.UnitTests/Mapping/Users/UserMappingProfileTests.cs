@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using AuthService.Application.Mapping.Users;
+﻿using AuthService.Application.Mapping.Users;
 using AuthService.Domain.Commands.Users;
 using AuthService.Domain.Constants;
 using AuthService.Domain.Entities;
+using AutoMapper;
 using FluentAssertions;
 
 namespace AuthService.Application.UnitTests.Mapping.Users;

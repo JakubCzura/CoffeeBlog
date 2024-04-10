@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using AuthService.Domain.Commands.Users;
+﻿using AuthService.Domain.Commands.Users;
 using AuthService.Domain.Constants;
 using AuthService.Domain.Entities;
+using AutoMapper;
 
 namespace AuthService.Application.Mapping.Users;
 

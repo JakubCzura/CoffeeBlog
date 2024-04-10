@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using AuthService.Application.Interfaces.Persistence.Repositories;
+﻿using AuthService.Application.Interfaces.Persistence.Repositories;
 using AuthService.Domain.Commands.RequestDetails;
 using AuthService.Domain.Entities;
+using AutoMapper;
 using MediatR;
 
 namespace AuthService.Application.Handlers.Commands.RequestDetails;

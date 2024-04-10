@@ -1,6 +1,6 @@
-﻿using AutoMapper;
-using AuthService.Domain.Commands.RequestDetails;
+﻿using AuthService.Domain.Commands.RequestDetails;
 using AuthService.Domain.Entities;
+using AutoMapper;
 
 namespace AuthService.Application.Mapping.RequestDetails;
 
