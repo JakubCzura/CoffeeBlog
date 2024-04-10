@@ -69,6 +69,6 @@ app.MapControllers();
 
 app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(AuthService.API.Client._Imports).Assembly);
+    .AddAdditionalAssemblies(typeof(WebClient.UI._Imports).Assembly);
 
 app.Run();
