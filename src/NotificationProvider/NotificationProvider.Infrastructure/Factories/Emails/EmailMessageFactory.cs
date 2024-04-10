@@ -6,16 +6,16 @@ namespace NotificationProvider.Infrastructure.Factories.Emails;
 internal class EmailMessageFactory : IEmailMessageFactory
 {
     public IEmailMessage CreateWelcomeEmailMessage(string to,
-                                                   string nickname)
+                                                   string username)
         => new WelcomeEmailMessage(to,
                                    "Welcome to CoffeeBlog",
-                                   $"Hello {nickname}! Nice to see you! We hope you enjoy drinking coffee.");
+                                   $"Hello {username}! Nice to see you! We hope you enjoy drinking coffee.");
 
     public IEmailMessage CreatePasswordResetEmailMessage(string to,
-                                                         string nickname,
+                                                         string username,
                                                          string token,
                                                          DateTime expirationDate)
         => new PasswordResetEmailMessage(to,
                                         "Reset your password",
-                                        $"Hello {nickname}! You can reset your password using this token: {token}. The token will expire {expirationDate}");
+                                        $"Hello {username}! You can reset your password using this token: {token}. The token will expire {expirationDate}");
 }
