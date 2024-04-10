@@ -49,6 +49,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationProvider.Infras
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebClient", "WebClient", "{F4A5F7DA-D3A4-47D3-957D-890BDA3566FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "src\EventBus\Contracts\Contracts.csproj", "{91D33F60-0792-419C-9388-3E0631756DF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,10 @@ Global
 		{6DA186B9-BE84-4CA0-A97E-4FBA1837DB70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DA186B9-BE84-4CA0-A97E-4FBA1837DB70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DA186B9-BE84-4CA0-A97E-4FBA1837DB70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91D33F60-0792-419C-9388-3E0631756DF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91D33F60-0792-419C-9388-3E0631756DF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91D33F60-0792-419C-9388-3E0631756DF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91D33F60-0792-419C-9388-3E0631756DF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,6 +135,7 @@ Global
 		{8CB4C780-9B78-4AFA-98DF-D64B8AD982CC} = {CBAAB76C-F9A5-4131-AF75-98D6C03E99A7}
 		{6DA186B9-BE84-4CA0-A97E-4FBA1837DB70} = {CBAAB76C-F9A5-4131-AF75-98D6C03E99A7}
 		{F4A5F7DA-D3A4-47D3-957D-890BDA3566FD} = {3E9A59FB-E8A5-416F-A3E4-FDF8DF703C65}
+		{91D33F60-0792-419C-9388-3E0631756DF8} = {9BD81EEE-15EF-40AC-9013-99A72378E1D8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {65834F78-0330-46CA-A056-3269495743AD}
