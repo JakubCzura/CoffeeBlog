@@ -10,7 +10,7 @@ namespace NotificationProvider.Infrastructure.ExtensionMethods.LayerRegistration
 public static class InfrastructureRegistration
 {
     public static IServiceCollection AddInfrastructureDI(this IServiceCollection services,
-                                                        IConfiguration configuration)
+                                                         IConfiguration configuration)
     {
         services.AddScoped<IEmailMessageFactory, EmailMessageFactory>();
         services.AddScoped<IEmailServiceProvider, EmailServiceProvider>();
