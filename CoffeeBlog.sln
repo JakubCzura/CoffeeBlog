@@ -55,7 +55,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Application", "src\EventBus\EventBus.Application\EventBus.Application.csproj", "{95400281-DA7D-4F36-9A69-059A159C445F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.API", "src\EventBus\EventBus.API\EventBus.API.csproj", "{0A4148AA-D247-45CF-83D6-64388DDDCD3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.API", "src\EventBus\EventBus.API\EventBus.API.csproj", "{0A4148AA-D247-45CF-83D6-64388DDDCD3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

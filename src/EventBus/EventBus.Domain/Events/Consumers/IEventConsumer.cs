@@ -6,6 +6,6 @@ namespace EventBus.Domain.Events.Consumers;
 /// <summary>
 /// Interface for event consumer.
 /// </summary>
-public interface IEventConsumer : IConsumer<EventBase>
+public interface IEventConsumer<T> : IConsumer<T> where T : EventBase
 {
 }

@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\EventBus\EventBus.API\EventBus.API.csproj" />
     <ProjectReference Include="..\NotificationProvider.Domain\NotificationProvider.Domain.csproj" />
   </ItemGroup>
 
