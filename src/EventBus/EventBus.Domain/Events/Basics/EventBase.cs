@@ -3,7 +3,7 @@
 /// <summary>
 /// Base class for events used to communicate between microservices.
 /// </summary>
-public abstract class EventBase
+public abstract record EventBase
 {
     /// <summary>
     /// Unique identifier of the event.

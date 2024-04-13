@@ -7,6 +7,8 @@ using AuthService.Domain.Entities;
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.ViewModels.Users;
 using AutoMapper;
+using EventBus.Application.Interfaces.Publishers;
+using EventBus.Domain.Events.Users;
 using FluentResults;
 using MediatR;
 
@@ -21,6 +23,7 @@ namespace AuthService.Application.Handlers.Commands.Users;
 /// <param name="_userDetailRepository">Interface to perform user's details operations in database.</param>
 /// <param name="_jwtService">Interface to create JWT token.</param>
 /// <param name="_passwordHasher">Interface to hash password.</param>
+/// <param name="_eventPublisher">Microservice to send event about user signing up.</param>
 /// <param name="_mapper">AutoMapper to map classes.</param>
 public class SignUpUserCommandHandler(IUserRepository _userRepository,
                                       IUserLastPasswordRepository _userLastPasswordRepository,
@@ -28,6 +31,7 @@ public class SignUpUserCommandHandler(IUserRepository _userRepository,
                                       IUserDetailRepository _userDetailRepository,
                                       IJwtService _jwtService,
                                       IPasswordHasher _passwordHasher,
+                                      IEventPublisher _eventPublisher,
                                       IMapper _mapper) : IRequestHandler<SignUpUserCommand, Result<SignUpUserViewModel>>
 {
     private readonly IUserRepository _userRepository = _userRepository;
@@ -36,6 +40,7 @@ public class SignUpUserCommandHandler(IUserRepository _userRepository,
     private readonly IUserDetailRepository _userDetailRepository = _userDetailRepository;
     private readonly IJwtService _jwtService = _jwtService;
     private readonly IPasswordHasher _passwordHasher = _passwordHasher;
+    private readonly IEventPublisher _eventPublisher = _eventPublisher;
     private readonly IMapper _mapper = _mapper;
 
     /// <summary>
@@ -68,6 +73,8 @@ public class SignUpUserCommandHandler(IUserRepository _userRepository,
         string jwtToken = _jwtService.CreateToken(new(user.Id, request.Username, request.Email), userRolesNames);
 
         SignUpUserViewModel result = _mapper.Map<SignUpUserViewModel>(user, jwtToken);
+
+        await _eventPublisher.PublishAsync(new UserSignedUpEvent(user.Username, user.Email), cancellationToken);
 
         return Result.Ok(result);
     }
