@@ -8,7 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AuthService.Domain\AuthService.Domain.csproj" />
+	  <ProjectReference Include="..\..\EventBus\EventBus.API\EventBus.API.csproj" />
+	  <ProjectReference Include="..\AuthService.Domain\AuthService.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

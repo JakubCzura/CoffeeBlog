@@ -1,6 +1,6 @@
-﻿using Contracts.Events.Basics;
+﻿using EventBus.Domain.Events.Basics;
 
-namespace Contracts.Events.Users;
+namespace EventBus.Domain.Events.Users;
 
 public class UserAskedForPasswordResetTokenEvent : EventBase
 {

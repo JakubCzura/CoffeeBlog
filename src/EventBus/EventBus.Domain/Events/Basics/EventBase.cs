@@ -1,9 +1,9 @@
-﻿namespace Contracts.Events.Basics;
+﻿namespace EventBus.Domain.Events.Basics;
 
 /// <summary>
-/// Base class for events.
+/// Base class for events used to communicate between microservices.
 /// </summary>
-public class EventBase
+public abstract class EventBase
 {
     /// <summary>
     /// Unique identifier of the event.

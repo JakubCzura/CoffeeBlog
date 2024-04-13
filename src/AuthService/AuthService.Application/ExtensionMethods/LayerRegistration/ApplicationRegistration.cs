@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using EventBus.API.ExtensionMethods.LayerRegistration;
 
 namespace AuthService.Application.ExtensionMethods.LayerRegistration;
 
@@ -19,6 +20,9 @@ public static class ApplicationRegistration
     public static IServiceCollection AddApplicationDI(this IServiceCollection services,
                                                       IConfiguration configuration)
     {
+
+        services.AddEventBus(configuration, Assembly.GetExecutingAssembly());
+
         services.AddMediatR(config => config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
