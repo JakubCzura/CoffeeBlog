@@ -1,7 +1,7 @@
 ﻿using AuthService.Domain.Commands.RequestDetails;
 using AutoMapper;
 using EventBus.Application.Interfaces.Publishers;
-using EventBus.Domain.Events.AuthService;
+using EventBus.Domain.Events.AuthService.RequestDetails;
 using MediatR;
 
 namespace AuthService.Application.Handlers.Commands.RequestDetails;

@@ -1,6 +1,6 @@
 ﻿using EventBus.Domain.Events.Basics;
 
-namespace EventBus.Domain.Events.AuthService;
+namespace EventBus.Domain.Events.AuthService.RequestDetails;
 
 public record RequestDetailCreatedEvent(string ControllerName,
                                         string Path,

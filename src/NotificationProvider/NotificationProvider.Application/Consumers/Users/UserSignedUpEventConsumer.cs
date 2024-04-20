@@ -1,5 +1,5 @@
-﻿using EventBus.Domain.Events.Consumers;
-using EventBus.Domain.Events.Users;
+﻿using EventBus.Domain.Events.AuthService.Users;
+using EventBus.Domain.Events.Consumers;
 using MassTransit;
 using NotificationProvider.Application.Interfaces.Email;
 using NotificationProvider.Application.Interfaces.Factories.Emails;

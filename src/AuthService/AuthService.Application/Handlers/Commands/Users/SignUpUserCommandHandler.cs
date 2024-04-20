@@ -8,7 +8,7 @@ using AuthService.Domain.Errors.Users;
 using AuthService.Domain.ViewModels.Users;
 using AutoMapper;
 using EventBus.Application.Interfaces.Publishers;
-using EventBus.Domain.Events.Users;
+using EventBus.Domain.Events.AuthService.Users;
 using FluentResults;
 using MediatR;
 

@@ -1,7 +1,7 @@
 ﻿using AuthService.Application.Mapping.RequestDetails;
 using AuthService.Domain.Commands.RequestDetails;
 using AutoMapper;
-using EventBus.Domain.Events.AuthService;
+using EventBus.Domain.Events.AuthService.RequestDetails;
 using FluentAssertions;
 
 namespace AuthService.Application.UnitTests.Mapping.RequestDetails;
