@@ -7,8 +7,8 @@ using NotificationProvider.Domain.Models.Emails;
 
 namespace NotificationProvider.Application.Consumers.Users;
 
-internal class UserSignedUpEventConsumer(IEmailMessageFactory _emailMessageFactory,
-                                         IEmailServiceProvider _emailServiceProvider) : IEventConsumer<UserSignedUpEvent>
+internal sealed class UserSignedUpEventConsumer(IEmailMessageFactory _emailMessageFactory,
+                                                IEmailServiceProvider _emailServiceProvider) : IEventConsumer<UserSignedUpEvent>
 {
     private readonly IEmailMessageFactory _emailMessageFactory = _emailMessageFactory;
     private readonly IEmailServiceProvider _emailServiceProvider = _emailServiceProvider;

@@ -19,7 +19,7 @@ public static class DbContextConfiguration
                                      sqlServerOptionsBuilder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
                                      sqlServerOptionsBuilder.MigrationsAssembly(typeof(AuthServiceDbContext).Assembly.FullName);
                                  });
-            options.UseTriggers(triggerOptions => triggerOptions.AddTrigger<AdjustUserLastPasswordCount>());
+            options.UseTriggers(triggerOptions => triggerOptions.AddTrigger<AdjustUserLastPasswordCountTrigger>());
         });
 
         return services;

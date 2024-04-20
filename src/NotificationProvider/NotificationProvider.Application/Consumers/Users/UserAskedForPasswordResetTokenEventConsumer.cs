@@ -7,8 +7,8 @@ using NotificationProvider.Domain.Models.Emails;
 
 namespace NotificationProvider.Application.Consumers.Users;
 
-internal class UserAskedForPasswordResetTokenEventConsumer(IEmailMessageFactory _emailMessageFactory,
-                                                           IEmailServiceProvider _emailServiceProvider) : IEventConsumer<UserAskedForPasswordResetTokenEvent>
+internal sealed class UserAskedForPasswordResetTokenEventConsumer(IEmailMessageFactory _emailMessageFactory,
+                                                                  IEmailServiceProvider _emailServiceProvider) : IEventConsumer<UserAskedForPasswordResetTokenEvent>
 {
     private readonly IEmailMessageFactory _emailMessageFactory = _emailMessageFactory;
     private readonly IEmailServiceProvider _emailServiceProvider = _emailServiceProvider;

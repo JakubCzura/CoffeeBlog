@@ -5,8 +5,8 @@ using EntityFrameworkCore.Triggered;
 
 namespace AuthService.Infrastructure.Persistence.Triggers;
 
-internal class AdjustUserLastPasswordCount(ICurrentUserContext _currentUserContext,
-                                           IUserLastPasswordRepository _userLastPasswordRepository) : IAfterSaveTrigger<UserLastPassword>
+internal sealed class AdjustUserLastPasswordCountTrigger(ICurrentUserContext _currentUserContext,
+                                                         IUserLastPasswordRepository _userLastPasswordRepository) : IAfterSaveTrigger<UserLastPassword>
 {
     private readonly ICurrentUserContext _currentUserContext = _currentUserContext;
     private readonly IUserLastPasswordRepository _userLastPasswordRepository = _userLastPasswordRepository;

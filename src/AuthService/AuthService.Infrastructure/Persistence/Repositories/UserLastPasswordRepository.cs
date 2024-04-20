@@ -16,13 +16,13 @@ internal class UserLastPasswordRepository(AuthServiceDbContext _authServiceDbCon
     public async Task<List<UserLastPassword>> GetUserLastPasswordsAsync(int userId,
                                                                         CancellationToken cancellationToken = default)
         => await _authServiceDbContext.UserLastPasswords.AsNoTracking()
-                                                       .Where(userLastPassword => userLastPassword.UserId == userId)
-                                                       .ToListAsync(cancellationToken);
+                                                        .Where(userLastPassword => userLastPassword.UserId == userId)
+                                                        .ToListAsync(cancellationToken);
 
     public async Task<int> AdjustUserLastPasswordCountByUserIdAsync(int userId,
                                                                     CancellationToken cancellationToken)
         => await _authServiceDbContext.UserLastPasswords.Where(userLastPassword => userLastPassword.UserId == userId)
-                                                       .OrderBy(userLastPassword => userLastPassword.CreatedAt)
-                                                       .Skip(_userCredentialOptions.LastPasswordCount)
-                                                       .ExecuteDeleteAsync(cancellationToken);
+                                                        .OrderBy(userLastPassword => userLastPassword.CreatedAt)
+                                                        .Skip(_userCredentialOptions.LastPasswordCount)
+                                                        .ExecuteDeleteAsync(cancellationToken);
 }
