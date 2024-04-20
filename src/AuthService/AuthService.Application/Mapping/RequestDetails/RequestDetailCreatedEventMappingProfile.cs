@@ -1,0 +1,21 @@
+﻿using AuthService.Domain.Commands.RequestDetails;
+using AutoMapper;
+using EventBus.Domain.Events.AuthService;
+
+namespace AuthService.Application.Mapping.RequestDetails;
+
+/// <summary>
+/// Mapping profile for <see cref="RequestDetailCreatedEvent"/>.
+/// </summary>
+public class RequestDetailCreatedEventMappingProfile : Profile
+{
+    /// <summary>
+    /// Default constructor.
+    /// </summary>
+    public RequestDetailCreatedEventMappingProfile()
+    {
+        CreateMap<CreateRequestDetailCommand, RequestDetailCreatedEvent>()
+            .ForMember(dest => dest.EventId, opt => opt.Ignore())
+            .ForMember(dest => dest.EventCreatedAt, opt => opt.Ignore());
+    }
+}

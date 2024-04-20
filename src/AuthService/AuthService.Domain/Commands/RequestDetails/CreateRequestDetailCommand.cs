@@ -53,6 +53,11 @@ public class CreateRequestDetailCommand : IRequest<Unit>
     public long RequestTimeInMiliseconds { get; set; }
 
     /// <summary>
+    /// Date and time when request was sent.
+    /// </summary>
+    public DateTime SentAt { get; set; } = DateTime.UtcNow;
+
+    /// <summary>
     /// Id of user who sent request. It can be null if user was not authorized but sent request, for example failed attempt to sign in.
     /// </summary>
     public int? UserId { get; set; }

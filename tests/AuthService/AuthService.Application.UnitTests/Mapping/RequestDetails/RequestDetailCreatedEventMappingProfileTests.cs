@@ -1,18 +1,18 @@
 ﻿using AuthService.Application.Mapping.RequestDetails;
 using AuthService.Domain.Commands.RequestDetails;
-using AuthService.Domain.Entities;
 using AutoMapper;
+using EventBus.Domain.Events.AuthService;
 using FluentAssertions;
 
 namespace AuthService.Application.UnitTests.Mapping.RequestDetails;
 
-public class RequestDetailMappingProfileTests
+public class RequestDetailCreatedEventMappingProfileTests
 {
     private readonly IMapper _mapper;
 
-    public RequestDetailMappingProfileTests()
+    public RequestDetailCreatedEventMappingProfileTests()
     {
-        MapperConfiguration configurationProvider = new(cfg => cfg.AddProfile<RequestDetailMappingProfile>());
+        MapperConfiguration configurationProvider = new(cfg => cfg.AddProfile<RequestDetailCreatedEventMappingProfile>());
         _mapper = configurationProvider.CreateMapper();
     }
 
@@ -21,7 +21,7 @@ public class RequestDetailMappingProfileTests
         => _mapper.ConfigurationProvider.AssertConfigurationIsValid();
 
     [Fact]
-    public void Map_should_MapCreateRequestDetailCommandToRequestDetail()
+    public void Map_should_MapCreateRequestDetailCommandToRequestDetailCreatedEvent()
     {
         //Arrange
         CreateRequestDetailCommand createRequestDetailCommand = new()
@@ -39,7 +39,7 @@ public class RequestDetailMappingProfileTests
         };
 
         //Act
-        RequestDetail result = _mapper.Map<RequestDetail>(createRequestDetailCommand);
+        RequestDetailCreatedEvent result = _mapper.Map<RequestDetailCreatedEvent>(createRequestDetailCommand);
 
         //Assert
         result.ControllerName.Should().Be(createRequestDetailCommand.ControllerName);
@@ -51,6 +51,7 @@ public class RequestDetailMappingProfileTests
         result.ResponseBody.Should().Be(createRequestDetailCommand.ResponseBody);
         result.ResponseContentType.Should().Be(createRequestDetailCommand.ResponseContentType);
         result.RequestTimeInMiliseconds.Should().Be(createRequestDetailCommand.RequestTimeInMiliseconds);
+        result.SentAt.Should().Be(createRequestDetailCommand.SentAt);
         result.UserId.Should().Be(createRequestDetailCommand.UserId);
     }
 }

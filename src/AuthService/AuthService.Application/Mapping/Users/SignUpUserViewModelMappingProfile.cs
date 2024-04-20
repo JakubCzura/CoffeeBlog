@@ -16,8 +16,6 @@ public class SignUpUserViewModelMappingProfile : Profile
     {
         CreateMap<User, SignUpUserViewModel>()
             .ForCtorParam(nameof(SignUpUserViewModel.UserId), opt => opt.MapFrom(src => src.Id))
-            .ForCtorParam(nameof(SignUpUserViewModel.Username), opt => opt.MapFrom(src => src.Username))
-            .ForCtorParam(nameof(SignUpUserViewModel.Email), opt => opt.MapFrom(src => src.Email))
             .ForCtorParam(nameof(SignUpUserViewModel.JwtToken), opt => opt.MapFrom((src, context) => context.Items[nameof(SignUpUserViewModel.JwtToken)]));
     }
 }

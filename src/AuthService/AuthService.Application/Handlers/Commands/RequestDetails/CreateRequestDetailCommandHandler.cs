@@ -1,7 +1,7 @@
-﻿using AuthService.Application.Interfaces.Persistence.Repositories;
-using AuthService.Domain.Commands.RequestDetails;
-using AuthService.Domain.Entities;
+﻿using AuthService.Domain.Commands.RequestDetails;
 using AutoMapper;
+using EventBus.Application.Interfaces.Publishers;
+using EventBus.Domain.Events.AuthService;
 using MediatR;
 
 namespace AuthService.Application.Handlers.Commands.RequestDetails;
@@ -9,12 +9,12 @@ namespace AuthService.Application.Handlers.Commands.RequestDetails;
 /// <summary>
 /// Command handler to create new request's details and save it to database. It's related to <see cref="CreateRequestDetailCommand"/>.
 /// </summary>
-/// <param name="_requestDetailRepository">Interface to perform request's details operations in database.</param>
+/// <param name="_eventPublisher">Microservice to send event about request's details.</param>
 /// <param name="_mapper">AutoMapper to map classes.</param>
-public class CreateRequestDetailCommandHandler(IRequestDetailRepository _requestDetailRepository,
+public class CreateRequestDetailCommandHandler(IEventPublisher _eventPublisher,
                                                IMapper _mapper) : IRequestHandler<CreateRequestDetailCommand, Unit>
 {
-    private readonly IRequestDetailRepository _requestDetailRepository = _requestDetailRepository;
+    private readonly IEventPublisher _eventPublisher = _eventPublisher;
     private readonly IMapper _mapper = _mapper;
 
     /// <summary>
@@ -26,9 +26,9 @@ public class CreateRequestDetailCommandHandler(IRequestDetailRepository _request
     public async Task<Unit> Handle(CreateRequestDetailCommand request,
                                    CancellationToken cancellationToken)
     {
-        RequestDetail requestDetail = _mapper.Map<RequestDetail>(request);
+        RequestDetailCreatedEvent requestDetailCreatedEvent = _mapper.Map<RequestDetailCreatedEvent>(request);
 
-        await _requestDetailRepository.CreateAsync(requestDetail, cancellationToken);
+        await _eventPublisher.PublishAsync(requestDetailCreatedEvent, cancellationToken);
 
         return Unit.Value;
     }
