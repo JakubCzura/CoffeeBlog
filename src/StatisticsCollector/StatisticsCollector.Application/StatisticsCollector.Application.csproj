@@ -11,4 +11,8 @@
     <ProjectReference Include="..\StatisticsCollector.Domain\StatisticsCollector.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\Persistence\Repositories\" />
+  </ItemGroup>
+
 </Project>

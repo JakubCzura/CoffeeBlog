@@ -10,4 +10,10 @@
     <ProjectReference Include="..\StatisticsCollector.Application\StatisticsCollector.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Persistence\EntitiesConfigurations\" />
+    <Folder Include="Persistence\DatabaseContext\" />
+    <Folder Include="Persistence\Repositories\" />
+  </ItemGroup>
+
 </Project>

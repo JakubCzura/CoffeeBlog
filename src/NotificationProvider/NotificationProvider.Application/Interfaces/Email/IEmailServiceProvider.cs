@@ -8,7 +8,7 @@ namespace NotificationProvider.Application.Interfaces.Email;
 public interface IEmailServiceProvider
 {
     /// <summary>
-    /// Sends an e-mail using STMP client.
+    /// Sends an e-mail using SMTP client.
     /// </summary>
     /// <param name="emailMessage">Message to send.</param>
     /// <returns>Response from server.</returns>
