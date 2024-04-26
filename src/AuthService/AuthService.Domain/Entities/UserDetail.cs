@@ -1,4 +1,4 @@
-﻿using AuthService.Domain.Entities.DbEntitiesBase;
+﻿using AuthService.Domain.Entities.Basics;
 
 namespace AuthService.Domain.Entities;
 
@@ -7,7 +7,7 @@ namespace AuthService.Domain.Entities;
 /// This entity should be created only once when user creates an account, then it should be updated.
 /// When user creates an account this fact should be noticed as <see cref="LastSuccessfullSignIn"/> .
 /// </summary>
-public class UserDetail(int userId) : DbEntityBase
+public class UserDetail(int userId) : MsSqlEntityBase
 {
     /// <summary>
     /// Date and time when user last successfully signed in.

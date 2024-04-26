@@ -3,4 +3,5 @@
 namespace EventBus.Domain.Events.AuthService.Users;
 
 public record UserSignedUpEvent(string Username,
-                                string Email) : EventBase();
+                                string Email,
+                                string EventPublisherName) : EventBase(EventPublisherName);

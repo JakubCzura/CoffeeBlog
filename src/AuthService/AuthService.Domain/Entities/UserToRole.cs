@@ -1,11 +1,11 @@
-﻿using AuthService.Domain.Entities.DbEntitiesBase;
+﻿using AuthService.Domain.Entities.Basics;
 
 namespace AuthService.Domain.Entities;
 
 /// <summary>
 /// Entity to define relation between <see cref="User"/> and <see cref="Role"/>.
 /// </summary>
-public class UserToRole : DbEntityBase
+public class UserToRole : MsSqlEntityBase
 {
     /// <summary>
     /// User's id.

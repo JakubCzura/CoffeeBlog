@@ -12,5 +12,6 @@ public interface IEmailServiceProvider
     /// </summary>
     /// <param name="emailMessage">Message to send.</param>
     /// <returns>Response from server.</returns>
-    Task<string> SendEmailAsync(IEmailMessage emailMessage);
+    Task<string> SendEmailAsync(IEmailMessage emailMessage,
+                                CancellationToken cancellationToken);
 }

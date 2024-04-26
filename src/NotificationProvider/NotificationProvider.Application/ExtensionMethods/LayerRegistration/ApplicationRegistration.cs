@@ -11,6 +11,7 @@ public static class ApplicationRegistration
                                                       IConfiguration configuration)
     {
         services.AddEventBus(configuration, Assembly.GetExecutingAssembly());
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
         return services;
     }

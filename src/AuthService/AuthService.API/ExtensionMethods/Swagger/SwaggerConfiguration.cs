@@ -2,6 +2,7 @@
 using AuthService.API.ExtensionMethods.Versioning;
 using AuthService.API.Filters;
 using AuthService.Application.ExtensionMethods.LayerRegistration;
+using AuthService.Domain.Entities.Basics;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -67,7 +68,7 @@ public static class SwaggerConfiguration
                                                .ForEach(version => swaggerGenOptions.SwaggerDoc(version.Version, SwaggerInfo.SwaggerDocumentInfo(version)));
 
             swaggerGenOptions.AddProjectsXmlDocumentations(Assembly.GetExecutingAssembly(),
-                                                           Assembly.GetAssembly(typeof(Domain.Entities.DbEntitiesBase.DbEntityBase))!,
+                                                           Assembly.GetAssembly(typeof(MsSqlEntityBase))!,
                                                            Assembly.GetAssembly(typeof(ApplicationRegistration))!);
 
             swaggerGenOptions.SchemaFilter<JsonIgnoreFilter>();

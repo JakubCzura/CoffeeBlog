@@ -74,7 +74,7 @@ public class SignUpUserCommandHandler(IUserRepository _userRepository,
 
         SignUpUserViewModel result = _mapper.Map<SignUpUserViewModel>(user, jwtToken);
 
-        await _eventPublisher.PublishAsync(new UserSignedUpEvent(user.Username, user.Email), cancellationToken);
+        await _eventPublisher.PublishAsync(new UserSignedUpEvent(user.Username, user.Email, nameof(SignUpUserCommandHandler)), cancellationToken);
 
         return Result.Ok(result);
     }

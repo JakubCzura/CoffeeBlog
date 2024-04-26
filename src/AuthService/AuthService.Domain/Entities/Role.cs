@@ -1,11 +1,11 @@
-﻿using AuthService.Domain.Entities.DbEntitiesBase;
+﻿using AuthService.Domain.Entities.Basics;
 
 namespace AuthService.Domain.Entities;
 
 /// <summary>
 /// Entity for role that supports authorization process.
 /// </summary>
-public class Role : DbEntityBase
+public class Role : MsSqlEntityBase
 {
     /// <summary>
     /// Role's name like "Admin", "User" etc.

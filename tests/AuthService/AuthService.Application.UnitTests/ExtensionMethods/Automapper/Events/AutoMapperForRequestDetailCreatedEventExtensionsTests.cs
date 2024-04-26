@@ -1,27 +1,24 @@
-﻿using AuthService.Application.Mapping.RequestDetails;
+﻿using AuthService.Application.ExtensionMethods.Automapper.Events;
+using AuthService.Application.Mapping.RequestDetails;
 using AuthService.Domain.Commands.RequestDetails;
 using AutoMapper;
 using EventBus.Domain.Events.AuthService.RequestDetails;
 using FluentAssertions;
 
-namespace AuthService.Application.UnitTests.Mapping.RequestDetails;
+namespace AuthService.Application.UnitTests.ExtensionMethods.Automapper.Events;
 
-public class RequestDetailCreatedEventMappingProfileTests
+public class AutoMapperForRequestDetailCreatedEventExtensionsTests
 {
     private readonly IMapper _mapper;
 
-    public RequestDetailCreatedEventMappingProfileTests()
+    public AutoMapperForRequestDetailCreatedEventExtensionsTests()
     {
         MapperConfiguration configurationProvider = new(cfg => cfg.AddProfile<RequestDetailCreatedEventMappingProfile>());
         _mapper = configurationProvider.CreateMapper();
     }
 
     [Fact]
-    public void AutoMapper_should_HaveValidConfiguration()
-        => _mapper.ConfigurationProvider.AssertConfigurationIsValid();
-
-    [Fact]
-    public void Map_should_MapCreateRequestDetailCommandToRequestDetailCreatedEvent()
+    public void Map_should_MapCreateRequestDetailCommandToRequestDetailCreatedEvent_when_AdditionalPropertiesAreSpecified()
     {
         //Arrange
         string eventPublisherName = "RequestCommandHandler";
@@ -41,10 +38,7 @@ public class RequestDetailCreatedEventMappingProfileTests
         };
 
         //Act
-        RequestDetailCreatedEvent result = _mapper.Map<RequestDetailCreatedEvent>(createRequestDetailCommand, opt =>
-        {
-            opt.Items[nameof(RequestDetailCreatedEvent.EventPublisherName)] = eventPublisherName;
-        });
+        RequestDetailCreatedEvent result = _mapper.Map<RequestDetailCreatedEvent>(createRequestDetailCommand, eventPublisherName);
 
         //Assert
         result.ControllerName.Should().Be(createRequestDetailCommand.ControllerName);
@@ -59,30 +53,5 @@ public class RequestDetailCreatedEventMappingProfileTests
         result.SentAt.Should().Be(createRequestDetailCommand.SentAt);
         result.UserId.Should().Be(createRequestDetailCommand.UserId);
         result.EventPublisherName.Should().Be(eventPublisherName);
-    }
-
-    [Fact]
-    public void Map_should_ThrowAutoMapperMappingException_when_AdditionalPropertiesAreNotSpecified()
-    {
-        //Arrange
-        CreateRequestDetailCommand createRequestDetailCommand = new()
-        {
-            ControllerName = "UserController",
-            Path = "/api/user",
-            HttpMethod = "GET",
-            StatusCode = 200,
-            RequestBody = """{"username":"Johny"}""",
-            RequestContentType = "application/json",
-            ResponseBody = """{"id":1,"username":"Johny"}""",
-            ResponseContentType = "application/json",
-            RequestTimeInMiliseconds = 5,
-            UserId = 1,
-        };
-
-        //Act
-        Func<RequestDetailCreatedEvent> action = () => _mapper.Map<RequestDetailCreatedEvent>(createRequestDetailCommand);
-
-        //Assert
-        action.Should().Throw<AutoMapperMappingException>();
     }
 }

@@ -3,6 +3,7 @@ using AutoMapper;
 using EventBus.Application.Interfaces.Publishers;
 using EventBus.Domain.Events.AuthService.RequestDetails;
 using MediatR;
+using AuthService.Application.ExtensionMethods.Automapper.Events;
 
 namespace AuthService.Application.Handlers.Commands.RequestDetails;
 
@@ -26,7 +27,7 @@ public class CreateRequestDetailCommandHandler(IEventPublisher _eventPublisher,
     public async Task<Unit> Handle(CreateRequestDetailCommand request,
                                    CancellationToken cancellationToken)
     {
-        RequestDetailCreatedEvent requestDetailCreatedEvent = _mapper.Map<RequestDetailCreatedEvent>(request);
+        RequestDetailCreatedEvent requestDetailCreatedEvent = _mapper.Map<RequestDetailCreatedEvent>(request, nameof(CreateRequestDetailCommandHandler));
 
         await _eventPublisher.PublishAsync(requestDetailCreatedEvent, cancellationToken);
 

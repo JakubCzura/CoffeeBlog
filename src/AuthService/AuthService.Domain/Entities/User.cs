@@ -1,11 +1,11 @@
-﻿using AuthService.Domain.Entities.DbEntitiesBase;
+﻿using AuthService.Domain.Entities.Basics;
 
 namespace AuthService.Domain.Entities;
 
 /// <summary>
 /// Entity that represents user of the application who has created an account.
 /// </summary>
-public class User : DbEntityBase
+public class User : MsSqlEntityBase
 {
     /// <summary>
     /// User's unique username.

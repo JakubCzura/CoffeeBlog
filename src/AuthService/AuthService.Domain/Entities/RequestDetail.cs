@@ -1,11 +1,11 @@
-﻿using AuthService.Domain.Entities.DbEntitiesBase;
+﻿using AuthService.Domain.Entities.Basics;
 
 namespace AuthService.Domain.Entities;
 
 /// <summary>
 /// Entity to store requests' details. It can be used in middleware that processes requests and responses.
 /// </summary>
-public class RequestDetail : DbEntityBase
+public class RequestDetail : MsSqlEntityBase
 {
     /// <summary>
     /// Name of controller that handles request.

@@ -12,4 +12,5 @@ public record RequestDetailCreatedEvent(string ControllerName,
                                         string? ResponseContentType,
                                         long RequestTimeInMiliseconds,
                                         DateTime SentAt,
-                                        int? UserId) : EventBase();
+                                        int? UserId,
+                                        string EventPublisherName) : EventBase(EventPublisherName);

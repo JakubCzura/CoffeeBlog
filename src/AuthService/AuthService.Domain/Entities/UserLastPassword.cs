@@ -1,4 +1,4 @@
-﻿using AuthService.Domain.Entities.DbEntitiesBase;
+﻿using AuthService.Domain.Entities.Basics;
 
 namespace AuthService.Domain.Entities;
 
@@ -8,7 +8,7 @@ namespace AuthService.Domain.Entities;
 /// For example when user changes password, new password can't be the same as the last passwords.
 /// </summary>
 public class UserLastPassword(string lastPassword,
-                              int userId) : DbEntityBase
+                              int userId) : MsSqlEntityBase
 {
     /// <summary>
     /// User's last password which can't be used again.

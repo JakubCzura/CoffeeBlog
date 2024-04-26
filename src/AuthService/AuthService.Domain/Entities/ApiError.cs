@@ -1,11 +1,11 @@
-﻿using AuthService.Domain.Entities.DbEntitiesBase;
+﻿using AuthService.Domain.Entities.Basics;
 
 namespace AuthService.Domain.Entities;
 
 /// <summary>
 /// Entity for API error for example when an exception is thrown.
 /// </summary>
-public class ApiError : DbEntityBase
+public class ApiError : MsSqlEntityBase
 {
     /// <summary>
     /// Full name of exception.

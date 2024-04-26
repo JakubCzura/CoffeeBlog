@@ -1,12 +1,12 @@
 ﻿using AuthService.Application.Interfaces.Persistence.Repositories;
-using AuthService.Domain.Entities.DbEntitiesBase;
+using AuthService.Domain.Entities.Basics;
 using AuthService.Domain.Exceptions;
 using AuthService.Infrastructure.Persistence.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 
 namespace AuthService.Infrastructure.Persistence.Repositories;
 
-internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : DbEntityBase
+internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : MsSqlEntityBase
 {
     private readonly AuthServiceDbContext _authServiceDbContext;
     private readonly DbSet<T> _dbSet;

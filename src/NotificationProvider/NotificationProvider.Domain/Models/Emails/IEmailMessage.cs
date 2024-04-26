@@ -6,9 +6,24 @@
 public interface IEmailMessage
 {
     /// <summary>
-    /// Email's recipient.
+    /// Name of email's sender.
     /// </summary>
-    string To { get; init; }
+    string SenderName { get; init; }
+
+    /// <summary>
+    /// Email of email's sender.
+    /// </summary>
+    string SenderEmail { get; init; }
+
+    /// <summary>
+    /// Name of email's recipient.
+    /// </summary>
+    string RecipientName { get; init; }
+
+    /// <summary>
+    /// Email of email's recipient.
+    /// </summary>
+    string RecipientEmail { get; init; }
 
     /// <summary>
     /// Email's subject.
