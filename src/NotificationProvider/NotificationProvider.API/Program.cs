@@ -1,3 +1,4 @@
+using NotificationProvider.Domain.SettingsOptions.Database;
 using NotificationProvider.Domain.SettingsOptions.Email;
 using NotificationProvider.Infrastructure.ExtensionMethods.LayerRegistration;
 using Serilog;
@@ -6,6 +7,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.Configure<DatabaseOptions>(builder.Configuration.GetSection(DatabaseOptions.AppsettingsKey));
 builder.Services.Configure<EmailOptions>(builder.Configuration.GetSection(EmailOptions.AppsettingsKey));
 
 builder.Services.AddInfrastructureDI(builder.Configuration);
