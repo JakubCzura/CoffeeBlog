@@ -16,8 +16,9 @@ internal sealed class UserSignedUpEventConsumer(ILogger<UserSignedUpEventConsume
                                                 IEmailMessageDetailRepository _emailMessageDetailRepository,
                                                 IEmailMessageFactory _emailMessageFactory,
                                                 IEmailServiceProvider _emailServiceProvider,
+                                                IApiErrorRepository _apiErrorRepository,
                                                 IMapper _mapper)
-    : EventConsumerBase<UserSignedUpEvent, UserSignedUpEventConsumer>(_logger, _eventConsumerDetailRepository)
+    : EventConsumerBase<UserSignedUpEvent, UserSignedUpEventConsumer>(_logger, _eventConsumerDetailRepository, _apiErrorRepository)
 {
     private readonly IEmailMessageDetailRepository _emailMessageDetailRepository = _emailMessageDetailRepository;
     private readonly IEmailMessageFactory _emailMessageFactory = _emailMessageFactory;

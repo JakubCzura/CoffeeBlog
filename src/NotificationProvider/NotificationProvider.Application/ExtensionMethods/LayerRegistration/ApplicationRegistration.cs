@@ -1,6 +1,7 @@
 ﻿using EventBus.API.ExtensionMethods.LayerRegistration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NotificationProvider.Application.Interfaces.Persistence.Repositories;
 using System.Reflection;
 
 namespace NotificationProvider.Application.ExtensionMethods.LayerRegistration;

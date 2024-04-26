@@ -9,12 +9,14 @@ using NotificationProvider.Domain.Entities;
 namespace NotificationProvider.Application.Consumers.Basics;
 
 internal abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventConsumer> _logger,
-                                                                  IEventConsumerDetailRepository _eventConsumerDetailRepository) 
-    : IEventConsumer<TEvent> where TEvent : EventBase 
+                                                                  IEventConsumerDetailRepository _eventConsumerDetailRepository,
+                                                                  IApiErrorRepository _apiErrorRepository)
+    : IEventConsumer<TEvent> where TEvent : EventBase
                              where TEventConsumer : IEventConsumer<TEvent>
 {
     private readonly ILogger<TEventConsumer> _logger = _logger;
     private readonly IEventConsumerDetailRepository _eventConsumerDetailRepository = _eventConsumerDetailRepository;
+    private readonly IApiErrorRepository _apiErrorRepository = _apiErrorRepository;
 
     private async Task HandleEventConsuming(ConsumeContext<TEvent> context)
     {
@@ -34,6 +36,22 @@ internal abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEvent
         catch (Exception exception)
         {
             _logger.LogError(exception, "Error while consuming event.");
+
+            try
+            {
+                await _apiErrorRepository.CreateAsync(new ApiError
+                {
+                    Name = (exception).GetType().Name,
+                    Exception = exception.ToString(),
+                    Message = exception.Message,
+                    Description = "Error while consuming event."
+                }, default);
+            }
+            catch (Exception)
+            {
+                _logger.LogCritical(exception, $"{nameof(EventConsumerBase<TEvent, TEventConsumer>)}: Exception while saving API exception's data to database.");
+            }
+
             await Task.CompletedTask;
         }
     }

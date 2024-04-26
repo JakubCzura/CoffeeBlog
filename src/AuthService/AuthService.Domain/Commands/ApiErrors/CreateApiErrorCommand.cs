@@ -8,7 +8,7 @@ namespace AuthService.Domain.Commands.ApiErrors;
 public class CreateApiErrorCommand : IRequest<Unit>
 {
     /// <summary>
-    /// Exception name. It should be achieved by calling <c>exception.GetType().FullName</c>.
+    /// Exception name. It should be achieved by calling <c>exception.GetType().Name</c>.
     /// </summary>
     public string Name { get; set; } = string.Empty;
 

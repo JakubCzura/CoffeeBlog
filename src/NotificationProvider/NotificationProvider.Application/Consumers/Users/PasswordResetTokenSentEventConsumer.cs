@@ -16,8 +16,9 @@ internal sealed class PasswordResetTokenSentEventConsumer(ILogger<PasswordResetT
                                                           IEmailMessageDetailRepository _emailMessageDetailRepository,
                                                           IEmailMessageFactory _emailMessageFactory,
                                                           IEmailServiceProvider _emailServiceProvider,
+                                                          IApiErrorRepository _apiErrorRepository,
                                                           IMapper _mapper)
-    : EventConsumerBase<PasswordResetTokenSentEvent, PasswordResetTokenSentEventConsumer>(_logger, _eventConsumerDetailRepository)
+    : EventConsumerBase<PasswordResetTokenSentEvent, PasswordResetTokenSentEventConsumer>(_logger, _eventConsumerDetailRepository, _apiErrorRepository)
 {
     private readonly IEmailMessageDetailRepository _emailMessageDetailRepository = _emailMessageDetailRepository;
     private readonly IEmailMessageFactory _emailMessageFactory = _emailMessageFactory;

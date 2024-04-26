@@ -1,11 +1,9 @@
-﻿using AuthService.Domain.Entities.Basics;
-
-namespace AuthService.Domain.Entities;
+﻿namespace NotificationProvider.Domain.Entities;
 
 /// <summary>
 /// Entity for API error for example when an exception is thrown.
 /// </summary>
-public class ApiError : MsSqlEntityBase
+public class ApiError
 {
     /// <summary>
     /// Name of exception.
