@@ -6,7 +6,7 @@ namespace AuthService.Application.Interfaces.Persistence.Repositories;
 /// Generic interface to perform CRUD operations in database.
 /// </summary>
 /// <typeparam name="T">Entity in database.</typeparam>
-public interface IDbEntityBaseRepository<T> where T : MsSqlEntityBase
+public interface IDbEntityBaseRepository<T> where T : DbEntityBase
 {
     /// <summary>
     /// Adds new entity to database.

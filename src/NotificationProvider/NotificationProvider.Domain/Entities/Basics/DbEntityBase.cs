@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace NotificationProvider.Domain.Entities.Basics;
 
-public abstract class MongoDbEntityBase
+public abstract class DbEntityBase
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]

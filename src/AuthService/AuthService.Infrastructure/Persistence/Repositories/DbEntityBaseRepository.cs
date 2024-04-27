@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthService.Infrastructure.Persistence.Repositories;
 
-internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : MsSqlEntityBase
+internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : DbEntityBase
 {
     private readonly AuthServiceDbContext _authServiceDbContext;
     private readonly DbSet<T> _dbSet;

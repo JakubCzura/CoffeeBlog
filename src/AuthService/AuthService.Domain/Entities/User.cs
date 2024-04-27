@@ -5,7 +5,7 @@ namespace AuthService.Domain.Entities;
 /// <summary>
 /// Entity that represents user of the application who has created an account.
 /// </summary>
-public class User : MsSqlEntityBase
+public class User : DbEntityBase
 {
     /// <summary>
     /// User's unique username.

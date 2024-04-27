@@ -8,7 +8,7 @@ namespace AuthService.Domain.Entities;
 /// For example when user changes password, new password can't be the same as the last passwords.
 /// </summary>
 public class UserLastPassword(string lastPassword,
-                              int userId) : MsSqlEntityBase
+                              int userId) : DbEntityBase
 {
     /// <summary>
     /// User's last password which can't be used again.

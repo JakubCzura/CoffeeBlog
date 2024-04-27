@@ -3,7 +3,7 @@ using NotificationProvider.Domain.Entities.Basics;
 
 namespace NotificationProvider.Domain.Entities;
 
-public class EventConsumerDetail : MongoDbEntityBase
+public class EventConsumerDetail : DbEntityBase
 {
     /// <summary>
     /// Unique identifier of the event.

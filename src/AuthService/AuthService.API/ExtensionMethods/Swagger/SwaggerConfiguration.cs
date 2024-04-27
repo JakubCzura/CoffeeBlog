@@ -68,7 +68,7 @@ public static class SwaggerConfiguration
                                                .ForEach(version => swaggerGenOptions.SwaggerDoc(version.Version, SwaggerInfo.SwaggerDocumentInfo(version)));
 
             swaggerGenOptions.AddProjectsXmlDocumentations(Assembly.GetExecutingAssembly(),
-                                                           Assembly.GetAssembly(typeof(MsSqlEntityBase))!,
+                                                           Assembly.GetAssembly(typeof(DbEntityBase))!,
                                                            Assembly.GetAssembly(typeof(ApplicationRegistration))!);
 
             swaggerGenOptions.SchemaFilter<JsonIgnoreFilter>();

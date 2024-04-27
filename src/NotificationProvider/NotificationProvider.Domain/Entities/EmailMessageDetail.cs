@@ -3,7 +3,7 @@ using NotificationProvider.Domain.Entities.Basics;
 
 namespace NotificationProvider.Domain.Entities;
 
-public class EmailMessageDetail : MongoDbEntityBase
+public class EmailMessageDetail : DbEntityBase
 {
     [BsonElement("SenderName")]
     public string SenderName { get; set; } = string.Empty;

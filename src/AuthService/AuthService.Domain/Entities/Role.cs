@@ -5,7 +5,7 @@ namespace AuthService.Domain.Entities;
 /// <summary>
 /// Entity for role that supports authorization process.
 /// </summary>
-public class Role : MsSqlEntityBase
+public class Role : DbEntityBase
 {
     /// <summary>
     /// Role's name like "Admin", "User" etc.
