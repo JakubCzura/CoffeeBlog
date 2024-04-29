@@ -8,13 +8,14 @@ using Microsoft.Extensions.Options;
 namespace AuthService.Infrastructure.Persistence.Repositories;
 
 internal class UserLastPasswordRepository(AuthServiceDbContext _authServiceDbContext,
-                                          IOptions<UserCredentialOptions> _userCredentialOptions) : DbEntityBaseRepository<UserLastPassword>(_authServiceDbContext), IUserLastPasswordRepository
+                                          IOptions<UserCredentialOptions> _userCredentialOptions) 
+    : DbEntityBaseRepository<UserLastPassword>(_authServiceDbContext), IUserLastPasswordRepository
 {
     private readonly AuthServiceDbContext _authServiceDbContext = _authServiceDbContext;
     private readonly UserCredentialOptions _userCredentialOptions = _userCredentialOptions.Value;
 
-    public async Task<List<UserLastPassword>> GetUserLastPasswordsAsync(int userId,
-                                                                        CancellationToken cancellationToken = default)
+    public async Task<List<UserLastPassword>> GetLastPasswordsByUserIdAsync(int userId,
+                                                                            CancellationToken cancellationToken = default)
         => await _authServiceDbContext.UserLastPasswords.AsNoTracking()
                                                         .Where(userLastPassword => userLastPassword.UserId == userId)
                                                         .ToListAsync(cancellationToken);

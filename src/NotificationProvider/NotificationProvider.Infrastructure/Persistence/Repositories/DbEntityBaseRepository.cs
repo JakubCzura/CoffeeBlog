@@ -1,4 +1,6 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using NotificationProvider.Application.Interfaces.Persistence.Repositories;
 using NotificationProvider.Domain.Entities.Basics;
 using NotificationProvider.Infrastructure.Persistence.DatabaseContext;
@@ -8,32 +10,48 @@ namespace NotificationProvider.Infrastructure.Persistence.Repositories;
 internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : DbEntityBase
 {
     private readonly NotificationProviderDbContext _notificationProviderDbContext;
-    private readonly IMongoCollection<T> _collection;
+    private readonly DbSet<T> _dbSet;
 
     public DbEntityBaseRepository(NotificationProviderDbContext notificationProviderDbContext)
     {
         _notificationProviderDbContext = notificationProviderDbContext;
-        _collection = _notificationProviderDbContext.GetCollection<T>(typeof(T).Name);
+        _dbSet = _notificationProviderDbContext.Set<T>();
     }
 
     public async Task CreateAsync(T entity,
                                   CancellationToken cancellationToken)
-        => await _collection.InsertOneAsync(entity, null, cancellationToken);
 
-    public async Task<T?> GetAsync(string id,
+    {
+        await _dbSet.AddAsync(entity, cancellationToken);
+        await _notificationProviderDbContext.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task<T?> GetAsync(ObjectId id,
                                    CancellationToken cancellationToken)
-        => await _collection.Find(x => x.Id == id)
-                            .FirstAsync(cancellationToken);
+        => await _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
     public async Task<List<T>> GetAllAsync(CancellationToken cancellationToken)
-        => await _collection.Find(_ => true)
-                            .ToListAsync(cancellationToken);
+        => await _dbSet.ToListAsync(cancellationToken);
 
-    public async Task<ReplaceOneResult> UpdateAsync(T entity,
-                                                    CancellationToken cancellationToken)
-        => await _collection.ReplaceOneAsync(x => x.Id == entity.Id, entity, cancellationToken: cancellationToken);
+    public async Task<int> UpdateAsync(T entity,
+                                       CancellationToken cancellationToken)
 
-    public Task<DeleteResult> DeleteAsync(string id,
-                                          CancellationToken cancellationToken)
-        => _collection.DeleteOneAsync(x => x.Id == id, cancellationToken);
+    {
+        _dbSet.Update(entity);
+        return await _notificationProviderDbContext.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task<int> DeleteAsync(ObjectId id,
+                                       CancellationToken cancellationToken)
+    {
+        T? entity = await _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        
+        if (entity is null)
+        {
+            return 0;
+        }
+
+        _dbSet.Remove(entity);
+        return await _notificationProviderDbContext.SaveChangesAsync(cancellationToken);
+    }
 }

@@ -14,8 +14,8 @@ public interface IUserLastPasswordRepository : IDbEntityBaseRepository<UserLastP
     /// <param name="userId">User's id.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>All the last hashed passwords of user with specified id.</returns>
-    Task<List<UserLastPassword>> GetUserLastPasswordsAsync(int userId,
-                                                           CancellationToken cancellationToken);
+    Task<List<UserLastPassword>> GetLastPasswordsByUserIdAsync(int userId,
+                                                               CancellationToken cancellationToken);
 
     /// <summary>
     /// Adjust count of last hashed passwords of user with specified id.

@@ -1,4 +1,4 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
 using NotificationProvider.Domain.Entities.Basics;
 
 namespace NotificationProvider.Application.Interfaces.Persistence.Repositories;
@@ -24,7 +24,7 @@ public interface IDbEntityBaseRepository<T> where T : DbEntityBase
     /// <param name="id">Entity's id.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Entity if found, otherwise null.</returns>
-    Task<T?> GetAsync(string id,
+    Task<T?> GetAsync(ObjectId id,
                       CancellationToken cancellationToken);
 
     /// <summary>
@@ -40,8 +40,8 @@ public interface IDbEntityBaseRepository<T> where T : DbEntityBase
     /// <param name="entity">Entity to update.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Number of state entries written to database.</returns>
-    Task<ReplaceOneResult> UpdateAsync(T entity,
-                                       CancellationToken cancellationToken);
+    Task<int> UpdateAsync(T entity,
+                          CancellationToken cancellationToken);
 
     /// <summary>
     /// Deletes entity in database by id.
@@ -49,6 +49,6 @@ public interface IDbEntityBaseRepository<T> where T : DbEntityBase
     /// <param name="id">Entity's id.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Number of rows deleted in database.</returns>
-    Task<DeleteResult> DeleteAsync(string id,
-                                   CancellationToken cancellationToken);
+    Task<int> DeleteAsync(ObjectId id,
+                          CancellationToken cancellationToken);
 }

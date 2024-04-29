@@ -46,7 +46,7 @@ public class ChangePasswordCommandHandler(IUserRepository _userRepository,
 
         string hashedPassword = _passwordHasher.HashPassword(request.NewPassword);
 
-        IEnumerable<string> userLastPasswords = (await _userLastPasswordRepository.GetUserLastPasswordsAsync(currentAuthorizedUser.Id, cancellationToken))
+        IEnumerable<string> userLastPasswords = (await _userLastPasswordRepository.GetLastPasswordsByUserIdAsync(currentAuthorizedUser.Id, cancellationToken))
                                                                                   .Select(userLastPassword => userLastPassword.LastPassword);
 
         if (userLastPasswords.Contains(hashedPassword))

@@ -1,22 +1,30 @@
-﻿using Microsoft.Extensions.Options;
-using MongoDB.Driver;
-using NotificationProvider.Domain.SettingsOptions.Database;
+﻿using Microsoft.EntityFrameworkCore;
+using MongoDB.EntityFrameworkCore.Extensions;
+using NotificationProvider.Domain.Entities;
 
 namespace NotificationProvider.Infrastructure.Persistence.DatabaseContext;
 
-public class NotificationProviderDbContext
+public class NotificationProviderDbContext(DbContextOptions<NotificationProviderDbContext> dbContextOptions) : DbContext(dbContextOptions)
 {
-    private readonly DatabaseOptions _databaseOptions;
-    private readonly MongoClient _mongoClient;
-    private readonly IMongoDatabase _database;
+    public DbSet<ApiError> ApiErrors { get; set; }
+    public DbSet<EmailMessageDetail> EmailMessageDetails { get; set; }
+    public DbSet<EventConsumerDetail> EventConsumerDetails { get; set; }
 
-    public NotificationProviderDbContext(IOptions<DatabaseOptions> databaseOptions)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        _databaseOptions = databaseOptions.Value;
-        _mongoClient = new(_databaseOptions.ConnectionString);
-        _database = _mongoClient.GetDatabase(_databaseOptions.DatabaseName);
-    }
+        modelBuilder.Entity<ApiError>(entity =>
+        {
+            entity.ToCollection("ApiError");
+        });
 
-    public IMongoCollection<T> GetCollection<T>(string collectionName) 
-        => _database.GetCollection<T>(collectionName);
+        modelBuilder.Entity<EmailMessageDetail>(entity =>
+        {
+            entity.ToCollection("EmailMessageDetail");
+        });
+
+        modelBuilder.Entity<EventConsumerDetail>(entity =>
+        {
+            entity.ToCollection("EventConsumerDetail");
+        });
+    }
 }
