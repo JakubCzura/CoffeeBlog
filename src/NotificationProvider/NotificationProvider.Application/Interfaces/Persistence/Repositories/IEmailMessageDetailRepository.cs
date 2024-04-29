@@ -2,8 +2,6 @@
 
 namespace NotificationProvider.Application.Interfaces.Persistence.Repositories;
 
-public interface IEmailMessageDetailRepository
+public interface IEmailMessageDetailRepository : IDbEntityBaseRepository<EmailMessageDetail>
 {
-    Task CreateAsync(EmailMessageDetail emailMessageDetail, 
-                     CancellationToken cancellationToken);
 }

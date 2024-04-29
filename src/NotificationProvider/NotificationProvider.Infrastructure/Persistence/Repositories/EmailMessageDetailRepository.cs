@@ -1,13 +1,10 @@
 ﻿using NotificationProvider.Application.Interfaces.Persistence.Repositories;
 using NotificationProvider.Domain.Entities;
+using NotificationProvider.Infrastructure.Persistence.DatabaseContext;
 
 namespace NotificationProvider.Infrastructure.Persistence.Repositories;
 
-internal class EmailMessageDetailRepository : IEmailMessageDetailRepository
+internal class EmailMessageDetailRepository(NotificationProviderDbContext notificationProviderDbContext) 
+    : DbEntityBaseRepository<EmailMessageDetail>(notificationProviderDbContext), IEmailMessageDetailRepository
 {
-    public Task CreateAsync(EmailMessageDetail emailMessageDetail, 
-                            CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
 }

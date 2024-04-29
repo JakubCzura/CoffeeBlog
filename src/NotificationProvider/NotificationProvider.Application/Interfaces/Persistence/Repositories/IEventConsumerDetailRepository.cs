@@ -2,8 +2,6 @@
 
 namespace NotificationProvider.Application.Interfaces.Persistence.Repositories;
 
-public interface IEventConsumerDetailRepository
+public interface IEventConsumerDetailRepository : IDbEntityBaseRepository<EventConsumerDetail>
 {
-    Task CreateAsync(EventConsumerDetail eventConsumerDetail,
-                     CancellationToken cancellationToken);
 }

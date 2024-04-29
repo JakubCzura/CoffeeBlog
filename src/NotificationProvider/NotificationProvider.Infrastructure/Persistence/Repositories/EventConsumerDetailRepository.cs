@@ -1,13 +1,10 @@
 ﻿using NotificationProvider.Application.Interfaces.Persistence.Repositories;
 using NotificationProvider.Domain.Entities;
+using NotificationProvider.Infrastructure.Persistence.DatabaseContext;
 
 namespace NotificationProvider.Infrastructure.Persistence.Repositories;
 
-internal class EventConsumerDetailRepository : IEventConsumerDetailRepository
+internal class EventConsumerDetailRepository(NotificationProviderDbContext notificationProviderDbContext) 
+    : DbEntityBaseRepository<EventConsumerDetail>(notificationProviderDbContext), IEventConsumerDetailRepository
 {
-    public Task CreateAsync(EventConsumerDetail eventConsumerDetail,
-                            CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
 }
