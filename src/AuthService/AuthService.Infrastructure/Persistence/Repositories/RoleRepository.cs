@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthService.Infrastructure.Persistence.Repositories;
 
-internal class RoleRepository(AuthServiceDbContext _authServiceDbContext) 
+internal class RoleRepository(AuthServiceDbContext _authServiceDbContext)
     : DbEntityBaseRepository<Role>(_authServiceDbContext), IRoleRepository
 {
     private readonly AuthServiceDbContext _authServiceDbContext = _authServiceDbContext;

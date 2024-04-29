@@ -8,7 +8,7 @@ using Microsoft.Extensions.Options;
 namespace AuthService.Infrastructure.Persistence.Repositories;
 
 internal class UserLastPasswordRepository(AuthServiceDbContext _authServiceDbContext,
-                                          IOptions<UserCredentialOptions> _userCredentialOptions) 
+                                          IOptions<UserCredentialOptions> _userCredentialOptions)
     : DbEntityBaseRepository<UserLastPassword>(_authServiceDbContext), IUserLastPasswordRepository
 {
     private readonly AuthServiceDbContext _authServiceDbContext = _authServiceDbContext;

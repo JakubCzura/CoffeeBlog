@@ -4,7 +4,7 @@ using AuthService.Infrastructure.Persistence.DatabaseContext;
 
 namespace AuthService.Infrastructure.Persistence.Repositories;
 
-internal class RequestDetailRepository(AuthServiceDbContext authServiceDbContext) 
+internal class RequestDetailRepository(AuthServiceDbContext authServiceDbContext)
     : DbEntityBaseRepository<RequestDetail>(authServiceDbContext), IRequestDetailRepository
 {
 }

@@ -4,7 +4,7 @@ using NotificationProvider.Infrastructure.Persistence.DatabaseContext;
 
 namespace NotificationProvider.Infrastructure.Persistence.Repositories;
 
-internal class EmailMessageDetailRepository(NotificationProviderDbContext notificationProviderDbContext) 
+internal class EmailMessageDetailRepository(NotificationProviderDbContext notificationProviderDbContext)
     : DbEntityBaseRepository<EmailMessageDetail>(notificationProviderDbContext), IEmailMessageDetailRepository
 {
 }

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace AuthService.Infrastructure.Persistence.Repositories;
 
 internal class UserDetailRepository(AuthServiceDbContext _authServiceDbContext,
-                                    IDateTimeProvider _dateTimeProvider) 
+                                    IDateTimeProvider _dateTimeProvider)
     : DbEntityBaseRepository<UserDetail>(_authServiceDbContext), IUserDetailRepository
 {
     private readonly AuthServiceDbContext _authServiceDbContext = _authServiceDbContext;

@@ -45,7 +45,7 @@ internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : 
                                        CancellationToken cancellationToken)
     {
         T? entity = await _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
-        
+
         if (entity is null)
         {
             return 0;

@@ -1,8 +1,8 @@
-﻿using FluentValidation;
+﻿using EventBus.API.ExtensionMethods.LayerRegistration;
+using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using EventBus.API.ExtensionMethods.LayerRegistration;
 
 namespace AuthService.Application.ExtensionMethods.LayerRegistration;
 
