@@ -1,4 +1,4 @@
-﻿using AuthService.Domain.Commands.ApiErrors;
+﻿using AuthService.Application.Commands.ApiErrors.CreateApiError;
 using AuthService.Domain.Constants;
 using AuthService.Domain.Exceptions;
 using AuthService.Domain.ViewModels.Errors;

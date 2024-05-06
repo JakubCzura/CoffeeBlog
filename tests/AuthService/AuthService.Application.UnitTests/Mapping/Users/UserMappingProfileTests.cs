@@ -1,5 +1,5 @@
-﻿using AuthService.Application.Mapping.Users;
-using AuthService.Domain.Commands.Users;
+﻿using AuthService.Application.Commands.Users.SignUpUser;
+using AuthService.Application.Mapping.Users;
 using AuthService.Domain.Constants;
 using AuthService.Domain.Entities;
 using AutoMapper;

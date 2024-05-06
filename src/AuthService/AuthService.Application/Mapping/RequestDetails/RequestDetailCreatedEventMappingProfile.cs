@@ -1,4 +1,4 @@
-﻿using AuthService.Domain.Commands.RequestDetails;
+﻿using AuthService.Application.Commands.RequestDetails.CreateRequestDetail;
 using AutoMapper;
 using EventBus.Domain.Events.AuthService.RequestDetails;
 

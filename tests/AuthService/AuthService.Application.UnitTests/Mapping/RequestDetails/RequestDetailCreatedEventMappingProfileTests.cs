@@ -1,5 +1,5 @@
-﻿using AuthService.Application.Mapping.RequestDetails;
-using AuthService.Domain.Commands.RequestDetails;
+﻿using AuthService.Application.Commands.RequestDetails.CreateRequestDetail;
+using AuthService.Application.Mapping.RequestDetails;
 using AutoMapper;
 using EventBus.Domain.Events.AuthService.RequestDetails;
 using FluentAssertions;
