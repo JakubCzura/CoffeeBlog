@@ -11,30 +11,25 @@ public class ApiError : DbEntityBase
     /// <summary>
     /// Name of exception.
     /// </summary>
-    [BsonElement("Name")]
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
     /// Exception thrown by application.
     /// </summary>
-    [BsonElement("Exception")]
     public string Exception { get; set; } = string.Empty;
 
     /// <summary>
     /// Message of thrown exception.
     /// </summary>
-    [BsonElement("Message")]
     public string Message { get; set; } = string.Empty;
 
     /// <summary>
     /// Additional information about error.
     /// </summary>
-    [BsonElement("Description")]
     public string Description { get; set; } = string.Empty;
 
     /// <summary>
     /// Date and time when the error was thrown.
     /// </summary>
-    [BsonElement("ThrownAt")]
     public DateTime ThrownAt { get; set; } = DateTime.UtcNow;
 }

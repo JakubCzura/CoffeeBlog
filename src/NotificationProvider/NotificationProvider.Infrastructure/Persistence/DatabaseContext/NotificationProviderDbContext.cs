@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MongoDB.EntityFrameworkCore.Extensions;
 using NotificationProvider.Domain.Entities;
+using System.Reflection;
 
 namespace NotificationProvider.Infrastructure.Persistence.DatabaseContext;
 
@@ -11,20 +11,5 @@ public class NotificationProviderDbContext(DbContextOptions<NotificationProvider
     public DbSet<EventConsumerDetail> EventConsumerDetails { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<ApiError>(entity =>
-        {
-            entity.ToCollection("ApiError");
-        });
-
-        modelBuilder.Entity<EmailMessageDetail>(entity =>
-        {
-            entity.ToCollection("EmailMessageDetail");
-        });
-
-        modelBuilder.Entity<EventConsumerDetail>(entity =>
-        {
-            entity.ToCollection("EventConsumerDetail");
-        });
-    }
+        => modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 }
