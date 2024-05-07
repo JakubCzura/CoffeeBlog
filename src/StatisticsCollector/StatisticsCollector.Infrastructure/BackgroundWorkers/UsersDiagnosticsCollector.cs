@@ -21,7 +21,7 @@ public class UsersDiagnosticsCollector(ILogger<UsersDiagnosticsCollector> _logge
         }
         catch (Exception exception)
         {
-            _logger.LogError(exception, $"{nameof(UsersDiagnosticsCollector)}: Exception while saving data to database");         
+            _logger.LogError(exception, $"{nameof(UsersDiagnosticsCollector)}: Exception while saving data to database");
         }
     }
 }

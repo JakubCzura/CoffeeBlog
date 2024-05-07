@@ -18,7 +18,7 @@ namespace AuthService.Application.Commands.Users.ChangeEmail;
 /// <param name="_currentUserContext">Interface to get information about current signed in user.</param>
 public class ChangeEmailCommandHandler(IUserRepository _userRepository,
                                        IUserDetailRepository _userDetailRepository,
-                                       ICurrentUserContext _currentUserContext) 
+                                       ICurrentUserContext _currentUserContext)
     : IRequestHandler<ChangeEmailCommand, Result<ViewModelBase>>
 {
     private readonly IUserRepository _userRepository = _userRepository;

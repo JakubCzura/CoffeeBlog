@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using NotificationProvider.Domain.Entities.Basics;
+﻿using NotificationProvider.Domain.Entities.Basics;
 
 namespace NotificationProvider.Domain.Entities;
 

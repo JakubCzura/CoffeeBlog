@@ -2,7 +2,6 @@
 using MongoDB.Bson;
 using StatisticsCollector.Application.Interfaces.Persistence.Repositories;
 using StatisticsCollector.Domain.Entities.Basics;
-using StatisticsCollector.Domain.Exceptions;
 using StatisticsCollector.Infrastructure.Persistence.DatabaseContext;
 
 namespace StatisticsCollector.Infrastructure.Persistence.Repositories;

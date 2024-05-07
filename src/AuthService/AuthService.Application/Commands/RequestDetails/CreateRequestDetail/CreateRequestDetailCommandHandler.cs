@@ -13,7 +13,7 @@ namespace AuthService.Application.Commands.RequestDetails.CreateRequestDetail;
 /// <param name="_eventPublisher">Microservice to send event about request's details.</param>
 /// <param name="_mapper">AutoMapper to map classes.</param>
 public class CreateRequestDetailCommandHandler(IEventPublisher _eventPublisher,
-                                               IMapper _mapper) 
+                                               IMapper _mapper)
     : IRequestHandler<CreateRequestDetailCommand, Unit>
 {
     private readonly IEventPublisher _eventPublisher = _eventPublisher;

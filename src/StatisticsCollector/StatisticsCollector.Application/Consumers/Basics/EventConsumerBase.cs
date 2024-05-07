@@ -11,7 +11,7 @@ namespace StatisticsCollector.Application.Consumers.Basics;
 internal abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventConsumer> _logger,
                                                                   IEventConsumerDetailRepository _eventConsumerDetailRepository,
                                                                   IApiErrorRepository _apiErrorRepository)
-: IEventConsumer<TEvent> where TEvent : EventBase 
+: IEventConsumer<TEvent> where TEvent : EventBase
                          where TEventConsumer : IEventConsumer<TEvent>
 {
     private readonly ILogger<TEventConsumer> _logger = _logger;

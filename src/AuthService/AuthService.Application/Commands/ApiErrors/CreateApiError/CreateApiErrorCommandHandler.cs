@@ -11,7 +11,7 @@ namespace AuthService.Application.Commands.ApiErrors.CreateApiError;
 /// <param name="_apiErrorRepository">Interface to perform API error's operations in database.</param>
 /// <param name="_mapper">AutoMapper to map classes.</param>
 public class CreateApiErrorCommandHandler(IApiErrorRepository _apiErrorRepository,
-                                          IMapper _mapper) 
+                                          IMapper _mapper)
     : IRequestHandler<CreateApiErrorCommand, Unit>
 {
     private readonly IApiErrorRepository _apiErrorRepository = _apiErrorRepository;

@@ -10,7 +10,7 @@ public class BanRemovalService(ILogger<BanRemovalService> _logger,
 {
     private readonly ILogger<BanRemovalService> _logger = _logger;
     private readonly IUserAccountRepository _userAccountRepository = _userAccountRepository;
-  
+
     public async Task Execute(IJobExecutionContext context)
     {
         try

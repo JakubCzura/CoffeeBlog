@@ -33,7 +33,7 @@ public class SignUpUserCommandHandler(IUserRepository _userRepository,
                                       IJwtService _jwtService,
                                       IPasswordHasher _passwordHasher,
                                       IEventPublisher _eventPublisher,
-                                      IMapper _mapper) 
+                                      IMapper _mapper)
     : IRequestHandler<SignUpUserCommand, Result<SignUpUserViewModel>>
 {
     private readonly IUserRepository _userRepository = _userRepository;

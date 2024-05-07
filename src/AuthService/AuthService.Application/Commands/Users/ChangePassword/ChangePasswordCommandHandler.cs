@@ -23,7 +23,7 @@ public class ChangePasswordCommandHandler(IUserRepository _userRepository,
                                          IUserDetailRepository _userDetailRepository,
                                          IUserLastPasswordRepository _userLastPasswordRepository,
                                          ICurrentUserContext _currentUserContext,
-                                         IPasswordHasher _passwordHasher) 
+                                         IPasswordHasher _passwordHasher)
     : IRequestHandler<ChangePasswordCommand, Result<ViewModelBase>>
 {
     private readonly IUserRepository _userRepository = _userRepository;

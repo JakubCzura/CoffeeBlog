@@ -1,7 +1,7 @@
+using NotificationProvider.Application.ExtensionMethods.LayerRegistration;
 using NotificationProvider.Domain.SettingsOptions.Database;
 using NotificationProvider.Domain.SettingsOptions.Email;
 using NotificationProvider.Infrastructure.ExtensionMethods.LayerRegistration;
-using NotificationProvider.Application.ExtensionMethods.LayerRegistration;
 using Serilog;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);

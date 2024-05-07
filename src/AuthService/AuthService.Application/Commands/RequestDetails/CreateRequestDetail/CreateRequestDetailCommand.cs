@@ -1,5 +1,4 @@
-﻿using AuthService.Domain.Constants;
-using MediatR;
+﻿using MediatR;
 
 namespace AuthService.Application.Commands.RequestDetails.CreateRequestDetail;
 

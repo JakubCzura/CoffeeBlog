@@ -23,7 +23,7 @@ public class SignInUserQueryHandler(IUserRepository _userRepository,
                                     IUserDetailRepository _userDetailRepository,
                                     IUserAccountRepository _userAccountRepository,
                                     IPasswordHasher _passwordHasher,
-                                    IJwtService _jwtService) 
+                                    IJwtService _jwtService)
     : IRequestHandler<SignInUserQuery, Result<SignInUserViewModel>>
 {
     private readonly IUserRepository _userRepository = _userRepository;
