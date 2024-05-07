@@ -2,8 +2,7 @@
 
 namespace EventBus.Domain.Events.CommonEvents;
 
-public record RequestDetailCreatedEvent(string MicroserviceName,
-                                        string ControllerName,
+public record RequestDetailCreatedEvent(string ControllerName,
                                         string Path,
                                         string HttpMethod,
                                         int StatusCode,
@@ -14,4 +13,5 @@ public record RequestDetailCreatedEvent(string MicroserviceName,
                                         long RequestTimeInMiliseconds,
                                         DateTime SentAt,
                                         int? UserId,
-                                        string EventPublisherName) : EventBase(EventPublisherName);
+                                        string EventPublisherName,
+                                        string EventPublisherMicroserviceName) : EventBase(EventPublisherName, EventPublisherMicroserviceName);

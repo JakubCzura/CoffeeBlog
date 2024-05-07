@@ -1,7 +1,6 @@
 ﻿using AuthService.Application.Commands.RequestDetails.CreateRequestDetail;
 using AuthService.Application.ExtensionMethods.Automapper.Events;
 using AuthService.Application.Mapping.RequestDetails;
-using AuthService.Domain.Constants;
 using AutoMapper;
 using EventBus.Domain.Events.CommonEvents;
 using FluentAssertions;
@@ -23,6 +22,7 @@ public class AutoMapperForRequestDetailCreatedEventExtensionsTests
     {
         //Arrange
         string eventPublisherName = "RequestCommandHandler";
+        string eventPublisherMicroserviceName = "MicroserviceName";
 
         CreateRequestDetailCommand createRequestDetailCommand = new()
         {
@@ -39,10 +39,9 @@ public class AutoMapperForRequestDetailCreatedEventExtensionsTests
         };
 
         //Act
-        RequestDetailCreatedEvent result = _mapper.Map<RequestDetailCreatedEvent>(createRequestDetailCommand, eventPublisherName);
+        RequestDetailCreatedEvent result = _mapper.Map<RequestDetailCreatedEvent>(createRequestDetailCommand, eventPublisherName, eventPublisherMicroserviceName);
 
         //Assert
-        result.MicroserviceName.Should().Be(MicroserviceInfoConstants.Name);
         result.ControllerName.Should().Be(createRequestDetailCommand.ControllerName);
         result.Path.Should().Be(createRequestDetailCommand.Path);
         result.HttpMethod.Should().Be(createRequestDetailCommand.HttpMethod);
@@ -55,5 +54,6 @@ public class AutoMapperForRequestDetailCreatedEventExtensionsTests
         result.SentAt.Should().Be(createRequestDetailCommand.SentAt);
         result.UserId.Should().Be(createRequestDetailCommand.UserId);
         result.EventPublisherName.Should().Be(eventPublisherName);
+        result.EventPublisherMicroserviceName.Should().Be(eventPublisherMicroserviceName);
     }
 }

@@ -16,12 +16,15 @@ public static class AutoMapperForRequestDetailCreatedEventExtensions
     /// <param name="mapper"><see cref="IMapper"/></param>
     /// <param name="createRequestDetailCommand">CreateRequestDetailCommand entity.</param>
     /// <param name="eventPublisherName">Name of event publisher.</param>
+    /// <param name="eventPublisherMicroserviceName">Name of microservice that contains publisher of the event.</param>
     /// <returns>Instance of <see cref="RequestDetailCreatedEvent"/></returns>
     public static RequestDetailCreatedEvent Map<T>(this IMapper mapper,
                                                    CreateRequestDetailCommand createRequestDetailCommand,
-                                                   string eventPublisherName) where T : RequestDetailCreatedEvent
+                                                   string eventPublisherName,
+                                                   string eventPublisherMicroserviceName) where T : RequestDetailCreatedEvent
         => mapper.Map<RequestDetailCreatedEvent>(createRequestDetailCommand, opt =>
         {
             opt.Items[nameof(RequestDetailCreatedEvent.EventPublisherName)] = eventPublisherName;
+            opt.Items[nameof(RequestDetailCreatedEvent.EventPublisherMicroserviceName)] = eventPublisherMicroserviceName;
         });
 }

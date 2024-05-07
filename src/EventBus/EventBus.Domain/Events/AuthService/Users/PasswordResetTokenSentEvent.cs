@@ -5,5 +5,5 @@ namespace EventBus.Domain.Events.AuthService.Users;
 public record PasswordResetTokenSentEvent(string Email,
                                           string Username,
                                           string Token,
-                                          string EventPublisherName,
-                                          DateTime ExpirationDate) : EventBase(EventPublisherName);
+                                          DateTime ExpirationDate,
+                                          string EventPublisherName) : AuthServiceEventBase(EventPublisherName);

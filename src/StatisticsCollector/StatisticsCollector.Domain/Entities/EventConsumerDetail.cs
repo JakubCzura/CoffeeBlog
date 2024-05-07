@@ -25,6 +25,11 @@ public class EventConsumerDetail : DbEntityBase
     public string EventPublisherName { get; set; } = string.Empty;
 
     /// <summary>
+    /// Name of the microservice that contains publisher of the event.
+    /// </summary>
+    public string EventPublisherMicroserviceName { get; set; } = string.Empty;
+
+    /// <summary>
     /// Name of the event consumer.
     /// </summary>
     public string EventConsumerName { get; set; } = string.Empty;

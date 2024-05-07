@@ -29,6 +29,7 @@ internal abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEvent
                 EventPublishedAt = context.Message.EventPublishedAt,
                 EventName = typeof(TEvent).Name,
                 EventPublisherName = context.Message.EventPublisherName,
+                EventPublisherMicroserviceName = context.Message.EventPublisherMicroserviceName,
                 EventConsumerName = typeof(TEventConsumer).Name,
                 EventMessage = context.Message.ToJson(),
             }, default);

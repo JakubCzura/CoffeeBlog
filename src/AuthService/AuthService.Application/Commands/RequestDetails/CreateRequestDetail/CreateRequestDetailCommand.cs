@@ -9,11 +9,6 @@ namespace AuthService.Application.Commands.RequestDetails.CreateRequestDetail;
 public class CreateRequestDetailCommand : IRequest<Unit>
 {
     /// <summary>
-    /// Name of microservice that handled request.
-    /// </summary>
-    public string MicroserviceName { get; } = MicroserviceInfoConstants.Name;
-
-    /// <summary>
     /// Name of controller that handled request.
     /// </summary>
     public string ControllerName { get; set; } = string.Empty;

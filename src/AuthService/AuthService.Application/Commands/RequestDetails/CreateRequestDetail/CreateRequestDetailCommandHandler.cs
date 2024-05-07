@@ -1,4 +1,5 @@
 ﻿using AuthService.Application.ExtensionMethods.Automapper.Events;
+using AuthService.Domain.Constants;
 using AutoMapper;
 using EventBus.Application.Interfaces.Publishers;
 using EventBus.Domain.Events.CommonEvents;
@@ -27,7 +28,7 @@ public class CreateRequestDetailCommandHandler(IEventPublisher _eventPublisher,
     public async Task<Unit> Handle(CreateRequestDetailCommand request,
                                    CancellationToken cancellationToken)
     {
-        RequestDetailCreatedEvent requestDetailCreatedEvent = _mapper.Map<RequestDetailCreatedEvent>(request, nameof(CreateRequestDetailCommandHandler));
+        RequestDetailCreatedEvent requestDetailCreatedEvent = _mapper.Map<RequestDetailCreatedEvent>(request, nameof(CreateRequestDetailCommandHandler), MicroserviceInfoConstants.Name);
 
         await _eventPublisher.PublishAsync(requestDetailCreatedEvent, cancellationToken);
 

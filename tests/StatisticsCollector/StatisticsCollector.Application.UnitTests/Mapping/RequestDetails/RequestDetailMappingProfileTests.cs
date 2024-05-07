@@ -25,7 +25,6 @@ public class RequestDetailMappingProfileTests
     {
         //Arrange
         RequestDetailCreatedEvent requestDetailCreatedEvent = new(
-            "MicroserviceName",
             "UserController",
             "/api/user",
             "GET",
@@ -37,13 +36,14 @@ public class RequestDetailMappingProfileTests
             5,
             DateTime.UtcNow,
             1,
-            "RequestCommandHandler");
+            "RequestCommandHandler",
+            "MicroserviceName");
 
         //Act
         RequestDetail result = _mapper.Map<RequestDetail>(requestDetailCreatedEvent);
 
         //Assert
-        result.MicroserviceName.Should().Be(requestDetailCreatedEvent.MicroserviceName);
+        result.MicroserviceName.Should().Be(requestDetailCreatedEvent.EventPublisherMicroserviceName);
         result.ControllerName.Should().Be(requestDetailCreatedEvent.ControllerName);
         result.Path.Should().Be(requestDetailCreatedEvent.Path);
         result.HttpMethod.Should().Be(requestDetailCreatedEvent.HttpMethod);
