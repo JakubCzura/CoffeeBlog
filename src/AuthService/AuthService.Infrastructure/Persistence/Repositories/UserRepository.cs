@@ -13,7 +13,7 @@ internal class UserRepository(AuthServiceDbContext authServiceDbContext)
     public async Task<User?> GetByEmailOrUsernameAsync(string usernameOrEmail,
                                                        CancellationToken cancellationToken)
         => await _authServiceDbContext.Users.AsNoTracking()
-                                           .FirstOrDefaultAsync(user => user.Email == usernameOrEmail || user.Username == usernameOrEmail, cancellationToken);
+                                            .FirstOrDefaultAsync(user => user.Email == usernameOrEmail || user.Username == usernameOrEmail, cancellationToken);
 
     public async Task<bool> UsernameExistsAsync(string username,
                                                 CancellationToken cancellationToken = default)

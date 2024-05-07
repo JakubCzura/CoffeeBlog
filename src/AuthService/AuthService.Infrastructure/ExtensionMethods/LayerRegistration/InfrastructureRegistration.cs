@@ -4,6 +4,7 @@ using AuthService.Application.Interfaces.Security.Authentication;
 using AuthService.Application.Interfaces.Security.CurrentUsers;
 using AuthService.Application.Interfaces.Security.Password;
 using AuthService.Infrastructure.ExtensionMethods.Authentication;
+using AuthService.Infrastructure.ExtensionMethods.BackgroundWorkers;
 using AuthService.Infrastructure.ExtensionMethods.Database;
 using AuthService.Infrastructure.Helpers;
 using AuthService.Infrastructure.Persistence.Repositories;
@@ -25,6 +26,7 @@ public static class InfrastructureRegistration
 
         services.AddScoped<IApiErrorRepository, ApiErrorRepository>();
         services.AddScoped<IRoleRepository, RoleRepository>();
+        services.AddScoped<IUserAccountRepository, UserAccountRepository>();
         services.AddScoped<IUserDetailRepository, UserDetailRepository>();
         services.AddScoped<IUserLastPasswordRepository, UserLastPasswordRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
@@ -38,7 +40,7 @@ public static class InfrastructureRegistration
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddScoped<ICurrentUserContext, CurrentUserContext>();
 
-        //services.ConfigureBackgroundWorkers(configuration);
+        services.ConfigureBackgroundWorkers(configuration);
 
         return services;
     }

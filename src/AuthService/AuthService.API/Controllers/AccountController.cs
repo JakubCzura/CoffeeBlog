@@ -59,6 +59,7 @@ public class AccountController(IMediator _mediator) : ApiControllerBase(_mediato
         return error switch
         {
             UserNotFoundError => Conflict(error.Message),
+            UserBannedError => Forbid(error.Message),
             _ => BadRequest(string.Join(";", result.Errors.Select(x => x.Message)))
         };
     }

@@ -12,17 +12,16 @@ public class UsersDiagnosticsCollector(ILogger<UsersDiagnosticsCollector> _logge
     private readonly ILogger<UsersDiagnosticsCollector> _logger = _logger;
     private readonly IUserDiagnosticRepository _userDiagnosticRepository = _userDiagnosticRepository;
 
-    public Task Execute(IJobExecutionContext context)
+    public async Task Execute(IJobExecutionContext context)
     {
         try
         {
-            _userDiagnosticRepository.CreateAsync(new UserDiagnostic(), default);
+            await _userDiagnosticRepository.CreateAsync(new UserDiagnostic(), default);
             throw new NotImplementedException();
         }
         catch (Exception exception)
         {
-            _logger.LogError(exception, $"{nameof(UsersDiagnosticsCollector)}: Exception while saving data to database");
-            return Task.CompletedTask;
+            _logger.LogError(exception, $"{nameof(UsersDiagnosticsCollector)}: Exception while saving data to database");         
         }
     }
 }

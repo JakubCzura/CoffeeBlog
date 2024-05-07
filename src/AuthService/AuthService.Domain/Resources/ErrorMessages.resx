@@ -120,6 +120,9 @@
   <data name="EmailAlreadyExists" xml:space="preserve">
     <value>E-mail already exists</value>
   </data>
+  <data name="ThisAccountHasBeenBanned" xml:space="preserve">
+    <value>This account has been banned</value>
+  </data>
   <data name="UsernameAlreadyExists" xml:space="preserve">
     <value>Username already exists</value>
   </data>

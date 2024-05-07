@@ -15,11 +15,13 @@ namespace AuthService.Application.Queries.Users.SignInUser;
 /// <param name="_userRepository">Interface to perform user's operations in database.</param>
 /// <param name="_roleRepository">Interface to perform authorization roles' operations in database.</param>
 /// <param name="_userDetailRepository">Interface to perform user's details operations in database.</param>
+/// <param name="_userAccountRepository">Interface to perform user's acount's operations in database.</param>
 /// <param name="_passwordHasher">Interface to verify password.</param>
 /// <param name="_jwtService">Interface to create JWT token.</param>
 public class SignInUserQueryHandler(IUserRepository _userRepository,
                                     IRoleRepository _roleRepository,
                                     IUserDetailRepository _userDetailRepository,
+                                    IUserAccountRepository _userAccountRepository,
                                     IPasswordHasher _passwordHasher,
                                     IJwtService _jwtService) 
     : IRequestHandler<SignInUserQuery, Result<SignInUserViewModel>>
@@ -27,6 +29,7 @@ public class SignInUserQueryHandler(IUserRepository _userRepository,
     private readonly IUserRepository _userRepository = _userRepository;
     private readonly IRoleRepository _roleRepository = _roleRepository;
     private readonly IUserDetailRepository _userDetailRepository = _userDetailRepository;
+    private readonly IUserAccountRepository _userAccountRepository = _userAccountRepository;
     private readonly IPasswordHasher _passwordHasher = _passwordHasher;
     private readonly IJwtService _jwtService = _jwtService;
 
@@ -44,7 +47,7 @@ public class SignInUserQueryHandler(IUserRepository _userRepository,
         //Don't reveal whether user was not found or password was incorrect due to potential security risks.
         //Just say that user was not found.
         //If statements are splitted to log failed sign in attempts if user was found but password was incorrect.
-        if (user == null)
+        if (user is null)
         {
             return Result.Fail<SignInUserViewModel>(new UserNotFoundError());
         }
@@ -52,6 +55,13 @@ public class SignInUserQueryHandler(IUserRepository _userRepository,
         {
             await _userDetailRepository.UpdateLastFailedSignInAsync(user.Id, cancellationToken);
             return Result.Fail<SignInUserViewModel>(new UserNotFoundError());
+        }
+
+        UserAccount? userAccount = await _userAccountRepository.GetAsync(user.Id, cancellationToken);
+        if (userAccount is not null && userAccount.IsBanned)
+        {
+            await _userDetailRepository.UpdateLastFailedSignInAsync(user.Id, cancellationToken);
+            return Result.Fail<SignInUserViewModel>(new UserBannedError(userAccount.BanNote));
         }
 
         await _userDetailRepository.UpdateLastSuccessfullSignInAsync(user.Id, cancellationToken);

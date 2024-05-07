@@ -20,6 +20,7 @@ namespace AuthService.Application.Commands.Users.SignUpUser;
 /// <param name="_userLastPasswordRepository">Interface to perform user's last passwords operations in database.</param>
 /// <param name="_roleRepository">Interface to perform authorization roles operations in database.</param>
 /// <param name="_userDetailRepository">Interface to perform user's details operations in database.</param>
+/// <param name="_userAccountRepository">Interface to perform user's account's operations in database.</param>
 /// <param name="_jwtService">Interface to create JWT token.</param>
 /// <param name="_passwordHasher">Interface to hash password.</param>
 /// <param name="_eventPublisher">Microservice to send event about user signing up.</param>
@@ -28,6 +29,7 @@ public class SignUpUserCommandHandler(IUserRepository _userRepository,
                                       IUserLastPasswordRepository _userLastPasswordRepository,
                                       IRoleRepository _roleRepository,
                                       IUserDetailRepository _userDetailRepository,
+                                      IUserAccountRepository _userAccountRepository,
                                       IJwtService _jwtService,
                                       IPasswordHasher _passwordHasher,
                                       IEventPublisher _eventPublisher,
@@ -38,6 +40,7 @@ public class SignUpUserCommandHandler(IUserRepository _userRepository,
     private readonly IUserLastPasswordRepository _userLastPasswordRepository = _userLastPasswordRepository;
     private readonly IRoleRepository _roleRepository = _roleRepository;
     private readonly IUserDetailRepository _userDetailRepository = _userDetailRepository;
+    private readonly IUserAccountRepository _userAccountRepository = _userAccountRepository;
     private readonly IJwtService _jwtService = _jwtService;
     private readonly IPasswordHasher _passwordHasher = _passwordHasher;
     private readonly IEventPublisher _eventPublisher = _eventPublisher;
@@ -68,6 +71,8 @@ public class SignUpUserCommandHandler(IUserRepository _userRepository,
         await _userLastPasswordRepository.CreateAsync(new(user.Password, user.Id), cancellationToken);
 
         await _userDetailRepository.CreateAsync(new(user.Id), cancellationToken);
+
+        await _userAccountRepository.CreateAsync(new(user.Id), cancellationToken);
 
         List<string> userRolesNames = await _roleRepository.GetAllRolesNamesByUserId(user.Id, cancellationToken);
         string jwtToken = _jwtService.CreateToken(new(user.Id, request.Username, request.Email), userRolesNames);

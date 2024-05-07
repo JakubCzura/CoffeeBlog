@@ -4,7 +4,7 @@ using AuthService.Infrastructure.Persistence.DatabaseContext;
 
 namespace AuthService.Infrastructure.Persistence.Repositories;
 
-internal class ApiErrorRepository(AuthServiceDbContext authServiceDbContext)
-    : DbEntityBaseRepository<ApiError>(authServiceDbContext), IApiErrorRepository
+internal class ApiErrorRepository(AuthServiceDbContext _authServiceDbContext)
+    : DbEntityBaseRepository<ApiError>(_authServiceDbContext), IApiErrorRepository
 {
 }

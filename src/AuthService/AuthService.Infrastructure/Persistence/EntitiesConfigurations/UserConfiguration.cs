@@ -26,7 +26,8 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.HasMany(x => x.LastPasswords)
                .WithOne()
-               .HasForeignKey(x => x.UserId);
+               .HasForeignKey(x => x.UserId)
+               .IsRequired();
 
         builder.HasMany(x => x.Roles)
                .WithMany(x => x.Users)
@@ -36,5 +37,15 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
                .WithOne()
                .HasForeignKey(x => x.UserId)
                .IsRequired(false);
+
+        builder.HasOne<UserDetail>()
+               .WithOne()
+               .HasForeignKey<UserDetail>(x => x.UserId)
+               .IsRequired();
+
+        builder.HasOne<UserAccount>()
+               .WithOne()
+               .HasForeignKey<UserAccount>(x => x.UserId)
+               .IsRequired();
     }
 };
