@@ -43,7 +43,6 @@ public class RequestDetailMappingProfileTests
         RequestDetail result = _mapper.Map<RequestDetail>(requestDetailCreatedEvent);
 
         //Assert
-        result.MicroserviceName.Should().Be(requestDetailCreatedEvent.EventPublisherMicroserviceName);
         result.ControllerName.Should().Be(requestDetailCreatedEvent.ControllerName);
         result.Path.Should().Be(requestDetailCreatedEvent.Path);
         result.HttpMethod.Should().Be(requestDetailCreatedEvent.HttpMethod);
@@ -55,5 +54,6 @@ public class RequestDetailMappingProfileTests
         result.RequestTimeInMiliseconds.Should().Be(requestDetailCreatedEvent.RequestTimeInMiliseconds);
         result.SentAt.Should().Be(requestDetailCreatedEvent.SentAt);
         result.UserId.Should().Be(requestDetailCreatedEvent.UserId);
+        result.MicroserviceName.Should().Be(requestDetailCreatedEvent.EventPublisherMicroserviceName);
     }
 }

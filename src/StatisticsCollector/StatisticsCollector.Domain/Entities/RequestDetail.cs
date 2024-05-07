@@ -8,11 +8,6 @@ namespace StatisticsCollector.Domain.Entities;
 public class RequestDetail : DbEntityBase
 {
     /// <summary>
-    /// Name of microservice that handles request.
-    /// </summary>
-    public string MicroserviceName { get; set; } = string.Empty;
-
-    /// <summary>
     /// Name of controller that handles request.
     /// </summary>
     public string ControllerName { get; set; } = string.Empty;
@@ -66,4 +61,9 @@ public class RequestDetail : DbEntityBase
     /// User's id. Request can be sent by a user who is not signed in yet, so the property is nullable.
     /// </summary>
     public int? UserId { get; set; }
+
+    /// <summary>
+    /// Name of microservice that handles request.
+    /// </summary>
+    public string MicroserviceName { get; set; } = string.Empty;
 }
