@@ -1,9 +1,9 @@
-﻿using AuthService.Infrastructure.BackgroundWorkers;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
+using StatisticsCollector.Infrastructure.BackgroundWorkers;
 
-namespace AuthService.Infrastructure.ExtensionMethods.BackgroundWorkers;
+namespace StatisticsCollector.Infrastructure.ExtensionMethods.BackgroundWorkers;
 
 public static class BackgroundWorkersConfiguration
 {
@@ -12,11 +12,12 @@ public static class BackgroundWorkersConfiguration
     {
         services.AddQuartz(options =>
         {
-            JobKey applicationDiagnosticsCollectorJobName = JobKey.Create(nameof(ApplicationDiagnosticsCollector));
+            JobKey applicationDiagnosticsCollectorJobName = JobKey.Create(nameof(UsersDiagnosticsCollector));
 
-            options.AddJob<ApplicationDiagnosticsCollector>(applicationDiagnosticsCollectorJobName)
+            options.AddJob<UsersDiagnosticsCollector>(applicationDiagnosticsCollectorJobName)
                    .AddTrigger(trigger => trigger.ForJob(applicationDiagnosticsCollectorJobName)
-                                                 .WithCronSchedule("0 22 * * *"));
+                   .StartAt(DateBuilder.TomorrowAt(0, 30, 0))
+                   .WithSimpleSchedule(schedule => schedule.WithIntervalInHours(24).RepeatForever()));
         });
 
         services.AddQuartzHostedService(options =>

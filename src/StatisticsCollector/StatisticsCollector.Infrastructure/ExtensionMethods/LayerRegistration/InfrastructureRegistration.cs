@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StatisticsCollector.Application.Interfaces.Persistence.Repositories;
 using StatisticsCollector.Domain.SettingsOptions.Database;
+using StatisticsCollector.Infrastructure.ExtensionMethods.BackgroundWorkers;
 using StatisticsCollector.Infrastructure.Persistence.DatabaseContext;
 using StatisticsCollector.Infrastructure.Persistence.Repositories;
 
@@ -21,6 +22,9 @@ public static class InfrastructureRegistration
         services.AddScoped<IApiErrorRepository, ApiErrorRepository>();
         services.AddScoped<IEventConsumerDetailRepository, EventConsumerDetailRepository>();
         services.AddScoped<IRequestDetailRepository, RequestDetailRepository>();
+        services.AddScoped<IUserDiagnosticRepository, UserDiagnosticRepository>();
+
+        services.ConfigureBackgroundWorkers(configuration);
 
         return services;
     }
