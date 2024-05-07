@@ -14,7 +14,7 @@ internal class UserAccountRepository(AuthServiceDbContext _authServiceDbContext,
     private readonly AuthServiceDbContext _authServiceDbContext = _authServiceDbContext;
     private readonly IDateTimeProvider _dateTimeProvider = _dateTimeProvider;
 
-    public async Task<int> RemoveAccountsBansDueToExpirationAsync(CancellationToken cancellationToken)
+    public async Task<int> RemoveAccountsBansDueToExpirationAsync(CancellationToken cancellationToken = default)
         => await _authServiceDbContext.UserAccounts.Where(userAccount => userAccount.BanEndsAt <= _dateTimeProvider.UtcNow)
                                                    .ExecuteUpdateAsync(userAccount => userAccount.SetProperty(property => property.IsBanned, false)
                                                                                                  .SetProperty(property => property.AccountBanReason, AccountBanReason.Unspecified)
