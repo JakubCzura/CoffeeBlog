@@ -57,13 +57,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Application", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.API", "src\EventBus\EventBus.API\EventBus.API.csproj", "{0A4148AA-D247-45CF-83D6-64388DDDCD3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticsCollector.API", "src\StatisticsCollector\StatisticsCollector.API\StatisticsCollector.API.csproj", "{B0AD05DA-4DB0-4F8A-8C33-9C0777813716}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatisticsCollector.API", "src\StatisticsCollector\StatisticsCollector.API\StatisticsCollector.API.csproj", "{B0AD05DA-4DB0-4F8A-8C33-9C0777813716}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticsCollector.Infrastructure", "src\StatisticsCollector\StatisticsCollector.Infrastructure\StatisticsCollector.Infrastructure.csproj", "{AE1C54CB-E46D-492B-AD3E-782189F34681}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatisticsCollector.Infrastructure", "src\StatisticsCollector\StatisticsCollector.Infrastructure\StatisticsCollector.Infrastructure.csproj", "{AE1C54CB-E46D-492B-AD3E-782189F34681}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticsCollector.Domain", "src\StatisticsCollector\StatisticsCollector.Domain\StatisticsCollector.Domain.csproj", "{368BD4FA-AC32-4E55-BE84-69C248FBF21A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatisticsCollector.Domain", "src\StatisticsCollector\StatisticsCollector.Domain\StatisticsCollector.Domain.csproj", "{368BD4FA-AC32-4E55-BE84-69C248FBF21A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticsCollector.Application", "src\StatisticsCollector\StatisticsCollector.Application\StatisticsCollector.Application.csproj", "{15C3B272-09B9-4CB8-8124-0868B0F28CBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatisticsCollector.Application", "src\StatisticsCollector\StatisticsCollector.Application\StatisticsCollector.Application.csproj", "{15C3B272-09B9-4CB8-8124-0868B0F28CBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticsCollector.Application.UnitTests", "tests\StatisticsCollector\StatisticsCollector.Application.UnitTests\StatisticsCollector.Application.UnitTests.csproj", "{9BFA17CD-400F-48F2-9CAE-79FD32AC9306}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StatisticsCollector", "StatisticsCollector", "{25D27EF3-5420-4826-A584-9694DF9B8C3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -151,6 +155,10 @@ Global
 		{15C3B272-09B9-4CB8-8124-0868B0F28CBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15C3B272-09B9-4CB8-8124-0868B0F28CBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15C3B272-09B9-4CB8-8124-0868B0F28CBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BFA17CD-400F-48F2-9CAE-79FD32AC9306}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BFA17CD-400F-48F2-9CAE-79FD32AC9306}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BFA17CD-400F-48F2-9CAE-79FD32AC9306}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BFA17CD-400F-48F2-9CAE-79FD32AC9306}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -185,6 +193,8 @@ Global
 		{AE1C54CB-E46D-492B-AD3E-782189F34681} = {2634D020-7EF3-4229-8150-9BFBCDC70B78}
 		{368BD4FA-AC32-4E55-BE84-69C248FBF21A} = {2634D020-7EF3-4229-8150-9BFBCDC70B78}
 		{15C3B272-09B9-4CB8-8124-0868B0F28CBA} = {2634D020-7EF3-4229-8150-9BFBCDC70B78}
+		{9BFA17CD-400F-48F2-9CAE-79FD32AC9306} = {25D27EF3-5420-4826-A584-9694DF9B8C3D}
+		{25D27EF3-5420-4826-A584-9694DF9B8C3D} = {037FE616-C76C-4ED0-8AFF-ECAEA834E4EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {65834F78-0330-46CA-A056-3269495743AD}

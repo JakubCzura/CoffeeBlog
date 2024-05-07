@@ -1,6 +1,6 @@
 ﻿using AuthService.Application.Commands.RequestDetails.CreateRequestDetail;
 using AutoMapper;
-using EventBus.Domain.Events.AuthService.RequestDetails;
+using EventBus.Domain.Events.CommonEvents;
 
 namespace AuthService.Application.Mapping.RequestDetails;
 

@@ -13,10 +13,10 @@ namespace NotificationProvider.Application.Consumers.Users;
 
 internal sealed class PasswordResetTokenSentEventConsumer(ILogger<PasswordResetTokenSentEventConsumer> _logger,
                                                           IEventConsumerDetailRepository _eventConsumerDetailRepository,
+                                                          IApiErrorRepository _apiErrorRepository,
                                                           IEmailMessageDetailRepository _emailMessageDetailRepository,
                                                           IEmailMessageFactory _emailMessageFactory,
                                                           IEmailServiceProvider _emailServiceProvider,
-                                                          IApiErrorRepository _apiErrorRepository,
                                                           IMapper _mapper)
     : EventConsumerBase<PasswordResetTokenSentEvent, PasswordResetTokenSentEventConsumer>(_logger, _eventConsumerDetailRepository, _apiErrorRepository)
 {

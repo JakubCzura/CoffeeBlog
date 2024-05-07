@@ -1,15 +1,15 @@
-﻿using AuthService.Domain.Constants;
-using AuthService.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MongoDB.EntityFrameworkCore.Extensions;
+using StatisticsCollector.Domain.Entities;
 
-namespace AuthService.Infrastructure.Persistence.EntitiesConfigurations;
+namespace StatisticsCollector.Infrastructure.Persistence.EntitiesConfigurations;
 
 internal class RequestDetailConfiguration : IEntityTypeConfiguration<RequestDetail>
 {
     public void Configure(EntityTypeBuilder<RequestDetail> builder)
     {
-        builder.ToTable("RequestDetail");
+        builder.ToCollection("AuthServiceRequestDetail");
 
         builder.Property(x => x.ControllerName).IsRequired()
                                                .HasMaxLength(100);
@@ -32,8 +32,7 @@ internal class RequestDetailConfiguration : IEntityTypeConfiguration<RequestDeta
 
         builder.Property(x => x.RequestTimeInMiliseconds).IsRequired();
 
-        builder.Property(x => x.SentAt).IsRequired()
-                                       .HasDefaultValueSql(SqlConstants.GetUtcDate);
+        builder.Property(x => x.SentAt).IsRequired();
 
         builder.Property(x => x.UserId).IsRequired(false);
     }

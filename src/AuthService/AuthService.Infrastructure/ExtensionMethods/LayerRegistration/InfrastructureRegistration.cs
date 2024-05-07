@@ -24,7 +24,6 @@ public static class InfrastructureRegistration
         services.ConfigureDbContext(configuration);
 
         services.AddScoped<IApiErrorRepository, ApiErrorRepository>();
-        services.AddScoped<IRequestDetailRepository, RequestDetailRepository>();
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IUserDetailRepository, UserDetailRepository>();
         services.AddScoped<IUserLastPasswordRepository, UserLastPasswordRepository>();

@@ -27,7 +27,6 @@ public class InfrastructureRegistrationTests
         // Assert
         services.Should().NotBeEmpty();
         serviceProvider.GetService<IApiErrorRepository>().Should().NotBeNull();
-        serviceProvider.GetService<IRequestDetailRepository>().Should().NotBeNull();
         serviceProvider.GetService<IRoleRepository>().Should().NotBeNull();
         serviceProvider.GetService<IUserDetailRepository>().Should().NotBeNull();
         serviceProvider.GetService<IUserRepository>().Should().NotBeNull();

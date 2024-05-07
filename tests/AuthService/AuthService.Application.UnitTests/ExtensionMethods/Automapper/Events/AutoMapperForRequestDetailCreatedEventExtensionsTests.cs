@@ -1,8 +1,9 @@
 ﻿using AuthService.Application.Commands.RequestDetails.CreateRequestDetail;
 using AuthService.Application.ExtensionMethods.Automapper.Events;
 using AuthService.Application.Mapping.RequestDetails;
+using AuthService.Domain.Constants;
 using AutoMapper;
-using EventBus.Domain.Events.AuthService.RequestDetails;
+using EventBus.Domain.Events.CommonEvents;
 using FluentAssertions;
 
 namespace AuthService.Application.UnitTests.ExtensionMethods.Automapper.Events;
@@ -41,6 +42,7 @@ public class AutoMapperForRequestDetailCreatedEventExtensionsTests
         RequestDetailCreatedEvent result = _mapper.Map<RequestDetailCreatedEvent>(createRequestDetailCommand, eventPublisherName);
 
         //Assert
+        result.MicroserviceName.Should().Be(MicroserviceInfoConstants.Name);
         result.ControllerName.Should().Be(createRequestDetailCommand.ControllerName);
         result.Path.Should().Be(createRequestDetailCommand.Path);
         result.HttpMethod.Should().Be(createRequestDetailCommand.HttpMethod);

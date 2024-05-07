@@ -1,8 +1,9 @@
 ﻿using EventBus.Domain.Events.Basics;
 
-namespace EventBus.Domain.Events.AuthService.RequestDetails;
+namespace EventBus.Domain.Events.CommonEvents;
 
-public record RequestDetailCreatedEvent(string ControllerName,
+public record RequestDetailCreatedEvent(string MicroserviceName,
+                                        string ControllerName,
                                         string Path,
                                         string HttpMethod,
                                         int StatusCode,
