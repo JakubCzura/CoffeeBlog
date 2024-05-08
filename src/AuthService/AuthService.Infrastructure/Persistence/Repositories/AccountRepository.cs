@@ -29,4 +29,11 @@ internal class AccountRepository(AuthServiceDbContext _authServiceDbContext,
                                                                                          .SetProperty(property => property.BanNote, banUserAccountByUserIdDto.BanNote)
                                                                                          .SetProperty(property => property.BannedAt, _dateTimeProvider.UtcNow)
                                                                                          .SetProperty(property => property.BanEndsAt, banUserAccountByUserIdDto.BanEndsAt), cancellationToken);
+    public async Task<int> RemoveAccountBanByUserIdAsync(int userId, CancellationToken cancellationToken = default)
+       => await _authServiceDbContext.UserAccounts.Where(account => account.UserId == userId)
+                                                  .ExecuteUpdateAsync(Account => Account.SetProperty(property => property.IsBanned, false)
+                                                                                                .SetProperty(property => property.BanReason, (value) => null)
+                                                                                                .SetProperty(property => property.BanNote, (value) => null)
+                                                                                                .SetProperty(property => property.BannedAt, (value) => null)
+                                                                                                .SetProperty(property => property.BanEndsAt, (value) => null), cancellationToken);
 }

@@ -61,6 +61,15 @@ namespace AuthService.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account ban has been removed.
+        /// </summary>
+        public static string AccountBanHasBeenRemoved {
+            get {
+                return ResourceManager.GetString("AccountBanHasBeenRemoved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account has been banned.
         /// </summary>
         public static string AccountHasBeenBanned {

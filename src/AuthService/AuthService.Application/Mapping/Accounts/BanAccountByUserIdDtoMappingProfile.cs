@@ -2,19 +2,18 @@
 using AuthService.Application.Dtos.Accounts;
 using AutoMapper;
 
-namespace AuthService.Application.Mapping.Accounts
+namespace AuthService.Application.Mapping.Accounts;
+
+/// <summary>
+/// Mapping profile for <see cref="BanAccountByUserIdDtoMappingProfile"/>.
+/// </summary>
+public class BanAccountByUserIdDtoMappingProfile : Profile
 {
     /// <summary>
-    /// Mapping profile for <see cref="BanAccountByUserIdDtoMappingProfile"/>.
+    /// Default constructor.
     /// </summary>
-    public class BanAccountByUserIdDtoMappingProfile : Profile
+    public BanAccountByUserIdDtoMappingProfile()
     {
-        /// <summary>
-        /// Default constructor.
-        /// </summary>
-        public BanAccountByUserIdDtoMappingProfile()
-        {
-            CreateMap<BanAccountByUserIdCommand, BanAccountByUserIdDto>();
-        }
+        CreateMap<BanAccountByUserIdCommand, BanAccountByUserIdDto>();
     }
 }

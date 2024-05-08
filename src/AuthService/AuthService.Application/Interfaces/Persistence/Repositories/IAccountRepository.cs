@@ -21,5 +21,16 @@ public interface IAccountRepository : IDbEntityBaseRepository<Account>
     /// <param name="banUserAccountByUserIdDto">Details to ban user's account.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Total number of rows updated in database.</returns>
-    Task<int> BanAccountByUserIdAsync(BanAccountByUserIdDto banUserAccountByUserIdDto, CancellationToken cancellationToken);
+    Task<int> BanAccountByUserIdAsync(BanAccountByUserIdDto banUserAccountByUserIdDto, 
+                                      CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Removes account ban for user with specified id.
+    /// </summary>
+    /// <param name="userId">User's id.</param>
+    /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
+    /// <returns>Total number of rows updated in database.</returns>
+    Task<int> RemoveAccountBanByUserIdAsync(int userId, 
+                                            CancellationToken cancellationToken);
+
 }

@@ -1,5 +1,4 @@
-﻿using AuthService.Application.Dtos.Accounts;
-using AuthService.Application.Interfaces.Persistence.Repositories;
+﻿using AuthService.Application.Interfaces.Persistence.Repositories;
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.Resources;
 using AuthService.Domain.ViewModels.Basics;
@@ -7,30 +6,30 @@ using AutoMapper;
 using FluentResults;
 using MediatR;
 
-namespace AuthService.Application.Commands.Accounts.BanAccountByUserId;
+namespace AuthService.Application.Commands.Accounts.RemoveAccountBanByUserId;
 
 /// <summary>
-/// Command handler to ban user's account. It's related to <see cref="BanAccountByUserIdCommand"/>.
+/// Command handler to remove user's account ban. It's related to <see cref="RemoveAccountBanByUserIdCommand"/>.
 /// </summary>
 /// <param name="_accountRepository">Interface to perform account operations in database.</param>
 /// <param name="_userRepository">Interface to perform user operations in database.</param>
 /// <param name="_mapper">AutoMapper to map classes.</param>
-public class BanAccountByUserIdCommandHandler(IAccountRepository _accountRepository,
-                                              IUserRepository _userRepository,
-                                              IMapper _mapper)
-    : IRequestHandler<BanAccountByUserIdCommand, Result<ViewModelBase>>
+public class RemoveAccountBanByUserIdCommandHandler(IAccountRepository _accountRepository,
+                                                    IUserRepository _userRepository,
+                                                    IMapper _mapper)
+    : IRequestHandler<RemoveAccountBanByUserIdCommand, Result<ViewModelBase>>
 {
     private readonly IAccountRepository _accountRepository = _accountRepository;
     private readonly IUserRepository _userRepository = _userRepository;
     private readonly IMapper _mapper = _mapper;
 
     /// <summary>
-    /// Handles request to ban user's account.
+    /// Handles request to remove user's account ban.
     /// </summary>
-    /// <param name="request">Request command with details to ban user's account.</param>
+    /// <param name="request">Request command with details to remove user's account ban.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns><see cref="ViewModelBase"/></returns>
-    public async Task<Result<ViewModelBase>> Handle(BanAccountByUserIdCommand request,
+    public async Task<Result<ViewModelBase>> Handle(RemoveAccountBanByUserIdCommand request,
                                                     CancellationToken cancellationToken)
     {
         if (!await _userRepository.UserExistsAsync(request.UserId, cancellationToken))
@@ -38,11 +37,9 @@ public class BanAccountByUserIdCommandHandler(IAccountRepository _accountReposit
             return Result.Fail<ViewModelBase>(new UserNotFoundError());
         }
 
-        BanAccountByUserIdDto banAccountByUserIdDto = _mapper.Map<BanAccountByUserIdDto>(request);
+        await _accountRepository.RemoveAccountBanByUserIdAsync(request.UserId, cancellationToken);
 
-        await _accountRepository.BanAccountByUserIdAsync(banAccountByUserIdDto, cancellationToken);
-
-        ViewModelBase result = new(ResponseMessages.AccountHasBeenBanned);
+        ViewModelBase result = new(ResponseMessages.AccountBanHasBeenRemoved);
 
         return Result.Ok(result);
     }
