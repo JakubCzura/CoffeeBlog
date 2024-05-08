@@ -10,6 +10,11 @@ internal class UserRepository(AuthServiceDbContext authServiceDbContext)
 {
     private readonly AuthServiceDbContext _authServiceDbContext = authServiceDbContext;
 
+    public async Task<bool> UserExistsAsync(int userId,
+                                            CancellationToken cancellationToken)
+        => await _authServiceDbContext.Users.AsNoTracking()
+                                            .AnyAsync(user => user.Id == userId, cancellationToken);
+
     public async Task<User?> GetByEmailOrUsernameAsync(string usernameOrEmail,
                                                        CancellationToken cancellationToken)
         => await _authServiceDbContext.Users.AsNoTracking()

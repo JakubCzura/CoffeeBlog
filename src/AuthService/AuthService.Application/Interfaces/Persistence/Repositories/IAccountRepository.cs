@@ -1,4 +1,5 @@
-﻿using AuthService.Domain.Entities;
+﻿using AuthService.Application.Dtos.Accounts;
+using AuthService.Domain.Entities;
 
 namespace AuthService.Application.Interfaces.Persistence.Repositories;
 
@@ -13,4 +14,12 @@ public interface IAccountRepository : IDbEntityBaseRepository<Account>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Total number of rows updated in database.</returns>
     Task<int> RemoveAccountsBansDueToExpirationAsync(CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Ban account of user.
+    /// </summary>
+    /// <param name="banUserAccountByUserIdDto">Details to ban user's account.</param>
+    /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
+    /// <returns>Total number of rows updated in database.</returns>
+    Task<int> BanAccountByUserIdAsync(BanAccountByUserIdDto banUserAccountByUserIdDto, CancellationToken cancellationToken);
 }

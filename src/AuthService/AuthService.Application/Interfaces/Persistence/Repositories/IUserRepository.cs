@@ -8,6 +8,16 @@ namespace AuthService.Application.Interfaces.Persistence.Repositories;
 public interface IUserRepository : IDbEntityBaseRepository<User>
 {
     /// <summary>
+    /// Returns true if user exists in database.
+    /// </summary>
+    /// <param name="userId">User's id.</param>
+    /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
+    /// <returns>True if user exists in database, otherwise false.</returns>
+    Task<bool> UserExistsAsync(int userId,
+                               CancellationToken cancellationToken);
+
+
+    /// <summary>
     /// Returns a user by email or username.
     /// </summary>
     /// <param name="usernameOrEmail">User's email or username.</param>

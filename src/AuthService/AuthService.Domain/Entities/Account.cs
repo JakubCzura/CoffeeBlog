@@ -23,7 +23,7 @@ public class Account(int userId) : DbEntityBase
     /// Ban note. It's used to describe why account is banned. 
     /// If account is not banned this field should be null.
     /// </summary>
-    public string? BanNote { get; set; } = string.Empty;
+    public string? BanNote { get; set; }
 
     /// <summary>
     /// Date and time when account was banned. 

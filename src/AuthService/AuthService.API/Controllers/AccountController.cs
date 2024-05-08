@@ -1,6 +1,7 @@
 ﻿using Asp.Versioning;
 using AuthService.API.Controllers.Basics;
 using AuthService.API.ExtensionMethods.Versioning;
+using AuthService.Application.Commands.Accounts.BanAccountByUserId;
 using AuthService.Application.Commands.Users.ChangeEmail;
 using AuthService.Application.Commands.Users.ChangePassword;
 using AuthService.Application.Commands.Users.ChangeUsername;
@@ -117,5 +118,31 @@ public class AccountController(IMediator _mediator) : ApiControllerBase(_mediato
         }
 
         return BadRequest(string.Join(";", result.Errors.Select(x => x.Message)));
+    }
+
+    [Authorize]
+    [HttpPost("ban/{userId}")]
+    public async Task<IActionResult> BanAccount([FromRoute] int userId,
+                                                [FromBody] BanAccountByUserIdRequest accountByUserIdRequest,
+                                                CancellationToken cancellationToken)
+    {
+        BanAccountByUserIdCommand accountByUserIdCommand = new(userId,
+                                                               accountByUserIdRequest.BanReason,
+                                                               accountByUserIdRequest.BanNote,
+                                                               accountByUserIdRequest.BanEndsAt);
+
+        Result<ViewModelBase> result = await Mediator.Send(accountByUserIdCommand, cancellationToken);
+
+        if (result.IsSuccess)
+        {
+            return Ok(result.Value);
+        }
+
+        IError error = result.Errors[0];
+        return error switch
+        {
+            UserNotFoundError => Conflict(error.Message),
+            _ => BadRequest(string.Join(";", result.Errors.Select(x => x.Message)))
+        };
     }
 }

@@ -16,8 +16,8 @@ public static class BanRemovalServiceConfiguration
 
             options.AddJob<BanRemovalService>(banRemovalServiceJobName)
                    .AddTrigger(trigger => trigger.ForJob(banRemovalServiceJobName)
-                   .StartAt(DateBuilder.TomorrowAt(0, 5, 0))
-                   .WithSimpleSchedule(schedule => schedule.WithIntervalInHours(24).RepeatForever()));
+                   .StartAt(DateBuilder.TomorrowAt(1, 0, 0))
+                   .WithSimpleSchedule(schedule => schedule.WithIntervalInHours(1).RepeatForever()));
         });
 
         services.AddQuartzHostedService(options =>

@@ -65,7 +65,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatisticsCollector.Domain"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatisticsCollector.Application", "src\StatisticsCollector\StatisticsCollector.Application\StatisticsCollector.Application.csproj", "{15C3B272-09B9-4CB8-8124-0868B0F28CBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticsCollector.Application.UnitTests", "tests\StatisticsCollector\StatisticsCollector.Application.UnitTests\StatisticsCollector.Application.UnitTests.csproj", "{9BFA17CD-400F-48F2-9CAE-79FD32AC9306}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatisticsCollector.Application.UnitTests", "tests\StatisticsCollector\StatisticsCollector.Application.UnitTests\StatisticsCollector.Application.UnitTests.csproj", "{9BFA17CD-400F-48F2-9CAE-79FD32AC9306}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StatisticsCollector", "StatisticsCollector", "{25D27EF3-5420-4826-A584-9694DF9B8C3D}"
 EndProject

@@ -1,7 +1,7 @@
-﻿using AuthService.Application.Interfaces.Helpers;
+﻿using AuthService.Application.Dtos.Accounts;
+using AuthService.Application.Interfaces.Helpers;
 using AuthService.Application.Interfaces.Persistence.Repositories;
 using AuthService.Domain.Entities;
-using AuthService.Domain.Enums;
 using AuthService.Infrastructure.Persistence.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,10 +15,18 @@ internal class AccountRepository(AuthServiceDbContext _authServiceDbContext,
     private readonly IDateTimeProvider _dateTimeProvider = _dateTimeProvider;
 
     public async Task<int> RemoveAccountsBansDueToExpirationAsync(CancellationToken cancellationToken = default)
-        => await _authServiceDbContext.UserAccounts.Where(Account => Account.BanEndsAt != null && Account.BanEndsAt <= _dateTimeProvider.UtcNow)
+        => await _authServiceDbContext.UserAccounts.Where(account => account.BanEndsAt != null && account.BanEndsAt <= _dateTimeProvider.UtcNow)
                                                    .ExecuteUpdateAsync(Account => Account.SetProperty(property => property.IsBanned, false)
                                                                                                  .SetProperty(property => property.BanReason, (value) => null)
                                                                                                  .SetProperty(property => property.BanNote, (value) => null)
                                                                                                  .SetProperty(property => property.BannedAt, (value) => null)
                                                                                                  .SetProperty(property => property.BanEndsAt, (value) => null), cancellationToken);
+
+    public async Task<int> BanAccountByUserIdAsync(BanAccountByUserIdDto banUserAccountByUserIdDto, CancellationToken cancellationToken = default)
+        => await _authServiceDbContext.UserAccounts.Where(account => account.UserId == banUserAccountByUserIdDto.UserId)
+                                                   .ExecuteUpdateAsync(Account => Account.SetProperty(property => property.IsBanned, true)
+                                                                                         .SetProperty(property => property.BanReason, banUserAccountByUserIdDto.BanReason)
+                                                                                         .SetProperty(property => property.BanNote, banUserAccountByUserIdDto.BanNote)
+                                                                                         .SetProperty(property => property.BannedAt, _dateTimeProvider.UtcNow)
+                                                                                         .SetProperty(property => property.BanEndsAt, banUserAccountByUserIdDto.BanEndsAt), cancellationToken);
 }
