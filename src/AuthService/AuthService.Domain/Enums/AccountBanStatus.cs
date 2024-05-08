@@ -6,11 +6,6 @@
 public enum AccountBanReason
 {
     /// <summary>
-    /// The reason of ban is unspecified. This should be default value for sql column.
-    /// </summary>
-    Unspecified,
-
-    /// <summary>
     /// User has tried to sign in too many times with wrong credentials.
     /// </summary>
     TooManyFailedSignInAttempts,
@@ -23,5 +18,10 @@ public enum AccountBanReason
     /// <summary>
     /// User writes spam and nonsense posts.
     /// </summary>
-    Spamming
+    Spamming,
+
+    /// <summary>
+    /// The reason of ban is other than specified in enum.
+    /// </summary>
+    Other
 }

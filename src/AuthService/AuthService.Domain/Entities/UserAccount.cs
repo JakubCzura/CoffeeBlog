@@ -14,26 +14,29 @@ public class UserAccount(int userId) : DbEntityBase
     public bool IsBanned { get; set; } = false;
 
     /// <summary>
-    /// Account ban reason. If account is not banned this field should have value <see cref="AccountBanReason.Unspecified"/>.
-    /// Prefer default value instead of null as this field doesn't matter if <see cref="IsBanned"/> is false.
+    /// Account ban reason. 
+    /// If account is not banned this field should be null.
     /// </summary>
-    public AccountBanReason AccountBanReason { get; set; } = AccountBanReason.Unspecified;
+    public AccountBanReason? BanReason { get; set; }
 
     /// <summary>
-    /// Ban note. It's used to describe why account is banned. If account is not banned this field should be empty.
-    /// Prefer default value instead of null as this field doesn't matter if <see cref="IsBanned"/> is false.
+    /// Ban note. It's used to describe why account is banned. 
+    /// If account is not banned this field should be null.
     /// </summary>
-    public string BanNote { get; set; } = string.Empty;
+    public string? BanNote { get; set; } = string.Empty;
 
     /// <summary>
-    /// Date and time when account was banned.
+    /// Date and time when account was banned. 
+    /// If account is not banned this field should be null
     /// </summary>
-    public DateTime BannedAt { get; set; } = DateTime.UtcNow;
+    public DateTime? BannedAt { get; set; }
 
     /// <summary>
-    /// Date and time when account ban ends. If account is banned forever this field should have value <see cref="DateTime.MaxValue"/>.
+    /// Date and time when account ban ends. 
+    /// If account is banned forever this field should have value <see cref="DateTime.MaxValue"/>.
+    /// If account is not banned this field should be null
     /// </summary>
-    public DateTime BanEndsAt { get; set; } = DateTime.UtcNow;
+    public DateTime? BanEndsAt { get; set; }
 
     /// <summary>
     /// User's id.

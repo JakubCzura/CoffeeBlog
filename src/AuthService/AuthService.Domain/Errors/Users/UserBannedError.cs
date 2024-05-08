@@ -3,6 +3,6 @@ using FluentResults;
 
 namespace AuthService.Domain.Errors.Users;
 
-public class UserBannedError(string banReason) : Error($"{ErrorMessages.ThisAccountHasBeenBanned}. Reason: {banReason}")
+public class UserBannedError(string? banReason) : Error($"{ErrorMessages.ThisAccountHasBeenBanned}.{(!string.IsNullOrWhiteSpace(banReason) ? $" Reason: {banReason}" : "")}")
 {
 }
