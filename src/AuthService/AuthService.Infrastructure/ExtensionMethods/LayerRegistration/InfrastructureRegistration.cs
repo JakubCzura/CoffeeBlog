@@ -26,7 +26,7 @@ public static class InfrastructureRegistration
 
         services.AddScoped<IApiErrorRepository, ApiErrorRepository>();
         services.AddScoped<IRoleRepository, RoleRepository>();
-        services.AddScoped<IUserAccountRepository, UserAccountRepository>();
+        services.AddScoped<IAccountRepository, AccountRepository>();
         services.AddScoped<IUserDetailRepository, UserDetailRepository>();
         services.AddScoped<IUserLastPasswordRepository, UserLastPasswordRepository>();
         services.AddScoped<IUserRepository, UserRepository>();

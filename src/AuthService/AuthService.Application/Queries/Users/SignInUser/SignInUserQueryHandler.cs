@@ -15,13 +15,13 @@ namespace AuthService.Application.Queries.Users.SignInUser;
 /// <param name="_userRepository">Interface to perform user's operations in database.</param>
 /// <param name="_roleRepository">Interface to perform authorization roles' operations in database.</param>
 /// <param name="_userDetailRepository">Interface to perform user's details operations in database.</param>
-/// <param name="_userAccountRepository">Interface to perform user's acount's operations in database.</param>
+/// <param name="_accountRepository">Interface to perform user's acount's operations in database.</param>
 /// <param name="_passwordHasher">Interface to verify password.</param>
 /// <param name="_jwtService">Interface to create JWT token.</param>
 public class SignInUserQueryHandler(IUserRepository _userRepository,
                                     IRoleRepository _roleRepository,
                                     IUserDetailRepository _userDetailRepository,
-                                    IUserAccountRepository _userAccountRepository,
+                                    IAccountRepository _accountRepository,
                                     IPasswordHasher _passwordHasher,
                                     IJwtService _jwtService)
     : IRequestHandler<SignInUserQuery, Result<SignInUserViewModel>>
@@ -29,7 +29,7 @@ public class SignInUserQueryHandler(IUserRepository _userRepository,
     private readonly IUserRepository _userRepository = _userRepository;
     private readonly IRoleRepository _roleRepository = _roleRepository;
     private readonly IUserDetailRepository _userDetailRepository = _userDetailRepository;
-    private readonly IUserAccountRepository _userAccountRepository = _userAccountRepository;
+    private readonly IAccountRepository _accountRepository = _accountRepository;
     private readonly IPasswordHasher _passwordHasher = _passwordHasher;
     private readonly IJwtService _jwtService = _jwtService;
 
@@ -57,11 +57,11 @@ public class SignInUserQueryHandler(IUserRepository _userRepository,
             return Result.Fail<SignInUserViewModel>(new UserNotFoundError());
         }
 
-        UserAccount? userAccount = await _userAccountRepository.GetAsync(user.Id, cancellationToken);
-        if (userAccount is not null && userAccount.IsBanned)
+        Account? account = await _accountRepository.GetAsync(user.Id, cancellationToken);
+        if (account is not null && account.IsBanned)
         {
             await _userDetailRepository.UpdateLastFailedSignInAsync(user.Id, cancellationToken);
-            return Result.Fail<SignInUserViewModel>(new UserBannedError(userAccount.BanNote));
+            return Result.Fail<SignInUserViewModel>(new UserBannedError(account.BanNote));
         }
 
         await _userDetailRepository.UpdateLastSuccessfullSignInAsync(user.Id, cancellationToken);

@@ -6,16 +6,16 @@ namespace AuthService.Infrastructure.BackgroundWorkers;
 
 [DisallowConcurrentExecution]
 public class BanRemovalService(ILogger<BanRemovalService> _logger,
-                               IUserAccountRepository _userAccountRepository) : IJob
+                               IAccountRepository _accountRepository) : IJob
 {
     private readonly ILogger<BanRemovalService> _logger = _logger;
-    private readonly IUserAccountRepository _userAccountRepository = _userAccountRepository;
+    private readonly IAccountRepository _accountRepository = _accountRepository;
 
     public async Task Execute(IJobExecutionContext context)
     {
         try
         {
-            await _userAccountRepository.RemoveAccountsBansDueToExpirationAsync(default);
+            await _accountRepository.RemoveAccountsBansDueToExpirationAsync(default);
         }
         catch (Exception exception)
         {

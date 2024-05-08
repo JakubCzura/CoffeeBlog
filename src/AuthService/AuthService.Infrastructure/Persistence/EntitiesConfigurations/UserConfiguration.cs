@@ -43,9 +43,9 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
                .HasForeignKey<UserDetail>(x => x.UserId)
                .IsRequired();
 
-        builder.HasOne<UserAccount>()
+        builder.HasOne<Account>()
                .WithOne()
-               .HasForeignKey<UserAccount>(x => x.UserId)
+               .HasForeignKey<Account>(x => x.UserId)
                .IsRequired();
     }
 };

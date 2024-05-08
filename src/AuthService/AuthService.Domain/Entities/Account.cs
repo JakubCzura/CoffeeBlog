@@ -6,7 +6,7 @@ namespace AuthService.Domain.Entities;
 /// <summary>
 /// This entity represents user account.
 /// </summary>
-public class UserAccount(int userId) : DbEntityBase
+public class Account(int userId) : DbEntityBase
 {
     /// <summary>
     /// If true, user can't sign in.

@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AuthService.Infrastructure.Persistence.EntitiesConfigurations;
 
-internal class UserAccountConfiguration : IEntityTypeConfiguration<UserAccount>
+internal class AccountConfiguration : IEntityTypeConfiguration<Account>
 {
-    public void Configure(EntityTypeBuilder<UserAccount> builder)
+    public void Configure(EntityTypeBuilder<Account> builder)
     {
-        builder.ToTable("UserAccount");
+        builder.ToTable("Account");
 
         builder.Property(x => x.IsBanned).IsRequired();
 
