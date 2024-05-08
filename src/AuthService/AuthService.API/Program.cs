@@ -6,6 +6,7 @@ using AuthService.Application.ExtensionMethods.LayerRegistration;
 using AuthService.Domain.SettingsOptions.Authentication;
 using AuthService.Domain.SettingsOptions.PasswordHasher;
 using AuthService.Domain.SettingsOptions.UserCredential;
+using AuthService.Domain.ViewModels.Errors;
 using AuthService.Infrastructure.ExtensionMethods.LayerRegistration;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
@@ -38,7 +39,9 @@ builder.Services.Configure<ApiBehaviorOptions>(config =>
     config.SuppressModelStateInvalidFilter = false;  //False to perform auto validation. Added for readability and code clear behaviour despite False is default value.
     config.InvalidModelStateResponseFactory = context =>
     {
-        string result = string.Join(";", context.ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage));
+        string errors = string.Join(";", context.ModelState.Values.SelectMany(x => x.Errors)
+                                                                  .Select(x => x.ErrorMessage));
+        ErrorDetailsViewModel result = new(400, errors);
         return new BadRequestObjectResult(result);
     };
 });

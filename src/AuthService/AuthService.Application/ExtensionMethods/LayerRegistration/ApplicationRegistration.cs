@@ -1,4 +1,5 @@
-﻿using EventBus.API.ExtensionMethods.LayerRegistration;
+﻿using AuthService.Application.Behaviours.Validators;
+using EventBus.API.ExtensionMethods.LayerRegistration;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,7 +23,11 @@ public static class ApplicationRegistration
     {
         services.AddEventBus(configuration, Assembly.GetExecutingAssembly());
 
-        services.AddMediatR(config => config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+        services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            config.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
+        });
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 

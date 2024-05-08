@@ -2,6 +2,7 @@
 using AuthService.Domain.Constants;
 using AuthService.Domain.Exceptions;
 using AuthService.Domain.ViewModels.Errors;
+using FluentValidation;
 using MediatR;
 using System.Net;
 
@@ -61,6 +62,7 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> _logger,
         ErrorDetailsViewModel errorDetailsViewModel = exception switch
         {
             NullEntityException => CreateErrorDetailsResponse(httpContext, HttpStatusCode.BadRequest, exception.Message),
+            ValidationException validationException => CreateErrorDetailsResponse(httpContext, HttpStatusCode.BadRequest, validationException.Message),
             _ => CreateErrorDetailsResponse(httpContext, HttpStatusCode.InternalServerError, "Internal server exception.")
         };
 
