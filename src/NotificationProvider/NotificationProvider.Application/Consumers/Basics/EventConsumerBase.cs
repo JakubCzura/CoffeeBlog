@@ -8,9 +8,9 @@ using NotificationProvider.Domain.Entities;
 
 namespace NotificationProvider.Application.Consumers.Basics;
 
-internal abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventConsumer> _logger,
-                                                                  IEventConsumerDetailRepository _eventConsumerDetailRepository,
-                                                                  IApiErrorRepository _apiErrorRepository)
+public abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventConsumer> _logger,
+                                                                IEventConsumerDetailRepository _eventConsumerDetailRepository,
+                                                                IApiErrorRepository _apiErrorRepository)
     : IEventConsumer<TEvent> where TEvent : EventBase
                              where TEventConsumer : IEventConsumer<TEvent>
 {

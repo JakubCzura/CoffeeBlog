@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using EventBus.Domain.Events.AuthService.Users;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 using NotificationProvider.Application.Consumers.Basics;
@@ -9,9 +8,9 @@ using NotificationProvider.Application.Interfaces.Persistence.Repositories;
 using NotificationProvider.Domain.Entities;
 using NotificationProvider.Domain.Models.Emails;
 
-namespace NotificationProvider.Application.Consumers.Users;
+namespace EventBus.Domain.Events.AuthService.Users;
 
-internal sealed class PasswordResetTokenSentEventConsumer(ILogger<PasswordResetTokenSentEventConsumer> _logger,
+public sealed class PasswordResetTokenSentEventConsumer(ILogger<PasswordResetTokenSentEventConsumer> _logger,
                                                           IEventConsumerDetailRepository _eventConsumerDetailRepository,
                                                           IApiErrorRepository _apiErrorRepository,
                                                           IEmailMessageDetailRepository _emailMessageDetailRepository,
