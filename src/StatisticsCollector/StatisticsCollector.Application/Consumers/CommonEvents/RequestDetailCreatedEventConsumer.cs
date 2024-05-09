@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
-using EventBus.Domain.Events.CommonEvents;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 using StatisticsCollector.Application.Consumers.Basics;
 using StatisticsCollector.Application.Interfaces.Persistence.Repositories;
 using StatisticsCollector.Domain.Entities;
 
-namespace StatisticsCollector.Application.Consumers.CommonEvents;
+//Event consumer's namespace must be the same as event's namespace
+namespace EventBus.Domain.Events.CommonEvents;
 
-internal sealed class RequestDetailCreatedEventConsumer(ILogger<RequestDetailCreatedEventConsumer> _logger,
+public sealed class RequestDetailCreatedEventConsumer(ILogger<RequestDetailCreatedEventConsumer> _logger,
                                                         IEventConsumerDetailRepository _eventConsumerDetailRepository,
                                                         IApiErrorRepository _apiErrorRepository,
                                                         IRequestDetailRepository _requestDetailRepository,

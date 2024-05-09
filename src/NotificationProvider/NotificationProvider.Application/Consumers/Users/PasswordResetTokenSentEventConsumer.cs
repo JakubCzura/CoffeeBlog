@@ -8,6 +8,7 @@ using NotificationProvider.Application.Interfaces.Persistence.Repositories;
 using NotificationProvider.Domain.Entities;
 using NotificationProvider.Domain.Models.Emails;
 
+//Event consumer's namespace must be the same as event's namespace
 namespace EventBus.Domain.Events.AuthService.Users;
 
 public sealed class PasswordResetTokenSentEventConsumer(ILogger<PasswordResetTokenSentEventConsumer> _logger,

@@ -57,7 +57,7 @@ public class RequestDetailsMiddleware(ILogger<RequestDetailsMiddleware> _logger,
 
             stopwatch.Stop();
 
-            //Write data to database
+            //Send data to StatisticsCollector microservice
             CreateRequestDetailCommand createRequestDetailCommand = new()
             {
                 ControllerName = httpContext.GetRouteData().Values["controller"]?.ToString() ?? string.Empty,
@@ -75,7 +75,7 @@ public class RequestDetailsMiddleware(ILogger<RequestDetailsMiddleware> _logger,
         }
         catch (Exception exception)
         {
-            _logger.LogCritical(exception, $"{nameof(RequestDetailsMiddleware)}: Exception while saving request's data to database.");
+            _logger.LogCritical(exception, $"{nameof(RequestDetailsMiddleware)}: Exception while sending request's data to StatisticsCollector microservice.");
         }
     }
 
