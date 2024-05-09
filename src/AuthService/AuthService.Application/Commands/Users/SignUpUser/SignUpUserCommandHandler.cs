@@ -68,8 +68,6 @@ public class SignUpUserCommandHandler(IUserRepository _userRepository,
 
         await _userRepository.CreateAsync(user, cancellationToken);
 
-        await _userLastPasswordRepository.CreateAsync(new(user.Password, user.Id), cancellationToken);
-
         await _userDetailRepository.CreateAsync(new(user.Id), cancellationToken);
 
         await _accountRepository.CreateAsync(new(user.Id), cancellationToken);
