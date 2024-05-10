@@ -24,8 +24,17 @@ internal class EmailMessageFactory(IOptions<EmailOptions> _emailOptions) : IEmai
                                                          DateTime expirationDate)
         => new PasswordResetEmailMessage(_emailOptions.CoffeeBlog.SenderName,
                                          _emailOptions.CoffeeBlog.Email,
+                                         recipientName,
                                          recipientEmail,
-                                         token,
                                          "Reset your password",
                                          $"Hello {recipientName}! You can reset your password using this token: {token}. The token will expire {expirationDate}");
+
+    public IEmailMessage CreatePasswordResetedEmailMessage(string recipientName,
+                                                           string recipientEmail) 
+        => new PasswordResetedEmailMessage(_emailOptions.CoffeeBlog.SenderName,
+                                           _emailOptions.CoffeeBlog.Email,
+                                           recipientName,
+                                           recipientEmail,
+                                           "You have just reseted your password",
+                                           $"Hello {recipientName}! You have just reseted your password. Thanks for paying attention for security and remember not to share your password with anybody.");
 }

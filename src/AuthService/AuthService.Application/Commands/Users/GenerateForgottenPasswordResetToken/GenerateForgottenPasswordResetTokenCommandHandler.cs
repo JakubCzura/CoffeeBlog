@@ -1,4 +1,4 @@
-﻿using AuthService.Application.Dtos.Accounts.Repository;
+﻿using AuthService.Application.Dtos.Users.Repository;
 using AuthService.Application.Interfaces.Persistence.Repositories;
 using AuthService.Application.Interfaces.Security.Token;
 using AuthService.Domain.Entities;
@@ -37,17 +37,17 @@ public class GenerateForgottenPasswordResetTokenCommandHandler(IUserRepository _
     public async Task<Result<ViewModelBase>> Handle(GenerateForgottenPasswordResetTokenCommand request,
                                                     CancellationToken cancellationToken)
     {
-        User? user = await _userRepository.GetByEmailOrUsernameAsync(request.UserEmail, cancellationToken);
+        User? user = await _userRepository.GetByEmailOrUsernameAsync(request.Email, cancellationToken);
         if (user is null)
         {
-            return Result.Fail<ViewModelBase>(new EmailExistsError());
+            return Result.Fail<ViewModelBase>(new UserNotFoundError());
         }
 
         SecurityToken securityToken = _securityTokenGenerator.GenerateForgottenPasswordResetToken();
-        UpdateForgottenPasswordResetTokenDto updateForgottenPasswordResetTokenDto = new(request.UserEmail, securityToken.Token, securityToken.ExpirationDate);
+        UpdateForgottenPasswordResetTokenDto updateForgottenPasswordResetTokenDto = new(request.Email, securityToken.Token, securityToken.ExpirationDate);
         await _userRepository.UpdateForgottenPasswordResetTokenAsync(updateForgottenPasswordResetTokenDto, cancellationToken);
 
-        PasswordResetTokenSentEvent passwordResetTokenSentEvent = new(request.UserEmail,
+        PasswordResetTokenSentEvent passwordResetTokenSentEvent = new(request.Email,
                                                                       user.Username,
                                                                       updateForgottenPasswordResetTokenDto.ForgottenPasswordResetToken,
                                                                       updateForgottenPasswordResetTokenDto.ForgottenPasswordResetTokenExpiresAt,

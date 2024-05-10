@@ -28,4 +28,13 @@ public interface IEmailMessageFactory
                                                   string recipientEmail,
                                                   string token,
                                                   DateTime expirationDate);
+
+    /// <summary>
+    /// Creates an e-mail message with information about successfully reseted password.
+    /// </summary>
+    /// <param name="recipientName">User's name.</param>
+    /// <param name="recipientEmail">User's e-mail.</param>
+    /// <returns>Message to send.</returns>
+    IEmailMessage CreatePasswordResetedEmailMessage(string recipientName,
+                                                    string recipientEmail);
 }

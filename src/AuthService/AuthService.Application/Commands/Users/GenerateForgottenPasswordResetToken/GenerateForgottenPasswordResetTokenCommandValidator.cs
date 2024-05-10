@@ -12,5 +12,5 @@ public class GenerateForgottenPasswordResetTokenCommandValidator : AbstractValid
     /// Default constructor.
     /// </summary>
     public GenerateForgottenPasswordResetTokenCommandValidator()
-        => RuleFor(x => x.UserEmail).SetValidator(new EmailValidator());
+        => RuleFor(x => x.Email).SetValidator(new EmailValidator());
 }

@@ -1,4 +1,4 @@
-﻿using AuthService.Application.Dtos.Accounts.Repository;
+﻿using AuthService.Application.Dtos.Users.Repository;
 using AuthService.Application.Interfaces.Persistence.Repositories;
 using AuthService.Domain.Entities;
 using AuthService.Infrastructure.Persistence.DatabaseContext;
@@ -54,4 +54,12 @@ internal class UserRepository(AuthServiceDbContext authServiceDbContext)
         => await _authServiceDbContext.Users.Where(user => user.Email == updateForgottenPasswordResetTokenDto.UserEmail)
                                             .ExecuteUpdateAsync(user => user.SetProperty(property => property.ForgottenPasswordResetToken, updateForgottenPasswordResetTokenDto.ForgottenPasswordResetToken)
                                                                             .SetProperty(property => property.ForgottenPasswordResetTokenExpiresAt, updateForgottenPasswordResetTokenDto.ForgottenPasswordResetTokenExpiresAt), cancellationToken);
+
+    public async Task<int> ResetForgottenPasswordAsync(int id,
+                                                       string password,
+                                                       CancellationToken cancellationToken = default)
+        => await _authServiceDbContext.Users.Where(user => user.Id == id)
+                                            .ExecuteUpdateAsync(user => user.SetProperty(property => property.Password, password)
+                                                                            .SetProperty(property => property.ForgottenPasswordResetToken, (value) => null)
+                                                                            .SetProperty(property => property.ForgottenPasswordResetTokenExpiresAt, (value) => null), cancellationToken);
 }

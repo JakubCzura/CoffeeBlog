@@ -15,12 +15,12 @@ internal class SecurityTokenGenerator(IOptions<SecurityTokenOptions> securityTok
     private static string GenerateToken(int byteCount = 32)
         => byteCount >= 32
         ? Convert.ToHexString(RandomNumberGenerator.GetBytes(byteCount))
-        : throw new SecurityTokenException(ErrorMessages.TokenValueIsInvalid);
+        : throw new SecurityTokenException(ExceptionMessages.TokenValueIsInvalid);
 
     private static DateTime GenerateExpirationDate(int lifetimeMinutes = 1)
         => lifetimeMinutes >= 1
         ? DateTime.UtcNow.AddDays(lifetimeMinutes)
-        : throw new SecurityTokenException(ErrorMessages.TokenExpirationDateIsInvalid);
+        : throw new SecurityTokenException(ExceptionMessages.TokenHasExpired);
 
     /// <exception cref="SecurityTokenException">When appsettings has to small values to create token and its expiration date.</exception>
     public SecurityToken GenerateForgottenPasswordResetToken()

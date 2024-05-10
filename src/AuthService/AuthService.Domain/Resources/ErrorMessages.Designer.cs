@@ -79,11 +79,11 @@ namespace AuthService.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Token expiration date is invalid.
+        ///   Looks up a localized string similar to Token has expired.
         /// </summary>
-        public static string TokenExpirationDateIsInvalid {
+        public static string TokenHasExpired {
             get {
-                return ResourceManager.GetString("TokenExpirationDateIsInvalid", resourceCulture);
+                return ResourceManager.GetString("TokenHasExpired", resourceCulture);
             }
         }
         

@@ -1,4 +1,4 @@
-﻿using AuthService.Application.Dtos.Accounts.Repository;
+﻿using AuthService.Application.Dtos.Users.Repository;
 using AuthService.Domain.Entities;
 
 namespace AuthService.Application.Interfaces.Persistence.Repositories;
@@ -49,7 +49,7 @@ public interface IUserRepository : IDbEntityBaseRepository<User>
     /// Updates user's username in database.
     /// </summary>
     /// <param name="id">User's id.</param>
-    /// <param name="username">User's username.</param>
+    /// <param name="username">User's new username.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Total number of rows updated in database.</returns>
     Task<int> UpdateUsernameAsync(int id,
@@ -60,7 +60,7 @@ public interface IUserRepository : IDbEntityBaseRepository<User>
     /// Updates user's email in database.
     /// </summary>
     /// <param name="id">User's id.</param>
-    /// <param name="email">User's email.</param>
+    /// <param name="email">User's new email.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Total number of rows updated in database.</returns>
     Task<int> UpdateEmailAsync(int id,
@@ -71,7 +71,7 @@ public interface IUserRepository : IDbEntityBaseRepository<User>
     /// Updates user's password in database.
     /// </summary>
     /// <param name="id">User's id.</param>
-    /// <param name="password">User's password.</param>
+    /// <param name="password">User's new password.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Total number of rows updated in database.</returns>
     Task<int> UpdatePasswordAsync(int id,
@@ -86,4 +86,15 @@ public interface IUserRepository : IDbEntityBaseRepository<User>
     /// <returns>Total number of rows updated in database.</returns>
     Task<int> UpdateForgottenPasswordResetTokenAsync(UpdateForgottenPasswordResetTokenDto updateForgottenPasswordResetTokenDto,
                                                      CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Updates user's forgotten password reset token and its expiration date in database.
+    /// </summary>
+    /// <param name="id">User's id.</param>
+    /// <param name="password">User's new password.</param>
+    /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
+    /// <returns>Total number of rows updated in database.</returns>
+    Task<int> ResetForgottenPasswordAsync(int id,
+                                          string password,
+                                          CancellationToken cancellationToken);
 }

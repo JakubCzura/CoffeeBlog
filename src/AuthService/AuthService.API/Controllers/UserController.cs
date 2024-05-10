@@ -5,6 +5,7 @@ using AuthService.Application.Commands.Users.ChangeEmail;
 using AuthService.Application.Commands.Users.ChangePassword;
 using AuthService.Application.Commands.Users.ChangeUsername;
 using AuthService.Application.Commands.Users.GenerateForgottenPasswordResetToken;
+using AuthService.Application.Commands.Users.ResetForgottenPassword;
 using AuthService.Application.Commands.Users.SignUpUser;
 using AuthService.Application.Queries.Users.SignInUser;
 using AuthService.Domain.Errors.Users;
@@ -132,6 +133,28 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
         return error switch
         {
             UserNotFoundError => Conflict(error.Message),
+            _ => BadRequest(string.Join(";", result.Errors.Select(x => x.Message)))
+        };
+    }
+
+    [Authorize]
+    [HttpPost("password-reset")]
+    public async Task<IActionResult> ResetPassword([FromBody] ResetForgottenPasswordCommand resetForgottenPasswordCommand,
+                                                   CancellationToken cancellationToken)
+    {
+        Result<ViewModelBase> result = await Mediator.Send(resetForgottenPasswordCommand, cancellationToken);
+
+        if (result.IsSuccess)
+        {
+            return Ok(result.Value);
+        }
+
+        IError error = result.Errors[0];
+        return error switch
+        {
+            UserNotFoundError => Conflict(error.Message),
+            InvalidForgottenPasswordResetTokenError => Forbid(error.Message),
+            ExpiredForgottenPasswordResetTokenError => Forbid(error.Message),
             _ => BadRequest(string.Join(";", result.Errors.Select(x => x.Message)))
         };
     }

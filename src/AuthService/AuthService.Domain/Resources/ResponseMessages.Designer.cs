@@ -97,6 +97,15 @@ namespace AuthService.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password has been reseted.
+        /// </summary>
+        public static string PasswordHasBeenReseted {
+            get {
+                return ResourceManager.GetString("PasswordHasBeenReseted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Token to reset password has been sent to your e-mail.
         /// </summary>
         public static string TokenToResetPasswordHasBeenSentToYourEmail {
