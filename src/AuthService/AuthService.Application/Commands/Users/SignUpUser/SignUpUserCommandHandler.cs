@@ -65,20 +65,16 @@ public class SignUpUserCommandHandler(IUserRepository _userRepository,
         }
 
         User user = _mapper.Map<User>(request, _passwordHasher.HashPassword(request.Password));
-
         await _userRepository.CreateAsync(user, cancellationToken);
-
         await _userDetailRepository.CreateAsync(new(user.Id), cancellationToken);
-
         await _accountRepository.CreateAsync(new(user.Id), cancellationToken);
 
         List<string> userRolesNames = await _roleRepository.GetAllRolesNamesByUserId(user.Id, cancellationToken);
         string jwtToken = _jwtService.CreateToken(new(user.Id, request.Username, request.Email), userRolesNames);
-
-        SignUpUserViewModel result = _mapper.Map<SignUpUserViewModel>(user, jwtToken);
-
+    
         await _eventPublisher.PublishAsync(new UserSignedUpEvent(user.Username, user.Email, nameof(SignUpUserCommandHandler)), cancellationToken);
-
+        
+        SignUpUserViewModel result = _mapper.Map<SignUpUserViewModel>(user, jwtToken);
         return Result.Ok(result);
     }
 }

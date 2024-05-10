@@ -1,5 +1,5 @@
 ﻿using AuthService.Application.Commands.Accounts.BanAccountByUserId;
-using AuthService.Application.Dtos.Accounts;
+using AuthService.Application.Dtos.Accounts.Repository;
 using AutoMapper;
 
 namespace AuthService.Application.Mapping.Accounts;

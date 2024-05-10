@@ -17,6 +17,8 @@ public class UserMappingProfile : Profile
     {
         CreateMap<SignUpUserCommand, User>()
             .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.ForgottenPasswordResetToken, opt => opt.Ignore())
+            .ForMember(dest => dest.ForgottenPasswordResetTokenExpiresAt, opt => opt.Ignore())
             .ForMember(dest => dest.LastPasswords, opt => opt.Ignore())
             .ForMember(dest => dest.Roles, opt => opt.Ignore())
             .ForMember(dest => dest.RequestDetails, opt => opt.Ignore())

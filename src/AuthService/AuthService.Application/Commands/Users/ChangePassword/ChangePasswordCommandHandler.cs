@@ -43,9 +43,9 @@ public class ChangePasswordCommandHandler(IUserRepository _userRepository,
                                                     CancellationToken cancellationToken)
     {
         CurrentAuthorizedUser currentAuthorizedUser = _currentUserContext.GetCurrentAuthorizedUser();
-
+       
         string hashedPassword = _passwordHasher.HashPassword(request.NewPassword);
-
+       
         IEnumerable<string> userLastPasswords = (await _userLastPasswordRepository.GetLastPasswordsByUserIdAsync(currentAuthorizedUser.Id, cancellationToken))
                                                                                   .Select(userLastPassword => userLastPassword.LastPassword);
 
@@ -55,13 +55,10 @@ public class ChangePasswordCommandHandler(IUserRepository _userRepository,
         }
 
         await _userRepository.UpdatePasswordAsync(currentAuthorizedUser.Id, hashedPassword, cancellationToken);
-
         await _userLastPasswordRepository.CreateAsync(new(hashedPassword, currentAuthorizedUser.Id), cancellationToken);
-
         await _userDetailRepository.UpdateLastPasswordChangeAsync(currentAuthorizedUser.Id, cancellationToken);
 
         ViewModelBase result = new(ResponseMessages.PasswordHasBeenChanged);
-
         return Result.Ok(result);
     }
 }

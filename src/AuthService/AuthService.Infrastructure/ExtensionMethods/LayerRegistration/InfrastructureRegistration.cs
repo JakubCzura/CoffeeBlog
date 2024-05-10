@@ -3,6 +3,7 @@ using AuthService.Application.Interfaces.Persistence.Repositories;
 using AuthService.Application.Interfaces.Security.Authentication;
 using AuthService.Application.Interfaces.Security.CurrentUsers;
 using AuthService.Application.Interfaces.Security.Password;
+using AuthService.Application.Interfaces.Security.Token;
 using AuthService.Infrastructure.ExtensionMethods.Authentication;
 using AuthService.Infrastructure.ExtensionMethods.BackgroundWorkers;
 using AuthService.Infrastructure.ExtensionMethods.Database;
@@ -11,7 +12,7 @@ using AuthService.Infrastructure.Persistence.Repositories;
 using AuthService.Infrastructure.Security.Authentication;
 using AuthService.Infrastructure.Security.CurrentUsers;
 using AuthService.Infrastructure.Security.Password;
-using Microsoft.AspNetCore.Http;
+using AuthService.Infrastructure.Security.Token;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -36,6 +37,7 @@ public static class InfrastructureRegistration
         services.ConfigureAuthentication();
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
+        services.AddScoped<ISecurityTokenGenerator, SecurityTokenGenerator>();
 
         services.AddHttpContextAccessor();
         services.AddScoped<ICurrentUserContext, CurrentUserContext>();

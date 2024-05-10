@@ -27,7 +27,6 @@ public class CreateApiErrorCommandHandler(IApiErrorRepository _apiErrorRepositor
                                    CancellationToken cancellationToken)
     {
         ApiError apiError = _mapper.Map<ApiError>(request);
-
         await _apiErrorRepository.CreateAsync(apiError, cancellationToken);
 
         return Unit.Value;

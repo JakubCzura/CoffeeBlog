@@ -1,4 +1,4 @@
-﻿using AuthService.Application.Dtos.Accounts;
+﻿using AuthService.Application.Dtos.Accounts.Repository;
 using AuthService.Application.Interfaces.Persistence.Repositories;
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.Resources;
@@ -39,11 +39,9 @@ public class BanAccountByUserIdCommandHandler(IAccountRepository _accountReposit
         }
 
         BanAccountByUserIdDto banAccountByUserIdDto = _mapper.Map<BanAccountByUserIdDto>(request);
-
         await _accountRepository.BanAccountByUserIdAsync(banAccountByUserIdDto, cancellationToken);
 
         ViewModelBase result = new(ResponseMessages.AccountHasBeenBanned);
-
         return Result.Ok(result);
     }
 }

@@ -31,11 +31,9 @@ public sealed class PasswordResetTokenSentEventConsumer(ILogger<PasswordResetTok
                                                                                      context.Message.Username,
                                                                                      context.Message.Token,
                                                                                      context.Message.ExpirationDate);
-
         await _emailServiceProvider.SendEmailAsync(message, default);
 
         EmailMessageDetail emailMessageDetail = _mapper.Map<EmailMessageDetail>(message);
-
         await _emailMessageDetailRepository.CreateAsync(emailMessageDetail, default);
     }
 }

@@ -29,7 +29,6 @@ public class CreateRequestDetailCommandHandler(IEventPublisher _eventPublisher,
                                    CancellationToken cancellationToken)
     {
         RequestDetailCreatedEvent requestDetailCreatedEvent = _mapper.Map<RequestDetailCreatedEvent>(request, nameof(CreateRequestDetailCommandHandler), MicroserviceInfoConstants.Name);
-
         await _eventPublisher.PublishAsync(requestDetailCreatedEvent, cancellationToken);
 
         return Unit.Value;

@@ -129,6 +129,9 @@
   <data name="PasswordHasBeenChanged" xml:space="preserve">
     <value>Password has been changed</value>
   </data>
+  <data name="TokenToResetPasswordHasBeenSentToYourEmail" xml:space="preserve">
+    <value>Token to reset password has been sent to your e-mail</value>
+  </data>
   <data name="UsernameHasBeenChanged" xml:space="preserve">
     <value>Username has been changed</value>
   </data>

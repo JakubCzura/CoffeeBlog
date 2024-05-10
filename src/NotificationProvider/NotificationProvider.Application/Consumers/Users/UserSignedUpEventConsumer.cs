@@ -29,11 +29,9 @@ public sealed class UserSignedUpEventConsumer(ILogger<UserSignedUpEventConsumer>
     {
         IEmailMessage message = _emailMessageFactory.CreateWelcomeEmailMessage(context.Message.Email,
                                                                                context.Message.Username);
-
         await _emailServiceProvider.SendEmailAsync(message, default);
 
         EmailMessageDetail emailMessageDetail = _mapper.Map<EmailMessageDetail>(message);
-
         await _emailMessageDetailRepository.CreateAsync(emailMessageDetail, default);
     }
 }

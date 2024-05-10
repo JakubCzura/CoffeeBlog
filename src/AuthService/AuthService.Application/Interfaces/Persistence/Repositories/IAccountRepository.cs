@@ -1,4 +1,4 @@
-﻿using AuthService.Application.Dtos.Accounts;
+﻿using AuthService.Application.Dtos.Accounts.Repository;
 using AuthService.Domain.Entities;
 
 namespace AuthService.Application.Interfaces.Persistence.Repositories;

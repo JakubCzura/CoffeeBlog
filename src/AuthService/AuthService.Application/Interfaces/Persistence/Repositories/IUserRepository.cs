@@ -1,4 +1,5 @@
-﻿using AuthService.Domain.Entities;
+﻿using AuthService.Application.Dtos.Accounts.Repository;
+using AuthService.Domain.Entities;
 
 namespace AuthService.Application.Interfaces.Persistence.Repositories;
 
@@ -76,4 +77,13 @@ public interface IUserRepository : IDbEntityBaseRepository<User>
     Task<int> UpdatePasswordAsync(int id,
                                   string password,
                                   CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Updates user's forgotten password reset token and its expiration date in database.
+    /// </summary>
+    /// <param name="updateForgottenPasswordResetTokenDto">Details to update forgotten password reset token and its expiration date.</param>
+    /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
+    /// <returns>Total number of rows updated in database.</returns>
+    Task<int> UpdateForgottenPasswordResetTokenAsync(UpdateForgottenPasswordResetTokenDto updateForgottenPasswordResetTokenDto,
+                                                     CancellationToken cancellationToken);
 }

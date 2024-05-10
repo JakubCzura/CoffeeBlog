@@ -43,11 +43,9 @@ public class ChangeUsernameCommandHandler(IUserRepository _userRepository,
         }
 
         await _userRepository.UpdateUsernameAsync(currentAuthorizedUser.Id, request.NewUsername, cancellationToken);
-
         await _userDetailRepository.UpdateLastUsernameChangeAsync(currentAuthorizedUser.Id, cancellationToken);
 
         ViewModelBase result = new(ResponseMessages.UsernameHasBeenChanged);
-
         return Result.Ok(result);
     }
 }

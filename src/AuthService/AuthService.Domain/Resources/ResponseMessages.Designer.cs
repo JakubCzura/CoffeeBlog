@@ -97,6 +97,15 @@ namespace AuthService.Domain.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Token to reset password has been sent to your e-mail.
+        /// </summary>
+        public static string TokenToResetPasswordHasBeenSentToYourEmail {
+            get {
+                return ResourceManager.GetString("TokenToResetPasswordHasBeenSentToYourEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username has been changed.
         /// </summary>
         public static string UsernameHasBeenChanged {

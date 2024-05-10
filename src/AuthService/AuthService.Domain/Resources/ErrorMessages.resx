@@ -123,6 +123,12 @@
   <data name="ThisAccountHasBeenBanned" xml:space="preserve">
     <value>This account has been banned</value>
   </data>
+  <data name="TokenExpirationDateIsInvalid" xml:space="preserve">
+    <value>Token expiration date is invalid</value>
+  </data>
+  <data name="TokenValueIsInvalid" xml:space="preserve">
+    <value>Token value is invalid</value>
+  </data>
   <data name="UsernameAlreadyExists" xml:space="preserve">
     <value>Username already exists</value>
   </data>

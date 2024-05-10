@@ -1,9 +1,9 @@
 ﻿using AuthService.Domain.Enums;
 
-namespace AuthService.Application.Dtos.Accounts;
+namespace AuthService.Application.Dtos.Accounts.Repository;
 
 /// <summary>
-/// Request command to ban user's account. It's handled using Mediatr and CQRS pattern.
+/// Details to ban user's account.
 /// </summary>
 /// <param name="UserId"> User's ID whose account will be banned. </param>
 /// <param name="BanReason">Why user's account is banned. </param>

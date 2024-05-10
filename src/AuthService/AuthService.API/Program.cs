@@ -5,6 +5,7 @@ using AuthService.API.Middlewares;
 using AuthService.Application.ExtensionMethods.LayerRegistration;
 using AuthService.Domain.SettingsOptions.Authentication;
 using AuthService.Domain.SettingsOptions.PasswordHasher;
+using AuthService.Domain.SettingsOptions.SecurityToken;
 using AuthService.Domain.SettingsOptions.UserCredential;
 using AuthService.Domain.ViewModels.Errors;
 using AuthService.Infrastructure.ExtensionMethods.LayerRegistration;
@@ -19,6 +20,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<AuthenticationOptions>(builder.Configuration.GetSection(AuthenticationOptions.AppsettingsKey));
 builder.Services.Configure<PasswordHasherOptions>(builder.Configuration.GetSection(PasswordHasherOptions.AppsettingsKey));
 builder.Services.Configure<UserCredentialOptions>(builder.Configuration.GetSection(UserCredentialOptions.AppsettingsKey));
+builder.Services.Configure<SecurityTokenOptions>(builder.Configuration.GetSection(SecurityTokenOptions.AppsettingsKey));
 
 builder.Services.AddApplicationDI(builder.Configuration);
 builder.Services.AddInfrastructureDI(builder.Configuration);
