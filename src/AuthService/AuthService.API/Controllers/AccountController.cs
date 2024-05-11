@@ -3,6 +3,7 @@ using AuthService.API.Controllers.Basics;
 using AuthService.API.ExtensionMethods.Versioning;
 using AuthService.Application.Commands.Accounts.BanAccountByUserId;
 using AuthService.Application.Commands.Accounts.RemoveAccountBanByUserId;
+using AuthService.Application.ExtensionMethods.Collections;
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.ViewModels.Basics;
 using MediatR;
@@ -28,7 +29,7 @@ public class AccountController(IMediator _mediator) : ApiControllerBase(_mediato
             { Errors: { Count: > 0 } errors } => errors[0] switch
             {
                 UserNotFoundError => Conflict(errors[0].Message),
-                _ => BadRequest(string.Join(";", errors.Select(x => x.Message)))
+                _ => BadRequest(errors.GetJoinedMessages())
             },
             _ => BadRequest()
         };
@@ -43,7 +44,7 @@ public class AccountController(IMediator _mediator) : ApiControllerBase(_mediato
             { Errors: { Count: > 0 } errors } => errors[0] switch
             {
                 UserNotFoundError => Conflict(errors[0].Message),
-                _ => BadRequest(string.Join(";", errors.Select(x => x.Message)))
+                _ => BadRequest(errors.GetJoinedMessages())
             },
             _ => BadRequest()
         };

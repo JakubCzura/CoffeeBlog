@@ -7,6 +7,7 @@ using AuthService.Application.Commands.Users.ChangeUsername;
 using AuthService.Application.Commands.Users.GenerateForgottenPasswordResetToken;
 using AuthService.Application.Commands.Users.ResetForgottenPassword;
 using AuthService.Application.Commands.Users.SignUpUser;
+using AuthService.Application.ExtensionMethods.Collections;
 using AuthService.Application.Queries.Users.SignInUser;
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.ViewModels.Basics;
@@ -32,7 +33,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
             {
                 UsernameExistsError => Conflict(errors[0].Message),
                 EmailExistsError => Conflict(errors[0].Message),
-                _ => BadRequest(string.Join(";", errors.Select(x => x.Message)))
+                _ => BadRequest(errors.GetJoinedMessages())
             },
             _ => BadRequest()
         };
@@ -47,7 +48,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
             {
                 UserNotFoundError => Conflict(errors[0].Message),
                 UserBannedError => Forbid(errors[0].Message),
-                _ => BadRequest(string.Join(";", errors.Select(x => x.Message)))
+                _ => BadRequest(errors.GetJoinedMessages())
             },
             _ => BadRequest()
         };
@@ -62,7 +63,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
             { Errors: { Count: > 0 } errors } => errors[0] switch
             {
                 UsernameExistsError => Conflict(errors[0].Message),
-                _ => BadRequest(string.Join(";", errors.Select(x => x.Message)))
+                _ => BadRequest(errors.GetJoinedMessages())
             },
             _ => BadRequest()
         };
@@ -77,7 +78,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
             { Errors: { Count: > 0 } errors } => errors[0] switch
             {
                 EmailExistsError => Conflict(errors[0].Message),
-                _ => BadRequest(string.Join(";", errors.Select(x => x.Message)))
+                _ => BadRequest(errors.GetJoinedMessages())
             },
             _ => BadRequest()
         };
@@ -89,7 +90,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
         => await Mediator.Send(changePasswordCommand, cancellationToken) switch
         {
             { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
-            { Errors: { Count: > 0 } errors } => BadRequest(string.Join(";", errors.Select(x => x.Message))),
+            { Errors: { Count: > 0 } errors } => BadRequest(errors.GetJoinedMessages()),
             _ => BadRequest()
         };
 
@@ -103,7 +104,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
             { Errors: { Count: > 0 } errors } => errors[0] switch
             {
                 UserNotFoundError => Conflict(errors[0].Message),
-                _ => BadRequest(string.Join(";", errors.Select(x => x.Message)))
+                _ => BadRequest(errors.GetJoinedMessages())
             },
             _ => BadRequest()
         };
@@ -120,7 +121,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
                 UserNotFoundError => Conflict(errors[0].Message),
                 InvalidForgottenPasswordResetTokenError => Forbid(errors[0].Message),
                 ExpiredForgottenPasswordResetTokenError => Forbid(errors[0].Message),
-                _ => BadRequest(string.Join(";", errors.Select(x => x.Message)))
+                _ => BadRequest(errors.GetJoinedMessages())
             },
             _ => BadRequest()
         };
@@ -138,7 +139,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
                 UserNotFoundError => Conflict(errors[0].Message),
                 InvalidForgottenPasswordResetTokenError => Forbid(errors[0].Message),
                 ExpiredForgottenPasswordResetTokenError => Forbid(errors[0].Message),
-                _ => BadRequest(string.Join(";", errors.Select(x => x.Message)))
+                _ => BadRequest(errors.GetJoinedMessages())
             },
             _ => BadRequest()
         };
