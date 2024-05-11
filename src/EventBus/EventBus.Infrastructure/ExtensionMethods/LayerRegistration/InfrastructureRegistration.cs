@@ -11,6 +11,7 @@ public static class InfrastructureRegistration
                                                          IConfiguration configuration)
     {
         services.AddScoped<IEventPublisher, EventPublisher>();
+        services.AddScoped(typeof(IRequestPublisher<>), typeof(RequestPublisher<>));
 
         return services;
     }
