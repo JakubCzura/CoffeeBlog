@@ -25,137 +25,121 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
     [HttpPost("sign-up")]
     public async Task<ActionResult<SignUpUserViewModel>> SignUp([FromBody] SignUpUserCommand signUpUserCommand,
                                                                 CancellationToken cancellationToken)
-    {
-        Result<SignUpUserViewModel> result = await Mediator.Send(signUpUserCommand, cancellationToken);
-
-        if (result.IsSuccess)
+        => await Mediator.Send(signUpUserCommand, cancellationToken) switch
         {
-            return Ok(result.Value);
-        }
-
-        IError error = result.Errors[0];
-        return error switch
-        {
-            UsernameExistsError => Conflict(error.Message),
-            EmailExistsError => Conflict(error.Message),
-            _ => BadRequest(string.Join(";", result.Errors.Select(x => x.Message)))
+            { IsSuccess: true, Value: SignUpUserViewModel viewModel } => Ok(viewModel),
+            { Errors: { Count: > 0 } errors } => errors[0] switch
+            {
+                UsernameExistsError => Conflict(errors[0].Message),
+                EmailExistsError => Conflict(errors[0].Message),
+                _ => BadRequest(string.Join(";", errors.Select(x => x.Message)))
+            },
+            _ => BadRequest()
         };
-    }
 
     [AllowAnonymous]
     [HttpPost("sign-in")]
     public async Task<IActionResult> SignIn([FromBody] SignInUserQuery signInUserQuery)
-    {
-        Result<SignInUserViewModel> result = await Mediator.Send(signInUserQuery);
-
-        if (result.IsSuccess)
+        => await Mediator.Send(signInUserQuery) switch
         {
-            return Ok(result.Value);
-        }
-
-        IError error = result.Errors[0];
-        return error switch
-        {
-            UserNotFoundError => Conflict(error.Message),
-            UserBannedError => Forbid(error.Message),
-            _ => BadRequest(string.Join(";", result.Errors.Select(x => x.Message)))
+            { IsSuccess: true, Value: SignInUserViewModel viewModel } => Ok(viewModel),
+            { Errors: { Count: > 0 } errors } => errors[0] switch
+            {
+                UserNotFoundError => Conflict(errors[0].Message),
+                UserBannedError => Forbid(errors[0].Message),
+                _ => BadRequest(string.Join(";", errors.Select(x => x.Message)))
+            },
+            _ => BadRequest()
         };
-    }
 
     [Authorize]
     [HttpPut("username")]
     public async Task<IActionResult> ChangeUsername([FromBody] ChangeUsernameCommand changeUsernameCommand,
                                                     CancellationToken cancellationToken)
-    {
-        Result<ViewModelBase> result = await Mediator.Send(changeUsernameCommand, cancellationToken);
-
-        if (result.IsSuccess)
+        => await Mediator.Send(changeUsernameCommand, cancellationToken) switch
         {
-            return Ok(result.Value);
-        }
-
-        IError error = result.Errors[0];
-        return error switch
-        {
-            UsernameExistsError => Conflict(error.Message),
-            _ => BadRequest(string.Join(";", result.Errors.Select(x => x.Message)))
+            { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
+            { Errors: { Count: > 0 } errors } => errors[0] switch
+            {
+                UsernameExistsError => Conflict(errors[0].Message),
+                _ => BadRequest(string.Join(";", errors.Select(x => x.Message)))
+            },
+            _ => BadRequest()
         };
-    }
 
     [Authorize]
     [HttpPut("email")]
     public async Task<IActionResult> ChangeEmail([FromBody] ChangeEmailCommand changeEmailCommand,
                                                  CancellationToken cancellationToken)
-    {
-        Result<ViewModelBase> result = await Mediator.Send(changeEmailCommand, cancellationToken);
-
-        if (result.IsSuccess)
+        => await Mediator.Send(changeEmailCommand, cancellationToken) switch
         {
-            return Ok(result.Value);
-        }
-
-        IError error = result.Errors[0];
-        return error switch
-        {
-            EmailExistsError => Conflict(error.Message),
-            _ => BadRequest(string.Join(";", result.Errors.Select(x => x.Message)))
+            { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
+            { Errors: { Count: > 0 } errors } => errors[0] switch
+            {
+                EmailExistsError => Conflict(errors[0].Message),
+                _ => BadRequest(string.Join(";", errors.Select(x => x.Message)))
+            },
+            _ => BadRequest()
         };
-    }
 
     [Authorize]
     [HttpPut("password")]
     public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordCommand changePasswordCommand,
                                                     CancellationToken cancellationToken)
-    {
-        Result<ViewModelBase> result = await Mediator.Send(changePasswordCommand, cancellationToken);
-
-        if (result.IsSuccess)
+        => await Mediator.Send(changePasswordCommand, cancellationToken) switch
         {
-            return Ok(result.Value);
-        }
-
-        return BadRequest(string.Join(";", result.Errors.Select(x => x.Message)));
-    }
+            { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
+            { Errors: { Count: > 0 } errors } => BadRequest(string.Join(";", errors.Select(x => x.Message))),
+            _ => BadRequest()
+        };
 
     [Authorize]
     [HttpPost("forgotten-password-reset-token")]
     public async Task<IActionResult> GenerateForgottenPasswordResetToken([FromBody] GenerateForgottenPasswordResetTokenCommand generateForgottenPasswordResetTokenCommand,
                                                                          CancellationToken cancellationToken)
-    {
-        Result<ViewModelBase> result = await Mediator.Send(generateForgottenPasswordResetTokenCommand, cancellationToken);
-
-        if (result.IsSuccess)
+        => await Mediator.Send(generateForgottenPasswordResetTokenCommand, cancellationToken) switch
         {
-            return Ok(result.Value);
-        }
-
-        IError error = result.Errors[0];
-        return error switch
-        {
-            UserNotFoundError => Conflict(error.Message),
-            _ => BadRequest(string.Join(";", result.Errors.Select(x => x.Message)))
+            { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
+            { Errors: { Count: > 0 } errors } => errors[0] switch
+            {
+                UserNotFoundError => Conflict(errors[0].Message),
+                _ => BadRequest(string.Join(";", errors.Select(x => x.Message)))
+            },
+            _ => BadRequest()
         };
-    }
 
     [Authorize]
     [HttpPost("password-reset")]
     public async Task<IActionResult> ResetPassword([FromBody] ResetForgottenPasswordCommand resetForgottenPasswordCommand,
                                                    CancellationToken cancellationToken)
-    {
-        Result<ViewModelBase> result = await Mediator.Send(resetForgottenPasswordCommand, cancellationToken);
-
-        if (result.IsSuccess)
+        => await Mediator.Send(resetForgottenPasswordCommand, cancellationToken) switch
         {
-            return Ok(result.Value);
-        }
-
-        IError error = result.Errors[0];
-        return error switch
-        {
-            UserNotFoundError => Conflict(error.Message),
-            InvalidForgottenPasswordResetTokenError => Forbid(error.Message),
-            ExpiredForgottenPasswordResetTokenError => Forbid(error.Message),
-            _ => BadRequest(string.Join(";", result.Errors.Select(x => x.Message)))
+            { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
+            { Errors: { Count: > 0 } errors } => errors[0] switch
+            {
+                UserNotFoundError => Conflict(errors[0].Message),
+                InvalidForgottenPasswordResetTokenError => Forbid(errors[0].Message),
+                ExpiredForgottenPasswordResetTokenError => Forbid(errors[0].Message),
+                _ => BadRequest(string.Join(";", errors.Select(x => x.Message)))
+            },
+            _ => BadRequest()
         };
-    }
+
+    [Authorize]
+    [HttpPost("password-reset2")]
+    public async Task<IActionResult> ResetPassword2([FromBody] ResetForgottenPasswordCommand resetForgottenPasswordCommand,
+                                                   CancellationToken cancellationToken)
+
+        => await Mediator.Send(resetForgottenPasswordCommand, cancellationToken) switch
+        {
+            { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
+            { Errors: { Count: > 0 } errors } => errors[0] switch
+            {
+                UserNotFoundError => Conflict(errors[0].Message),
+                InvalidForgottenPasswordResetTokenError => Forbid(errors[0].Message),
+                ExpiredForgottenPasswordResetTokenError => Forbid(errors[0].Message),
+                _ => BadRequest(string.Join(";", errors.Select(x => x.Message)))
+            },
+            _ => BadRequest()
+        };
 }

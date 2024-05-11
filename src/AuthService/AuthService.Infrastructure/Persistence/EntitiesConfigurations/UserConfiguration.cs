@@ -19,6 +19,10 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(x => x.Password).IsRequired();
 
+        builder.Property(x => x.ForgottenPasswordResetToken).IsRequired(false);
+
+        builder.Property(x => x.ForgottenPasswordResetTokenExpiresAt).IsRequired(false);
+
         builder.Property(x => x.CreatedAt).IsRequired()
                                           .HasDefaultValueSql(SqlConstants.GetUtcDate);
 

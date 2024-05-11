@@ -5,7 +5,6 @@ using AuthService.Application.Commands.Accounts.BanAccountByUserId;
 using AuthService.Application.Commands.Accounts.RemoveAccountBanByUserId;
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.ViewModels.Basics;
-using FluentResults;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,46 +19,32 @@ public class AccountController(IMediator _mediator) : ApiControllerBase(_mediato
     public async Task<IActionResult> BanAccount([FromRoute] int userId,
                                                 [FromBody] BanAccountByUserIdRequest accountByUserIdRequest,
                                                 CancellationToken cancellationToken)
-    {
-        BanAccountByUserIdCommand banAccountByUserIdCommand = new(userId,
-                                                                  accountByUserIdRequest.BanReason,
-                                                                  accountByUserIdRequest.BanNote,
-                                                                  accountByUserIdRequest.BanEndsAt);
-
-        Result<ViewModelBase> result = await Mediator.Send(banAccountByUserIdCommand, cancellationToken);
-
-        if (result.IsSuccess)
+        => await Mediator.Send(new BanAccountByUserIdCommand(userId,
+                                                             accountByUserIdRequest.BanReason,
+                                                             accountByUserIdRequest.BanNote,
+                                                             accountByUserIdRequest.BanEndsAt), cancellationToken) switch
         {
-            return Ok(result.Value);
-        }
-
-        IError error = result.Errors[0];
-        return error switch
-        {
-            UserNotFoundError => Conflict(error.Message),
-            _ => BadRequest(string.Join(";", result.Errors.Select(x => x.Message)))
+            { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
+            { Errors: { Count: > 0 } errors } => errors[0] switch
+            {
+                UserNotFoundError => Conflict(errors[0].Message),
+                _ => BadRequest(string.Join(";", errors.Select(x => x.Message)))
+            },
+            _ => BadRequest()
         };
-    }
 
     [Authorize]
     [HttpPut("ban/remove/{userId}")]
     public async Task<IActionResult> RemoveAccountBan([FromRoute] int userId,
                                                       CancellationToken cancellationToken)
-    {
-        RemoveAccountBanByUserIdCommand removeAccountBanByUserIdCommand = new(userId);
-
-        Result<ViewModelBase> result = await Mediator.Send(removeAccountBanByUserIdCommand, cancellationToken);
-
-        if (result.IsSuccess)
+        => await Mediator.Send(new RemoveAccountBanByUserIdCommand(userId), cancellationToken) switch
         {
-            return Ok(result.Value);
-        }
-
-        IError error = result.Errors[0];
-        return error switch
-        {
-            UserNotFoundError => Conflict(error.Message),
-            _ => BadRequest(string.Join(";", result.Errors.Select(x => x.Message)))
+            { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
+            { Errors: { Count: > 0 } errors } => errors[0] switch
+            {
+                UserNotFoundError => Conflict(errors[0].Message),
+                _ => BadRequest(string.Join(";", errors.Select(x => x.Message)))
+            },
+            _ => BadRequest()
         };
-    }
 }
