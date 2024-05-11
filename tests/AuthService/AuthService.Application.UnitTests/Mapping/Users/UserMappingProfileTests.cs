@@ -27,13 +27,12 @@ public class UserMappingProfileTests
         //Arrange
         string hashedPassword = "#$#@sdasdjsahd218732DSADASD@#dksadha23!@#das";
 
-        SignUpUserCommand signUpUserCommand = new()
-        {
-            Username = "Johny",
-            Email = "johny@email.com",
-            Password = "Password123@!",
-            ConfirmPassword = "Password123@!"
-        };
+        SignUpUserCommand signUpUserCommand = new(
+            "Johny",
+            "johny@email.com",
+            "Password123@!",
+            "Password123@!"
+        );
 
         //Act
         User result = _mapper.Map<User>(signUpUserCommand, opt =>
@@ -51,11 +50,12 @@ public class UserMappingProfileTests
     public void Map_should_ThrowAutoMapperMappingException_when_AdditionalPropertiesAreNotSpecified()
     {
         //Arrange
-        SignUpUserCommand signUpUserCommand = new()
-        {
-            Username = "Johny",
-            Email = "johny@email.com"
-        };
+        SignUpUserCommand signUpUserCommand = new(
+            "Johny",
+            "johny@email.com",
+            "Password123@!",
+            "Password123@!"
+        );
 
         //Act
         Func<User> action = () => _mapper.Map<User>(signUpUserCommand);

@@ -24,13 +24,12 @@ public class ApiErrorMappingProfileTests
     public void Map_should_MapCreateApiErrorCommanddToApiError()
     {
         //Arrange
-        CreateApiErrorCommand createApiErrorCommand = new()
-        {
-            Name = "NullEntityException",
-            Exception = "NullEntityException, StackTrace: example for test, More auto-generated text etc.",
-            Message = "Entity cannot be null",
-            Description = "Attempt to save null entity in database"
-        };
+        CreateApiErrorCommand createApiErrorCommand = new(
+            "NullEntityException",
+            "NullEntityException, StackTrace: example for test, More auto-generated text etc.",
+            "Entity cannot be null",
+            "Attempt to save null entity in database"
+        );
 
         //Act
         ApiError result = _mapper.Map<ApiError>(createApiErrorCommand);

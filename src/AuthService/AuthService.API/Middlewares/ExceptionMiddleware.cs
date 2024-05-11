@@ -45,13 +45,12 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> _logger,
 
         try
         {
-            CreateApiErrorCommand createApiErrorCommand = new()
-            {
-                Name = exception.GetType().Name,
-                Exception = exception.ToString(),
-                Message = exception.Message,
-                Description = "Exception caught by exception middleware"
-            };
+            CreateApiErrorCommand createApiErrorCommand = new(
+                exception.GetType().Name,
+                exception.ToString(),
+                exception.Message,
+                "Exception caught by exception middleware"
+            );
             await _mediator.Send(createApiErrorCommand, httpContext.RequestAborted);
         }
         catch (Exception)

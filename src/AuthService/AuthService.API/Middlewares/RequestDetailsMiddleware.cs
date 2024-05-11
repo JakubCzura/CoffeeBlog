@@ -58,19 +58,18 @@ public class RequestDetailsMiddleware(ILogger<RequestDetailsMiddleware> _logger,
             stopwatch.Stop();
 
             //Send data to StatisticsCollector microservice
-            CreateRequestDetailCommand createRequestDetailCommand = new()
-            {
-                ControllerName = httpContext.GetRouteData().Values["controller"]?.ToString() ?? string.Empty,
-                Path = httpContext.Request.Path,
-                HttpMethod = httpContext.Request.Method,
-                StatusCode = httpContext.Response.StatusCode,
-                RequestBody = requestBody,
-                RequestContentType = httpContext.Request.ContentType,
-                ResponseBody = responseBody,
-                ResponseContentType = httpContext.Response.ContentType,
-                RequestTimeInMiliseconds = stopwatch.ElapsedMilliseconds,
-                UserId = userId is not null ? int.Parse(userId) : null
-            };
+            CreateRequestDetailCommand createRequestDetailCommand = new(
+                httpContext.GetRouteData().Values["controller"]?.ToString() ?? string.Empty,
+                httpContext.Request.Path,
+                httpContext.Request.Method,
+                httpContext.Response.StatusCode,
+                requestBody,
+                httpContext.Request.ContentType,
+                responseBody,
+                httpContext.Response.ContentType,
+                stopwatch.ElapsedMilliseconds,
+                userId is not null ? int.Parse(userId) : null
+            );
             await _mediator.Send(createRequestDetailCommand, httpContext.RequestAborted);
         }
         catch (Exception exception)

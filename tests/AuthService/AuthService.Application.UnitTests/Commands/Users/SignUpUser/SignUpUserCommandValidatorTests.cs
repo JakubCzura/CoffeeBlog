@@ -13,13 +13,12 @@ public class SignUpUserCommandValidatorTests
     public void Validate_should_Pass_when_CommandIsCorrect()
     {
         //Arrange
-        SignUpUserCommand command = new()
-        {
-            Username = "Johny",
-            Email = "jemail@email.com",
-            Password = "KJPa!2Dsd1@",
-            ConfirmPassword = "KJPa!2Dsd1@"
-        };
+        SignUpUserCommand command = new(
+            "Johny",
+            "jemail@email.com",
+            "KJPa!2Dsd1@",
+            "KJPa!2Dsd1@"
+        );
 
         //Act
         TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
@@ -32,13 +31,12 @@ public class SignUpUserCommandValidatorTests
     public void Validate_should_Fail_when_UsernameIsIncorrect()
     {
         //Arrange
-        SignUpUserCommand command = new()
-        {
-            Username = new string('k', 200),
-            Email = "myemail@email.com",
-            Password = "KJPa!2Dsd1@",
-            ConfirmPassword = "KJPa!2Dsd1@"
-        };
+        SignUpUserCommand command = new(
+            new string('k', 200),
+            "myemail@email.com",
+            "KJPa!2Dsd1@",
+            "KJPa!2Dsd1@"
+        );
 
         //Act
         TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
@@ -52,13 +50,12 @@ public class SignUpUserCommandValidatorTests
     public void Validate_should_Fail_when_EmailIsIncorrect()
     {
         //Arrange
-        SignUpUserCommand command = new()
-        {
-            Username = "Johny",
-            Email = "myemail.com",
-            Password = "KJPa!2Dsd1@",
-            ConfirmPassword = "KJPa!2Dsd1@"
-        };
+        SignUpUserCommand command = new(
+            "Johny",
+            "myemail.com",
+            "KJPa!2Dsd1@",
+            "KJPa!2Dsd1@"
+        );
 
         //Act
         TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
@@ -72,13 +69,12 @@ public class SignUpUserCommandValidatorTests
     public void Validate_should_Fail_when_EmailIsSameAsUsername()
     {
         //Arrange
-        SignUpUserCommand command = new()
-        {
-            Username = "myemail@mail.com",
-            Email = "myemail@mail.com",
-            Password = "KJPa!2Dsd1@",
-            ConfirmPassword = "KJPa!2Dsd1@"
-        };
+        SignUpUserCommand command = new(
+            "myemail@mail.com",
+            "myemail@mail.com",
+            "KJPa!2Dsd1@",
+            "KJPa!2Dsd1@"
+        );
 
         //Act
         TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
@@ -92,13 +88,12 @@ public class SignUpUserCommandValidatorTests
     public void Validate_should_Fail_when_PasswordIsIncorrect()
     {
         //Arrange
-        SignUpUserCommand command = new()
-        {
-            Username = "Johny",
-            Email = "myemail@emai.com",
-            Password = "Kkkk@d<",
-            ConfirmPassword = "Kkkk@d<"
-        };
+        SignUpUserCommand command = new(
+            "Johny",
+            "myemail@emai.com",
+            "Kkkk@d<",
+            "Kkkk@d<"
+        );
 
         //Act
         TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
@@ -112,13 +107,12 @@ public class SignUpUserCommandValidatorTests
     public void Validate_should_Fail_when_ConfirmPasswordIsIncorrect()
     {
         //Arrange
-        SignUpUserCommand command = new()
-        {
-            Username = "Johny",
-            Email = "myemail@email.com",
-            Password = "Kkkk@d<",
-            ConfirmPassword = ""
-        };
+        SignUpUserCommand command = new(
+            "Johny",
+            "myemail@email.com",
+            "Kkkk@d<",
+            ""
+        );
 
         //Act
         TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
@@ -132,13 +126,12 @@ public class SignUpUserCommandValidatorTests
     public void Validate_should_Fail_when_ConfirmPasswordIsDifferentFromPassword()
     {
         //Arrange
-        SignUpUserCommand command = new()
-        {
-            Username = "Johny",
-            Email = "myemail@email.com",
-            Password = "Kkkk@d<2",
-            ConfirmPassword = "Kkkk@d<22222222222"
-        };
+        SignUpUserCommand command = new(
+            "Johny",
+            "myemail@email.com",
+            "Kkkk@d<2",
+            "Kkkk@d<22222222222"
+        );
 
         //Act
         TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);

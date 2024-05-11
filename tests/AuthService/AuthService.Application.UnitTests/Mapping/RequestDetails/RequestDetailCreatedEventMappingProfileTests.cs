@@ -27,19 +27,18 @@ public class RequestDetailCreatedEventMappingProfileTests
         string eventPublisherName = "RequestCommandHandler";
         string eventPublisherMicroserviceName = "MicroserviceName";
 
-        CreateRequestDetailCommand createRequestDetailCommand = new()
-        {
-            ControllerName = "UserController",
-            Path = "/api/user",
-            HttpMethod = "GET",
-            StatusCode = 200,
-            RequestBody = """{"username":"Johny"}""",
-            RequestContentType = "application/json",
-            ResponseBody = """{"id":1,"username":"Johny"}""",
-            ResponseContentType = "application/json",
-            RequestTimeInMiliseconds = 5,
-            UserId = 1,
-        };
+        CreateRequestDetailCommand createRequestDetailCommand = new(
+            "UserController",
+            "/api/user",
+            "GET",
+            200,
+            """{"username":"Johny"}""",
+            "application/json",
+            """{"id":1,"username":"Johny"}""",
+            "application/json",
+            5,
+            1
+        );
 
         //Act
         RequestDetailCreatedEvent result = _mapper.Map<RequestDetailCreatedEvent>(createRequestDetailCommand, opt =>
@@ -68,19 +67,18 @@ public class RequestDetailCreatedEventMappingProfileTests
     public void Map_should_ThrowAutoMapperMappingException_when_AdditionalPropertiesAreNotSpecified()
     {
         //Arrange
-        CreateRequestDetailCommand createRequestDetailCommand = new()
-        {
-            ControllerName = "UserController",
-            Path = "/api/user",
-            HttpMethod = "GET",
-            StatusCode = 200,
-            RequestBody = """{"username":"Johny"}""",
-            RequestContentType = "application/json",
-            ResponseBody = """{"id":1,"username":"Johny"}""",
-            ResponseContentType = "application/json",
-            RequestTimeInMiliseconds = 5,
-            UserId = 1,
-        };
+        CreateRequestDetailCommand createRequestDetailCommand = new(
+            "UserController",
+            "/api/user",
+            "GET",
+            200,
+            """{"username":"Johny"}""",
+            "application/json",
+            """{"id":1,"username":"Johny"}""",
+            "application/json",
+            5,
+            1
+        );
 
         //Act
         Func<RequestDetailCreatedEvent> action = () => _mapper.Map<RequestDetailCreatedEvent>(createRequestDetailCommand);

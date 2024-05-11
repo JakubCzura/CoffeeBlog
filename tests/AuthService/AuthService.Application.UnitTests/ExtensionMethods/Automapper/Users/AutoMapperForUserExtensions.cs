@@ -23,11 +23,12 @@ public class AutoMapperForUserExtensions
         // Arrange
         string hashedPassword = "hjsda@#!@dasdn2#!@da@#!";
 
-        SignUpUserCommand signUpUserCommand = new()
-        {
-            Username = "username",
-            Email = "myemail@email.com"
-        };
+        SignUpUserCommand signUpUserCommand = new(
+            "username",
+            "myemail@email.com",
+            "Password123@!",
+            "Password123@!"
+        );
 
         //Act
         User result = _mapper.Map<User>(signUpUserCommand, hashedPassword);
