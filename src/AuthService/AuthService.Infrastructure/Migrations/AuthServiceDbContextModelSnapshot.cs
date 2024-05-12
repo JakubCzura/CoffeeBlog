@@ -91,6 +91,45 @@ namespace AuthService.Infrastructure.Migrations
                     b.ToTable("ApiError", (string)null);
                 });
 
+            modelBuilder.Entity("AuthService.Domain.Entities.EventConsumerDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("EventConsumerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("EventMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EventName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EventPublishedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EventPublisherMicroserviceName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EventPublisherName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EventConsumerDetail", (string)null);
+                });
+
             modelBuilder.Entity("AuthService.Domain.Entities.RequestDetail", b =>
                 {
                     b.Property<int>("Id")

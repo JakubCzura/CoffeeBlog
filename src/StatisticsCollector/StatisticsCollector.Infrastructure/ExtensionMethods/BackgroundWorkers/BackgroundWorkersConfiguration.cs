@@ -16,7 +16,7 @@ public static class BackgroundWorkersConfiguration
 
             options.AddJob<UsersDiagnosticsCollector>(applicationDiagnosticsCollectorJobName)
                    .AddTrigger(trigger => trigger.ForJob(applicationDiagnosticsCollectorJobName)
-                   .StartAt(DateBuilder.TomorrowAt(0, 30, 0))
+                   .StartAt(DateBuilder.TomorrowAt(4, 0, 0))
                    .WithSimpleSchedule(schedule => schedule.WithIntervalInHours(24).RepeatForever()));
         });
 

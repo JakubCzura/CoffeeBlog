@@ -29,6 +29,25 @@ namespace AuthService.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EventConsumerDetail",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EventId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EventPublishedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EventName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EventPublisherName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EventPublisherMicroserviceName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EventConsumerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EventMessage = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventConsumerDetail", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Role",
                 columns: table => new
                 {
@@ -231,6 +250,9 @@ namespace AuthService.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "ApiError");
+
+            migrationBuilder.DropTable(
+                name: "EventConsumerDetail");
 
             migrationBuilder.DropTable(
                 name: "RequestDetails");

@@ -14,4 +14,11 @@ public interface IDateTimeProvider
     /// The current time in local format.
     /// </summary>
     public DateTime Now { get; }
+
+    /// <summary>
+    /// Converts <see cref="DateTime"/> to <see cref="DateOnly"/>.
+    /// </summary>
+    /// <param name="dateTime">Date and time to convert</param>
+    /// <returns><see cref="DateOnly"/> instance</returns>
+    public DateOnly FromDateTime(DateTime dateTime);
 }

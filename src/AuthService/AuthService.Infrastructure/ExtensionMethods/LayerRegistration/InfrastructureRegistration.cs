@@ -25,10 +25,12 @@ public static class InfrastructureRegistration
     {
         services.ConfigureDbContext(configuration);
 
-        services.AddScoped<IApiErrorRepository, ApiErrorRepository>();
-        services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IAccountRepository, AccountRepository>();
+        services.AddScoped<IApiErrorRepository, ApiErrorRepository>();
+        services.AddScoped<IEventConsumerDetailRepository, EventConsumerDetailRepository>();
+        services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IUserDetailRepository, UserDetailRepository>();
+        services.AddScoped<IUserDiagnosticDataRepository, UsersDiagnosticDataRepository>();
         services.AddScoped<IUserLastPasswordRepository, UserLastPasswordRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
 

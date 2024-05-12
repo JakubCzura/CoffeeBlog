@@ -2,6 +2,6 @@
 
 namespace StatisticsCollector.Application.Interfaces.Persistence.Repositories;
 
-public interface IUserDiagnosticRepository : IDbEntityBaseRepository<UserDiagnostic>
+public interface IUsersDiagnosticsRepository : IDbEntityBaseRepository<UsersDiagnostics>
 {
 }

@@ -5,13 +5,13 @@ using MassTransit;
 
 namespace EventBus.Infrastructure.Publishers;
 
-internal class RequestPublisher<TResponseRequest>(IRequestClient<TResponseRequest> _requestClient)
-    : IRequestPublisher<TResponseRequest> where TResponseRequest : EventBase
+internal class RequestPublisher<TRequest>(IRequestClient<TRequest> _requestClient)
+    : IRequestPublisher<TRequest> where TRequest : EventBase
 {
-    private readonly IRequestClient<TResponseRequest> _requestClient = _requestClient;
+    private readonly IRequestClient<TRequest> _requestClient = _requestClient;
 
-    public async Task<Response<TResponse>> GetResponseAsync<TRequest, TResponse>(TRequest request,
-                                                                                 CancellationToken cancellationToken) where TRequest : EventBase
-                                                                                                                      where TResponse : ResponseBase
+    public async Task<Response<TResponse>> GetResponseAsync<TResponse>(TRequest request,
+                                                                       CancellationToken cancellationToken) where TResponse : ResponseBase
         => await _requestClient.GetResponse<TResponse>(request, cancellationToken);
 }
+

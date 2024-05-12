@@ -26,7 +26,7 @@ public static class InfrastructureRegistration
         services.AddScoped<IApiErrorRepository, ApiErrorRepository>();
         services.AddScoped<IEventConsumerDetailRepository, EventConsumerDetailRepository>();
         services.AddScoped<IRequestDetailRepository, RequestDetailRepository>();
-        services.AddScoped<IUserDiagnosticRepository, UserDiagnosticRepository>();
+        services.AddScoped<IUsersDiagnosticsRepository, UsersDiagnosticsRepository>();
 
         services.ConfigureBackgroundWorkers(configuration);
 

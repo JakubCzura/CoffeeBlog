@@ -4,9 +4,8 @@ using MassTransit;
 
 namespace EventBus.Application.Interfaces.Publishers;
 
-public interface IRequestPublisher<TResponseRequest> where TResponseRequest : EventBase
+public interface IRequestPublisher<TRequest> where TRequest : EventBase
 {
-    Task<Response<TResponse>> GetResponseAsync<TRequest, TResponse>(TRequest request,
-                                                                    CancellationToken cancellationToken) where TRequest : EventBase
-                                                                                                         where TResponse : ResponseBase;
+    Task<Response<TResponse>> GetResponseAsync<TResponse>(TRequest request,
+                                                          CancellationToken cancellationToken) where TResponse : ResponseBase;
 }
