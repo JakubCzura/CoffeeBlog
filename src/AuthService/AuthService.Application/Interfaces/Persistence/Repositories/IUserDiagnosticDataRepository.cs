@@ -13,6 +13,6 @@ public interface IUserDiagnosticDataRepository
     /// <param name="dataCollectedAt">Date when data is collected.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Diagnostic data about users.</returns>
-    Task<GetUsersDiagnosticDataResultDto> GetUsersDiagnosticDataAsync(DateOnly dataCollectedAt,
+    Task<GetUsersDiagnosticDataResultDto> GetUsersDiagnosticDataAsync(DateTime dataCollectedAt,
                                                                       CancellationToken cancellationToken);
 }

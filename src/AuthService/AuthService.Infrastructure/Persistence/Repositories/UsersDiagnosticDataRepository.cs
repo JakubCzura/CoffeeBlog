@@ -11,14 +11,11 @@ internal class UsersDiagnosticDataRepository(AuthServiceDbContext _authServiceDb
 {
     private readonly AuthServiceDbContext _authServiceDbContext = _authServiceDbContext;
 
-    public async Task<GetUsersDiagnosticDataResultDto> GetUsersDiagnosticDataAsync(DateOnly dataCollectedAt,
+    public async Task<GetUsersDiagnosticDataResultDto> GetUsersDiagnosticDataAsync(DateTime dataCollectedAt,
                                                                                    CancellationToken cancellationToken = default)
     {
-        //Due EF Core and possible issue with time convertion, it is necessary to convert time here, not in query
-        DateTime dataCollectedTime = dataCollectedAt.ToDateTime(default).Date;
-
         int newUserCount = await _authServiceDbContext.Users.AsNoTracking()
-                                                            .CountAsync(user => user.CreatedAt.Date == dataCollectedTime, cancellationToken);
+                                                            .CountAsync(user => user.CreatedAt.Date == dataCollectedAt.Date, cancellationToken);
 
         int activeAccountCount = await _authServiceDbContext.Accounts.AsNoTracking()
                                                                      .CountAsync(account => !account.IsBanned, cancellationToken);
@@ -35,22 +32,22 @@ internal class UsersDiagnosticDataRepository(AuthServiceDbContext _authServiceDb
                                                                                     .FirstOrDefaultAsync(cancellationToken);
 
         int userWhoLoggedInCount = await _authServiceDbContext.UserDetails.AsNoTracking()
-                                                                          .CountAsync(userDetail => userDetail.LastSuccessfullSignIn == dataCollectedTime, cancellationToken);
+                                                                          .CountAsync(userDetail => userDetail.LastSuccessfullSignIn == dataCollectedAt.Date, cancellationToken);
 
         int userWhoFailedToLogInCount = await _authServiceDbContext.UserDetails.AsNoTracking()
                                                                                .CountAsync(userDetail => userDetail.LastFailedSignIn != null
-                                                                                                      && userDetail.LastFailedSignIn.Value == dataCollectedTime, cancellationToken);
+                                                                                                      && userDetail.LastFailedSignIn.Value == dataCollectedAt.Date, cancellationToken);
 
         int userWhoChangedUsernameCount = await _authServiceDbContext.UserDetails.AsNoTracking()
                                                                                  .CountAsync(userDetail => userDetail.LastUsernameChange != null
-                                                                                                        && userDetail.LastUsernameChange.Value == dataCollectedTime, cancellationToken);
+                                                                                                        && userDetail.LastUsernameChange.Value == dataCollectedAt.Date, cancellationToken);
 
         int userWhoChangedEmailCount = await _authServiceDbContext.UserDetails.AsNoTracking()
                                                                               .CountAsync(userDetail => userDetail.LastEmailChange != null
-                                                                                                     && userDetail.LastEmailChange.Value == dataCollectedTime, cancellationToken);
+                                                                                                     && userDetail.LastEmailChange.Value == dataCollectedAt.Date, cancellationToken);
         int userWhoChangedPasswordCount = await _authServiceDbContext.UserDetails.AsNoTracking()
                                                                                  .CountAsync(userDetail => userDetail.LastPasswordChange != null
-                                                                                                        && userDetail.LastPasswordChange.Value == dataCollectedTime, cancellationToken);
+                                                                                                        && userDetail.LastPasswordChange.Value == dataCollectedAt.Date, cancellationToken);
 
         GetUsersDiagnosticDataResultDto getUserDiagnosticResultDto = new(newUserCount,
                                                                          activeAccountCount,

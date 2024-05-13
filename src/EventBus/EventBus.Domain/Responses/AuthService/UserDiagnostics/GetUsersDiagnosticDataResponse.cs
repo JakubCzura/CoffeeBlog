@@ -26,6 +26,6 @@ public record GetUsersDiagnosticDataResponse(int NewUserCount,
                                              int UserWhoChangedUsernameCount,
                                              int UserWhoChangedEmailCount,
                                              int UserWhoChangedPasswordCount,
-                                             DateOnly DataCollectedAt,
+                                             DateTime DataCollectedAt,
                                              Guid RequestId,
                                              string ResponsePublisherName) : AuthServiceResponseBase(RequestId, ResponsePublisherName);

@@ -3,6 +3,7 @@ using EventBus.Domain.Events.StatisticsCollector.UserDiagnostics;
 using EventBus.Domain.Responses.AuthService.UserDiagnostics;
 using MassTransit;
 using Microsoft.Extensions.Logging;
+using MongoDB.Bson.IO;
 using Quartz;
 using StatisticsCollector.Application.Interfaces.Helpers;
 using StatisticsCollector.Application.Interfaces.Persistence.Repositories;
@@ -25,7 +26,7 @@ public class UsersDiagnosticsCollector(ILogger<UsersDiagnosticsCollector> _logge
     {
         try
         {
-            DateOnly dataCollectedAt = _dateTimeProvider.FromDateTime(_dateTimeProvider.UtcNow.AddDays(-1));
+            DateTime dataCollectedAt = _dateTimeProvider.UtcNow.AddDays(-1);
 
             GetUsersDiagnosticDataRequest getUserDiagnosticRequest = new(dataCollectedAt,
                                                                          nameof(UsersDiagnosticsCollector));
@@ -43,7 +44,7 @@ public class UsersDiagnosticsCollector(ILogger<UsersDiagnosticsCollector> _logge
                 UserWhoChangedUsernameCount = response.Message.UserWhoChangedUsernameCount,
                 UserWhoChangedEmailCount = response.Message.UserWhoChangedEmailCount,
                 UserWhoChangedPasswordCount = response.Message.UserWhoChangedPasswordCount,
-                DataCollectedAt = response.Message.DataCollectedAt.ToDateTime(default)
+                DataCollectedAt = response.Message.DataCollectedAt
             };
             await _usersDiagnosticsRepository.CreateAsync(usersDiagnostics, default);
         }
