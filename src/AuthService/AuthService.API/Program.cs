@@ -12,6 +12,7 @@ using AuthService.Infrastructure.ExtensionMethods.LayerRegistration;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
+using System.Net;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -43,7 +44,7 @@ builder.Services.Configure<ApiBehaviorOptions>(config =>
     {
         string errors = string.Join(";", context.ModelState.Values.SelectMany(x => x.Errors)
                                                                   .Select(x => x.ErrorMessage));
-        ErrorDetailsViewModel result = new(400, errors);
+        ErrorDetailsViewModel result = new((int)HttpStatusCode.BadRequest, errors);
         return new BadRequestObjectResult(result);
     };
 });

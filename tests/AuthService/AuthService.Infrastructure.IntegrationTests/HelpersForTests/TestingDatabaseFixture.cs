@@ -8,7 +8,7 @@ namespace AuthService.Infrastructure.IntegrationTests.HelpersForTests;
 public class TestingDatabaseFixture : IAsyncLifetime
 {
     public readonly AuthServiceDbContext AuthServiceDbContext;
-    private static string CoffeeBlogDbConnectionString => $"Server=(localdb)\\MSSQLLocalDB;Database=PersistenceIntegrationTests;Integrated Security=True;TrustServerCertificate=True";
+    private static string CoffeeBlogAuthServiceInfrastructureDbConnectionString => $"Server=(localdb)\\MSSQLLocalDB;Database=CoffeeBlogAuthServiceInfrastructureIntegrationTests;Integrated Security=True;TrustServerCertificate=True";
 
     private Respawner _respawner = default!;
     private DbConnection _connection = default!;
@@ -16,7 +16,7 @@ public class TestingDatabaseFixture : IAsyncLifetime
     public TestingDatabaseFixture()
     {
         DbContextOptions<AuthServiceDbContext> options = new DbContextOptionsBuilder<AuthServiceDbContext>()
-                                                           .UseSqlServer(CoffeeBlogDbConnectionString)
+                                                           .UseSqlServer(CoffeeBlogAuthServiceInfrastructureDbConnectionString)
                                                            .Options;
         AuthServiceDbContext = new(options);
 

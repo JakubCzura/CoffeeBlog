@@ -13,7 +13,7 @@ public static class DbContextConfiguration
     {
         services.AddDbContext<AuthServiceDbContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("CoffeeBlogDbConnectionString"),
+            options.UseSqlServer(configuration.GetConnectionString("CoffeeBlogAuthServiceDbConnectionString"),
                                  sqlServerOptionsBuilder =>
                                  {
                                      sqlServerOptionsBuilder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);

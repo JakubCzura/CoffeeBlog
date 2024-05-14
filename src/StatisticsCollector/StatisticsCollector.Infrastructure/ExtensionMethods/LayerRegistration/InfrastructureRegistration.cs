@@ -5,6 +5,7 @@ using StatisticsCollector.Application.Interfaces.Helpers;
 using StatisticsCollector.Application.Interfaces.Persistence.Repositories;
 using StatisticsCollector.Domain.SettingsOptions.Database;
 using StatisticsCollector.Infrastructure.ExtensionMethods.BackgroundWorkers;
+using StatisticsCollector.Infrastructure.ExtensionMethods.Database;
 using StatisticsCollector.Infrastructure.Helpers;
 using StatisticsCollector.Infrastructure.Persistence.DatabaseContext;
 using StatisticsCollector.Infrastructure.Persistence.Repositories;
@@ -16,10 +17,7 @@ public static class InfrastructureRegistration
     public static IServiceCollection AddInfrastructureDI(this IServiceCollection services,
                                                          IConfiguration configuration)
     {
-        DatabaseOptions databaseOptions = configuration.GetSection(DatabaseOptions.AppsettingsKey).Get<DatabaseOptions>()!;
-
-        services.AddDbContext<StatisticsCollectorDbContext>(options =>
-            options.UseMongoDB(databaseOptions.ConnectionString, databaseOptions.DatabaseName));
+        services.ConfigureDbContext(configuration);
 
         services.AddScoped<IDateTimeProvider, DateTimeProvider>();
 
