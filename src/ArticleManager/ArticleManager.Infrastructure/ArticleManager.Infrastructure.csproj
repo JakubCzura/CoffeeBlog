@@ -16,6 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
+	<InternalsVisibleTo Include="ArticleManager.Infrastructure.UnitTests" />
+	<InternalsVisibleTo Include="ArticleManager.Infrastructure.IntegrationTests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ArticleManager.Application\ArticleManager.Application.csproj" />
   </ItemGroup>
 
