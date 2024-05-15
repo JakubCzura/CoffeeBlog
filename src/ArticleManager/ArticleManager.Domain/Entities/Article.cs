@@ -1,8 +1,8 @@
-﻿using PostManager.Domain.Entities.Basics;
+﻿using ArticleManager.Domain.Entities.Basics;
 
-namespace PostManager.Domain.Entities;
+namespace ArticleManager.Domain.Entities;
 
-public class Post : DbEntityBase
+public class Article : DbEntityBase
 {
     public string Title { get; set; } = string.Empty;
 
@@ -16,5 +16,5 @@ public class Post : DbEntityBase
 
     public int UserId { get; set; }
 
-    public virtual List<PostComment> PostComments { get; set; } = [];
+    public virtual List<ArticleComment> ArticleComments { get; set; } = [];
 }

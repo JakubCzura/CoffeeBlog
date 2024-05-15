@@ -1,4 +1,4 @@
-﻿namespace PostManager.Domain.Constants;
+﻿namespace ArticleManager.Domain.Constants;
 
 /// <summary>
 /// Constants for SQL for example when configuring database require to use some SQL code.

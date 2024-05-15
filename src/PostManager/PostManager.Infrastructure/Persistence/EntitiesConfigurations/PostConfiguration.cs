@@ -14,6 +14,9 @@ internal class PostConfiguration : IEntityTypeConfiguration<Post>
         builder.Property(x => x.Title).IsRequired()
                                       .HasMaxLength(100);
 
+        builder.Property(x => x.Subtitle).IsRequired(false)
+                                         .HasMaxLength(100);
+
         builder.Property(x => x.Content).IsRequired()
                                         .HasMaxLength(5000);
 

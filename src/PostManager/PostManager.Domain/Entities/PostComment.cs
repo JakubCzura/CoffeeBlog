@@ -1,13 +1,13 @@
-﻿namespace PostManager.Domain.Entities;
+﻿using PostManager.Domain.Entities.Basics;
+
+namespace PostManager.Domain.Entities;
 
 /// <summary>
-/// Class representing a post comment.
+/// Class representing post's comment.
 /// See <see cref="Post"/>
 /// </summary>
-public class PostComment
+public class PostComment : DbEntityBase
 {
-    public int Id { get; set; }
-
     public string Content { get; set; } = string.Empty;
 
     public DateTime CreatedAt { get; set; }
