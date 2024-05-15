@@ -1,6 +1,5 @@
 ﻿using AuthService.Application.Commands.Users.SignUpUser;
 using AuthService.Domain.Resources;
-using FluentAssertions;
 using FluentValidation.TestHelper;
 
 namespace AuthService.Application.UnitTests.Commands.Users.SignUpUser;
@@ -42,8 +41,8 @@ public class SignUpUserCommandValidatorTests
         TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
 
         //Assert
-        result.ShouldHaveValidationErrorFor(x => x.Username);
-        result.Errors.Should().Contain(x => x.ErrorMessage == ValidatorMessages.UsernameCantContainMoreThan100Characters);
+        result.ShouldHaveValidationErrorFor(x => x.Username)
+              .WithErrorMessage(ValidatorMessages.UsernameCantContainMoreThan50Characters);
     }
 
     [Fact]
@@ -61,8 +60,8 @@ public class SignUpUserCommandValidatorTests
         TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
 
         //Assert
-        result.ShouldHaveValidationErrorFor(x => x.Email);
-        result.Errors.Should().Contain(x => x.ErrorMessage == ValidatorMessages.EmailMustBeInValidFormat);
+        result.ShouldHaveValidationErrorFor(x => x.Email)
+              .WithErrorMessage(ValidatorMessages.EmailMustBeInValidFormat);
     }
 
     [Fact]
@@ -80,8 +79,8 @@ public class SignUpUserCommandValidatorTests
         TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
 
         //Assert
-        result.ShouldHaveValidationErrorFor(x => x.Email);
-        result.Errors.Should().Contain(x => x.ErrorMessage == ValidatorMessages.EmailMustBeDifferentFromUsername);
+        result.ShouldHaveValidationErrorFor(x => x.Email)
+              .WithErrorMessage(ValidatorMessages.EmailMustBeDifferentFromUsername);
     }
 
     [Fact]
@@ -99,8 +98,8 @@ public class SignUpUserCommandValidatorTests
         TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
 
         //Assert
-        result.ShouldHaveValidationErrorFor(x => x.Password);
-        result.Errors.Should().Contain(x => x.ErrorMessage == ValidatorMessages.PasswordMustContainAtLeastOneDigit);
+        result.ShouldHaveValidationErrorFor(x => x.Password)
+              .WithErrorMessage(ValidatorMessages.PasswordMustContainAtLeastOneDigit);
     }
 
     [Fact]
@@ -118,8 +117,8 @@ public class SignUpUserCommandValidatorTests
         TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
 
         //Assert
-        result.ShouldHaveValidationErrorFor(x => x.ConfirmPassword);
-        result.Errors.Should().Contain(x => x.ErrorMessage == ValidatorMessages.ConfirmPasswordIsRequired);
+        result.ShouldHaveValidationErrorFor(x => x.ConfirmPassword)
+              .WithErrorMessage(ValidatorMessages.ConfirmPasswordIsRequired);
     }
 
     [Fact]
@@ -137,7 +136,7 @@ public class SignUpUserCommandValidatorTests
         TestValidationResult<SignUpUserCommand> result = _createUserCommandValidator.TestValidate(command);
 
         //Assert
-        result.ShouldHaveValidationErrorFor(x => x.ConfirmPassword);
-        result.Errors.Should().Contain(x => x.ErrorMessage == ValidatorMessages.PasswordAndConfirmPasswordMustMatch);
+        result.ShouldHaveValidationErrorFor(x => x.ConfirmPassword)
+              .WithErrorMessage(ValidatorMessages.PasswordAndConfirmPasswordMustMatch);
     }
 }

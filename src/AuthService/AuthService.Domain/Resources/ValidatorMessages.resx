@@ -153,11 +153,14 @@
   <data name="PasswordMustContainAtLeastOneUpperLetter" xml:space="preserve">
     <value>Password must contain at least one upper letter</value>
   </data>
+  <data name="TokenCantContainMoreThan200Characters" xml:space="preserve">
+    <value>Token can't contain more than 200 characters</value>
+  </data>
   <data name="TokenToResetPasswordIsRequired" xml:space="preserve">
     <value>Token to reset password is required</value>
   </data>
-  <data name="UsernameCantContainMoreThan100Characters" xml:space="preserve">
-    <value>Username can't contain more than 100 characters</value>
+  <data name="UsernameCantContainMoreThan50Characters" xml:space="preserve">
+    <value>Username can't contain more than 50 characters</value>
   </data>
   <data name="UsernameIsRequired" xml:space="preserve">
     <value>Username is required</value>

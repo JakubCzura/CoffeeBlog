@@ -12,6 +12,8 @@ public class UsernameValidator : AbstractValidator<string>
     /// Default constructor.
     /// </summary>
     public UsernameValidator()
-        => RuleFor(username => username).NotEmpty().WithMessage(ValidatorMessages.UsernameIsRequired)
-                                        .MaximumLength(100).WithMessage(ValidatorMessages.UsernameCantContainMoreThan100Characters);
+        => RuleFor(username => username).NotEmpty()
+                                        .WithMessage(ValidatorMessages.UsernameIsRequired)
+                                        .MaximumLength(50)
+                                        .WithMessage(ValidatorMessages.UsernameCantContainMoreThan50Characters);
 }

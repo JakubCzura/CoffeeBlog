@@ -1,4 +1,6 @@
 ﻿using AuthService.Application.Validators.SharedValidators;
+using AuthService.Domain.Constants;
+using AuthService.Domain.Resources;
 using FluentAssertions;
 using FluentValidation.TestHelper;
 
@@ -22,32 +24,29 @@ public class PasswordValidatorTests
         => _passwordValidator.TestValidate(password)
                              .ShouldNotHaveAnyValidationErrors();
 
-    public static TheoryData<string> Validate_should_Fail_when_PasswordIsIncorrect_Data => new()
+    public static TheoryData<string, string> Validate_should_Fail_when_PasswordIsIncorrect_Data => new()
     {
-        "",
-        " ",
-        "  ",
-        "s" ,
-        " d" ,
-        "d s" ,
-        "4" ,
-        "1234" ,
-        "1234" ,
-        "12345",
-        "Johny1" ,
-        "!y1" ,
-        "!y1    " ,
-        "!#" ,
-        "k^" ,
-        "K^ 1" ,
-        new string('k', 321)
+        { "", ValidatorMessages.PasswordIsRequired },
+        { " ", ValidatorMessages.PasswordIsRequired },
+        { "  ", ValidatorMessages.PasswordIsRequired },
+        { "@#", ValidatorMessages.PasswordMustBeBetween5And50CharactersLong },
+        { " d@1", ValidatorMessages.PasswordMustBeBetween5And50CharactersLong },
+        { "d#!", ValidatorMessages.PasswordMustBeBetween5And50CharactersLong },
+        { new string('k', 4), ValidatorMessages.PasswordMustBeBetween5And50CharactersLong },
+        { new string('k', 51), ValidatorMessages.PasswordMustBeBetween5And50CharactersLong },
+        { "d12#$da23", ValidatorMessages.PasswordMustContainAtLeastOneUpperLetter },
+        { "3DDD23$$!@31@O", ValidatorMessages.PasswordMustContainAtLeastOneLowerLetter },
+        { "DDD@@@ddad@@$#", ValidatorMessages.PasswordMustContainAtLeastOneDigit },
+        { "kdD2312dsa32d", $"{ValidatorMessages.PasswordMustContainAtLeastOneOfSpecialCharacters}: {PasswordConstants.SpecialCharacters}" }
     };
 
     [Theory]
     [MemberData(nameof(Validate_should_Fail_when_PasswordIsIncorrect_Data))]
-    public void Validate_should_Fail_when_PasswordIsIncorrect(string password)
+    public void Validate_should_Fail_when_PasswordIsIncorrect(string password, 
+                                                              string errorMessage)
         => _passwordValidator.TestValidate(password)
-                             .ShouldHaveAnyValidationError();
+                             .ShouldHaveAnyValidationError()
+                             .WithErrorMessage(errorMessage);
 
     [Fact]
     public void Validate_should_ThrowArgumentNullException_when_PasswordIsNull()

@@ -12,7 +12,7 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
         builder.ToTable("User");
 
         builder.Property(x => x.Username).IsRequired()
-                                         .HasMaxLength(100);
+                                         .HasMaxLength(50);
 
         builder.Property(x => x.Email).IsRequired()
                                       .HasMaxLength(320);

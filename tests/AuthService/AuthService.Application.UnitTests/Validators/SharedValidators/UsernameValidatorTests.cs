@@ -1,4 +1,5 @@
 ﻿using AuthService.Application.Validators.SharedValidators;
+using AuthService.Domain.Resources;
 using FluentAssertions;
 using FluentValidation.TestHelper;
 
@@ -12,7 +13,7 @@ public class UsernameValidatorTests
     {
         "Johny",
         "J",
-        new string('K', 100)
+        new string('K', 50)
     };
 
     [Theory]
@@ -21,17 +22,21 @@ public class UsernameValidatorTests
         => _usernameValidator.TestValidate(username)
                              .ShouldNotHaveAnyValidationErrors();
 
-    public static TheoryData<string> Validate_should_Fail_when_UsernameIsIncorrect_Data => new()
+    public static TheoryData<string, string> Validate_should_Fail_when_UsernameIsIncorrect_Data => new()
     {
-        "" ,
-        new string('k', 101)
+        { "", ValidatorMessages.UsernameIsRequired } ,
+        { " ", ValidatorMessages.UsernameIsRequired } ,
+        { "   ", ValidatorMessages.UsernameIsRequired } ,
+        { new string('k', 51), ValidatorMessages.UsernameCantContainMoreThan50Characters }
     };
 
     [Theory]
     [MemberData(nameof(Validate_should_Fail_when_UsernameIsIncorrect_Data))]
-    public void Validate_should_Fail_when_UsernameIsIncorrect(string username)
+    public void Validate_should_Fail_when_UsernameIsIncorrect(string username,
+                                                              string errorMessage)
         => _usernameValidator.TestValidate(username)
-                             .ShouldHaveAnyValidationError();
+                             .ShouldHaveAnyValidationError()
+                             .WithErrorMessage(errorMessage);
 
     [Fact]
     public void Validate_should_ThrowArgumentNullException_when_UsernameIsNull()

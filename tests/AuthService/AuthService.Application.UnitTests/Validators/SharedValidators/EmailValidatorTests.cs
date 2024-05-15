@@ -1,4 +1,5 @@
 ﻿using AuthService.Application.Validators.SharedValidators;
+using AuthService.Domain.Resources;
 using FluentAssertions;
 using FluentValidation.TestHelper;
 
@@ -13,29 +14,31 @@ public class EmailValidatorTests
         => _emailValidator.TestValidate("johny@emailprovider.com")
                           .ShouldNotHaveAnyValidationErrors();
 
-    public static TheoryData<string> Validate_should_Fail_when_EmailIsIncorrect_Data => new()
+    public static TheoryData<string, string> Validate_should_Fail_when_EmailIsIncorrect_Data => new()
     {
-         "",
-         " ",
-         "s",
-         " d",
-         "d s",
-         "dd s",
-         "@ s",
-         "@" ,
-         "@ " ,
-         "@D" ,
-         "email." ,
-         "email.com" ,
-         "email.@" ,
-         new string('k', 321)
+        { "", ValidatorMessages.EmailIsRequired },
+        { " ", ValidatorMessages.EmailIsRequired },
+        { "s", ValidatorMessages.EmailMustBeInValidFormat },
+        { " d", ValidatorMessages.EmailMustBeInValidFormat },
+        { "d s", ValidatorMessages.EmailMustBeInValidFormat },
+        { "dd s", ValidatorMessages.EmailMustBeInValidFormat },
+        { "Q s", ValidatorMessages.EmailMustBeInValidFormat },
+        { "Q", ValidatorMessages.EmailMustBeInValidFormat },
+        { "Q ", ValidatorMessages.EmailMustBeInValidFormat },
+        { "QD", ValidatorMessages.EmailMustBeInValidFormat },
+        { "email.", ValidatorMessages.EmailMustBeInValidFormat },
+        { "email.com", ValidatorMessages.EmailMustBeInValidFormat },
+        { "email.Q", ValidatorMessages.EmailMustBeInValidFormat },
+        { new string('k', 321), ValidatorMessages.EmailCantContainMoreThan320Characters }
     };
 
     [Theory]
     [MemberData(nameof(Validate_should_Fail_when_EmailIsIncorrect_Data))]
-    public void Validate_should_Fail_when_EmailIsIncorrect(string email)
+    public void Validate_should_Fail_when_EmailIsIncorrect(string email, 
+                                                           string errorMessage)
         => _emailValidator.TestValidate(email)
-                          .ShouldHaveAnyValidationError();
+                          .ShouldHaveAnyValidationError()
+                          .WithErrorMessage(errorMessage);
 
     [Fact]
     public void Validate_should_ThrowArgumentNullException_when_EmailIsNull()

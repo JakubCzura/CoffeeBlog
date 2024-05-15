@@ -12,7 +12,10 @@ public class EmailValidator : AbstractValidator<string>
     /// Default constructor.
     /// </summary>
     public EmailValidator()
-        => RuleFor(email => email).NotEmpty().WithMessage(ValidatorMessages.EmailIsRequired)
-                                  .MaximumLength(320).WithMessage(ValidatorMessages.EmailCantContainMoreThan320Characters)
-                                  .EmailAddress().WithMessage(ValidatorMessages.EmailMustBeInValidFormat);
+        => RuleFor(email => email).NotEmpty()
+                                  .WithMessage(ValidatorMessages.EmailIsRequired)
+                                  .MaximumLength(320)
+                                  .WithMessage(ValidatorMessages.EmailCantContainMoreThan320Characters)
+                                  .EmailAddress()
+                                  .WithMessage(ValidatorMessages.EmailMustBeInValidFormat);
 }

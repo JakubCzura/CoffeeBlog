@@ -18,9 +18,14 @@ public class ResetForgottenPasswordCommandValidator : AbstractValidator<ResetFor
 
         RuleFor(x => x.NewPassword).SetValidator(new PasswordValidator());
 
-        RuleFor(x => x.ConfirmNewPassword).NotEmpty().WithMessage(ValidatorMessages.ConfirmPasswordIsRequired)
-                                          .Equal(x => x.NewPassword).WithMessage(ValidatorMessages.PasswordAndConfirmPasswordMustMatch);
+        RuleFor(x => x.ConfirmNewPassword).NotEmpty()
+                                          .WithMessage(ValidatorMessages.ConfirmPasswordIsRequired)
+                                          .Equal(x => x.NewPassword)
+                                          .WithMessage(ValidatorMessages.PasswordAndConfirmPasswordMustMatch);
 
-        RuleFor(x => x.ForgottenPasswordResetToken).NotEmpty().WithMessage(ValidatorMessages.TokenToResetPasswordIsRequired);
+        RuleFor(x => x.ForgottenPasswordResetToken).NotEmpty()
+                                                   .WithMessage(ValidatorMessages.TokenToResetPasswordIsRequired)
+                                                   .MaximumLength(200)
+                                                   .WithMessage(ValidatorMessages.TokenCantContainMoreThan200Characters);
     }
 }

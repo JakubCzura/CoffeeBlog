@@ -16,7 +16,9 @@ public class ChangePasswordCommandValidator : AbstractValidator<ChangePasswordCo
     {
         RuleFor(x => x.NewPassword).SetValidator(new PasswordValidator());
 
-        RuleFor(x => x.ConfirmNewPassword).NotEmpty().WithMessage(ValidatorMessages.ConfirmPasswordIsRequired)
-                                          .Equal(x => x.NewPassword).WithMessage(ValidatorMessages.PasswordAndConfirmPasswordMustMatch);
+        RuleFor(x => x.ConfirmNewPassword).NotEmpty()
+                                          .WithMessage(ValidatorMessages.ConfirmPasswordIsRequired)
+                                          .Equal(x => x.NewPassword)
+                                          .WithMessage(ValidatorMessages.PasswordAndConfirmPasswordMustMatch);
     }
 }
