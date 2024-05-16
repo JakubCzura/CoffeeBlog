@@ -10,9 +10,10 @@ using AuthService.Application.Commands.Users.SignUpUser;
 using AuthService.Application.ExtensionMethods.Collections;
 using AuthService.Application.Queries.Users.SignInUser;
 using AuthService.Domain.Errors.Users;
+using AuthService.Domain.Resources;
 using AuthService.Domain.ViewModels.Basics;
+using AuthService.Domain.ViewModels.Errors;
 using AuthService.Domain.ViewModels.Users;
-using FluentResults;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,8 +23,19 @@ namespace AuthService.API.Controllers;
 [ApiVersion(ApiVersioningInfo.Version_1_0)]
 public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
 {
+
+    /// <summary>
+    /// Endpoint to sign up user.
+    /// </summary>
+    /// <param name="signUpUserCommand">Details to create user's account.</param>
+    /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
+    /// <returns>Information about signin up user.</returns>
     [AllowAnonymous]
     [HttpPost("sign-up")]
+    [ProducesResponseType(typeof(ViewModelBase), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status409Conflict)]
+    [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<SignUpUserViewModel>> SignUp([FromBody] SignUpUserCommand signUpUserCommand,
                                                                 CancellationToken cancellationToken)
         => await Mediator.Send(signUpUserCommand, cancellationToken) switch
@@ -31,30 +43,53 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
             { IsSuccess: true, Value: SignUpUserViewModel viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => errors[0] switch
             {
-                UsernameExistsError => Conflict(errors[0].Message),
-                EmailExistsError => Conflict(errors[0].Message),
-                _ => BadRequest(errors.GetJoinedMessages())
+                UsernameExistsError => Conflict(new ErrorDetailsViewModel(StatusCodes.Status409Conflict, errors[0].Message)),
+                EmailExistsError => Conflict(new ErrorDetailsViewModel(StatusCodes.Status409Conflict, errors[0].Message)),
+                _ => BadRequest(new ErrorDetailsViewModel(StatusCodes.Status400BadRequest, errors.GetJoinedMessages()))
             },
-            _ => BadRequest()
+            _ => BadRequest(new ErrorDetailsViewModel(StatusCodes.Status400BadRequest, ResponseMessages.UndefinedError))
         };
 
+    /// <summary>
+    /// Endpoint to sign in user.
+    /// </summary>
+    /// <param name="signInUserQuery">User's credentials.</param>
+    /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
+    /// <returns>Result of attempt to sign in and authorization token for successful attempt.</returns>
     [AllowAnonymous]
     [HttpPost("sign-in")]
-    public async Task<IActionResult> SignIn([FromBody] SignInUserQuery signInUserQuery)
-        => await Mediator.Send(signInUserQuery) switch
+    [ProducesResponseType(typeof(ViewModelBase), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(UnauthorizedResult), StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> SignIn([FromBody] SignInUserQuery signInUserQuery,
+                                            CancellationToken cancellationToken)
+        => await Mediator.Send(signInUserQuery, cancellationToken) switch
         {
             { IsSuccess: true, Value: SignInUserViewModel viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => errors[0] switch
             {
-                UserNotFoundError => Conflict(errors[0].Message),
-                UserBannedError => Forbid(errors[0].Message),
-                _ => BadRequest(errors.GetJoinedMessages())
+                UserNotFoundError => NotFound(new ErrorDetailsViewModel(StatusCodes.Status404NotFound, errors[0].Message)),
+                UserBannedError => Unauthorized(new ErrorDetailsViewModel(StatusCodes.Status401Unauthorized, errors[0].Message)),
+                _ => BadRequest(new ErrorDetailsViewModel(StatusCodes.Status400BadRequest, errors.GetJoinedMessages()))
             },
-            _ => BadRequest()
+            _ => BadRequest(new ErrorDetailsViewModel(StatusCodes.Status400BadRequest, ResponseMessages.UndefinedError))
         };
 
+    /// <summary>
+    /// Endpoint to change user's username.
+    /// </summary>
+    /// <param name="changeUsernameCommand">Details to set new username.</param>
+    /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
+    /// <returns>Information about changing user's username.</returns>
     [Authorize]
     [HttpPut("username")]
+    [ProducesResponseType(typeof(ViewModelBase), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(UnauthorizedResult), StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status409Conflict)]
+    [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> ChangeUsername([FromBody] ChangeUsernameCommand changeUsernameCommand,
                                                     CancellationToken cancellationToken)
         => await Mediator.Send(changeUsernameCommand, cancellationToken) switch
@@ -62,10 +97,10 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
             { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => errors[0] switch
             {
-                UsernameExistsError => Conflict(errors[0].Message),
-                _ => BadRequest(errors.GetJoinedMessages())
+                UsernameExistsError => Conflict(new ErrorDetailsViewModel(StatusCodes.Status409Conflict, errors[0].Message)),
+                _ => BadRequest(new ErrorDetailsViewModel(StatusCodes.Status400BadRequest, errors.GetJoinedMessages()))
             },
-            _ => BadRequest()
+            _ => BadRequest(new ErrorDetailsViewModel(StatusCodes.Status400BadRequest, ResponseMessages.UndefinedError))
         };
 
     [Authorize]
@@ -103,7 +138,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
             { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => errors[0] switch
             {
-                UserNotFoundError => Conflict(errors[0].Message),
+                UserNotFoundError => NotFound(errors[0].Message),
                 _ => BadRequest(errors.GetJoinedMessages())
             },
             _ => BadRequest()
@@ -118,7 +153,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
             { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => errors[0] switch
             {
-                UserNotFoundError => Conflict(errors[0].Message),
+                UserNotFoundError => NotFound(errors[0].Message),
                 InvalidForgottenPasswordResetTokenError => Forbid(errors[0].Message),
                 ExpiredForgottenPasswordResetTokenError => Forbid(errors[0].Message),
                 _ => BadRequest(errors.GetJoinedMessages())
@@ -136,7 +171,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
             { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => errors[0] switch
             {
-                UserNotFoundError => Conflict(errors[0].Message),
+                UserNotFoundError => NotFound(errors[0].Message),
                 InvalidForgottenPasswordResetTokenError => Forbid(errors[0].Message),
                 ExpiredForgottenPasswordResetTokenError => Forbid(errors[0].Message),
                 _ => BadRequest(errors.GetJoinedMessages())
