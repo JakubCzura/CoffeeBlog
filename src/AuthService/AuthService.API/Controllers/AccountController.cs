@@ -3,9 +3,7 @@ using AuthService.API.Controllers.Basics;
 using AuthService.API.ExtensionMethods.Versioning;
 using AuthService.Application.Commands.Accounts.BanAccountByUserId;
 using AuthService.Application.Commands.Accounts.RemoveAccountBanByUserId;
-using AuthService.Application.ExtensionMethods.Collections;
 using AuthService.Domain.Errors.Users;
-using AuthService.Domain.Resources;
 using AuthService.Domain.ViewModels.Basics;
 using AuthService.Domain.ViewModels.Errors;
 using MediatR;
@@ -46,10 +44,10 @@ public class AccountController(IMediator _mediator) : ApiControllerBase(_mediato
             { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => errors[0] switch
             {
-                UserNotFoundError => NotFound(new ErrorDetailsViewModel(StatusCodes.Status404NotFound, errors[0].Message)),
-                _ => BadRequest(new ErrorDetailsViewModel(StatusCodes.Status400BadRequest, errors.GetJoinedMessages()))
+                UserNotFoundError => CreateNotFoundObjectResult(errors[0]),
+                _ => CreateBadRequestObjectResult(errors)
             },
-            _ => BadRequest(new ErrorDetailsViewModel(StatusCodes.Status400BadRequest, ResponseMessages.UndefinedError))
+            _ => CreateBadRequestObjectResult()
         };
 
     /// <summary>
@@ -72,9 +70,9 @@ public class AccountController(IMediator _mediator) : ApiControllerBase(_mediato
             { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => errors[0] switch
             {
-                UserNotFoundError => NotFound(new ErrorDetailsViewModel(StatusCodes.Status404NotFound, errors[0].Message)),
-                _ => BadRequest(new ErrorDetailsViewModel(StatusCodes.Status400BadRequest, errors.GetJoinedMessages()))
+                UserNotFoundError => CreateNotFoundObjectResult(errors[0]),
+                _ => CreateBadRequestObjectResult(errors)
             },
-            _ => BadRequest(new ErrorDetailsViewModel(StatusCodes.Status400BadRequest, ResponseMessages.UndefinedError))
+            _ => CreateBadRequestObjectResult()
         };
 }
