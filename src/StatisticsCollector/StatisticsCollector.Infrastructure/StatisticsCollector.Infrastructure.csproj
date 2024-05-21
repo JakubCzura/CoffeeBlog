@@ -10,12 +10,12 @@
     <ProjectReference Include="..\StatisticsCollector.Application\StatisticsCollector.Application.csproj" />
   </ItemGroup>
 
-  <!--MongoDB and EntityFramework must be the same version. Use version 7.0 due to MongoDB. Don't update EntityFramework.-->
+  <!--MongoDB and EntityFramework must be the same version.-->
   <ItemGroup>
-	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.5" />
 	  <PackageReference Include="MongoDB.Driver" Version="2.25.0" />
-	  <PackageReference Include="MongoDB.EntityFrameworkCore" Version="7.0.0-preview.1" />
-	  <PackageReference Include="Quartz.Extensions.Hosting" Version="3.8.1" />
+	  <PackageReference Include="MongoDB.EntityFrameworkCore" Version="8.0.1" />
+	  <PackageReference Include="Quartz.Extensions.Hosting" Version="3.9.0" />
   </ItemGroup>
 
 </Project>
