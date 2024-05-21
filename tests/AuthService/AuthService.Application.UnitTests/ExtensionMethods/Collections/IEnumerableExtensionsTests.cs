@@ -63,7 +63,7 @@ public class IEnumerableExtensionsTests
         action.Should().Throw<ArgumentNullException>();
     }
 
-    public static TheoryData<IError[], char, string> GetJoinedMessages_should_ReturnJoinedMessagesOfErrorsAsStrings_Data
+    public static TheoryData<IError[], char, string> GetJoinedMessages_should_ReturnJoinedMessagesOfErrorsAsStrings_when_ErrorsAreSpecified_Data
         => new()
         {
             { new IError[] { new Error("Error 1 Message"), new Error("Error 2 Message") }, ';', "Error 1 Message;Error 2 Message" },
@@ -73,7 +73,7 @@ public class IEnumerableExtensionsTests
 
 
     [Theory]
-    [MemberData(nameof(GetJoinedMessages_should_ReturnJoinedMessagesOfErrorsAsStrings_Data))]
+    [MemberData(nameof(GetJoinedMessages_should_ReturnJoinedMessagesOfErrorsAsStrings_when_ErrorsAreSpecified_Data))]
     public void GetJoinedMessages_should_ReturnJoinedMessagesOfErrorsAsStrings_when_ErrorsAreSpecified(IError[] errors, char delimiter, string expected)
     {
         // Act

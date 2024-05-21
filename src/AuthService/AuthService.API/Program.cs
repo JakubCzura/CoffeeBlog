@@ -2,6 +2,7 @@ using AuthService.API.Components;
 using AuthService.API.ExtensionMethods.Swagger;
 using AuthService.API.ExtensionMethods.Versioning;
 using AuthService.API.Middlewares;
+using AuthService.Application.ExtensionMethods.ActionContext;
 using AuthService.Application.ExtensionMethods.LayerRegistration;
 using AuthService.Domain.SettingsOptions.Authentication;
 using AuthService.Domain.SettingsOptions.PasswordHasher;
@@ -12,7 +13,6 @@ using AuthService.Infrastructure.ExtensionMethods.LayerRegistration;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
-using System.Net;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -40,13 +40,8 @@ builder.Services.AddSwagger();
 builder.Services.Configure<ApiBehaviorOptions>(config =>
 {
     config.SuppressModelStateInvalidFilter = false;  //False to perform auto validation. Added for readability and code clear behaviour despite False is default value.
-    config.InvalidModelStateResponseFactory = context =>
-    {
-        string errors = string.Join(";", context.ModelState.Values.SelectMany(x => x.Errors)
-                                                                  .Select(x => x.ErrorMessage));
-        ErrorDetailsViewModel result = new((int)HttpStatusCode.BadRequest, errors);
-        return new BadRequestObjectResult(result);
-    };
+    config.InvalidModelStateResponseFactory = context
+        => new BadRequestObjectResult(new ErrorDetailsViewModel(StatusCodes.Status400BadRequest, context.GetJoinedErrorsMessages()));
 });
 
 builder.Services.AddTransient<ExceptionMiddleware>();

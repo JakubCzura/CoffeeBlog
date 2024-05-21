@@ -1,5 +1,8 @@
 ﻿namespace AuthService.API.ExtensionMethods.Request;
 
+/// <summary>
+/// Extension methods helping to process a request.
+/// </summary>
 public static class RequestExtensions
 {
     /// <summary>

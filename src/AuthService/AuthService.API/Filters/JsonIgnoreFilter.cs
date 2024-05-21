@@ -6,8 +6,16 @@ using System.Text.Json.Serialization;
 
 namespace AuthService.API.Filters;
 
+/// <summary>
+/// Filter to ignore properties with <see cref="JsonIgnoreAttribute"/> in Swagger.
+/// </summary>
 public class JsonIgnoreFilter : ISchemaFilter
 {
+    /// <summary>
+    /// Applies filter to schema.
+    /// </summary>
+    /// <param name="schema">Schema for API.</param>
+    /// <param name="schemaFilterContext">Context filter for schema.</param>
     public void Apply(OpenApiSchema schema,
                       SchemaFilterContext schemaFilterContext)
     {

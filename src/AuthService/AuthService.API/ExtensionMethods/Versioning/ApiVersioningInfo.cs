@@ -8,7 +8,7 @@ namespace AuthService.API.ExtensionMethods.Versioning;
 /// </summary>
 public static class ApiVersioningInfo
 {
-    private const string _title = "CoffeeBlog API";
+    private const string _title = "CoffeeBlog - AuthService API";
 
     /// <summary>
     /// Version 1.0 of API.

@@ -31,7 +31,7 @@ public sealed class RequestValidationBehavior<TRequest, TResponse>(IEnumerable<I
             return await next();
         }
 
-        ValidationContext<TRequest> context = new ValidationContext<TRequest>(request);
+        ValidationContext<TRequest> context = new(request);
 
         string errorsMessages = string.Join(";", _validators.Select(x => x.Validate(context))
                                                             .SelectMany(x => x.Errors)
