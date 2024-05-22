@@ -1,5 +1,6 @@
 using ArticleManager.API.ExtensionMethods.Swagger;
 using ArticleManager.API.ExtensionMethods.Versioning;
+using ArticleManager.API.Middlewares;
 using ArticleManager.Application.ExtensionMethods.ActionContext;
 using ArticleManager.Application.ExtensionMethods.LayerRegistration;
 using ArticleManager.Domain.ViewModels.Errors;
@@ -29,7 +30,13 @@ builder.Services.Configure<ApiBehaviorOptions>(config =>
         => new BadRequestObjectResult(new ErrorDetailsViewModel(StatusCodes.Status400BadRequest, context.GetJoinedErrorsMessages()));
 });
 
+builder.Services.AddTransient<ExceptionMiddleware>();
+builder.Services.AddTransient<RequestDetailsMiddleware>();
+
 WebApplication app = builder.Build();
+
+app.UseMiddleware<RequestDetailsMiddleware>();
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

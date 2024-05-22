@@ -1,11 +1,11 @@
-﻿using AuthService.API.ExtensionMethods.Request;
-using AuthService.Application.Commands.RequestDetails.CreateRequestDetail;
-using AuthService.Domain.Constants;
+﻿using ArticleManager.API.ExtensionMethods.Request;
+using ArticleManager.Application.Commands.RequestDetails.CreateRequestDetail;
+using ArticleManager.Domain.Constants;
 using MediatR;
 using System.Diagnostics;
 using System.Security.Claims;
 
-namespace AuthService.API.Middlewares;
+namespace ArticleManager.API.Middlewares;
 
 /// <summary>
 /// Middleware to measure request's details. It writes data like request's time, path, method etc. to database.

@@ -1,6 +1,8 @@
 ﻿using ArticleManager.Application.Interfaces.Helpers;
+using ArticleManager.Application.Interfaces.Persistence.Repositories;
 using ArticleManager.Infrastructure.ExtensionMethods.Database;
 using ArticleManager.Infrastructure.Helpers;
+using ArticleManager.Infrastructure.Persistence.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +16,8 @@ public static class InfrastructureRegistration
         services.ConfigureDbContext(configuration);
 
         services.AddScoped<IDateTimeProvider, DateTimeProvider>();
+
+        services.AddScoped<IApiErrorRepository, ApiErrorRepository>();
 
         return services;
     }

@@ -1,12 +1,12 @@
-﻿using AuthService.Application.Commands.ApiErrors.CreateApiError;
-using AuthService.Domain.Constants;
-using AuthService.Domain.Exceptions;
-using AuthService.Domain.ViewModels.Errors;
+﻿using ArticleManager.Application.Commands.ApiErrors.CreateApiError;
+using ArticleManager.Domain.Constants;
+using ArticleManager.Domain.Exceptions;
+using ArticleManager.Domain.ViewModels.Errors;
 using FluentValidation;
 using MediatR;
 using System.Net;
 
-namespace AuthService.API.Middlewares;
+namespace ArticleManager.API.Middlewares;
 
 /// <summary>
 /// Middleware to handle request's exception. It logs the exception and returns a response with exception's details.
@@ -24,7 +24,7 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> _logger,
     /// </summary>
     /// <param name="httpContext">Request's context.</param>
     /// <param name="next">Delegate to process request.</param>
-    /// <returns>Instance of <see cref="Task"/>.</returns>
+    /// <returns>Instance of <see cref="Task"/></returns>
     public async Task InvokeAsync(HttpContext httpContext,
                                   RequestDelegate next)
     {
