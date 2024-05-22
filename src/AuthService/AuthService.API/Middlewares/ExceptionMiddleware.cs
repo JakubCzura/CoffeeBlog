@@ -60,8 +60,8 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> _logger,
 
         ErrorDetailsViewModel errorDetailsViewModel = exception switch
         {
-            NullEntityException => CreateErrorDetailsResponse(httpContext, HttpStatusCode.BadRequest, exception.Message),
             ValidationException validationException => CreateErrorDetailsResponse(httpContext, HttpStatusCode.BadRequest, validationException.Message),
+            NullEntityException => CreateErrorDetailsResponse(httpContext, HttpStatusCode.BadRequest, exception.Message),
             _ => CreateErrorDetailsResponse(httpContext, HttpStatusCode.InternalServerError, "Internal server exception.")
         };
 

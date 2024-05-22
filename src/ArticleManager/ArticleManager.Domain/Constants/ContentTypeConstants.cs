@@ -1,4 +1,4 @@
-﻿namespace AuthService.Domain.Constants;
+﻿namespace ArticleManager.Domain.Constants;
 
 /// <summary>
 /// Constants for content types.

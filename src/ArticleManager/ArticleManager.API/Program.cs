@@ -1,5 +1,11 @@
+using ArticleManager.API.ExtensionMethods.Swagger;
+using ArticleManager.API.ExtensionMethods.Versioning;
+using ArticleManager.Application.ExtensionMethods.ActionContext;
 using ArticleManager.Application.ExtensionMethods.LayerRegistration;
+using ArticleManager.Domain.ViewModels.Errors;
 using ArticleManager.Infrastructure.ExtensionMethods.LayerRegistration;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -11,20 +17,29 @@ builder.Services.AddInfrastructureDI(builder.Configuration);
 builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddApiVersion();
+builder.Services.AddSwagger();
+
+builder.Services.Configure<ApiBehaviorOptions>(config =>
+{
+    config.SuppressModelStateInvalidFilter = false;  //False to perform auto validation. Added for readability and code clear behaviour despite False is default value.
+    config.InvalidModelStateResponseFactory = context
+        => new BadRequestObjectResult(new ErrorDetailsViewModel(StatusCodes.Status400BadRequest, context.GetJoinedErrorsMessages()));
+});
 
 WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerInterface();
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

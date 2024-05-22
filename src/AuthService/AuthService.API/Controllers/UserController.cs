@@ -19,7 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AuthService.API.Controllers;
 
 /// <summary>
-/// Controller to manage user entity
+/// Controller to manage user entity.
 /// </summary>
 /// <param name="_mediator">Mediator to handle requests' commands and queries.</param>
 [ApiVersion(ApiVersioningInfo.Version_1_0)]
