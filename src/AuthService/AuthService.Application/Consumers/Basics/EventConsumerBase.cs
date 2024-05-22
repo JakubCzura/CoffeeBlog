@@ -8,6 +8,15 @@ using System.Text.Json;
 
 namespace AuthService.Application.Consumers.Basics;
 
+/// <summary>
+/// Base class for event's consumers that logs and saves consumed events and exceptions to database.
+/// It consumes messages according to microservices communication.
+/// </summary>
+/// <typeparam name="TEvent">Type of event.</typeparam>
+/// <typeparam name="TEventConsumer">Type of event's consumer that will inherit from this class.</typeparam>
+/// <param name="_logger">Logger to log exceptions.</param>
+/// <param name="_eventConsumerDetailRepository">Interface to perform event consumer detail operations in database.</param>
+/// <param name="_apiErrorRepository">Interface to perform api error operations in database.</param>
 public abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventConsumer> _logger,
                                                                 IEventConsumerDetailRepository _eventConsumerDetailRepository,
                                                                 IApiErrorRepository _apiErrorRepository)
@@ -57,8 +66,18 @@ public abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventCo
         }
     }
 
+    /// <summary>
+    /// Method to consume event.
+    /// </summary>
+    /// <param name="context">Event's context.</param>
+    /// <returns>Instance of <see cref="Task"/></returns>
     public async Task Consume(ConsumeContext<TEvent> context)
         => await HandleEventConsuming(context);
 
+    /// <summary>
+    /// Method to consume event that should be inherited and overridden.
+    /// </summary>
+    /// <param name="consumeContext">Event's context.</param>
+    /// <returns>Instance of <see cref="Task"/></returns>
     public abstract Task ConsumeEvent(ConsumeContext<TEvent> consumeContext);
 }

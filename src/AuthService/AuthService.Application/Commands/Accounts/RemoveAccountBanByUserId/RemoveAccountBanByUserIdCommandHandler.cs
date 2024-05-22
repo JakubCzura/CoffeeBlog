@@ -2,7 +2,6 @@
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.Resources;
 using AuthService.Domain.ViewModels.Basics;
-using AutoMapper;
 using FluentResults;
 using MediatR;
 
@@ -15,13 +14,11 @@ namespace AuthService.Application.Commands.Accounts.RemoveAccountBanByUserId;
 /// <param name="_userRepository">Interface to perform user operations in database.</param>
 /// <param name="_mapper">AutoMapper to map classes.</param>
 public class RemoveAccountBanByUserIdCommandHandler(IAccountRepository _accountRepository,
-                                                    IUserRepository _userRepository,
-                                                    IMapper _mapper)
+                                                    IUserRepository _userRepository)
     : IRequestHandler<RemoveAccountBanByUserIdCommand, Result<ViewModelBase>>
 {
     private readonly IAccountRepository _accountRepository = _accountRepository;
     private readonly IUserRepository _userRepository = _userRepository;
-    private readonly IMapper _mapper = _mapper;
 
     /// <summary>
     /// Handles request to remove user's account ban.

@@ -8,6 +8,13 @@ using Microsoft.Extensions.Logging;
 //Event consumer's namespace must be the same as event's namespace
 namespace EventBus.Domain.Events.StatisticsCollector.UserDiagnostics;
 
+/// <summary>
+/// Consumer of <see cref="GetUsersDiagnosticDataRequest"/> request.
+/// </summary>
+/// <param name="_logger">Logger to log exceptions.</param>
+/// <param name="_eventConsumerDetailRepository">Interface to perform event consumer detail operations in database.</param>
+/// <param name="_apiErrorRepository">Interface to perform api error operations in database.</param>
+/// <param name="_userDiagnosticDataRepository">Interface to perform user diagnostic data operations in database.</param>
 public sealed class GetUsersDiagnosticDataRequestConsumer(ILogger<GetUsersDiagnosticDataRequestConsumer> _logger,
                                                           IEventConsumerDetailRepository _eventConsumerDetailRepository,
                                                           IApiErrorRepository _apiErrorRepository,
@@ -16,6 +23,11 @@ public sealed class GetUsersDiagnosticDataRequestConsumer(ILogger<GetUsersDiagno
 {
     private readonly IUserDiagnosticDataRepository _userDiagnosticDataRepository = _userDiagnosticDataRepository;
 
+    /// <summary>
+    /// Consumes <see cref="GetUsersDiagnosticDataRequest"/> request.
+    /// </summary>
+    /// <param name="consumeContext">Request's context.</param>
+    /// <returns>Instance of <see cref="Task"/></returns>
     public override async Task ConsumeEvent(ConsumeContext<GetUsersDiagnosticDataRequest> consumeContext)
     {
         GetUsersDiagnosticDataResultDto userDiagnostic = await _userDiagnosticDataRepository.GetUsersDiagnosticDataAsync(consumeContext.Message.DataCollectedAt, default);
