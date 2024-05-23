@@ -1,7 +1,7 @@
-﻿using ArticleManager.Application.ExtensionMethods.String;
-using FluentAssertions;
+﻿using FluentAssertions;
+using PostManager.Application.ExtensionMethods.String;
 
-namespace ArticleManager.Application.UnitTests.ExtensionMethods.String;
+namespace PostManager.Application.UnitTests.ExtensionMethods.String;
 
 public class StringExtensionsTests
 {

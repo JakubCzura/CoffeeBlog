@@ -1,9 +1,13 @@
-﻿using ArticleManager.Application.ExtensionMethods.ActionContext;
-using FluentAssertions;
+﻿using FluentAssertions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using PostManager.Application.ExtensionMethods.ActionContext;
 using Mvc = Microsoft.AspNetCore.Mvc;
 
-namespace ArticleManager.Application.UnitTests.ExtensionMethods.ActionContext;
-
+namespace PostManager.Application.UnitTests.ExtensionMethods.ActionContext;
 public class ActionContextExtensionsTests
 {
     [Fact]
