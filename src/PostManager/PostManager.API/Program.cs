@@ -1,4 +1,6 @@
 using FluentValidation.AspNetCore;
+using PostManager.API.ExtensionMethods.Swagger;
+using PostManager.API.ExtensionMethods.Versioning;
 using PostManager.Application.ExtensionMethods.LayerRegistration;
 using PostManager.Infrastructure.ExtensionMethods.LayerRegistration;
 using Serilog;
@@ -13,17 +15,17 @@ builder.Services.AddInfrastructureDI(builder.Configuration);
 builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddApiVersion();
+builder.Services.AddSwagger();
 
 WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerInterface();
 }
 
 app.UseHttpsRedirection();

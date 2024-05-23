@@ -1,14 +1,14 @@
 ﻿using Asp.Versioning;
 using Microsoft.OpenApi.Models;
 
-namespace ArticleManager.API.ExtensionMethods.Versioning;
+namespace PostManager.API.ExtensionMethods.Versioning;
 
 /// <summary>
 /// Informatin about API versioning.
 /// </summary>
 public static class ApiVersioningInfo
 {
-    private const string _title = "CoffeeBlog - ArticleManager API";
+    private const string _title = "CoffeeBlog - PostManager API";
 
     /// <summary>
     /// Version 1.0 of API.
