@@ -23,13 +23,6 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddApiVersion();
 builder.Services.AddSwagger();
 
-builder.Services.Configure<ApiBehaviorOptions>(config =>
-{
-    config.SuppressModelStateInvalidFilter = false;  //False to perform auto validation. Added for readability and code clear behaviour despite False is default value.
-    config.InvalidModelStateResponseFactory = context
-        => new BadRequestObjectResult(new ErrorDetailsViewModel(StatusCodes.Status400BadRequest, context.GetJoinedErrorsMessages()));
-});
-
 builder.Services.AddTransient<ExceptionMiddleware>();
 builder.Services.AddTransient<RequestDetailsMiddleware>();
 

@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using MediatR;
 
 namespace AuthService.Application.Behaviours.Validators;
@@ -9,7 +10,7 @@ namespace AuthService.Application.Behaviours.Validators;
 /// <typeparam name="TRequest">Command or query for CQRS.</typeparam>
 /// <typeparam name="TResponse">Response from command or query.</typeparam>
 /// <param name="_validators">FluentValidation validators to validate commands and queries.</param>
-public sealed class RequestValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> _validators) 
+public sealed class RequestValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> _validators)
     : IPipelineBehavior<TRequest, TResponse> where TRequest : class, IRequest<TResponse>
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators = _validators;
@@ -33,13 +34,12 @@ public sealed class RequestValidationBehavior<TRequest, TResponse>(IEnumerable<I
 
         ValidationContext<TRequest> context = new(request);
 
-        string errorsMessages = string.Join(";", _validators.Select(x => x.Validate(context))
-                                                            .SelectMany(x => x.Errors)
-                                                            .Select(x => x.ErrorMessage));
+        IEnumerable<ValidationFailure> errors = _validators.Select(v => v.Validate(context))
+                                                           .SelectMany(result => result.Errors);
 
-        if (!string.IsNullOrWhiteSpace(errorsMessages))
+        if (errors.Any())
         {
-            throw new ValidationException(errorsMessages);
+            throw new ValidationException(errors);
         }
 
         return await next();

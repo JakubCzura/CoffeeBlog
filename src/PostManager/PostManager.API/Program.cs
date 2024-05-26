@@ -21,10 +21,10 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddApiVersion();
 builder.Services.AddSwagger();
 
-WebApplication app = builder.Build();
-
 builder.Services.AddTransient<ExceptionMiddleware>();
 builder.Services.AddTransient<RequestDetailsMiddleware>();
+
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

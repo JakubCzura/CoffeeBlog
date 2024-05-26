@@ -4,6 +4,8 @@ using AuthService.Domain.Exceptions;
 using AuthService.Domain.ViewModels.Errors;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using System.Net;
 
 namespace AuthService.API.Middlewares;
@@ -32,10 +34,35 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> _logger,
         {
             await next.Invoke(httpContext);
         }
+        catch (ValidationException exception)
+        {
+            await HandleValidationExceptionAsync(httpContext, exception);
+        }
         catch (Exception exception)
         {
             await HandleExceptionAsync(httpContext, exception);
         }
+    }
+
+    private static async Task HandleValidationExceptionAsync(HttpContext httpContext, ValidationException exception)
+    {
+        Dictionary<string, string[]> validationErrors = exception.Errors.GroupBy(x => x.PropertyName, x => x.ErrorMessage,
+                                                                        (propertyName, errorMessages) => new
+                                                                        {
+                                                                            Key = propertyName,
+                                                                            Values = errorMessages.Distinct().ToArray()
+                                                                        })
+                                                                        .ToDictionary(x => x.Key, x => x.Values);
+        ValidationProblemDetails validationProblemDetails = new(validationErrors)
+        {
+            Type = ValidationProblemDetailsConstants.BadRequestType,
+            Status = StatusCodes.Status400BadRequest
+        };
+        validationProblemDetails.Extensions.Add(ValidationProblemDetailsConstants.TraceId, Activity.Current?.Id ?? httpContext.TraceIdentifier);
+
+        httpContext.Response.ContentType = ContentTypeConstants.ApplicationJson;
+        httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+        await httpContext.Response.WriteAsJsonAsync(validationProblemDetails, httpContext.RequestAborted);
     }
 
     private async Task HandleExceptionAsync(HttpContext httpContext,
@@ -60,7 +87,6 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> _logger,
 
         ErrorDetailsViewModel errorDetailsViewModel = exception switch
         {
-            ValidationException validationException => CreateErrorDetailsResponse(httpContext, HttpStatusCode.BadRequest, validationException.Message),
             NullEntityException => CreateErrorDetailsResponse(httpContext, HttpStatusCode.BadRequest, exception.Message),
             _ => CreateErrorDetailsResponse(httpContext, HttpStatusCode.InternalServerError, "Internal server exception.")
         };
