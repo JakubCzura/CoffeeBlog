@@ -71,9 +71,9 @@ public class SignUpUserCommandHandler(IUserRepository _userRepository,
 
         List<string> userRolesNames = await _roleRepository.GetAllRolesNamesByUserId(user.Id, cancellationToken);
         string jwtToken = _jwtService.CreateToken(new(user.Id, request.Username, request.Email), userRolesNames);
-    
+
         await _eventPublisher.PublishAsync(new UserSignedUpEvent(user.Username, user.Email, nameof(SignUpUserCommandHandler)), cancellationToken);
-        
+
         SignUpUserViewModel result = _mapper.Map<SignUpUserViewModel>(user, jwtToken);
         return Result.Ok(result);
     }

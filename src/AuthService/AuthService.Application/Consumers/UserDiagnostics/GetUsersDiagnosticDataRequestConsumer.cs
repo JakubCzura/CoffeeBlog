@@ -18,7 +18,7 @@ namespace EventBus.Domain.Events.StatisticsCollector.UserDiagnostics;
 public sealed class GetUsersDiagnosticDataRequestConsumer(ILogger<GetUsersDiagnosticDataRequestConsumer> _logger,
                                                           IEventConsumerDetailRepository _eventConsumerDetailRepository,
                                                           IApiErrorRepository _apiErrorRepository,
-                                                          IUserDiagnosticDataRepository _userDiagnosticDataRepository )
+                                                          IUserDiagnosticDataRepository _userDiagnosticDataRepository)
     : EventConsumerBase<GetUsersDiagnosticDataRequest, GetUsersDiagnosticDataRequestConsumer>(_logger, _eventConsumerDetailRepository, _apiErrorRepository)
 {
     private readonly IUserDiagnosticDataRepository _userDiagnosticDataRepository = _userDiagnosticDataRepository;

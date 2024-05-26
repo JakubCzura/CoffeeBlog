@@ -29,6 +29,7 @@ internal class AccountRepository(AuthServiceDbContext _authServiceDbContext,
                                                                                          .SetProperty(property => property.BanNote, banUserAccountByUserIdDto.BanNote)
                                                                                          .SetProperty(property => property.BannedAt, _dateTimeProvider.UtcNow)
                                                                                          .SetProperty(property => property.BanEndsAt, banUserAccountByUserIdDto.BanEndsAt), cancellationToken);
+
     public async Task<int> RemoveAccountBanByUserIdAsync(int userId, CancellationToken cancellationToken = default)
        => await _authServiceDbContext.Accounts.Where(account => account.UserId == userId)
                                                   .ExecuteUpdateAsync(Account => Account.SetProperty(property => property.IsBanned, false)

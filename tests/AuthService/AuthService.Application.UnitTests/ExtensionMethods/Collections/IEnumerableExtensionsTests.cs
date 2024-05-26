@@ -71,7 +71,6 @@ public class IEnumerableExtensionsTests
             { new IError[] { new Error("Error 1"), new Error("Error 2") }, ' ', "Error 1 Error 2" }
         };
 
-
     [Theory]
     [MemberData(nameof(GetJoinedMessages_should_ReturnJoinedMessagesOfErrorsAsStrings_when_ErrorsAreSpecified_Data))]
     public void GetJoinedMessages_should_ReturnJoinedMessagesOfErrorsAsStrings_when_ErrorsAreSpecified(IError[] errors, char delimiter, string expected)

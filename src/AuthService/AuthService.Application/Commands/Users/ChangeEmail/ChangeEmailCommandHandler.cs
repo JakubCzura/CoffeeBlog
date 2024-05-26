@@ -36,7 +36,7 @@ public class ChangeEmailCommandHandler(IUserRepository _userRepository,
                                                     CancellationToken cancellationToken)
     {
         CurrentAuthorizedUser currentAuthorizedUser = _currentUserContext.GetCurrentAuthorizedUser();
-        
+
         if (await _userRepository.EmailExistsAsync(request.NewEmail, cancellationToken))
         {
             return Result.Fail<ViewModelBase>(new EmailExistsError());

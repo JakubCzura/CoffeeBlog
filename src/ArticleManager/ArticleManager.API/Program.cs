@@ -1,12 +1,9 @@
 using ArticleManager.API.ExtensionMethods.Swagger;
 using ArticleManager.API.ExtensionMethods.Versioning;
 using ArticleManager.API.Middlewares;
-using ArticleManager.Application.ExtensionMethods.ActionContext;
 using ArticleManager.Application.ExtensionMethods.LayerRegistration;
-using ArticleManager.Domain.ViewModels.Errors;
 using ArticleManager.Infrastructure.ExtensionMethods.LayerRegistration;
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);

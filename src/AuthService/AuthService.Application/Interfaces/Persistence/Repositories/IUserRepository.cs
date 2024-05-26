@@ -17,7 +17,6 @@ public interface IUserRepository : IDbEntityBaseRepository<User>
     Task<bool> UserExistsAsync(int userId,
                                CancellationToken cancellationToken);
 
-
     /// <summary>
     /// Returns a user by email or username.
     /// </summary>

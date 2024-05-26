@@ -30,7 +30,7 @@ internal class EmailMessageFactory(IOptions<EmailOptions> _emailOptions) : IEmai
                                          $"Hello {recipientName}! You can reset your password using this token: {token}. The token will expire {expirationDate}");
 
     public IEmailMessage CreatePasswordResetedEmailMessage(string recipientName,
-                                                           string recipientEmail) 
+                                                           string recipientEmail)
         => new PasswordResetedEmailMessage(_emailOptions.CoffeeBlog.SenderName,
                                            _emailOptions.CoffeeBlog.Email,
                                            recipientName,

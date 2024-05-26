@@ -1,5 +1,4 @@
-﻿using AuthService.Application.Commands.Users.GenerateForgottenPasswordResetToken;
-using AuthService.Application.Interfaces.Helpers;
+﻿using AuthService.Application.Interfaces.Helpers;
 using AuthService.Application.Interfaces.Persistence.Repositories;
 using AuthService.Application.Interfaces.Security.Password;
 using AuthService.Domain.Entities;

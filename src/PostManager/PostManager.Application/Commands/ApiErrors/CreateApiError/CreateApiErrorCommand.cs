@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace PostManager.Application.Commands.ApiErrors.CreateApiError; 
+namespace PostManager.Application.Commands.ApiErrors.CreateApiError;
 
 /// <summary>
 /// Request command to save API error to database. It's handled using Mediatr and CQRS pattern.

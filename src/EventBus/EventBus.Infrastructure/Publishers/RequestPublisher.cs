@@ -14,4 +14,3 @@ internal class RequestPublisher<TRequest>(IRequestClient<TRequest> _requestClien
                                                                        CancellationToken cancellationToken) where TResponse : ResponseBase
         => await _requestClient.GetResponse<TResponse>(request, cancellationToken);
 }
-

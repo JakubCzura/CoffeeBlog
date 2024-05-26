@@ -34,7 +34,7 @@ public class EmailValidatorTests
 
     [Theory]
     [MemberData(nameof(Validate_should_Fail_when_EmailIsIncorrect_Data))]
-    public void Validate_should_Fail_when_EmailIsIncorrect(string email, 
+    public void Validate_should_Fail_when_EmailIsIncorrect(string email,
                                                            string errorMessage)
         => _emailValidator.TestValidate(email)
                           .ShouldHaveAnyValidationError()

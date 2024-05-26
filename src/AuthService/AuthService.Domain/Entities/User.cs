@@ -28,14 +28,14 @@ public class User : DbEntityBase
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     /// <summary>
-    /// Date and time when token to reset password expires. 
+    /// Date and time when token to reset password expires.
     /// It is null by default and must be updated every time user asks to reset forgotten password.
     /// It is combined with <see cref="ForgottenPasswordResetToken"/> to verify token validation.
     /// </summary>
     public DateTime? ForgottenPasswordResetTokenExpiresAt { get; set; }
 
     /// <summary>
-    /// Token to reset user's forgotten password. 
+    /// Token to reset user's forgotten password.
     /// It's used to verify user's identity when user asks to reset forgotten password.
     /// It's null by default and must be updated every time user asks to reset forgotten password.
     /// It is combined with <see cref="ForgottenPasswordResetTokenExpiresAt"/> to verify token validation.

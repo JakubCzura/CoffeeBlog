@@ -42,7 +42,7 @@ public class PasswordValidatorTests
 
     [Theory]
     [MemberData(nameof(Validate_should_Fail_when_PasswordIsIncorrect_Data))]
-    public void Validate_should_Fail_when_PasswordIsIncorrect(string password, 
+    public void Validate_should_Fail_when_PasswordIsIncorrect(string password,
                                                               string errorMessage)
         => _passwordValidator.TestValidate(password)
                              .ShouldHaveAnyValidationError()

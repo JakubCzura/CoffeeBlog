@@ -9,6 +9,6 @@ internal class EventPublisher(IPublishEndpoint _publishEndpoint) : IEventPublish
     private readonly IPublishEndpoint _publishEndpoint = _publishEndpoint;
 
     public async Task PublishAsync<TEvent>(TEvent @event,
-                                           CancellationToken cancellationToken) where TEvent : EventBase 
+                                           CancellationToken cancellationToken) where TEvent : EventBase
         => await _publishEndpoint.Publish(@event, cancellationToken);
 }
