@@ -1,9 +1,11 @@
 ﻿using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using PostManager.Application.Commands.ApiErrors.CreateApiError;
 using PostManager.Domain.Constants;
 using PostManager.Domain.Exceptions;
 using PostManager.Domain.ViewModels.Errors;
+using System.Diagnostics;
 using System.Net;
 
 namespace PostManager.API.Middlewares;
@@ -32,10 +34,35 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> _logger,
         {
             await next.Invoke(httpContext);
         }
+        catch (ValidationException exception)
+        {
+            await HandleValidationExceptionAsync(httpContext, exception);
+        }
         catch (Exception exception)
         {
             await HandleExceptionAsync(httpContext, exception);
         }
+    }
+
+    private static async Task HandleValidationExceptionAsync(HttpContext httpContext, ValidationException exception)
+    {
+        Dictionary<string, string[]> validationErrors = exception.Errors.GroupBy(x => x.PropertyName, x => x.ErrorMessage,
+                                                                        (propertyName, errorMessages) => new
+                                                                        {
+                                                                            Key = propertyName,
+                                                                            Values = errorMessages.Distinct().ToArray()
+                                                                        })
+                                                                        .ToDictionary(x => x.Key, x => x.Values);
+        ValidationProblemDetails validationProblemDetails = new(validationErrors)
+        {
+            Type = ValidationProblemDetailsConstants.BadRequestType,
+            Status = StatusCodes.Status400BadRequest
+        };
+        validationProblemDetails.Extensions.Add(ValidationProblemDetailsConstants.TraceId, Activity.Current?.Id ?? httpContext.TraceIdentifier);
+
+        httpContext.Response.ContentType = ContentTypeConstants.ApplicationJson;
+        httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+        await httpContext.Response.WriteAsJsonAsync(validationProblemDetails, httpContext.RequestAborted);
     }
 
     private async Task HandleExceptionAsync(HttpContext httpContext,

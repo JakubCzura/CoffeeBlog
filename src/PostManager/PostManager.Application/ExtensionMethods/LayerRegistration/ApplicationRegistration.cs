@@ -3,6 +3,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PostManager.Application.Behaviours.Validators;
 using System.Reflection;
 
 namespace PostManager.Application.ExtensionMethods.LayerRegistration;
@@ -26,6 +27,7 @@ public static class ApplicationRegistration
         services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            config.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
         });
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

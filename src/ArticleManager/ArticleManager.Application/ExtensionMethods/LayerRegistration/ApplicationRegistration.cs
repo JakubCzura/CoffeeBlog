@@ -1,4 +1,5 @@
-﻿using EventBus.API.ExtensionMethods.LayerRegistration;
+﻿using ArticleManager.Application.Behaviours.Validators;
+using EventBus.API.ExtensionMethods.LayerRegistration;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +27,7 @@ public static class ApplicationRegistration
         services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            config.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
         });
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
