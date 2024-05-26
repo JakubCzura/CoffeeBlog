@@ -7,8 +7,8 @@ namespace ArticleManager.Infrastructure.Persistence.DatabaseContext;
 public class ArticleManagerDbContext(DbContextOptions<ArticleManagerDbContext> dbContextOptions) : DbContext(dbContextOptions)
 {
     public DbSet<Article> Articles { get; set; }
-
     public DbSet<ArticleComment> ArticleComments { get; set; }
+    public DbSet<ApiError> ApiErrors { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
         => modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

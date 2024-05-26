@@ -1,5 +1,6 @@
 ﻿using EventBus.API.ExtensionMethods.LayerRegistration;
 using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -28,6 +29,7 @@ public static class ApplicationRegistration
         });
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        services.AddFluentValidationAutoValidation();
 
         return services;
     }
