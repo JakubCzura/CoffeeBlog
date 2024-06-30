@@ -19,7 +19,7 @@ public static class ApiVersioningConfiguration
             config.AssumeDefaultVersionWhenUnspecified = true;
             config.DefaultApiVersion = ApiVersioningInfo.CurrentVersion;
             config.ReportApiVersions = true;
-            config.ApiVersionReader = new HeaderApiVersionReader("x-API-Version");
+            config.ApiVersionReader = new UrlSegmentApiVersionReader();
         });
 
         return services;
