@@ -95,7 +95,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArticleManager.Infrastructu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostManager.Infrastructure.IntegrationTests", "tests\PostManager\PostManager.Infrastructure.IntegrationTests\PostManager.Infrastructure.IntegrationTests.csproj", "{35B74BE8-E381-41B7-97AE-77A228F256CB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArticleManager.Infrastructure.IntegrationTests", "ArticleManager.Infrastructure.IntegrationTests\ArticleManager.Infrastructure.IntegrationTests.csproj", "{56CE0995-3947-4619-B075-08800FDF6207}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArticleManager.Infrastructure.IntegrationTests", "tests\ArticleManager\ArticleManager.Infrastructure.IntegrationTests\ArticleManager.Infrastructure.IntegrationTests.csproj", "{56CE0995-3947-4619-B075-08800FDF6207}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArticleManager.Application.UnitTests", "tests\ArticleManager\ArticleManager.Application.UnitTests\ArticleManager.Application.UnitTests.csproj", "{93EE5DF7-3442-49E2-BC9C-5F4EE87C20A5}"
 EndProject
