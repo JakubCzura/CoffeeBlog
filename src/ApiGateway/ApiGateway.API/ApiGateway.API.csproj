@@ -11,4 +11,9 @@
 	<PackageReference Include="Yarp.ReverseProxy" Version="2.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ApiGateway.Application\ApiGateway.Application.csproj" />
+    <ProjectReference Include="..\ApiGateway.Persistence\ApiGateway.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>
