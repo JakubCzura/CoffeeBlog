@@ -9,7 +9,7 @@ namespace StatisticsCollector.Infrastructure.ExtensionMethods.Database;
 public static class DbContextConfiguration
 {
     public static IServiceCollection ConfigureDbContext(this IServiceCollection services,
-                                                    IConfiguration configuration)
+                                                        IConfiguration configuration)
     {
         DatabaseOptions databaseOptions = configuration.GetSection(DatabaseOptions.AppsettingsKey).Get<DatabaseOptions>()!;
 

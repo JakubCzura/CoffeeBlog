@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using StatisticsCollector.Application.Interfaces.Helpers;
 using StatisticsCollector.Application.Interfaces.Persistence.Repositories;
+using StatisticsCollector.Infrastructure.ExtensionMethods.Authentication;
 using StatisticsCollector.Infrastructure.ExtensionMethods.BackgroundWorkers;
 using StatisticsCollector.Infrastructure.ExtensionMethods.Database;
 using StatisticsCollector.Infrastructure.Helpers;
@@ -22,6 +23,8 @@ public static class InfrastructureRegistration
         services.AddScoped<IEventConsumerDetailRepository, EventConsumerDetailRepository>();
         services.AddScoped<IRequestDetailRepository, RequestDetailRepository>();
         services.AddScoped<IUsersDiagnosticsRepository, UsersDiagnosticsRepository>();
+
+        services.ConfigureAuthentication();
 
         services.ConfigureBackgroundWorkers(configuration);
 

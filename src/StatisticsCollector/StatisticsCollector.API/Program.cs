@@ -1,5 +1,6 @@
 using Serilog;
 using StatisticsCollector.Application.ExtensionMethods.LayerRegistration;
+using StatisticsCollector.Domain.SettingsOptions.Authentication;
 using StatisticsCollector.Domain.SettingsOptions.Database;
 using StatisticsCollector.Infrastructure.ExtensionMethods.LayerRegistration;
 
@@ -7,6 +8,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.Configure<AuthenticationOptions>(builder.Configuration.GetSection(AuthenticationOptions.AppsettingsKey));
 builder.Services.Configure<DatabaseOptions>(builder.Configuration.GetSection(DatabaseOptions.AppsettingsKey));
 
 builder.Services.AddInfrastructureDI(builder.Configuration);
