@@ -8,7 +8,6 @@ using AuthService.Domain.SettingsOptions.PasswordHasher;
 using AuthService.Domain.SettingsOptions.SecurityToken;
 using AuthService.Domain.SettingsOptions.UserCredential;
 using AuthService.Infrastructure.ExtensionMethods.LayerRegistration;
-using FluentValidation.AspNetCore;
 using Serilog;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -30,7 +29,6 @@ builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfigura
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddApiVersion();
 builder.Services.AddSwagger();
 

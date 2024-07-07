@@ -16,39 +16,27 @@ public class IEnumerableExtensionsTests
     [Theory]
     [MemberData(nameof(IsAnyElementNullOrWhiteSpace_should_ReturnTrue_when_AnyElementIsNullOrWhiteSpace_Data))]
     public void IsAnyElementNullOrWhiteSpace_should_ReturnTrue_when_AnyElementIsNullOrWhiteSpace(string?[] collection)
-    {
-        // Act
-        bool result = collection.IsAnyElementNullOrWhiteSpace();
+        => collection.IsAnyElementNullOrWhiteSpace()
+                     .Should()
+                     .BeTrue();
 
-        // Assert
-        result.Should().BeTrue();
-    }
+    public static TheoryData<string?[]> IsAnyElementNullOrWhiteSpace_should_ReturnFalse_when_NoElementIsNullOrWhiteSpace_Data =>
+    [
+        ["a", "b", "c", "d", "e"],
+    ];
 
-    [Fact]
-    public void IsAnyElementNullOrWhiteSpace_should_ReturnFalse_when_NoElementIsNullOrWhiteSpace()
-    {
-        // Arrange
-        IEnumerable<string> collection = ["a", "b", "c", "d", "e"];
-
-        // Act
-        bool result = collection.IsAnyElementNullOrWhiteSpace();
-
-        // Assert
-        result.Should().BeFalse();
-    }
+    [Theory]
+    [MemberData(nameof(IsAnyElementNullOrWhiteSpace_should_ReturnFalse_when_NoElementIsNullOrWhiteSpace_Data))]
+    public void IsAnyElementNullOrWhiteSpace_should_ReturnFalse_when_NoElementIsNullOrWhiteSpace(string?[] collection)
+        => collection.IsAnyElementNullOrWhiteSpace()
+                     .Should()
+                     .BeFalse();
 
     [Fact]
     public void IsAnyElementNullOrWhiteSpace_should_ReturnFalse_when_CollectionIsEmpty()
-    {
-        // Arrange
-        IEnumerable<string> collection = [];
-
-        // Act
-        bool result = collection.IsAnyElementNullOrWhiteSpace();
-
-        // Assert
-        result.Should().BeFalse();
-    }
+        => Array.Empty<string>().IsAnyElementNullOrWhiteSpace()
+                                .Should()
+                                .BeFalse();
 
     [Fact]
     public void IsAnyElementNullOrWhiteSpace_should_ThrowArgumentNullException_when_CollectionIsNull()
@@ -63,59 +51,40 @@ public class IEnumerableExtensionsTests
         action.Should().Throw<ArgumentNullException>();
     }
 
-    public static TheoryData<IError[], char, string> GetJoinedMessages_should_ReturnJoinedMessagesOfErrorsAsStrings_when_ErrorsAreSpecified_Data
-        => new()
-        {
-            { new IError[] { new Error("Error 1 Message"), new Error("Error 2 Message") }, ';', "Error 1 Message;Error 2 Message" },
-            { new IError[] { new Error("Error 1 Message"), new Error("Error 2 Message") }, ',', "Error 1 Message,Error 2 Message" },
-            { new IError[] { new Error("Error 1"), new Error("Error 2") }, ' ', "Error 1 Error 2" }
-        };
+    public static TheoryData<IError[], char, string> GetJoinedMessages_should_ReturnJoinedMessagesOfErrorsAsStrings_when_ErrorsAreSpecified_Data => new()
+    {
+        { new IError[] { new Error("Error 1 Message"), new Error("Error 2 Message") }, ';', "Error 1 Message;Error 2 Message" },
+        { new IError[] { new Error("Error 1 Message"), new Error("Error 2 Message") }, ',', "Error 1 Message,Error 2 Message" },
+        { new IError[] { new Error("Error 1"), new Error("Error 2") }, ' ', "Error 1 Error 2" }
+    };
 
     [Theory]
     [MemberData(nameof(GetJoinedMessages_should_ReturnJoinedMessagesOfErrorsAsStrings_when_ErrorsAreSpecified_Data))]
     public void GetJoinedMessages_should_ReturnJoinedMessagesOfErrorsAsStrings_when_ErrorsAreSpecified(IError[] errors, char delimiter, string expected)
-    {
-        // Act
-        string result = errors.GetJoinedMessages(delimiter);
-
-        // Assert
-        result.Should().Be(expected);
-    }
+        => errors.GetJoinedMessages(delimiter)
+                .Should()
+                .Be(expected);
 
     [Fact]
     public void GetJoinedMessages_should_ReturnJoinedMessagesOfErrorsAsStringsWithDefaultDelimiter_when_DelimiterIsNotSpecified()
-    {
-        // Arrange
-        IEnumerable<IError> errors = [new Error("Error 1 Message"), new Error("Error 2 Message")];
-
-        // Act
-        string result = errors.GetJoinedMessages();
-
-        // Assert
-        result.Should().Be("Error 1 Message;Error 2 Message");
-    }
+        => new IError[] { new Error("Error 1 Message"), new Error("Error 2 Message") }.GetJoinedMessages()
+                                                                                      .Should()
+                                                                                      .Be("Error 1 Message;Error 2 Message");
 
     [Fact]
     public void GetJoinedMessages_should_ReturnEmptyString_when_ErrorsAreNotSpecified()
-    {
-        // Arrange
-        IEnumerable<IError> errors = [];
-
-        // Act
-        string result = errors.GetJoinedMessages();
-
-        // Assert
-        result.Should().BeEmpty();
-    }
+        => Array.Empty<IError>().GetJoinedMessages()
+                                .Should()
+                                .BeEmpty();
 
     [Fact]
     public void GetJoinedMessages_should_ThrowArgumentNullException_when_ErrorsAreNull()
     {
         // Arrange
-        IEnumerable<IError> errors = null!;
+        IEnumerable<IError> collection = null!;
 
         // Act
-        Action action = () => errors.GetJoinedMessages();
+        Action action = () => collection.GetJoinedMessages();
 
         // Assert
         action.Should().Throw<ArgumentNullException>();
