@@ -2,6 +2,7 @@ using ArticleManager.API.ExtensionMethods.Swagger;
 using ArticleManager.API.ExtensionMethods.Versioning;
 using ArticleManager.API.Middlewares;
 using ArticleManager.Application.ExtensionMethods.LayerRegistration;
+using ArticleManager.Domain.SettingsOptions.Authentication;
 using ArticleManager.Infrastructure.ExtensionMethods.LayerRegistration;
 using FluentValidation.AspNetCore;
 using Serilog;
@@ -9,6 +10,8 @@ using Serilog;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.Configure<AuthenticationOptions>(builder.Configuration.GetSection(AuthenticationOptions.AppsettingsKey));
+
 builder.Services.AddApplicationDI(builder.Configuration);
 builder.Services.AddInfrastructureDI(builder.Configuration);
 

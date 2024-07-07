@@ -1,5 +1,6 @@
 ﻿using ArticleManager.Application.Interfaces.Helpers;
 using ArticleManager.Application.Interfaces.Persistence.Repositories;
+using ArticleManager.Infrastructure.ExtensionMethods.Authentication;
 using ArticleManager.Infrastructure.ExtensionMethods.Database;
 using ArticleManager.Infrastructure.Helpers;
 using ArticleManager.Infrastructure.Persistence.Repositories;
@@ -18,6 +19,8 @@ public static class InfrastructureRegistration
         services.AddScoped<IDateTimeProvider, DateTimeProvider>();
 
         services.AddScoped<IApiErrorRepository, ApiErrorRepository>();
+
+        services.ConfigureAuthentication();
 
         return services;
     }
