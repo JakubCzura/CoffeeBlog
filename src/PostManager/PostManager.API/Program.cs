@@ -20,7 +20,6 @@ builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfigura
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddApiVersion();
 builder.Services.AddSwagger();
 
