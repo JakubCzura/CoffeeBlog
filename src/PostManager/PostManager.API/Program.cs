@@ -3,12 +3,15 @@ using PostManager.API.ExtensionMethods.Swagger;
 using PostManager.API.ExtensionMethods.Versioning;
 using PostManager.API.Middlewares;
 using PostManager.Application.ExtensionMethods.LayerRegistration;
+using PostManager.Domain.SettingsOptions.Authentication;
 using PostManager.Infrastructure.ExtensionMethods.LayerRegistration;
 using Serilog;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.Configure<AuthenticationOptions>(builder.Configuration.GetSection(AuthenticationOptions.AppsettingsKey));
 
 builder.Services.AddApplicationDI(builder.Configuration);
 builder.Services.AddInfrastructureDI(builder.Configuration);

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using PostManager.Application.Interfaces.Helpers;
 using PostManager.Application.Interfaces.Persistence.Repositories;
+using PostManager.Infrastructure.ExtensionMethods.Authentication;
 using PostManager.Infrastructure.ExtensionMethods.Database;
 using PostManager.Infrastructure.Helpers;
 using PostManager.Infrastructure.Persistence.Repositories;
@@ -18,6 +19,8 @@ public static class InfrastructureRegistration
         services.AddScoped<IDateTimeProvider, DateTimeProvider>();
 
         services.AddScoped<IApiErrorRepository, ApiErrorRepository>();
+
+        services.ConfigureAuthentication();
 
         return services;
     }
