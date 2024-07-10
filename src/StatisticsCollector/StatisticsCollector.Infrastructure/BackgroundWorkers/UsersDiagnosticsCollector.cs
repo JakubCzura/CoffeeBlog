@@ -38,6 +38,10 @@ public class UsersDiagnosticsCollector(ILogger<UsersDiagnosticsCollector> _logge
             UsersDiagnostics usersDiagnostics = _mapper.Map<UsersDiagnostics>(response.Message);
             await _usersDiagnosticsRepository.CreateAsync(usersDiagnostics, default);
         }
+        catch (RequestFaultException exception)
+        {
+            _logger.LogError(exception, $"{nameof(UsersDiagnosticsCollector)}: Exception when receiving {nameof(GetUsersDiagnosticDataResponse)} response from {nameof(GetUsersDiagnosticDataRequest)} request");
+        }
         catch (Exception exception)
         {
             _logger.LogError(exception, $"{nameof(UsersDiagnosticsCollector)}: Exception while saving data to database");
