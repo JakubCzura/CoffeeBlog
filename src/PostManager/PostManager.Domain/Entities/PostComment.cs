@@ -16,7 +16,7 @@ public class PostComment : DbEntityBase
     /// <summary>
     /// Date and time when comment was created.
     /// </summary>
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     /// <summary>
     /// Date and time when comment was last updated.

@@ -15,7 +15,7 @@ internal class ArticleCommentConfiguration : IEntityTypeConfiguration<ArticleCom
                                         .HasMaxLength(2000);
 
         builder.Property(x => x.CreatedAt).IsRequired()
-                                          .HasDefaultValue(SqlConstants.GetUtcDate);
+                                          .HasDefaultValueSql(SqlConstants.GetUtcDate);
 
         builder.Property(x => x.UpdatedAt).IsRequired(false);
 

@@ -21,7 +21,7 @@ internal class ArticleConfiguration : IEntityTypeConfiguration<Article>
                                         .HasMaxLength(10000);
 
         builder.Property(x => x.CreatedAt).IsRequired()
-                                          .HasDefaultValue(SqlConstants.GetUtcDate);
+                                          .HasDefaultValueSql(SqlConstants.GetUtcDate);
 
         builder.Property(x => x.UpdatedAt).IsRequired(false);
 

@@ -15,7 +15,7 @@ internal class PostCommentConfiguration : IEntityTypeConfiguration<PostComment>
                                         .HasMaxLength(1000);
 
         builder.Property(x => x.CreatedAt).IsRequired()
-                                          .HasDefaultValue(SqlConstants.GetUtcDate);
+                                          .HasDefaultValueSql(SqlConstants.GetUtcDate);
 
         builder.Property(x => x.UpdatedAt).IsRequired(false);
 
