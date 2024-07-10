@@ -36,10 +36,9 @@ public abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventCo
         }
         catch (Exception exception)
         {
-            _logger.LogError(exception, "Error while consuming event.");
-
             try
             {
+                _logger.LogError(exception, "Error while consuming event.");
                 await _apiErrorRepository.CreateAsync(new ApiError
                 {
                     Name = (exception).GetType().Name,
@@ -53,7 +52,8 @@ public abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventCo
                 _logger.LogCritical(exception, $"{nameof(EventConsumerBase<TEvent, TEventConsumer>)}: Exception while saving API exception's data to database.");
             }
 
-            await Task.CompletedTask;
+            //Pass original exception.
+            throw;
         }
     }
 
