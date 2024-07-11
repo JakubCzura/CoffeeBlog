@@ -3,6 +3,7 @@ using NotificationProvider.Domain.SettingsOptions.Database;
 using NotificationProvider.Domain.SettingsOptions.Email;
 using NotificationProvider.Infrastructure.ExtensionMethods.LayerRegistration;
 using Serilog;
+using System.Text.Json.Serialization;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,11 @@ builder.Services.AddApplicationDI(builder.Configuration);
 
 builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

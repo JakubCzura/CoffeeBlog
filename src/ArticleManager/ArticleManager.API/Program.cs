@@ -5,6 +5,7 @@ using ArticleManager.Application.ExtensionMethods.LayerRegistration;
 using ArticleManager.Domain.SettingsOptions.Authentication;
 using ArticleManager.Infrastructure.ExtensionMethods.LayerRegistration;
 using Serilog;
+using System.Text.Json.Serialization;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,11 @@ builder.Services.AddInfrastructureDI(builder.Configuration);
 
 builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddApiVersion();
 builder.Services.AddSwagger();
