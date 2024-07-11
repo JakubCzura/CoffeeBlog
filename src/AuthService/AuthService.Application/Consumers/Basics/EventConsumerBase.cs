@@ -43,26 +43,43 @@ public abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventCo
                 EventMessage = JsonSerializer.Serialize(context.Message),
             }, default);
         }
-        catch (Exception exception)
+        catch (RequestFaultException requestFaultException)
         {
-            try
-            {
-                _logger.LogError(exception, "Error while consuming event.");
-                await _apiErrorRepository.CreateAsync(new ApiError
-                {
-                    Name = (exception).GetType().Name,
-                    Exception = exception.ToString(),
-                    Message = exception.Message,
-                    Description = "Error while consuming event."
-                }, default);
-            }
-            catch (Exception)
-            {
-                _logger.LogCritical(exception, $"{nameof(EventConsumerBase<TEvent, TEventConsumer>)}: Exception while saving API exception's data to database.");
-            }
+            await LogException(requestFaultException);
 
             //Pass original exception.
             throw;
+        }
+        catch (Exception exception)
+        {
+            await LogException(exception);
+
+            //Finish consuming event.
+            await Task.CompletedTask;
+        }
+    }
+
+    /// <summary>
+    /// Logs and saves exception to database.
+    /// </summary>
+    /// <param name="eventHandlerException">Exception that was thrown by event handler.</param>
+    /// <returns><see cref="Task"/></returns>
+    private async Task LogException(Exception eventHandlerException)
+    {
+        try
+        {
+            _logger.LogError(eventHandlerException, "Error while consuming event.");
+            await _apiErrorRepository.CreateAsync(new ApiError
+            {
+                Name = (eventHandlerException).GetType().Name,
+                Exception = eventHandlerException.ToString(),
+                Message = eventHandlerException.Message,
+                Description = "Error while consuming event."
+            }, default);
+        }
+        catch (Exception loggerException)
+        {
+            _logger.LogCritical(loggerException, $"{nameof(EventConsumerBase<TEvent, TEventConsumer>)}: Exception while saving API exception's data to database.");
         }
     }
 
