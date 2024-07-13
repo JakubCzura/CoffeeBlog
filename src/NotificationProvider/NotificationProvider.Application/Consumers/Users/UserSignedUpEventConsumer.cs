@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EventBus.Domain.Events.AuthService.Users;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 using NotificationProvider.Application.Consumers.Basics;
@@ -8,8 +9,7 @@ using NotificationProvider.Application.Interfaces.Persistence.Repositories;
 using NotificationProvider.Domain.Entities;
 using NotificationProvider.Domain.Models.Emails;
 
-//Event consumer's namespace must be the same as event's namespace
-namespace EventBus.Domain.Events.AuthService.Users;
+namespace NotificationProvider.Application.Consumers.Users;
 
 public sealed class UserSignedUpEventConsumer(ILogger<UserSignedUpEventConsumer> _logger,
                                                 IEventConsumerDetailRepository _eventConsumerDetailRepository,

@@ -1,12 +1,12 @@
 ﻿using AuthService.Application.Consumers.Basics;
 using AuthService.Application.Dtos.UserDiagnostics;
 using AuthService.Application.Interfaces.Persistence.Repositories;
+using EventBus.Domain.Events.StatisticsCollector.UserDiagnostics;
 using EventBus.Domain.Responses.AuthService.UserDiagnostics;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
-//Event consumer's namespace must be the same as event's namespace
-namespace EventBus.Domain.Events.StatisticsCollector.UserDiagnostics;
+namespace AuthService.Application.Consumers.UserDiagnostics;
 
 /// <summary>
 /// Consumer of <see cref="GetUsersDiagnosticDataRequest"/> request.
