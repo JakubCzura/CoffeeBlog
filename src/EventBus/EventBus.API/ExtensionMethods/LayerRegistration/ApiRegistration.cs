@@ -21,10 +21,10 @@ public static class ApiRegistration
     /// </code>
     /// </example>
     /// </summary>
-    /// <param name="services">Instance of <see cref="IServiceCollection"/></param>
+    /// <param name="services">Collection of dependency injection services.</param>
     /// <param name="configuration">Appsettings.json</param>
     /// <param name="assembly">Assembly that contains the code that is currently executing.</param>
-    /// <returns>Instance of <see cref="IServiceCollection"/></returns>
+    /// <returns>Reference to <paramref name="services"/></returns>
     public static IServiceCollection AddEventBus(this IServiceCollection services,
                                                  IConfiguration configuration,
                                                  Assembly assembly)

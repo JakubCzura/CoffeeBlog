@@ -13,7 +13,8 @@ namespace ArticleManager.API.Middlewares;
 /// <param name="_logger">Logger to log exceptions.</param>
 /// <param name="_mediator">Mediator to handle command to save request's details in database.</param>
 public class RequestDetailsMiddleware(ILogger<RequestDetailsMiddleware> _logger,
-                                      IMediator _mediator) : IMiddleware
+                                      IMediator _mediator) 
+    : IMiddleware
 {
     private readonly ILogger<RequestDetailsMiddleware> _logger = _logger;
     private readonly IMediator _mediator = _mediator;
@@ -26,7 +27,7 @@ public class RequestDetailsMiddleware(ILogger<RequestDetailsMiddleware> _logger,
     /// </summary>
     /// <param name="httpContext">Request's context.</param>
     /// <param name="next">Delegate to process request.</param>
-    /// <returns>Instance of <see cref="Task"/>.</returns>
+    /// <returns><see cref="Task"/>.</returns>
     public async Task InvokeAsync(HttpContext httpContext,
                                   RequestDelegate next)
     {

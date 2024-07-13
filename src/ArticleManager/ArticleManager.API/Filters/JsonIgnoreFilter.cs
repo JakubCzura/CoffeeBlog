@@ -7,9 +7,10 @@ using System.Text.Json.Serialization;
 namespace ArticleManager.API.Filters;
 
 /// <summary>
-/// Filter to ignore properties with <see cref="JsonIgnoreAttribute"/> in Swagger.
+/// Filter to ignore properties with <see cref="JsonIgnoreAttribute"/>.
 /// </summary>
-public class JsonIgnoreFilter : ISchemaFilter
+public class JsonIgnoreFilter 
+    : ISchemaFilter
 {
     /// <summary>
     /// Applies filter to schema.

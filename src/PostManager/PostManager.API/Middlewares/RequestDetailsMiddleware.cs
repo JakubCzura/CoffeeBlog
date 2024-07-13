@@ -26,7 +26,7 @@ public class RequestDetailsMiddleware(ILogger<RequestDetailsMiddleware> _logger,
     /// </summary>
     /// <param name="httpContext">Request's context.</param>
     /// <param name="next">Delegate to process request.</param>
-    /// <returns>Instance of <see cref="Task"/>.</returns>
+    /// <returns><see cref="Task"/>.</returns>
     public async Task InvokeAsync(HttpContext httpContext,
                                   RequestDelegate next)
     {

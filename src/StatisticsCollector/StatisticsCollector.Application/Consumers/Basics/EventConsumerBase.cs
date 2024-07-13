@@ -54,7 +54,7 @@ public abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventCo
     /// Logs and saves exception to database.
     /// </summary>
     /// <param name="eventHandlerException">Exception that was thrown by event handler.</param>
-    /// <returns><see cref="Task"/></returns>
+    /// <returns><see cref="Task"/>.</returns>
     private async Task LogException(Exception eventHandlerException)
     {
         try
@@ -78,7 +78,7 @@ public abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventCo
     /// Method to consume event.
     /// </summary>
     /// <param name="context">Event's context.</param>
-    /// <returns>Instance of <see cref="Task"/></returns>
+    /// <returns><see cref="Task"/>.</returns>
     public async Task Consume(ConsumeContext<TEvent> context)
         => await HandleEventConsuming(context);
 
@@ -86,6 +86,6 @@ public abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventCo
     /// Method to consume event that should be inherited and overridden.
     /// </summary>
     /// <param name="consumeContext">Event's context.</param>
-    /// <returns>Instance of <see cref="Task"/></returns>
+    /// <returns><see cref="Task"/>.</returns>
     public abstract Task ConsumeEvent(ConsumeContext<TEvent> consumeContext);
 }

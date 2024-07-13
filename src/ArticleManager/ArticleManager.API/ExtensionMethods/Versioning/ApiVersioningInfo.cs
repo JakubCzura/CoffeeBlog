@@ -4,7 +4,7 @@ using Microsoft.OpenApi.Models;
 namespace ArticleManager.API.ExtensionMethods.Versioning;
 
 /// <summary>
-/// Informatin about API versioning.
+/// Information about API versioning.
 /// </summary>
 public static class ApiVersioningInfo
 {

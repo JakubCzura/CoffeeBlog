@@ -4,7 +4,7 @@ using Microsoft.OpenApi.Models;
 namespace PostManager.API.ExtensionMethods.Versioning;
 
 /// <summary>
-/// Informatin about API versioning.
+/// Information about API versioning.
 /// </summary>
 public static class ApiVersioningInfo
 {

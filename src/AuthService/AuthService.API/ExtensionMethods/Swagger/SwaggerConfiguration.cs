@@ -58,8 +58,8 @@ public static class SwaggerConfiguration
     /// <summary>
     /// Registers Swagger in dependency injection services.
     /// </summary>
-    /// <param name="services">Instance of <see cref="IServiceCollection"/></param>
-    /// <returns>Instance of <see cref="IServiceCollection"/></returns>
+    /// <param name="services">Collection of dependency injection services.</param>
+    /// <returns>Reference to <paramref name="services"/></returns>
     public static IServiceCollection AddSwagger(this IServiceCollection services)
     {
         services.AddSwaggerGen(swaggerGenOptions =>
@@ -111,8 +111,8 @@ public static class SwaggerConfiguration
     /// <summary>
     /// Configures Swagger UI and launches Swagger UI in browser using configured path.
     /// </summary>
-    /// <param name="webApplication">Instance of <see cref="WebApplication"/></param>
-    /// <returns>Instance of <see cref="WebApplication"/></returns>
+    /// <param name="webApplication">The web application used to configure the HTTP pipeline, and routes.</param>
+    /// <returns>Reference to <see cref="webApplication"/></returns>
     public static WebApplication UseSwaggerInterface(this WebApplication webApplication)
     {
         webApplication.UseSwagger(options => options.RouteTemplate = SwaggerInfo.RouteTemplate);

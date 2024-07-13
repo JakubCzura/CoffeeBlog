@@ -10,8 +10,8 @@ public static class ApiVersioningConfiguration
     /// <summary>
     /// Configures API versioning.
     /// </summary>
-    /// <param name="services">Reference to <see cref="IServiceCollection"/>.</param>
-    /// <returns><paramref name="services"/> with configured API versioning.</returns>
+    /// <param name="services">Collection of dependency injection services.</param>
+    /// <returns>Reference to <paramref name="services"/></returns>
     public static IServiceCollection AddApiVersion(this IServiceCollection services)
     {
         services.AddApiVersioning(config =>

@@ -9,7 +9,6 @@ using System.Text.Json.Serialization;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.Configure<AuthenticationOptions>(builder.Configuration.GetSection(AuthenticationOptions.AppsettingsKey));
 
 builder.Services.AddApplicationDI(builder.Configuration);

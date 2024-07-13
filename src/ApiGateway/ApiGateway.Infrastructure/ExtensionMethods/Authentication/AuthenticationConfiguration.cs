@@ -11,8 +11,8 @@ public static class AuthenticationConfiguration
     /// <summary>
     /// Configures authentication services.
     /// </summary>
-    /// <param name="services">Collection of dependency incjetion services.</param>
-    /// <returns>Reference to dependency injection service collection.</returns>
+    /// <param name="services">Collection of dependency injection services.</param>
+    /// <returns>Reference to <paramref name="services"/></returns>
     public static IServiceCollection ConfigureAuthentication(this IServiceCollection services)
     {
         services.AddAuthentication().AddJwtBearer();

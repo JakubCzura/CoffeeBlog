@@ -27,7 +27,7 @@ public sealed class GetUsersDiagnosticDataRequestConsumer(ILogger<GetUsersDiagno
     /// Consumes <see cref="GetUsersDiagnosticDataRequest"/> request.
     /// </summary>
     /// <param name="consumeContext">Request's context.</param>
-    /// <returns>Instance of <see cref="Task"/></returns>
+    /// <returns><see cref="Task"/>.</returns>
     public override async Task ConsumeEvent(ConsumeContext<GetUsersDiagnosticDataRequest> consumeContext)
     {
         GetUsersDiagnosticDataResultDto userDiagnostic = await _userDiagnosticDataRepository.GetUsersDiagnosticDataAsync(consumeContext.Message.DataCollectedAt, default);

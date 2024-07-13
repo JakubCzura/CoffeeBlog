@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 namespace AuthService.API.Filters;
 
 /// <summary>
-/// Filter to ignore properties with <see cref="JsonIgnoreAttribute"/> in Swagger.
+/// Filter to ignore properties with <see cref="JsonIgnoreAttribute"/>.
 /// </summary>
 public class JsonIgnoreFilter : ISchemaFilter
 {
