@@ -13,6 +13,7 @@ namespace AuthService.Application.Commands.Accounts.BanAccountByUserId;
 /// <param name="BanNote"> Note with details about ban. </param>
 /// <param name="BanEndsAt"> Date and time of ban expiration. </param>
 public record BanAccountByUserIdCommand(int UserId,
-                                        AccountBanReason? BanReason,
-                                        string? BanNote,
-                                        DateTime? BanEndsAt) : IRequest<Result<ViewModelBase>>;
+                                        AccountBanReason BanReason,
+                                        string BanNote,
+                                        DateTime BanEndsAt) 
+    : IRequest<Result<ViewModelBase>>;

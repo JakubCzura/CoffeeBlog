@@ -112,7 +112,7 @@ public static class SwaggerConfiguration
     /// Configures Swagger UI and launches Swagger UI in browser using configured path.
     /// </summary>
     /// <param name="webApplication">The web application used to configure the HTTP pipeline, and routes.</param>
-    /// <returns>Reference to <see cref="webApplication"/></returns>
+    /// <returns>Reference to <paramref name="webApplication"/>.</returns>
     public static WebApplication UseSwaggerInterface(this WebApplication webApplication)
     {
         webApplication.UseSwagger(options => options.RouteTemplate = SwaggerInfo.RouteTemplate);

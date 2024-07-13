@@ -13,11 +13,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace AuthService.API.Controllers;
 
 /// <summary>
-/// Controller to manage user's account.
+/// Controller to manage users' accounts.
 /// </summary>
-/// <param name="_mediator">Mediator to handle requests' commands and queries.</param>
+/// <param name="_mediator">Mediator to handle commands and queries using CQRS pattern.</param>
 [ApiVersion(ApiVersioningInfo.Version_1_0)]
-public class AccountController(IMediator _mediator) : ApiControllerBase(_mediator)
+public class AccountController(IMediator _mediator) 
+    : ApiControllerBase(_mediator)
 {
     /// <summary>
     /// Endpoint to ban user's account by user id.

@@ -16,7 +16,8 @@ namespace AuthService.API.Middlewares;
 /// <param name="_logger">Logger to log exceptions.</param>
 /// <param name="_mediator">Mediator to handle command to save API error in database.</param>
 public class ExceptionMiddleware(ILogger<ExceptionMiddleware> _logger,
-                                 IMediator _mediator) : IMiddleware
+                                 IMediator _mediator) 
+    : IMiddleware
 {
     private readonly ILogger<ExceptionMiddleware> _logger = _logger;
     private readonly IMediator _mediator = _mediator;

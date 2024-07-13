@@ -10,6 +10,6 @@ namespace AuthService.Application.Dtos.Accounts.Repository;
 /// <param name="BanNote"> Note with details about ban. </param>
 /// <param name="BanEndsAt"> Date and time of ban expiration. </param>
 public record BanAccountByUserIdDto(int UserId,
-                                    AccountBanReason? BanReason,
-                                    string? BanNote,
+                                    AccountBanReason BanReason,
+                                    string BanNote,
                                     DateTime? BanEndsAt);

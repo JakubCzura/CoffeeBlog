@@ -19,11 +19,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace AuthService.API.Controllers;
 
 /// <summary>
-/// Controller to manage user entity.
+/// Controller to manage users.
 /// </summary>
-/// <param name="_mediator">Mediator to handle requests' commands and queries.</param>
+/// <param name="_mediator">Mediator to handle commands and queries using CQRS pattern.</param>
 [ApiVersion(ApiVersioningInfo.Version_1_0)]
-public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
+public class UserController(IMediator _mediator) 
+    : ApiControllerBase(_mediator)
 {
     /// <summary>
     /// Endpoint to sign up user.

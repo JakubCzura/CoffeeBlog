@@ -8,7 +8,7 @@ namespace PostManager.API.Controllers;
 /// <summary>
 /// Controller to manage post entity.
 /// </summary>
-/// <param name="_mediator">Mediator to handle requests' commands and queries.</param>
+/// <param name="_mediator">Mediator to handle commands and queries using CQRS pattern.</param>
 [ApiVersion(ApiVersioningInfo.Version_1_0)]
 public class PostController(IMediator _mediator) : ApiControllerBase(_mediator)
 {
