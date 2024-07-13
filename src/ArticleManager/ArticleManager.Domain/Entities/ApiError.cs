@@ -5,7 +5,8 @@ namespace ArticleManager.Domain.Entities;
 /// <summary>
 /// Entity for API error for example when an exception is thrown.
 /// </summary>
-public class ApiError : DbEntityBase
+public class ApiError 
+    : DbEntityBase
 {
     /// <summary>
     /// Name of exception.

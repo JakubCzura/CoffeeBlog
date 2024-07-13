@@ -4,11 +4,25 @@ using Microsoft.Extensions.Options;
 
 namespace ArticleManager.Infrastructure.Security.Authentication;
 
-internal sealed class JwtAuthenticationConfiguration : IConfigureNamedOptions<AuthenticationOptions>
+/// <summary>
+/// Configuration of JWT authentication.
+/// </summary>
+internal sealed class JwtAuthenticationConfiguration 
+    : IConfigureNamedOptions<AuthenticationOptions>
 {
-    public void Configure(string? name, AuthenticationOptions options)
+    /// <summary>
+    /// Configures JWT authentication.
+    /// </summary>
+    /// <param name="name">The name of the options instance being configured.</param>
+    /// <param name="options">The options instance to configure.</param>
+    public void Configure(string? name, 
+                          AuthenticationOptions options)
         => Configure(options);
 
+    /// <summary>
+    /// Configures JWT authentication.
+    /// </summary>
+    /// <param name="options">The options instance to configure.</param>
     public void Configure(AuthenticationOptions options)
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

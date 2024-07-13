@@ -6,7 +6,8 @@ namespace ArticleManager.Domain.ViewModels.Errors;
 /// <summary>
 /// View model when an error occurs while processing a request.
 /// </summary>
-public class ErrorDetailsViewModel : ViewModelBase
+public class ErrorDetailsViewModel 
+    : ViewModelBase
 {
     /// <summary>
     /// Response status code.
@@ -25,7 +26,9 @@ public class ErrorDetailsViewModel : ViewModelBase
     /// </summary>
     /// <param name="statusCode">Response status code.</param>
     /// <param name="message">Response from request.</param>
-    public ErrorDetailsViewModel(int statusCode, string message) : base(message) => StatusCode = statusCode;
+    public ErrorDetailsViewModel(int statusCode,
+                                 string message) 
+        : base(message) => StatusCode = statusCode;
 
     /// <summary>
     /// Converts the reponse to json.

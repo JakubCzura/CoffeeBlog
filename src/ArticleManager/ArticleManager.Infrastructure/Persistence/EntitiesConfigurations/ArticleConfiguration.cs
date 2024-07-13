@@ -5,7 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ArticleManager.Infrastructure.Persistence.EntitiesConfigurations;
 
-internal class ArticleConfiguration : IEntityTypeConfiguration<Article>
+/// <summary>
+/// Configuration for <see cref="Article"/> in database.
+/// </summary>
+internal class ArticleConfiguration 
+    : IEntityTypeConfiguration<Article>
 {
     public void Configure(EntityTypeBuilder<Article> builder)
     {

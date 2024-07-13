@@ -6,7 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ArticleManager.Infrastructure.Persistence.Repositories;
 
-internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : DbEntityBase
+/// <summary>
+/// Generic repository to perform CRUD operations in database.
+/// </summary>
+/// <typeparam name="T">Entity in database.</typeparam>
+internal class DbEntityBaseRepository<T> 
+    : IDbEntityBaseRepository<T> where T : DbEntityBase
 {
     private readonly ArticleManagerDbContext _articleManagerDbContext;
     private readonly DbSet<T> _dbSet;

@@ -11,7 +11,7 @@ namespace ApiGateway.Infrastructure.Security.Authentication;
 /// <summary>
 /// Configuration of JWT validation.
 /// </summary>
-/// <param name="authenticationOptions"></param>
+/// <param name="authenticationOptions">Settings for authentication.</param>
 internal sealed class JwtValidationConfiguration(IOptions<AuthenticationOptions> authenticationOptions) 
     : IConfigureNamedOptions<JwtBearerOptions>
 {

@@ -7,7 +7,8 @@ namespace ArticleManager.Application.Mapping.ApiErrors;
 /// <summary>
 /// Mapping profile for <see cref="ApiError"/>.
 /// </summary>
-public class ApiErrorMappingProfile : Profile
+public class ApiErrorMappingProfile 
+    : Profile
 {
     /// <summary>
     /// Default constructor.

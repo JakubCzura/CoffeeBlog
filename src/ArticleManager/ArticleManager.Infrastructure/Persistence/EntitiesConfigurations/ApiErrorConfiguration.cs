@@ -5,7 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ArticleManager.Infrastructure.Persistence.EntitiesConfigurations;
 
-internal class ApiErrorConfiguration : IEntityTypeConfiguration<ApiError>
+/// <summary>
+/// Configuration for <see cref="ApiError"/> in database.
+/// </summary>
+internal class ApiErrorConfiguration 
+    : IEntityTypeConfiguration<ApiError>
 {
     public void Configure(EntityTypeBuilder<ApiError> builder)
     {
