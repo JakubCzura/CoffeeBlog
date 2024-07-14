@@ -4,6 +4,10 @@ using System.Reflection;
 
 namespace PostManager.Infrastructure.Persistence.DatabaseContext;
 
+/// <summary>
+/// Database context.
+/// </summary>
+/// <param name="dbContextOptions">Configuration for database context.</param>
 public class PostManagerDbContext(DbContextOptions<PostManagerDbContext> dbContextOptions) : DbContext(dbContextOptions)
 {
     public DbSet<Post> Posts { get; set; }

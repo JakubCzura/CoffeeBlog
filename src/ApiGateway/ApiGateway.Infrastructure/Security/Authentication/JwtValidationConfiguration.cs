@@ -21,7 +21,8 @@ internal sealed class JwtValidationConfiguration(IOptions<AuthenticationOptions>
     /// </summary>
     /// <param name="name">The name of the options instance being configured.</param>
     /// <param name="options">The options instance to configure.</param>
-    public void Configure(string? name, JwtBearerOptions options)
+    public void Configure(string? name, 
+                          JwtBearerOptions options)
         => Configure(options);
 
     /// <summary>

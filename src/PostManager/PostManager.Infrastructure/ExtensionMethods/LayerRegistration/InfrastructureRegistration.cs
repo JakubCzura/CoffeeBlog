@@ -9,8 +9,17 @@ using PostManager.Infrastructure.Persistence.Repositories;
 
 namespace PostManager.Infrastructure.ExtensionMethods.LayerRegistration;
 
+/// <summary>
+/// Registration of infrastructure layer services.
+/// </summary>
 public static class InfrastructureRegistration
 {
+    /// <summary>
+    /// Registers infrastructure layer services.
+    /// </summary>
+    /// <param name="services">Collection of dependency injection services.</param>
+    /// <param name="configuration">Appsettings.json</param>
+    /// <returns>Reference to <paramref name="services"/></returns>
     public static IServiceCollection AddInfrastructureDI(this IServiceCollection services,
                                                          IConfiguration configuration)
     {

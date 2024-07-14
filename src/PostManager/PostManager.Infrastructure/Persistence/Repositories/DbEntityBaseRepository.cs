@@ -6,11 +6,19 @@ using PostManager.Infrastructure.Persistence.DatabaseContext;
 
 namespace PostManager.Infrastructure.Persistence.Repositories;
 
+/// <summary>
+/// Generic repository to perform CRUD operations in database.
+/// </summary>
+/// <typeparam name="TEntity">Entity in database.</typeparam>
 internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : DbEntityBase
 {
     private readonly PostManagerDbContext _postManagerDbContext;
     private readonly DbSet<T> _dbSet;
 
+    /// <summary>
+    /// Constructor with database context.
+    /// </summary>
+    /// <param name="postManagerDbContext">Database context.</param>
     public DbEntityBaseRepository(PostManagerDbContext postManagerDbContext)
     {
         _postManagerDbContext = postManagerDbContext;

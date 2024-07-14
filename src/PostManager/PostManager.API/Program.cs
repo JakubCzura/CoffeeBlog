@@ -1,4 +1,3 @@
-using FluentValidation.AspNetCore;
 using PostManager.API.ExtensionMethods.Swagger;
 using PostManager.API.ExtensionMethods.Versioning;
 using PostManager.API.Middlewares;
@@ -9,8 +8,6 @@ using Serilog;
 using System.Text.Json.Serialization;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 builder.Services.Configure<AuthenticationOptions>(builder.Configuration.GetSection(AuthenticationOptions.AppsettingsKey));
 

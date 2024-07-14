@@ -5,8 +5,17 @@ using PostManager.Infrastructure.Persistence.DatabaseContext;
 
 namespace PostManager.Infrastructure.ExtensionMethods.Database;
 
+/// <summary>
+/// Configuration of database context.
+/// </summary>
 public static class DbContextConfiguration
 {
+    /// <summary>
+    /// Configures database context.
+    /// </summary>
+    /// <param name="services">Collection of dependency injection services.</param>
+    /// <param name="configuration">Appsettings.json</param>
+    /// <returns>Reference to <paramref name="services"/></returns>
     public static IServiceCollection ConfigureDbContext(this IServiceCollection services,
                                                         IConfiguration configuration)
     {

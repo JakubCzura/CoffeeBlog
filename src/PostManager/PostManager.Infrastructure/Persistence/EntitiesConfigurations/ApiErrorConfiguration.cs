@@ -5,6 +5,9 @@ using PostManager.Domain.Entities;
 
 namespace PostManager.Infrastructure.Persistence.EntitiesConfigurations;
 
+/// <summary>
+/// Configuration for <see cref="ApiError"/> in database.
+/// </summary>
 internal class ApiErrorConfiguration : IEntityTypeConfiguration<ApiError>
 {
     public void Configure(EntityTypeBuilder<ApiError> builder)

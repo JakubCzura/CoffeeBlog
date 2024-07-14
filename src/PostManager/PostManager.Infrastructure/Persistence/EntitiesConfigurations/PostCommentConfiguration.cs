@@ -5,6 +5,9 @@ using PostManager.Domain.Entities;
 
 namespace PostManager.Infrastructure.Persistence.EntitiesConfigurations;
 
+/// <summary>
+/// Configuration for <see cref="PostComment"/> in database.
+/// </summary>
 internal class PostCommentConfiguration : IEntityTypeConfiguration<PostComment>
 {
     public void Configure(EntityTypeBuilder<PostComment> builder)
