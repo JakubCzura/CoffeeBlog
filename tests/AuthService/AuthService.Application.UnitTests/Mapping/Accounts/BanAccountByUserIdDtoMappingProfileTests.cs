@@ -25,7 +25,7 @@ public class BanAccountByUserIdDtoMappingProfileTests
     public void Map_should_MapBanAccountByUserIdCommandToBanAccountByUserIdDto()
     {
         //Arrange
-        BanAccountByUserIdCommand banAccountByUserIdCommand = new(1, AccountBanReason.Spamming, "Spamming too much", DateTime.UtcNow);
+        BanAccountByUserIdCommand banAccountByUserIdCommand = new(1, AccountBanReason.Spamming, "Spamming too much", new DateOnly(2030, 1, 1));
 
         //Act
         BanAccountByUserIdDto result = _mapper.Map<BanAccountByUserIdDto>(banAccountByUserIdCommand);

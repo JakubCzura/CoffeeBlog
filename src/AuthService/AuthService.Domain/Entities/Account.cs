@@ -26,17 +26,19 @@ public class Account(int userId) : DbEntityBase
     public string? BanNote { get; set; }
 
     /// <summary>
-    /// Date and time when account was banned.
+    /// Date when account was banned.
     /// If account is not banned this field should be null
     /// </summary>
-    public DateTime? BannedAt { get; set; }
+    public DateOnly? BannedAt { get; set; }
 
     /// <summary>
-    /// Date and time when account ban ends.
-    /// If account is banned forever this field should have value <see cref="DateTime.MaxValue"/>.
-    /// If account is not banned this field should be null
+    /// Date when account ban ends.
+    /// If account is banned forever this field should have value <see cref="DateOnly.MaxValue"/>.
+    /// If account is not banned this field should be null.
+    /// For example if this property has value 2022-01-01 and the date is 2022-01-02, ban will be removed.
+    /// We expect that this field's value is also the day when account is banned, when the day ends account should be unbanned.
     /// </summary>
-    public DateTime? BanEndsAt { get; set; }
+    public DateOnly? BanEndsAt { get; set; }
 
     /// <summary>
     /// User's id.

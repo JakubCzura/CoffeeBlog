@@ -10,6 +10,7 @@ public interface IAccountRepository : IDbEntityBaseRepository<Account>
 {
     /// <summary>
     /// Removes all accounts bans that have expired.
+    /// For example if the property <see cref="Account.BanEndsAt"/> has value 2022-01-01 and the date is 2022-01-02, ban will be removed.
     /// </summary>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Total number of rows updated in database.</returns>
