@@ -10,6 +10,7 @@ public interface IPasswordHasher
     /// </summary>
     /// <param name="password">Plain-text password that will be hashed.</param>
     /// <returns>Hashed password.</returns>
+    /// <exception cref="ArgumentNullException">When password is null.</exception>
     public string HashPassword(string password);
 
     /// <summary>
@@ -18,6 +19,7 @@ public interface IPasswordHasher
     /// <param name="password">Plain-text password.</param>
     /// <param name="passwordHash">Hashed password.</param>
     /// <returns>True if the given plain-text password matches hashed password, otherwise false.</returns>
+    /// <exception cref="ArgumentNullException">When password or password hash is null.</exception>
     public bool VerifyPassword(string password,
                                string passwordHash);
 }

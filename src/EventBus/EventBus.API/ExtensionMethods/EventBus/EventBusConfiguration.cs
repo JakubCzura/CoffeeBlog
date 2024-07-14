@@ -6,8 +6,17 @@ using System.Reflection;
 
 namespace EventBus.API.ExtensionMethods.EventBus;
 
+/// <summary>
+/// Configuration of event bus.
+/// </summary>
 internal static class EventBusConfiguration
 {
+    /// <summary>
+    /// Configures event bus that is used to communicate between microservices.
+    /// </summary>
+    /// <param name="services">Collection of dependency injection services.</param>
+    /// <param name="assembly">Assembly of microservice that wants to use event bus.</param>
+    /// <returns>Reference to <paramref name="services"/></returns>
     public static IServiceCollection ConfigureEventBus(this IServiceCollection services,
                                                        Assembly assembly)
     {

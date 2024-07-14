@@ -13,17 +13,20 @@ namespace EventBus.API.ExtensionMethods.LayerRegistration;
 public static class ApiRegistration
 {
     /// <summary>
-    /// Registers API layer services and configures event bus. <br/><br/>
+    /// Registers API layer services and configures event bus to communicate between microservices. <br/><br/>
     /// <example>
     /// Recommended way to call this method is as follows:<br/>
     /// <code>
     /// services.AddEventBus(configuration, Assembly.GetExecutingAssembly());
     /// </code>
     /// </example>
+    /// <br></br>
+    /// Event bus needs configuration in appsettings.json. in every project that uses the event bus.
+    /// The configuration should be as followed <see cref="EventBusOptions"/><br/>
     /// </summary>
     /// <param name="services">Collection of dependency injection services.</param>
     /// <param name="configuration">Appsettings.json</param>
-    /// <param name="assembly">Assembly that contains the code that is currently executing.</param>
+    /// <param name="assembly">Assembly of microservice that wants to use event bus.</param>
     /// <returns>Reference to <paramref name="services"/></returns>
     public static IServiceCollection AddEventBus(this IServiceCollection services,
                                                  IConfiguration configuration,
