@@ -5,6 +5,9 @@ using StatisticsCollector.Domain.Entities;
 
 namespace StatisticsCollector.Infrastructure.Persistence.EntitiesConfigurations;
 
+/// <summary>
+/// Configuration for <see cref="UsersDiagnostics"/> in database.
+/// </summary>
 internal class UsersDiagnosticsConfiguration : IEntityTypeConfiguration<UsersDiagnostics>
 {
     public void Configure(EntityTypeBuilder<UsersDiagnostics> builder)

@@ -5,7 +5,7 @@ using Quartz;
 namespace AuthService.Infrastructure.BackgroundWorkers;
 
 /// <summary>
-/// Service for removing expired bans from users' accounts.
+/// Background service for removing expired bans from users' accounts.
 /// </summary>
 /// <param name="_logger">Logger to log exceptions.</param>
 /// <param name="_accountRepository">Interface to perform account operations in database.</param>

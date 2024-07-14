@@ -5,6 +5,9 @@ using StatisticsCollector.Domain.Entities;
 
 namespace StatisticsCollector.Infrastructure.Persistence.EntitiesConfigurations;
 
+/// <summary>
+/// Configuration for <see cref="RequestDetail"/> in database.
+/// </summary>
 internal class RequestDetailConfiguration : IEntityTypeConfiguration<RequestDetail>
 {
     public void Configure(EntityTypeBuilder<RequestDetail> builder)

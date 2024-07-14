@@ -11,6 +11,14 @@ using StatisticsCollector.Domain.Entities;
 
 namespace StatisticsCollector.Infrastructure.BackgroundWorkers;
 
+/// <summary>
+/// Background service for collecting diagnostics data about user's activities.
+/// </summary>
+/// <param name="_logger">Logger to log exceptions.</param>
+/// <param name="_usersDiagnosticsRepository">Interface to perform users diagnostics operations in database.</param>
+/// <param name="_dateTimeProvider">Interface to provide date and time.</param>
+/// <param name="_requestPublisher">Interface to publish requests to get response from other microservices.</param>
+/// <param name="_mapper">AutoMapper to map classes.</param>
 [DisallowConcurrentExecution]
 public class UsersDiagnosticsCollector(ILogger<UsersDiagnosticsCollector> _logger,
                                        IUsersDiagnosticsRepository _usersDiagnosticsRepository,
@@ -24,12 +32,16 @@ public class UsersDiagnosticsCollector(ILogger<UsersDiagnosticsCollector> _logge
     private readonly IRequestPublisher<GetUsersDiagnosticDataRequest> _requestPublisher = _requestPublisher;
     private readonly IMapper _mapper = _mapper;
 
+    /// <summary>
+    /// Collects diagnostics data about user's activities and saves it to database.
+    /// </summary>
+    /// <param name="context">Context of quartz job.</param>
+    /// <returns><see cref="Task"/></returns>
     public async Task Execute(IJobExecutionContext context)
     {
         try
         {
             DateTime dataCollectedAt = _dateTimeProvider.UtcNow.AddDays(-1);
-
             GetUsersDiagnosticDataRequest getUserDiagnosticRequest = new(dataCollectedAt,
                                                                          nameof(UsersDiagnosticsCollector));
 

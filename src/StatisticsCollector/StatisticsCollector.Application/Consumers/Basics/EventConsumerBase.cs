@@ -8,6 +8,15 @@ using StatisticsCollector.Domain.Entities;
 
 namespace StatisticsCollector.Application.Consumers.Basics;
 
+/// <summary>
+/// Base class for event's consumers that logs and saves consumed events and exceptions to database.
+/// It consumes messages according to microservices communication.
+/// </summary>
+/// <typeparam name="TEvent">Type of event.</typeparam>
+/// <typeparam name="TEventConsumer">Type of event's consumer that will inherit from this class.</typeparam>
+/// <param name="_logger">Logger to log exceptions.</param>
+/// <param name="_eventConsumerDetailRepository">Interface to perform event consumer detail operations in database.</param>
+/// <param name="_apiErrorRepository">Interface to perform api error operations in database.</param>
 public abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventConsumer> _logger,
                                                                   IEventConsumerDetailRepository _eventConsumerDetailRepository,
                                                                   IApiErrorRepository _apiErrorRepository)
@@ -18,6 +27,11 @@ public abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventCo
     private readonly IEventConsumerDetailRepository _eventConsumerDetailRepository = _eventConsumerDetailRepository;
     private readonly IApiErrorRepository _apiErrorRepository = _apiErrorRepository;
 
+    /// <summary>
+    /// Handles event consuming.
+    /// </summary>
+    /// <param name="context">Context of event.</param>
+    /// <returns><see cref="Task"/></returns>
     private async Task HandleEventConsuming(ConsumeContext<TEvent> context)
     {
         try

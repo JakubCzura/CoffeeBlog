@@ -6,18 +6,18 @@ using Quartz;
 namespace AuthService.Infrastructure.ExtensionMethods.BackgroundWorkers;
 
 /// <summary>
-/// Configuration of ban removal service.
+/// Configuration of background workers.
 /// </summary>
-public static class BanRemovalServiceConfiguration
+public static class BackgroundWorkersConfiguration
 {
     /// <summary>
-    /// Configures background worker for removing users' accounts' bans.
+    /// Configures all background workers that work in the microservice.
     /// </summary>
     /// <param name="services">Collection of dependency injection services.</param>
     /// <param name="configuration">Appsettings.json</param>
     /// <returns>Reference to <paramref name="services"/></returns>
-    public static IServiceCollection ConfigureBanRemovalServiceBackgroundWorker(this IServiceCollection services,
-                                                                                IConfiguration configuration)
+    public static IServiceCollection ConfigureBackgroundWorkers(this IServiceCollection services,
+                                                                IConfiguration configuration)
     {
         services.AddQuartz(options =>
         {

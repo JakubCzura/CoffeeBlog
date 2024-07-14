@@ -5,6 +5,9 @@ using NotificationProvider.Domain.Entities;
 
 namespace NotificationProvider.Infrastructure.Persistence.EntitiesConfigurations;
 
+/// <summary>
+/// Configuration for <see cref="EmailMessageDetail"/> in database.
+/// </summary>
 internal class EmailMessageDetailConfiguration : IEntityTypeConfiguration<EmailMessageDetail>
 {
     public void Configure(EntityTypeBuilder<EmailMessageDetail> builder)

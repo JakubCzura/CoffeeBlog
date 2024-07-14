@@ -7,34 +7,42 @@ using NotificationProvider.Infrastructure.Persistence.DatabaseContext;
 
 namespace NotificationProvider.Infrastructure.Persistence.Repositories;
 
-internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : DbEntityBase
+/// <summary>
+/// Generic repository to perform CRUD operations in database.
+/// </summary>
+/// <typeparam name="TEntity">Entity in database.</typeparam>
+internal class DbEntityBaseRepository<TEntity> : IDbEntityBaseRepository<TEntity> where TEntity : DbEntityBase
 {
     private readonly NotificationProviderDbContext _notificationProviderDbContext;
-    private readonly DbSet<T> _dbSet;
+    private readonly DbSet<TEntity> _dbSet;
 
+    /// <summary>
+    /// Constructor with database context.
+    /// </summary>
+    /// <param name="notificationProviderDbContext">Database context.</param>
     public DbEntityBaseRepository(NotificationProviderDbContext notificationProviderDbContext)
     {
         _notificationProviderDbContext = notificationProviderDbContext;
-        _dbSet = _notificationProviderDbContext.Set<T>();
+        _dbSet = _notificationProviderDbContext.Set<TEntity>();
     }
 
-    public async Task CreateAsync(T entity,
-                                  CancellationToken cancellationToken)
+    public async Task CreateAsync(TEntity entity,
+                                  CancellationToken cancellationToken = default)
 
     {
         await _dbSet.AddAsync(entity, cancellationToken);
         await _notificationProviderDbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<T?> GetAsync(ObjectId id,
-                                   CancellationToken cancellationToken)
+    public async Task<TEntity?> GetAsync(ObjectId id,
+                                   CancellationToken cancellationToken = default)
         => await _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
-    public async Task<List<T>> GetAllAsync(CancellationToken cancellationToken)
+    public async Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
         => await _dbSet.ToListAsync(cancellationToken);
 
-    public async Task<int> UpdateAsync(T entity,
-                                       CancellationToken cancellationToken)
+    public async Task<int> UpdateAsync(TEntity entity,
+                                       CancellationToken cancellationToken = default)
 
     {
         _dbSet.Update(entity);
@@ -42,9 +50,9 @@ internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : 
     }
 
     public async Task<int> DeleteAsync(ObjectId id,
-                                       CancellationToken cancellationToken)
+                                       CancellationToken cancellationToken = default)
     {
-        T? entity = await _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        TEntity? entity = await _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
         if (entity is null)
         {

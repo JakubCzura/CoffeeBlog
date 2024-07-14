@@ -2,6 +2,9 @@
 
 namespace NotificationProvider.Domain.Entities;
 
+/// <summary>
+/// Entity for email message detail.
+/// </summary>
 public class EmailMessageDetail : DbEntityBase
 {
     public string SenderName { get; set; } = string.Empty;

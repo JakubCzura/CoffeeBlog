@@ -2,6 +2,9 @@
 
 namespace StatisticsCollector.Domain.Entities;
 
+/// <summary>
+/// Entity to store events' consumers details. Helpful for microservices architecture.
+/// </summary>
 public class EventConsumerDetail : DbEntityBase
 {
     /// <summary>

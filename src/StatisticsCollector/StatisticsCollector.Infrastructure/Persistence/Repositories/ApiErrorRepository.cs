@@ -4,7 +4,11 @@ using StatisticsCollector.Infrastructure.Persistence.DatabaseContext;
 
 namespace StatisticsCollector.Infrastructure.Persistence.Repositories;
 
-internal class ApiErrorRepository(StatisticsCollectorDbContext statisticsCollectorDbContext)
-    : DbEntityBaseRepository<ApiError>(statisticsCollectorDbContext), IApiErrorRepository
+/// <summary>
+/// Repository to perform database operations related to <see cref="ApiError"/>.
+/// </summary>
+/// <param name="_statisticsCollectorDbContext">Database context.</param>
+internal class ApiErrorRepository(StatisticsCollectorDbContext _statisticsCollectorDbContext)
+    : DbEntityBaseRepository<ApiError>(_statisticsCollectorDbContext), IApiErrorRepository
 {
 }

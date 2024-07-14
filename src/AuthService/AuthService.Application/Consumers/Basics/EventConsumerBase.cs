@@ -27,6 +27,11 @@ public abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventCo
     private readonly IEventConsumerDetailRepository _eventConsumerDetailRepository = _eventConsumerDetailRepository;
     private readonly IApiErrorRepository _apiErrorRepository = _apiErrorRepository;
 
+    /// <summary>
+    /// Handles event consuming.
+    /// </summary>
+    /// <param name="context">Context of event.</param>
+    /// <returns><see cref="Task"/></returns>
     private async Task HandleEventConsuming(ConsumeContext<TEvent> context)
     {
         try

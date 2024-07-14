@@ -1,5 +1,8 @@
 ﻿namespace NotificationProvider.Domain.SettingsOptions.Database;
 
+/// <summary>
+/// Configuration options for database in appsettings.json.
+/// </summary>
 public class DatabaseOptions
 {
     /// <summary>

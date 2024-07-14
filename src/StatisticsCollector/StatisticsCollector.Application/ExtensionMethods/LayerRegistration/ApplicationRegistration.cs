@@ -5,8 +5,17 @@ using System.Reflection;
 
 namespace StatisticsCollector.Application.ExtensionMethods.LayerRegistration;
 
+/// <summary>
+/// Registration of application layer services.
+/// </summary>
 public static class ApplicationRegistration
 {
+    /// <summary>
+    /// Registers application layer services.
+    /// </summary>
+    /// <param name="services">Collection of dependency injection services.</param>
+    /// <param name="configuration">Appsettings.json</param>
+    /// <returns>Reference to <paramref name="services"/></returns>
     public static IServiceCollection AddApplicationDI(this IServiceCollection services,
                                                       IConfiguration configuration)
     {

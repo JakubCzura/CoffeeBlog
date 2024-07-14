@@ -53,7 +53,7 @@ public static class InfrastructureRegistration
         services.AddHttpContextAccessor();
         services.AddScoped<ICurrentUserContext, CurrentUserContext>();
 
-        services.ConfigureBanRemovalServiceBackgroundWorker(configuration);
+        services.ConfigureBackgroundWorkers(configuration);
 
         return services;
     }

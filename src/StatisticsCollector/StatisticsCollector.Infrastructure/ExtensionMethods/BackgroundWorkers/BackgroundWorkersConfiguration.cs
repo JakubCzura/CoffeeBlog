@@ -5,8 +5,17 @@ using StatisticsCollector.Infrastructure.BackgroundWorkers;
 
 namespace StatisticsCollector.Infrastructure.ExtensionMethods.BackgroundWorkers;
 
+/// <summary>
+/// Configuration of background workers.
+/// </summary>
 public static class BackgroundWorkersConfiguration
 {
+    /// <summary>
+    /// Configures all background workers that work in the microservice.
+    /// </summary>
+    /// <param name="services">Collection of dependency injection services.</param>
+    /// <param name="configuration">Appsettings.json</param>
+    /// <returns>Reference to <paramref name="services"/></returns>
     public static IServiceCollection ConfigureBackgroundWorkers(this IServiceCollection services,
                                                                 IConfiguration configuration)
     {

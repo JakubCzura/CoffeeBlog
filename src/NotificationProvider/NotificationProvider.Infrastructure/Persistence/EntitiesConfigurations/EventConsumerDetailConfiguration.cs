@@ -5,6 +5,9 @@ using NotificationProvider.Domain.Entities;
 
 namespace NotificationProvider.Infrastructure.Persistence.EntitiesConfigurations;
 
+/// <summary>
+/// Configuration for <see cref="EventConsumerDetail"/> in database.
+/// </summary>
 internal class EventConsumerDetailConfiguration : IEntityTypeConfiguration<EventConsumerDetail>
 {
     public void Configure(EntityTypeBuilder<EventConsumerDetail> builder)

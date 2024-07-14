@@ -4,7 +4,11 @@ using StatisticsCollector.Infrastructure.Persistence.DatabaseContext;
 
 namespace StatisticsCollector.Infrastructure.Persistence.Repositories;
 
-internal class EventConsumerDetailRepository(StatisticsCollectorDbContext statisticsCollectorDbContext)
-    : DbEntityBaseRepository<EventConsumerDetail>(statisticsCollectorDbContext), IEventConsumerDetailRepository
+/// <summary>
+/// Repository to perform database operations related to <see cref="EventConsumerDetail"/>.
+/// </summary>
+/// <param name="_statisticsCollectorDbContext">Database context.</param>
+internal class EventConsumerDetailRepository(StatisticsCollectorDbContext _statisticsCollectorDbContext)
+    : DbEntityBaseRepository<EventConsumerDetail>(_statisticsCollectorDbContext), IEventConsumerDetailRepository
 {
 }

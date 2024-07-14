@@ -8,7 +8,7 @@ namespace AuthService.Infrastructure.Persistence.DatabaseContext;
 /// Database context.
 /// </summary>
 /// <param name="dbContextOptions">Configuration for database context.</param>
-public class AuthServiceDbContext(DbContextOptions<AuthServiceDbContext> options) : DbContext(options)
+public class AuthServiceDbContext(DbContextOptions<AuthServiceDbContext> dbContextOptions) : DbContext(dbContextOptions)
 {
     public DbSet<Account> Accounts { get; set; }
     public DbSet<ApiError> ApiErrors { get; set; }

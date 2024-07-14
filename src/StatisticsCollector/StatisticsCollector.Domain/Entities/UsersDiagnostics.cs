@@ -2,6 +2,9 @@
 
 namespace StatisticsCollector.Domain.Entities;
 
+/// <summary>
+/// Entity to store information about users' diagnostics.
+/// </summary>
 public class UsersDiagnostics : DbEntityBase
 {
     public int NewUserCount { get; set; }

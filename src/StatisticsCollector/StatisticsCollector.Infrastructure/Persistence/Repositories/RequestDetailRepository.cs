@@ -4,7 +4,11 @@ using StatisticsCollector.Infrastructure.Persistence.DatabaseContext;
 
 namespace StatisticsCollector.Infrastructure.Persistence.Repositories;
 
-internal class RequestDetailRepository(StatisticsCollectorDbContext statisticsCollectorDbContext)
-: DbEntityBaseRepository<RequestDetail>(statisticsCollectorDbContext), IRequestDetailRepository
+/// <summary>
+/// Repository to perform database operations related to <see cref="RequestDetail"/>.
+/// </summary>
+/// <param name="_statisticsCollectorDbContext">Database context.</param>
+internal class RequestDetailRepository(StatisticsCollectorDbContext _statisticsCollectorDbContext)
+    : DbEntityBaseRepository<RequestDetail>(_statisticsCollectorDbContext), IRequestDetailRepository
 {
 }

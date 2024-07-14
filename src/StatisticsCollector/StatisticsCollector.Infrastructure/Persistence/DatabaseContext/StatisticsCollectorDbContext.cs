@@ -4,7 +4,11 @@ using System.Reflection;
 
 namespace StatisticsCollector.Infrastructure.Persistence.DatabaseContext;
 
-public class StatisticsCollectorDbContext(DbContextOptions<StatisticsCollectorDbContext> options) : DbContext(options)
+/// <summary>
+/// Database context.
+/// </summary>
+/// <param name="dbContextOptions">Configuration for database context.</param>
+public class StatisticsCollectorDbContext(DbContextOptions<StatisticsCollectorDbContext> dbContextOptions) : DbContext(dbContextOptions)
 {
     public DbSet<ApiError> ApiErrors { get; set; }
     public DbSet<EventConsumerDetail> EventConsumerDetails { get; set; }

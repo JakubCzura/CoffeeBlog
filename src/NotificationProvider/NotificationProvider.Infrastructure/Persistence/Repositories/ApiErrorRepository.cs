@@ -4,7 +4,11 @@ using NotificationProvider.Infrastructure.Persistence.DatabaseContext;
 
 namespace NotificationProvider.Infrastructure.Persistence.Repositories;
 
-internal class ApiErrorRepository(NotificationProviderDbContext notificationProviderDbContext)
-    : DbEntityBaseRepository<ApiError>(notificationProviderDbContext), IApiErrorRepository
+/// <summary>
+/// Repository to perform database operations related to <see cref="ApiError"/>.
+/// </summary>
+/// <param name="_notificationProviderDbContext">Database context.</param>
+internal class ApiErrorRepository(NotificationProviderDbContext _notificationProviderDbContext)
+    : DbEntityBaseRepository<ApiError>(_notificationProviderDbContext), IApiErrorRepository
 {
 }
