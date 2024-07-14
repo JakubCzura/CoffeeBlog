@@ -6,8 +6,7 @@ namespace ArticleManager.Domain.Entities;
 /// Entity representing article's comment.
 /// See <see cref="Article"/>
 /// </summary>
-public class ArticleComment 
-    : DbEntityBase
+public class ArticleComment : DbEntityBase
 {
     /// <summary>
     /// Content of comment, everything that user wants to tell.

@@ -12,8 +12,7 @@ namespace ArticleManager.Infrastructure.Security.Authentication;
 /// Configuration of JWT validation.
 /// </summary>
 /// <param name="authenticationOptions">Settings for authentication.</param>
-internal sealed class JwtValidationConfiguration(IOptions<AuthenticationOptions> authenticationOptions) 
-    : IConfigureNamedOptions<JwtBearerOptions>
+internal sealed class JwtValidationConfiguration(IOptions<AuthenticationOptions> authenticationOptions) : IConfigureNamedOptions<JwtBearerOptions>
 {
     private readonly AuthenticationOptions _authenticationOptions = authenticationOptions.Value;
 

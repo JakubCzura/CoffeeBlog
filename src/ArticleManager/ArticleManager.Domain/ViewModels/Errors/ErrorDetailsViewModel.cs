@@ -6,8 +6,7 @@ namespace ArticleManager.Domain.ViewModels.Errors;
 /// <summary>
 /// View model when an error occurs while processing a request.
 /// </summary>
-public class ErrorDetailsViewModel 
-    : ViewModelBase
+public class ErrorDetailsViewModel : ViewModelBase
 {
     /// <summary>
     /// Response status code.

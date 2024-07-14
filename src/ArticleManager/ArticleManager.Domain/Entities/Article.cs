@@ -5,8 +5,7 @@ namespace ArticleManager.Domain.Entities;
 /// <summary>
 /// Entity that represents article which is created by user.
 /// </summary>
-public class Article 
-    : DbEntityBase
+public class Article : DbEntityBase
 {
     /// <summary>
     /// Title of article.

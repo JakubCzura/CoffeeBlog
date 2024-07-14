@@ -13,8 +13,7 @@ namespace AuthService.API.Middlewares;
 /// <param name="_logger">Logger to log exceptions.</param>
 /// <param name="_mediator">Mediator to handle command to save request's details in database.</param>
 public class RequestDetailsMiddleware(ILogger<RequestDetailsMiddleware> _logger,
-                                      IMediator _mediator) 
-    : IMiddleware
+                                      IMediator _mediator) : IMiddleware
 {
     private readonly ILogger<RequestDetailsMiddleware> _logger = _logger;
     private readonly IMediator _mediator = _mediator;

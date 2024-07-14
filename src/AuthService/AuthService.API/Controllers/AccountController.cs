@@ -17,8 +17,7 @@ namespace AuthService.API.Controllers;
 /// </summary>
 /// <param name="_mediator">Mediator to handle commands and queries using CQRS pattern.</param>
 [ApiVersion(ApiVersioningInfo.Version_1_0)]
-public class AccountController(IMediator _mediator) 
-    : ApiControllerBase(_mediator)
+public class AccountController(IMediator _mediator) : ApiControllerBase(_mediator)
 {
     /// <summary>
     /// Endpoint to ban user's account by user id.

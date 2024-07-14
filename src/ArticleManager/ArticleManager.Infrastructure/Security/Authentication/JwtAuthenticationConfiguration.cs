@@ -7,8 +7,7 @@ namespace ArticleManager.Infrastructure.Security.Authentication;
 /// <summary>
 /// Configuration of JWT authentication.
 /// </summary>
-internal sealed class JwtAuthenticationConfiguration 
-    : IConfigureNamedOptions<AuthenticationOptions>
+internal sealed class JwtAuthenticationConfiguration : IConfigureNamedOptions<AuthenticationOptions>
 {
     /// <summary>
     /// Configures JWT authentication.

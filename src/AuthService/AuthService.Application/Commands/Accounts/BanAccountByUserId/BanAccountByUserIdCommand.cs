@@ -15,5 +15,4 @@ namespace AuthService.Application.Commands.Accounts.BanAccountByUserId;
 public record BanAccountByUserIdCommand(int UserId,
                                         AccountBanReason BanReason,
                                         string BanNote,
-                                        DateOnly BanEndsAt) 
-    : BanAccountByUserIdRequest(BanReason, BanNote, BanEndsAt), IRequest<Result<ViewModelBase>>;
+                                        DateOnly BanEndsAt) : BanAccountByUserIdRequest(BanReason, BanNote, BanEndsAt), IRequest<Result<ViewModelBase>>;

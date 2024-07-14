@@ -10,8 +10,7 @@ namespace ArticleManager.Infrastructure.Persistence.Repositories;
 /// Generic repository to perform CRUD operations in database.
 /// </summary>
 /// <typeparam name="TEntity">Entity in database.</typeparam>
-internal class DbEntityBaseRepository<TEntity> 
-    : IDbEntityBaseRepository<TEntity> where TEntity : DbEntityBase
+internal class DbEntityBaseRepository<TEntity> : IDbEntityBaseRepository<TEntity> where TEntity : DbEntityBase
 {
     private readonly ArticleManagerDbContext _articleManagerDbContext;
     private readonly DbSet<TEntity> _dbSet;

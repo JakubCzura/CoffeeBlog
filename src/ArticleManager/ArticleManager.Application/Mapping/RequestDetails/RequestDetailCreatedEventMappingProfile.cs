@@ -7,8 +7,7 @@ namespace ArticleManager.Application.Mapping.RequestDetails;
 /// <summary>
 /// Mapping profile for <see cref="RequestDetailCreatedEvent"/>.
 /// </summary>
-public class RequestDetailCreatedEventMappingProfile 
-    : Profile
+public class RequestDetailCreatedEventMappingProfile : Profile
 {
     /// <summary>
     /// Default constructor.
