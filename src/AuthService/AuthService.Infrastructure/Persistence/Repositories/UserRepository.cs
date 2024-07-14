@@ -28,30 +28,30 @@ internal class UserRepository(AuthServiceDbContext _authServiceDbContext)
     public async Task<bool> UsernameExistsAsync(string username,
                                                 CancellationToken cancellationToken = default)
         => await _authServiceDbContext.Users.AsNoTracking()
-                                           .AnyAsync(user => user.Username == username, cancellationToken);
+                                            .AnyAsync(user => user.Username == username, cancellationToken);
 
     public async Task<bool> EmailExistsAsync(string email,
                                              CancellationToken cancellationToken = default)
         => await _authServiceDbContext.Users.AsNoTracking()
-                                           .AnyAsync(user => user.Email == email, cancellationToken);
+                                            .AnyAsync(user => user.Email == email, cancellationToken);
 
     public async Task<int> UpdateUsernameAsync(int id,
                                                string username,
                                                CancellationToken cancellationToken = default)
         => await _authServiceDbContext.Users.Where(user => user.Id == id)
-                                           .ExecuteUpdateAsync(user => user.SetProperty(property => property.Username, username), cancellationToken);
+                                            .ExecuteUpdateAsync(user => user.SetProperty(property => property.Username, username), cancellationToken);
 
     public async Task<int> UpdateEmailAsync(int id,
                                             string email,
                                             CancellationToken cancellationToken = default)
         => await _authServiceDbContext.Users.Where(user => user.Id == id)
-                                           .ExecuteUpdateAsync(user => user.SetProperty(property => property.Email, email), cancellationToken);
+                                            .ExecuteUpdateAsync(user => user.SetProperty(property => property.Email, email), cancellationToken);
 
     public async Task<int> UpdatePasswordAsync(int id,
                                                string password,
                                                CancellationToken cancellationToken = default)
         => await _authServiceDbContext.Users.Where(user => user.Id == id)
-                                           .ExecuteUpdateAsync(user => user.SetProperty(property => property.Password, password), cancellationToken);
+                                            .ExecuteUpdateAsync(user => user.SetProperty(property => property.Password, password), cancellationToken);
 
     public async Task<int> UpdateForgottenPasswordResetTokenAsync(UpdateForgottenPasswordResetTokenDto updateForgottenPasswordResetTokenDto,
                                                                   CancellationToken cancellationToken = default)

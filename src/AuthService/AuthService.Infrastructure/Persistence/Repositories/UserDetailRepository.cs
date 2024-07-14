@@ -24,7 +24,7 @@ internal class UserDetailRepository(AuthServiceDbContext _authServiceDbContext,
                                                  .ExecuteUpdateAsync(userDetail => userDetail.SetProperty(property => property.LastSuccessfullSignIn, _dateTimeProvider.UtcNow), cancellationToken);
 
     public async Task<int> UpdateLastFailedSignInAsync(int userId,
-                                                           CancellationToken cancellationToken = default)
+                                                       CancellationToken cancellationToken = default)
         => await _authServiceDbContext.UserDetails.Where(userDetail => userDetail.UserId == userId)
                                                   .ExecuteUpdateAsync(userDetail => userDetail.SetProperty(property => property.LastFailedSignIn, _dateTimeProvider.UtcNow), cancellationToken);
 
