@@ -9,11 +9,11 @@ namespace AuthService.Infrastructure.Persistence.Repositories;
 /// <summary>
 /// Repository to perform database operations related to <see cref="User"/>.
 /// </summary>
-/// <param name="authServiceDbContext">Database context.</param>
-internal class UserRepository(AuthServiceDbContext authServiceDbContext)
-    : DbEntityBaseRepository<User>(authServiceDbContext), IUserRepository
+/// <param name="_authServiceDbContext">Database context.</param>
+internal class UserRepository(AuthServiceDbContext _authServiceDbContext)
+    : DbEntityBaseRepository<User>(_authServiceDbContext), IUserRepository
 {
-    private readonly AuthServiceDbContext _authServiceDbContext = authServiceDbContext;
+    private readonly AuthServiceDbContext _authServiceDbContext = _authServiceDbContext;
 
     public async Task<bool> UserExistsAsync(int userId,
                                             CancellationToken cancellationToken)

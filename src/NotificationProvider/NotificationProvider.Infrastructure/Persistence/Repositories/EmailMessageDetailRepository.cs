@@ -4,7 +4,11 @@ using NotificationProvider.Infrastructure.Persistence.DatabaseContext;
 
 namespace NotificationProvider.Infrastructure.Persistence.Repositories;
 
-internal class EmailMessageDetailRepository(NotificationProviderDbContext notificationProviderDbContext)
-    : DbEntityBaseRepository<EmailMessageDetail>(notificationProviderDbContext), IEmailMessageDetailRepository
+/// <summary>
+/// Repository to perform database operations related to <see cref="EmailMessageDetail"/>.
+/// </summary>
+/// <param name="_notificationProviderDbContext">Database context.</param>
+internal class EmailMessageDetailRepository(NotificationProviderDbContext _notificationProviderDbContext)
+    : DbEntityBaseRepository<EmailMessageDetail>(_notificationProviderDbContext), IEmailMessageDetailRepository
 {
 }
