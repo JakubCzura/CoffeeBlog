@@ -24,7 +24,8 @@ public sealed class GetUsersDiagnosticDataRequestConsumer(ILogger<GetUsersDiagno
     private readonly IUserDiagnosticDataRepository _userDiagnosticDataRepository = _userDiagnosticDataRepository;
 
     /// <summary>
-    /// Consumes <see cref="GetUsersDiagnosticDataRequest"/> request.
+    /// Consumes <see cref="GetUsersDiagnosticDataRequest"/> request.<br/>
+    /// Sends diagnostics data about users as response.
     /// </summary>
     /// <param name="consumeContext">Request's context.</param>
     /// <returns><see cref="Task"/>.</returns>

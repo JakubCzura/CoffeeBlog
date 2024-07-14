@@ -7,8 +7,6 @@ using System.Text.Json.Serialization;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.Configure<DatabaseOptions>(builder.Configuration.GetSection(DatabaseOptions.AppsettingsKey));
 builder.Services.Configure<EmailOptions>(builder.Configuration.GetSection(EmailOptions.AppsettingsKey));
 
