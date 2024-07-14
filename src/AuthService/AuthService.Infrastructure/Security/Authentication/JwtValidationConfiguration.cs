@@ -8,13 +8,26 @@ using System.Text;
 
 namespace AuthService.Infrastructure.Security.Authentication;
 
+/// <summary>
+/// Configuration of JWT validation.
+/// </summary>
+/// <param name="authenticationOptions">Settings for authentication.</param>
 internal sealed class JwtValidationConfiguration(IOptions<AuthenticationOptions> authenticationOptions) : IConfigureNamedOptions<JwtBearerOptions>
 {
     private readonly AuthenticationOptions _authenticationOptions = authenticationOptions.Value;
 
+    /// <summary>
+    /// Configures JWT validation.
+    /// </summary>
+    /// <param name="name">The name of the options instance being configured.</param>
+    /// <param name="options">The options instance to configure.</param>
     public void Configure(string? name, JwtBearerOptions options)
         => Configure(options);
 
+    /// <summary>
+    /// Configures JWT validation.
+    /// </summary>
+    /// <param name="options">The options instance to configure.</param>
     public void Configure(JwtBearerOptions options)
     {
         options.TokenValidationParameters = new()

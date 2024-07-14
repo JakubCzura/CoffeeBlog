@@ -1,4 +1,5 @@
-﻿using AuthService.Domain.Models.Security;
+﻿using AuthService.Domain.Exceptions;
+using AuthService.Domain.Models.Security;
 
 namespace AuthService.Application.Interfaces.Security.Token;
 
@@ -11,5 +12,6 @@ public interface ISecurityTokenGenerator
     /// Generates a security token with its expiration date to reset forgotten password.
     /// </summary>
     /// <returns>Security token with its expiration date.</returns>
+    /// <exception cref="SecurityTokenException">When appsettings has to small values to create token and its expiration date.</exception>
     public SecurityToken GenerateForgottenPasswordResetToken();
 }

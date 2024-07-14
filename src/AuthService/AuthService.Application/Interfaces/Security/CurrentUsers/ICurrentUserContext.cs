@@ -1,4 +1,5 @@
-﻿using AuthService.Domain.Models.Users;
+﻿using AuthService.Domain.Exceptions;
+using AuthService.Domain.Models.Users;
 
 namespace AuthService.Application.Interfaces.Security.CurrentUsers;
 
@@ -11,5 +12,6 @@ public interface ICurrentUserContext
     /// Returns information about current authorized user.
     /// </summary>
     /// <returns>Information about user who has successfully signed in and is authorized.</returns>
+    /// <exception cref="UserUnauthorizedException">When user is unauthorized.</exception>
     public CurrentAuthorizedUser GetCurrentAuthorizedUser();
 }

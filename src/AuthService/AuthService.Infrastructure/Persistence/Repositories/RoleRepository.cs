@@ -5,6 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthService.Infrastructure.Persistence.Repositories;
 
+/// <summary>
+/// Repository to perform database operations related to <see cref="Role"/>.
+/// </summary>
+/// <param name="_authServiceDbContext">Database context.</param>
 internal class RoleRepository(AuthServiceDbContext _authServiceDbContext)
     : DbEntityBaseRepository<Role>(_authServiceDbContext), IRoleRepository
 {

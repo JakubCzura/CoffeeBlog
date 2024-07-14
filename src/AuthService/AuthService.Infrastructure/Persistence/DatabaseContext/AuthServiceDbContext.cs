@@ -4,6 +4,10 @@ using System.Reflection;
 
 namespace AuthService.Infrastructure.Persistence.DatabaseContext;
 
+/// <summary>
+/// Database context.
+/// </summary>
+/// <param name="dbContextOptions">Configuration for database context.</param>
 public class AuthServiceDbContext(DbContextOptions<AuthServiceDbContext> options) : DbContext(options)
 {
     public DbSet<Account> Accounts { get; set; }

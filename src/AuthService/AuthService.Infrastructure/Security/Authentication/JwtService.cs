@@ -10,11 +10,16 @@ using System.Text;
 
 namespace AuthService.Infrastructure.Security.Authentication;
 
+/// <summary>
+/// Security service to perform operations related to JWT and provide token creation.
+/// </summary>
+/// <param name="authenticationOptions">Settings for authentication.</param>
+/// <param name="_dateTimeProvider">Interface to provide date and time.</param>
 internal class JwtService(IOptions<AuthenticationOptions> authenticationOptions,
-                          IDateTimeProvider dateTimeHelper) : IJwtService
+                          IDateTimeProvider _dateTimeProvider) : IJwtService
 {
     private readonly AuthenticationOptions _authenticationOptions = authenticationOptions.Value;
-    private readonly IDateTimeProvider _dateTimeHelper = dateTimeHelper;
+    private readonly IDateTimeProvider _dateTimeProvider = _dateTimeProvider;
 
     public string CreateToken(CreateJwtTokenDto createJwtTokenUserDetailsDto,
                               IEnumerable<string>? roles = null,
@@ -42,7 +47,7 @@ internal class JwtService(IOptions<AuthenticationOptions> authenticationOptions,
 
         SymmetricSecurityKey symmetricSecurityKey = new(Encoding.UTF8.GetBytes(_authenticationOptions.Jwt.SecretKey));
         SigningCredentials signingCredentials = new(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
-        DateTime expires = _dateTimeHelper.UtcNow.AddMinutes(Convert.ToDouble(_authenticationOptions.Jwt.LifetimeInMinutes));
+        DateTime expires = _dateTimeProvider.UtcNow.AddMinutes(Convert.ToDouble(_authenticationOptions.Jwt.LifetimeInMinutes));
 
         JwtSecurityToken jwtSecurityToken = new(issuer: _authenticationOptions.Jwt.Issuer,
                                                 audience: _authenticationOptions.Jwt.Audience,

@@ -7,6 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthService.Infrastructure.Persistence.Repositories;
 
+/// <summary>
+/// Repository to perform database operations related to <see cref="Account"/>.
+/// </summary>
+/// <param name="_authServiceDbContext">Database context.</param>
+/// <param name="_dateTimeProvider">Interface to provide date and time.</param>
 internal class AccountRepository(AuthServiceDbContext _authServiceDbContext,
                                  IDateTimeProvider _dateTimeProvider)
     : DbEntityBaseRepository<Account>(_authServiceDbContext), IAccountRepository

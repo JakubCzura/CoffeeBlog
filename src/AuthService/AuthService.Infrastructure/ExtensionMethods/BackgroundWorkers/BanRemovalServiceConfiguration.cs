@@ -5,10 +5,19 @@ using Quartz;
 
 namespace AuthService.Infrastructure.ExtensionMethods.BackgroundWorkers;
 
+/// <summary>
+/// Configuration of ban removal service.
+/// </summary>
 public static class BanRemovalServiceConfiguration
 {
-    public static IServiceCollection ConfigureBackgroundWorkers(this IServiceCollection services,
-                                                                IConfiguration configuration)
+    /// <summary>
+    /// Configures background worker for removing users' accounts' bans.
+    /// </summary>
+    /// <param name="services">Collection of dependency injection services.</param>
+    /// <param name="configuration">Appsettings.json</param>
+    /// <returns>Reference to <paramref name="services"/></returns>
+    public static IServiceCollection ConfigureBanRemovalServiceBackgroundWorker(this IServiceCollection services,
+                                                                                IConfiguration configuration)
     {
         services.AddQuartz(options =>
         {
@@ -17,7 +26,7 @@ public static class BanRemovalServiceConfiguration
             options.AddJob<BanRemovalService>(banRemovalServiceJobName)
                    .AddTrigger(trigger => trigger.ForJob(banRemovalServiceJobName)
                    .StartAt(DateBuilder.TomorrowAt(1, 0, 0))
-                   .WithSimpleSchedule(schedule => schedule.WithIntervalInHours(1).RepeatForever()));
+                   .WithSimpleSchedule(schedule => schedule.WithIntervalInHours(12).RepeatForever()));
         });
 
         services.AddQuartzHostedService(options =>

@@ -6,6 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthService.Infrastructure.Persistence.Repositories;
 
+/// <summary>
+/// Repository to perform database operations related to <see cref="User"/>.
+/// </summary>
+/// <param name="authServiceDbContext">Database context.</param>
 internal class UserRepository(AuthServiceDbContext authServiceDbContext)
     : DbEntityBaseRepository<User>(authServiceDbContext), IUserRepository
 {

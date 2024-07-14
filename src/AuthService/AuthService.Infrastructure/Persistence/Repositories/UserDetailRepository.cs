@@ -6,6 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthService.Infrastructure.Persistence.Repositories;
 
+/// <summary>
+/// Repository to perform database operations related to <see cref="UserDetail"/>.
+/// </summary>
+/// <param name="_authServiceDbContext">Database context.</param>
+/// <param name="_dateTimeProvider">Interface to provide date and time.</param>
 internal class UserDetailRepository(AuthServiceDbContext _authServiceDbContext,
                                     IDateTimeProvider _dateTimeProvider)
     : DbEntityBaseRepository<UserDetail>(_authServiceDbContext), IUserDetailRepository

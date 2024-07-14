@@ -7,6 +7,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthService.Infrastructure.Persistence.Repositories;
 
+/// <summary>
+/// Repository to perform database operations related to user diagnostic data.
+/// </summary>
+/// <param name="_authServiceDbContext">Database context.</param>
 internal class UsersDiagnosticDataRepository(AuthServiceDbContext _authServiceDbContext) : IUserDiagnosticDataRepository
 {
     private readonly AuthServiceDbContext _authServiceDbContext = _authServiceDbContext;

@@ -5,6 +5,10 @@ using System.Security.Cryptography;
 
 namespace AuthService.Infrastructure.Security.Password;
 
+/// <summary>
+/// Security service to hash and verify passwords. Passwords should be always securely stored.
+/// </summary>
+/// <param name="passwordHasherOptions">Settings to perform hashing and verifying passwords.</param>
 internal class PasswordHasher(IOptions<PasswordHasherOptions> passwordHasherOptions) : IPasswordHasher
 {
     private readonly PasswordHasherOptions _passwordHasherOptions = passwordHasherOptions.Value;

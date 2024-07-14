@@ -8,6 +8,10 @@ using System.Security.Cryptography;
 
 namespace AuthService.Infrastructure.Security.Token;
 
+/// <summary>
+/// Generator of security tokens.
+/// </summary>
+/// <param name="securityTokenOptions"></param>
 internal class SecurityTokenGenerator(IOptions<SecurityTokenOptions> securityTokenOptions) : ISecurityTokenGenerator
 {
     private readonly SecurityTokenOptions _securityTokenOptions = securityTokenOptions.Value;
@@ -22,7 +26,6 @@ internal class SecurityTokenGenerator(IOptions<SecurityTokenOptions> securityTok
         ? DateTime.UtcNow.AddDays(lifetimeMinutes)
         : throw new SecurityTokenException(ExceptionMessages.TokenHasExpired);
 
-    /// <exception cref="SecurityTokenException">When appsettings has to small values to create token and its expiration date.</exception>
     public SecurityToken GenerateForgottenPasswordResetToken()
         => new(GenerateToken(_securityTokenOptions.ForgottenPassword.ByteCount), GenerateExpirationDate(_securityTokenOptions.ForgottenPassword.LifetimeMinutes));
 }

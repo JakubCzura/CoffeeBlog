@@ -6,11 +6,14 @@ using System.Security.Claims;
 
 namespace AuthService.Infrastructure.Security.CurrentUsers;
 
+/// <summary>
+/// Service to get information about current authorized user who is using the application.
+/// </summary>
+/// <param name="_httpContextAccessor">Interface for accessing the HTTP context which gives information about authenticated user.</param>
 internal class CurrentUserContext(IHttpContextAccessor _httpContextAccessor) : ICurrentUserContext
 {
     private readonly IHttpContextAccessor _httpContextAccessor = _httpContextAccessor;
 
-    /// <exception cref="UserUnauthorizedException">When user is unauthorized.</exception>
     public CurrentAuthorizedUser GetCurrentAuthorizedUser()
     {
         ClaimsPrincipal? user = (_httpContextAccessor.HttpContext?.User) ?? throw new UserUnauthorizedException();

@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AuthService.Infrastructure.Persistence.EntitiesConfigurations;
 
+/// <summary>
+/// Configuration for <see cref="EventConsumerDetail"/> in database.
+/// </summary>
 internal class EventConsumerDetailConfiguration : IEntityTypeConfiguration<EventConsumerDetail>
 {
     public void Configure(EntityTypeBuilder<EventConsumerDetail> builder)
