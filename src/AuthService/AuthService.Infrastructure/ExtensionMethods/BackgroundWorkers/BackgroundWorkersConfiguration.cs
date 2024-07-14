@@ -1,4 +1,5 @@
-﻿using AuthService.Infrastructure.BackgroundWorkers;
+﻿using AuthService.Domain.SettingsOptions.BanRemovalService;
+using AuthService.Infrastructure.BackgroundWorkers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
@@ -19,14 +20,17 @@ public static class BackgroundWorkersConfiguration
     public static IServiceCollection ConfigureBackgroundWorkers(this IServiceCollection services,
                                                                 IConfiguration configuration)
     {
+        BanRemovalServiceOptions banRemovalServiceOptions = configuration.GetSection(BanRemovalServiceOptions.AppsettingsKey)
+                                                                         .Get<BanRemovalServiceOptions>()!;
+
         services.AddQuartz(options =>
         {
             JobKey banRemovalServiceJobName = JobKey.Create(nameof(BanRemovalService));
 
             options.AddJob<BanRemovalService>(banRemovalServiceJobName)
                    .AddTrigger(trigger => trigger.ForJob(banRemovalServiceJobName)
-                   .StartAt(DateBuilder.TomorrowAt(1, 0, 0))
-                   .WithSimpleSchedule(schedule => schedule.WithIntervalInHours(12).RepeatForever()));
+                   .StartAt(DateBuilder.TomorrowAt(banRemovalServiceOptions.StartHour, banRemovalServiceOptions.StartMinute, banRemovalServiceOptions.StartSecond))
+                   .WithSimpleSchedule(schedule => schedule.WithIntervalInHours(banRemovalServiceOptions.IntervalInHours).RepeatForever()));
         });
 
         services.AddQuartzHostedService(options =>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
+using StatisticsCollector.Domain.SettingsOptions.UsersDiagnosticsCollector;
 using StatisticsCollector.Infrastructure.BackgroundWorkers;
 
 namespace StatisticsCollector.Infrastructure.ExtensionMethods.BackgroundWorkers;
@@ -19,14 +20,17 @@ public static class BackgroundWorkersConfiguration
     public static IServiceCollection ConfigureBackgroundWorkers(this IServiceCollection services,
                                                                 IConfiguration configuration)
     {
+        UsersDiagnosticsCollectorOptions usersDiagnosticsCollectorOptions = configuration.GetSection(UsersDiagnosticsCollectorOptions.AppsettingsKey)
+                                                                                         .Get<UsersDiagnosticsCollectorOptions>()!;
+
         services.AddQuartz(options =>
         {
             JobKey applicationDiagnosticsCollectorJobName = JobKey.Create(nameof(UsersDiagnosticsCollector));
 
             options.AddJob<UsersDiagnosticsCollector>(applicationDiagnosticsCollectorJobName)
                    .AddTrigger(trigger => trigger.ForJob(applicationDiagnosticsCollectorJobName)
-                   .StartAt(DateBuilder.TomorrowAt(4, 0, 0))
-                   .WithSimpleSchedule(schedule => schedule.WithIntervalInHours(24).RepeatForever()));
+                   .StartAt(DateBuilder.TomorrowAt(usersDiagnosticsCollectorOptions.StartHour, usersDiagnosticsCollectorOptions.StartMinute, usersDiagnosticsCollectorOptions.StartSecond))
+                   .WithSimpleSchedule(schedule => schedule.WithIntervalInHours(usersDiagnosticsCollectorOptions.IntervalInHours).RepeatForever()));
         });
 
         services.AddQuartzHostedService(options =>

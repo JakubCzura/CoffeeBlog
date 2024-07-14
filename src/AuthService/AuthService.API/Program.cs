@@ -4,6 +4,7 @@ using AuthService.API.ExtensionMethods.Versioning;
 using AuthService.API.Middlewares;
 using AuthService.Application.ExtensionMethods.LayerRegistration;
 using AuthService.Domain.SettingsOptions.Authentication;
+using AuthService.Domain.SettingsOptions.BanRemovalService;
 using AuthService.Domain.SettingsOptions.PasswordHasher;
 using AuthService.Domain.SettingsOptions.SecurityToken;
 using AuthService.Domain.SettingsOptions.UserCredential;
@@ -17,6 +18,7 @@ builder.Services.Configure<AuthenticationOptions>(builder.Configuration.GetSecti
 builder.Services.Configure<PasswordHasherOptions>(builder.Configuration.GetSection(PasswordHasherOptions.AppsettingsKey));
 builder.Services.Configure<UserCredentialOptions>(builder.Configuration.GetSection(UserCredentialOptions.AppsettingsKey));
 builder.Services.Configure<SecurityTokenOptions>(builder.Configuration.GetSection(SecurityTokenOptions.AppsettingsKey));
+builder.Services.Configure<BanRemovalServiceOptions>(builder.Configuration.GetSection(BanRemovalServiceOptions.AppsettingsKey));
 
 builder.Services.AddApplicationDI(builder.Configuration);
 builder.Services.AddInfrastructureDI(builder.Configuration);

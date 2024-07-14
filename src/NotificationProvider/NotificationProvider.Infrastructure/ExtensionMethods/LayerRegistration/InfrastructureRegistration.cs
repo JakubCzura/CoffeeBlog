@@ -17,7 +17,8 @@ public static class InfrastructureRegistration
     public static IServiceCollection AddInfrastructureDI(this IServiceCollection services,
                                                          IConfiguration configuration)
     {
-        DatabaseOptions databaseOptions = configuration.GetSection(DatabaseOptions.AppsettingsKey).Get<DatabaseOptions>()!;
+        DatabaseOptions databaseOptions = configuration.GetSection(DatabaseOptions.AppsettingsKey)
+                                                       .Get<DatabaseOptions>()!;
 
         services.AddDbContext<NotificationProviderDbContext>(options =>
             options.UseMongoDB(databaseOptions.ConnectionString, databaseOptions.DatabaseName));

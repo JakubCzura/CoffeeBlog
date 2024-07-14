@@ -20,7 +20,8 @@ public static class DbContextConfiguration
     public static IServiceCollection ConfigureDbContext(this IServiceCollection services,
                                                         IConfiguration configuration)
     {
-        DatabaseOptions databaseOptions = configuration.GetSection(DatabaseOptions.AppsettingsKey).Get<DatabaseOptions>()!;
+        DatabaseOptions databaseOptions = configuration.GetSection(DatabaseOptions.AppsettingsKey)
+                                                       .Get<DatabaseOptions>()!;
 
         services.AddDbContext<StatisticsCollectorDbContext>(options =>
             options.UseMongoDB(databaseOptions.ConnectionString, databaseOptions.DatabaseName));

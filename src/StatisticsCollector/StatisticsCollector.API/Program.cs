@@ -2,6 +2,7 @@ using Serilog;
 using StatisticsCollector.Application.ExtensionMethods.LayerRegistration;
 using StatisticsCollector.Domain.SettingsOptions.Authentication;
 using StatisticsCollector.Domain.SettingsOptions.Database;
+using StatisticsCollector.Domain.SettingsOptions.UsersDiagnosticsCollector;
 using StatisticsCollector.Infrastructure.ExtensionMethods.LayerRegistration;
 using System.Text.Json.Serialization;
 
@@ -9,6 +10,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<AuthenticationOptions>(builder.Configuration.GetSection(AuthenticationOptions.AppsettingsKey));
 builder.Services.Configure<DatabaseOptions>(builder.Configuration.GetSection(DatabaseOptions.AppsettingsKey));
+builder.Services.Configure<UsersDiagnosticsCollectorOptions>(builder.Configuration.GetSection(UsersDiagnosticsCollectorOptions.AppsettingsKey));
 
 builder.Services.AddInfrastructureDI(builder.Configuration);
 builder.Services.AddApplicationDI(builder.Configuration);
