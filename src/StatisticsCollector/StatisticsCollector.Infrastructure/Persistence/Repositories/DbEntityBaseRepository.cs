@@ -6,18 +6,26 @@ using StatisticsCollector.Infrastructure.Persistence.DatabaseContext;
 
 namespace StatisticsCollector.Infrastructure.Persistence.Repositories;
 
-internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : DbEntityBase
+/// <summary>
+/// Generic repository to perform CRUD operations in database.
+/// </summary>
+/// <typeparam name="TEntity">Entity in database.</typeparam>
+internal class DbEntityBaseRepository<TEntity> : IDbEntityBaseRepository<TEntity> where TEntity : DbEntityBase
 {
     private readonly StatisticsCollectorDbContext _statisticsCollectorDbContext;
-    private readonly DbSet<T> _dbSet;
+    private readonly DbSet<TEntity> _dbSet;
 
+    /// <summary>
+    /// Constructor with database context.
+    /// </summary>
+    /// <param name="statisticsCollectorDbContext">Database context.</param>
     public DbEntityBaseRepository(StatisticsCollectorDbContext statisticsCollectorDbContext)
     {
         _statisticsCollectorDbContext = statisticsCollectorDbContext;
-        _dbSet = _statisticsCollectorDbContext.Set<T>();
+        _dbSet = _statisticsCollectorDbContext.Set<TEntity>();
     }
 
-    public async Task CreateAsync(T entity,
+    public async Task CreateAsync(TEntity entity,
                                   CancellationToken cancellationToken)
 
     {
@@ -25,14 +33,14 @@ internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : 
         await _statisticsCollectorDbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<T?> GetAsync(ObjectId id,
+    public async Task<TEntity?> GetAsync(ObjectId id,
                                    CancellationToken cancellationToken)
         => await _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
-    public async Task<List<T>> GetAllAsync(CancellationToken cancellationToken)
+    public async Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken)
         => await _dbSet.ToListAsync(cancellationToken);
 
-    public async Task<int> UpdateAsync(T entity,
+    public async Task<int> UpdateAsync(TEntity entity,
                                        CancellationToken cancellationToken)
 
     {
@@ -43,7 +51,7 @@ internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : 
     public async Task<int> DeleteAsync(ObjectId id,
                                        CancellationToken cancellationToken)
     {
-        T? entity = await _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        TEntity? entity = await _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
         if (entity is null)
         {
