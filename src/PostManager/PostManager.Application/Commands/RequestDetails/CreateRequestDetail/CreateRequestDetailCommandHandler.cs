@@ -7,6 +7,11 @@ using PostManager.Domain.Constants;
 
 namespace PostManager.Application.Commands.RequestDetails.CreateRequestDetail;
 
+/// <summary>
+/// Command handler to create new request's details and save it to database. It's related to <see cref="CreateRequestDetailCommand"/>.
+/// </summary>
+/// <param name="_eventPublisher">Microservice to send event about request's details.</param>
+/// <param name="_mapper">AutoMapper to map classes.</param>
 public class CreateRequestDetailCommandHandler(IEventPublisher _eventPublisher,
                                                IMapper _mapper)
 : IRequestHandler<CreateRequestDetailCommand, Unit>
