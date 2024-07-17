@@ -1,4 +1,5 @@
 ﻿using AuthService.Application.Behaviours.Validators;
+using AuthService.Domain.Constants;
 using EventBus.API.ExtensionMethods.LayerRegistration;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -31,8 +32,14 @@ public static class ApplicationRegistration
         });
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-        services.AddFluentValidationAutoValidation();
+        services.AddFluentValidationAutoValidation(config =>
+        {
+            config.Filter = type => ExcludeUnexpectedTypesFromFluentValidationAutoValidation(type);
+        });
 
         return services;
     }
+
+    private static Func<Type, bool> ExcludeUnexpectedTypesFromFluentValidationAutoValidation =>
+       type => !FluentValidationConstants.TypesExcludedFromAutoValidation.Contains(type);
 }

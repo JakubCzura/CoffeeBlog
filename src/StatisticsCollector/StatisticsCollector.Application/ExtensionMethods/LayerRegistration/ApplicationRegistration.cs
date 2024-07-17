@@ -1,6 +1,10 @@
 ﻿using EventBus.API.ExtensionMethods.LayerRegistration;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StatisticsCollector.Application.Behaviours.Validators;
+using StatisticsCollector.Domain.Constants;
 using System.Reflection;
 
 namespace StatisticsCollector.Application.ExtensionMethods.LayerRegistration;
@@ -20,8 +24,22 @@ public static class ApplicationRegistration
                                                       IConfiguration configuration)
     {
         services.AddEventBus(configuration, Assembly.GetExecutingAssembly());
+
+        services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            config.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
+        });
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        services.AddFluentValidationAutoValidation(config =>
+        {
+            config.Filter = type => ExcludeUnexpectedTypesFromFluentValidationAutoValidation(type);
+        });
 
         return services;
     }
+
+    private static Func<Type, bool> ExcludeUnexpectedTypesFromFluentValidationAutoValidation =>
+       type => !FluentValidationConstants.TypesExcludedFromAutoValidation.Contains(type);
 }
