@@ -28,6 +28,8 @@ public static class InfrastructureRegistration
         services.AddScoped<IDateTimeProvider, DateTimeProvider>();
 
         services.AddScoped<IApiErrorRepository, ApiErrorRepository>();
+        services.AddScoped<IPostRepository, PostRepository>();
+        services.AddScoped<IPostCommentRepository, PostCommentRepository>();
 
         services.ConfigureAuthentication();
 
