@@ -1,8 +1,8 @@
-﻿using PostManager.Application.Commands.ApiErrors.CreateApiError;
+﻿using AutoMapper;
+using FluentAssertions;
+using PostManager.Application.Commands.ApiErrors.CreateApiError;
 using PostManager.Application.Mapping.ApiErrors;
 using PostManager.Domain.Entities;
-using AutoMapper;
-using FluentAssertions;
 
 namespace PostManager.Application.UnitTests.Mapping.ApiErrors;
 

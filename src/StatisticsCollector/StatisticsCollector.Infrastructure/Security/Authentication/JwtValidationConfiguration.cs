@@ -1,8 +1,8 @@
-﻿using StatisticsCollector.Application.ExtensionMethods.Collections;
-using StatisticsCollector.Domain.SettingsOptions.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using StatisticsCollector.Application.ExtensionMethods.Collections;
+using StatisticsCollector.Domain.SettingsOptions.Authentication;
 using System.Security.Claims;
 using System.Text;
 
@@ -15,7 +15,7 @@ namespace StatisticsCollector.Infrastructure.Security.Authentication;
 internal sealed class JwtValidationConfiguration(IOptions<AuthenticationOptions> authenticationOptions) : IConfigureNamedOptions<JwtBearerOptions>
 {
     private readonly AuthenticationOptions _authenticationOptions = authenticationOptions.Value;
-    
+
     /// <summary>
     /// Configures JWT validation.
     /// </summary>

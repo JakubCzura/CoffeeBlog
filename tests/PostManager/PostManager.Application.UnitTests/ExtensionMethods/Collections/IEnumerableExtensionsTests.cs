@@ -1,6 +1,6 @@
-﻿using PostManager.Application.ExtensionMethods.Collections;
-using FluentAssertions;
+﻿using FluentAssertions;
 using FluentResults;
+using PostManager.Application.ExtensionMethods.Collections;
 
 namespace PostManager.Application.UnitTests.ExtensionMethods.Collections;
 

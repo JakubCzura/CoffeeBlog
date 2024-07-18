@@ -1,7 +1,7 @@
-﻿using PostManager.Application.Interfaces.Security.CurrentUsers;
+﻿using Microsoft.AspNetCore.Http;
+using PostManager.Application.Interfaces.Security.CurrentUsers;
 using PostManager.Domain.Exceptions;
 using PostManager.Domain.Models.Users;
-using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 
 namespace PostManager.Infrastructure.Security.CurrentUsers;

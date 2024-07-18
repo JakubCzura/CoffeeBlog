@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
+using PostManager.Application.ExtensionMethods.Automapper.Posts;
 using PostManager.Application.Interfaces.Persistence.Repositories;
 using PostManager.Application.Interfaces.Security.CurrentUsers;
 using PostManager.Domain.Entities;
 using PostManager.Domain.Models.Users;
-using PostManager.Application.ExtensionMethods.Automapper.Posts;
 
 namespace PostManager.Application.Commands.Posts.CreatePost;
 

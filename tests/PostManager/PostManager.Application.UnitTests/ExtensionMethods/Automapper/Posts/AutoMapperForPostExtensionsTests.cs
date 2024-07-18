@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using FluentAssertions;
 using PostManager.Application.Commands.Posts.CreatePost;
-using PostManager.Application.ExtensionMethods.Automapper.RequestDetails;
 using PostManager.Application.ExtensionMethods.Automapper.Posts;
+using PostManager.Application.ExtensionMethods.Automapper.RequestDetails;
 using PostManager.Application.Mapping.Posts;
 using PostManager.Domain.Entities;
 

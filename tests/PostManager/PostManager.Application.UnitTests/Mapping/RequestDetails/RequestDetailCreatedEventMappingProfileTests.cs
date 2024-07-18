@@ -1,8 +1,8 @@
-﻿using PostManager.Application.Commands.RequestDetails.CreateRequestDetail;
-using PostManager.Application.Mapping.RequestDetails;
-using AutoMapper;
+﻿using AutoMapper;
 using EventBus.Domain.Events.CommonEvents;
 using FluentAssertions;
+using PostManager.Application.Commands.RequestDetails.CreateRequestDetail;
+using PostManager.Application.Mapping.RequestDetails;
 
 namespace PostManager.Application.UnitTests.Mapping.RequestDetails;
 

@@ -26,7 +26,7 @@ public class ErrorDetailsViewModel : ViewModelBase
     /// <param name="statusCode">Response status code.</param>
     /// <param name="message">Response from request.</param>
     public ErrorDetailsViewModel(int statusCode,
-                                 string message) 
+                                 string message)
         : base(message) => StatusCode = statusCode;
 
     /// <summary>

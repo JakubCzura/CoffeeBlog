@@ -13,7 +13,7 @@ namespace ArticleManager.API.Controllers.Basics;
 [Route(RouteConstants.ApiController)]
 [Produces(ContentTypeConstants.ApplicationJson)]
 [Authorize]
-public class ApiControllerBase(IMediator _mediator) 
+public class ApiControllerBase(IMediator _mediator)
     : ControllerBase
 {
     /// <summary>

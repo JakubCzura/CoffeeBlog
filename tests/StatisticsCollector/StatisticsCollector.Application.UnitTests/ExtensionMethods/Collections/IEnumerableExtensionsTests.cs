@@ -1,6 +1,6 @@
-﻿using StatisticsCollector.Application.ExtensionMethods.Collections;
-using FluentAssertions;
+﻿using FluentAssertions;
 using FluentResults;
+using StatisticsCollector.Application.ExtensionMethods.Collections;
 
 namespace StatisticsCollector.Application.UnitTests.ExtensionMethods.Collections;
 

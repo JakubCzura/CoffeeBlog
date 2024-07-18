@@ -1,5 +1,5 @@
-﻿using StatisticsCollector.Infrastructure.Security.Authentication;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using StatisticsCollector.Infrastructure.Security.Authentication;
 
 namespace StatisticsCollector.Infrastructure.ExtensionMethods.Authentication;
 
