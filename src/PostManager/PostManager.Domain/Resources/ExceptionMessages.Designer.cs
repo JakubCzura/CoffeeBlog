@@ -22,14 +22,14 @@ namespace PostManager.Domain.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ValidatorMessages {
+    public class ExceptionMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ValidatorMessages() {
+        internal ExceptionMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace PostManager.Domain.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PostManager.Domain.Resources.ValidatorMessages", typeof(ValidatorMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PostManager.Domain.Resources.ExceptionMessages", typeof(ExceptionMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,11 @@ namespace PostManager.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Content can&apos;t contain more than 5000 characters.
+        ///   Looks up a localized string similar to User is not authorized.
         /// </summary>
-        public static string ContentCantContainMoreThan5000Characters {
+        public static string UserUnauthorized {
             get {
-                return ResourceManager.GetString("ContentCantContainMoreThan5000Characters", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Content is required.
-        /// </summary>
-        public static string ContentIsRequired {
-            get {
-                return ResourceManager.GetString("ContentIsRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Subtitle can&apos;t contain more than 5000 characters.
-        /// </summary>
-        public static string SubtitleCantContainMoreThan100Characters {
-            get {
-                return ResourceManager.GetString("SubtitleCantContainMoreThan100Characters", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title can&apos;t contain more than 100 characters.
-        /// </summary>
-        public static string TitleCantContainMoreThan100Characters {
-            get {
-                return ResourceManager.GetString("TitleCantContainMoreThan100Characters", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title is required.
-        /// </summary>
-        public static string TitleIsRequired {
-            get {
-                return ResourceManager.GetString("TitleIsRequired", resourceCulture);
+                return ResourceManager.GetString("UserUnauthorized", resourceCulture);
             }
         }
     }

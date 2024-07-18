@@ -12,7 +12,6 @@ namespace AuthService.Application.Commands.Accounts.RemoveAccountBanByUserId;
 /// </summary>
 /// <param name="_accountRepository">Interface to perform account operations in database.</param>
 /// <param name="_userRepository">Interface to perform user operations in database.</param>
-/// <param name="_mapper">AutoMapper to map classes.</param>
 public class RemoveAccountBanByUserIdCommandHandler(IAccountRepository _accountRepository,
                                                     IUserRepository _userRepository)
     : IRequestHandler<RemoveAccountBanByUserIdCommand, Result<ViewModelBase>>

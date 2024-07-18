@@ -1,8 +1,8 @@
-﻿using AuthService.Application.Commands.RequestDetails.CreateRequestDetail;
-using AutoMapper;
+﻿using AutoMapper;
 using EventBus.Domain.Events.CommonEvents;
+using PostManager.Application.Commands.RequestDetails.CreateRequestDetail;
 
-namespace AuthService.Application.ExtensionMethods.Automapper.Events;
+namespace PostManager.Application.ExtensionMethods.Automapper.RequestDetails;
 
 /// <summary>
 /// Extension methods for <see cref="IMapper"/>.
@@ -14,7 +14,7 @@ public static class AutoMapperForRequestDetailCreatedEventExtensions
     /// </summary>
     /// <typeparam name="T"><see cref="RequestDetailCreatedEvent"/></typeparam>
     /// <param name="mapper"><see cref="IMapper"/></param>
-    /// <param name="createRequestDetailCommand">CreateRequestDetailCommand entity.</param>
+    /// <param name="createRequestDetailCommand">Command with details to create a new request detail created event.</param>
     /// <param name="eventPublisherName">Name of event publisher.</param>
     /// <param name="eventPublisherMicroserviceName">Name of microservice that contains publisher of the event.</param>
     /// <returns>Instance of <see cref="RequestDetailCreatedEvent"/></returns>

@@ -1,4 +1,4 @@
-﻿using AuthService.Application.ExtensionMethods.Automapper.Events;
+﻿using AuthService.Application.ExtensionMethods.Automapper.RequestDetails;
 using AuthService.Domain.Constants;
 using AutoMapper;
 using EventBus.Application.Interfaces.Publishers;

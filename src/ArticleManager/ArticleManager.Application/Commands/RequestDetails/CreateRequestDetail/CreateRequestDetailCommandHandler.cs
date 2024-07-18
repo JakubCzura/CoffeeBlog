@@ -1,4 +1,4 @@
-﻿using ArticleManager.Application.ExtensionMethods.Automapper.Events;
+﻿using ArticleManager.Application.ExtensionMethods.Automapper.RequestDetails;
 using ArticleManager.Domain.Constants;
 using AutoMapper;
 using EventBus.Application.Interfaces.Publishers;

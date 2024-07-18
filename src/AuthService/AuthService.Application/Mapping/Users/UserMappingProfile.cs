@@ -1,5 +1,4 @@
 ﻿using AuthService.Application.Commands.Users.SignUpUser;
-using AuthService.Domain.Constants;
 using AuthService.Domain.Entities;
 using AutoMapper;
 
@@ -23,6 +22,6 @@ public class UserMappingProfile : Profile
             .ForMember(dest => dest.Roles, opt => opt.Ignore())
             .ForMember(dest => dest.RequestDetails, opt => opt.Ignore())
             .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
-            .ForMember(dest => dest.Password, opt => opt.MapFrom((src, dest, destMember, context) => context.Items[MappingConstants.HashedPassword]));
+            .ForMember(dest => dest.Password, opt => opt.MapFrom((src, dest, destMember, context) => context.Items[nameof(User.Password)]));
     }
 }

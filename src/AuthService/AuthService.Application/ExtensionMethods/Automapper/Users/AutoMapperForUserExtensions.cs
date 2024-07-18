@@ -1,5 +1,4 @@
 ﻿using AuthService.Application.Commands.Users.SignUpUser;
-using AuthService.Domain.Constants;
 using AuthService.Domain.Entities;
 using AutoMapper;
 
@@ -23,6 +22,6 @@ public static class AutoMapperForUserExtensions
                               string hashedPassword) where T : User
         => mapper.Map<User>(createUserCommand, opt =>
         {
-            opt.Items[MappingConstants.HashedPassword] = hashedPassword;
+            opt.Items[nameof(User.Password)] = hashedPassword;
         });
 }

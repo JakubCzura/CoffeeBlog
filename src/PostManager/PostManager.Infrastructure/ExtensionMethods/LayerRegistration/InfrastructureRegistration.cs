@@ -2,10 +2,12 @@
 using Microsoft.Extensions.DependencyInjection;
 using PostManager.Application.Interfaces.Helpers;
 using PostManager.Application.Interfaces.Persistence.Repositories;
+using PostManager.Application.Interfaces.Security.CurrentUsers;
 using PostManager.Infrastructure.ExtensionMethods.Authentication;
 using PostManager.Infrastructure.ExtensionMethods.Database;
 using PostManager.Infrastructure.Helpers;
 using PostManager.Infrastructure.Persistence.Repositories;
+using PostManager.Infrastructure.Security.CurrentUsers;
 
 namespace PostManager.Infrastructure.ExtensionMethods.LayerRegistration;
 
@@ -30,6 +32,9 @@ public static class InfrastructureRegistration
         services.AddScoped<IApiErrorRepository, ApiErrorRepository>();
         services.AddScoped<IPostRepository, PostRepository>();
         services.AddScoped<IPostCommentRepository, PostCommentRepository>();
+
+        services.AddHttpContextAccessor();
+        services.AddScoped<ICurrentUserContext, CurrentUserContext>();
 
         services.ConfigureAuthentication();
 

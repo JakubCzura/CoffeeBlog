@@ -2,7 +2,7 @@
 using EventBus.Application.Interfaces.Publishers;
 using EventBus.Domain.Events.CommonEvents;
 using MediatR;
-using PostManager.Application.ExtensionMethods.Automapper.Events;
+using PostManager.Application.ExtensionMethods.Automapper.RequestDetails;
 using PostManager.Domain.Constants;
 
 namespace PostManager.Application.Commands.RequestDetails.CreateRequestDetail;

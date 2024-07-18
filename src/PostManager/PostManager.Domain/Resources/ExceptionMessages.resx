@@ -117,19 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ContentCantContainMoreThan5000Characters" xml:space="preserve">
-    <value>Content can't contain more than 5000 characters</value>
-  </data>
-  <data name="ContentIsRequired" xml:space="preserve">
-    <value>Content is required</value>
-  </data>
-  <data name="SubtitleCantContainMoreThan100Characters" xml:space="preserve">
-    <value>Subtitle can't contain more than 5000 characters</value>
-  </data>
-  <data name="TitleCantContainMoreThan100Characters" xml:space="preserve">
-    <value>Title can't contain more than 100 characters</value>
-  </data>
-  <data name="TitleIsRequired" xml:space="preserve">
-    <value>Title is required</value>
+  <data name="UserUnauthorized" xml:space="preserve">
+    <value>User is not authorized</value>
   </data>
 </root>

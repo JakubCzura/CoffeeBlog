@@ -8,8 +8,6 @@ namespace PostManager.Application.Commands.Posts.CreatePost;
 /// <param name="Title"> Title of the post. </param>
 /// <param name="Subtitle"> Subtitle of the post, additional information about the post. </param>
 /// <param name="Content"> Content of the post, everything that user wants to share with other people. </param>
-/// <param name="UserId"> Id of user who created post. </param>
 public record CreatePostCommand(string Title,
                                 string? Subtitle,
-                                string Content,
-                                int UserId) : IRequest<int>;
+                                string Content) : IRequest<int>;

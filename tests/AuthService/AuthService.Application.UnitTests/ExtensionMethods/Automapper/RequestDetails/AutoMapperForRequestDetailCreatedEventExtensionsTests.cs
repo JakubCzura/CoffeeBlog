@@ -1,11 +1,11 @@
-﻿using PostManager.Application.Commands.RequestDetails.CreateRequestDetail;
-using PostManager.Application.ExtensionMethods.Automapper.Events;
-using PostManager.Application.Mapping.RequestDetails;
+﻿using AuthService.Application.Commands.RequestDetails.CreateRequestDetail;
+using AuthService.Application.ExtensionMethods.Automapper.RequestDetails;
+using AuthService.Application.Mapping.RequestDetails;
 using AutoMapper;
 using EventBus.Domain.Events.CommonEvents;
 using FluentAssertions;
 
-namespace PostManager.Application.UnitTests.ExtensionMethods.Automapper.Events;
+namespace AuthService.Application.UnitTests.ExtensionMethods.Automapper.RequestDetails;
 
 public class AutoMapperForRequestDetailCreatedEventExtensionsTests
 {

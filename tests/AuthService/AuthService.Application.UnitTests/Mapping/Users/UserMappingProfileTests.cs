@@ -37,7 +37,7 @@ public class UserMappingProfileTests
         //Act
         User result = _mapper.Map<User>(signUpUserCommand, opt =>
         {
-            opt.Items[MappingConstants.HashedPassword] = hashedPassword;
+            opt.Items[nameof(User.Password)] = hashedPassword;
         });
 
         //Assert
