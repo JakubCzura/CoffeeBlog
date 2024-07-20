@@ -33,7 +33,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
     /// <returns>Information about signin up user.</returns>
     [AllowAnonymous]
     [HttpPost("sign-up")]
-    [ProducesResponseType(typeof(ViewModelBase), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(SignUpUserViewModel), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status409Conflict)]
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
@@ -59,7 +59,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
     /// <returns>Result of attempt to sign in and authorization token for successful attempt.</returns>
     [AllowAnonymous]
     [HttpPost("sign-in")]
-    [ProducesResponseType(typeof(ViewModelBase), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(SignInUserViewModel), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(UnauthorizedResult), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
