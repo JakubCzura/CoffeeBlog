@@ -20,7 +20,7 @@ public class PostController(IMediator _mediator) : ApiControllerBase(_mediator)
     /// </summary>
     /// <param name="createPostCommand">Details to create user's post on website.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
-    /// <returns>Information about creating new post.</returns>
+    /// <returns>Id of created post.</returns>
     [HttpPost]
     [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status400BadRequest)]

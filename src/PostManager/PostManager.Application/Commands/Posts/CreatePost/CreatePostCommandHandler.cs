@@ -28,7 +28,7 @@ public class CreatePostCommandHandler(IPostRepository _postRepository,
     /// </summary>
     /// <param name="request">Request command with details to create post by a user.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
-    /// <returns>Number of state entries written to database.</returns>
+    /// <returns>Id of created post.</returns>
     public async Task<int> Handle(CreatePostCommand request,
                                   CancellationToken cancellationToken)
     {
