@@ -25,20 +25,23 @@ internal class DbEntityBaseRepository<TEntity> : IDbEntityBaseRepository<TEntity
         _dbSet = _statisticsCollectorDbContext.Set<TEntity>();
     }
 
-    public async Task CreateAsync(TEntity entity,
-                                  CancellationToken cancellationToken)
+    public async Task<ObjectId> CreateAsync(TEntity entity,
+                                            CancellationToken cancellationToken)
 
     {
         await _dbSet.AddAsync(entity, cancellationToken);
         await _statisticsCollectorDbContext.SaveChangesAsync(cancellationToken);
+        return entity.Id;
     }
 
     public async Task<TEntity?> GetAsync(ObjectId id,
                                    CancellationToken cancellationToken)
-        => await _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        => await _dbSet.AsNoTracking()
+                       .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
     public async Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken)
-        => await _dbSet.ToListAsync(cancellationToken);
+        => await _dbSet.AsNoTracking()
+                       .ToListAsync(cancellationToken);
 
     public async Task<int> UpdateAsync(TEntity entity,
                                        CancellationToken cancellationToken)

@@ -14,7 +14,7 @@ public interface IDbEntityBaseRepository<TEntity>
     /// </summary>
     /// <param name="entity">Entity to add to database.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
-    /// <returns>Number of state entries written to database.</returns>
+    /// <returns>Id of created entity.</returns>
     Task<int> CreateAsync(TEntity entity,
                           CancellationToken cancellationToken);
 
@@ -25,7 +25,7 @@ public interface IDbEntityBaseRepository<TEntity>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Entity if found, otherwise null.</returns>
     Task<TEntity?> GetAsync(int id,
-                      CancellationToken cancellationToken);
+                            CancellationToken cancellationToken);
 
     /// <summary>
     /// Returns all rows for specified entity's type from database.

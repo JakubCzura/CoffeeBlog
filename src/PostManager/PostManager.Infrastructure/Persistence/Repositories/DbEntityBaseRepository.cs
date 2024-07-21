@@ -34,7 +34,8 @@ internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : 
         }
 
         await _dbSet.AddAsync(entity, cancellationToken);
-        return await _postManagerDbContext.SaveChangesAsync(cancellationToken);
+        await _postManagerDbContext.SaveChangesAsync(cancellationToken);
+        return entity.Id;
     }
 
     public async Task<T?> GetAsync(int id,

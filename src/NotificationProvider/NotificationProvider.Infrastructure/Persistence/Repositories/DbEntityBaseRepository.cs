@@ -26,20 +26,23 @@ internal class DbEntityBaseRepository<TEntity> : IDbEntityBaseRepository<TEntity
         _dbSet = _notificationProviderDbContext.Set<TEntity>();
     }
 
-    public async Task CreateAsync(TEntity entity,
-                                  CancellationToken cancellationToken = default)
+    public async Task<ObjectId> CreateAsync(TEntity entity,
+                                            CancellationToken cancellationToken = default)
 
     {
         await _dbSet.AddAsync(entity, cancellationToken);
         await _notificationProviderDbContext.SaveChangesAsync(cancellationToken);
+        return entity.Id;
     }
 
     public async Task<TEntity?> GetAsync(ObjectId id,
-                                   CancellationToken cancellationToken = default)
-        => await _dbSet.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+                                         CancellationToken cancellationToken = default)
+        => await _dbSet.AsNoTracking()
+                       .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
     public async Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
-        => await _dbSet.ToListAsync(cancellationToken);
+        => await _dbSet.AsNoTracking()
+                       .ToListAsync(cancellationToken);
 
     public async Task<int> UpdateAsync(TEntity entity,
                                        CancellationToken cancellationToken = default)

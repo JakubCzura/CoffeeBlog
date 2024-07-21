@@ -5,16 +5,16 @@ namespace PostManager.Application.Interfaces.Persistence.Repositories;
 /// <summary>
 /// Generic interface to perform CRUD operations in database.
 /// </summary>
-/// <typeparam name="T">Entity in database.</typeparam>
-public interface IDbEntityBaseRepository<T> where T : DbEntityBase
+/// <typeparam name="TEntity">Entity in database.</typeparam>
+public interface IDbEntityBaseRepository<TEntity> where TEntity : DbEntityBase
 {
     /// <summary>
     /// Adds new entity to database.
     /// </summary>
     /// <param name="entity">Entity to add to database.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
-    /// <returns>Number of state entries written to database.</returns>
-    Task<int> CreateAsync(T entity,
+    /// <returns>Id of created entity.</returns>
+    Task<int> CreateAsync(TEntity entity,
                           CancellationToken cancellationToken);
 
     /// <summary>
@@ -23,15 +23,15 @@ public interface IDbEntityBaseRepository<T> where T : DbEntityBase
     /// <param name="id">Entity's id.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Entity if found, otherwise null.</returns>
-    Task<T?> GetAsync(int id,
-                      CancellationToken cancellationToken);
+    Task<TEntity?> GetAsync(int id,
+                            CancellationToken cancellationToken);
 
     /// <summary>
     /// Returns all rows for specified entity's type from database.
     /// </summary>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>List of all entities for specified type.</returns>
-    Task<List<T>> GetAllAsync(CancellationToken cancellationToken);
+    Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken);
 
     /// <summary>
     /// Updates entity in database.
@@ -39,7 +39,7 @@ public interface IDbEntityBaseRepository<T> where T : DbEntityBase
     /// <param name="entity">Entity to update.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Number of state entries written to database.</returns>
-    Task<int> UpdateAsync(T entity,
+    Task<int> UpdateAsync(TEntity entity,
                           CancellationToken cancellationToken);
 
     /// <summary>
