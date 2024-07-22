@@ -24,6 +24,7 @@ public class PostController(IMediator _mediator) : ApiControllerBase(_mediator)
     [HttpPost]
     [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(UnauthorizedResult), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<int>> Create([FromBody] CreatePostCommand createPostCommand,
                                                 CancellationToken cancellationToken)
