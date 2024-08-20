@@ -18,8 +18,8 @@ namespace StatisticsCollector.Application.Consumers.Basics;
 /// <param name="_eventConsumerDetailRepository">Interface to perform event consumer detail operations in database.</param>
 /// <param name="_apiErrorRepository">Interface to perform api error operations in database.</param>
 public abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventConsumer> _logger,
-                                                                  IEventConsumerDetailRepository _eventConsumerDetailRepository,
-                                                                  IApiErrorRepository _apiErrorRepository)
+                                                                IEventConsumerDetailRepository _eventConsumerDetailRepository,
+                                                                IApiErrorRepository _apiErrorRepository)
     : IEventConsumer<TEvent> where TEvent : EventBase
                              where TEventConsumer : IEventConsumer<TEvent>
 {
