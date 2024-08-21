@@ -1,31 +1,15 @@
 ﻿using AuthService.Domain.Entities;
 using AuthService.Domain.Exceptions;
 using AuthService.Infrastructure.IntegrationTests.HelpersForTests;
-using AuthService.Infrastructure.Persistence.DatabaseContext;
 using AuthService.Infrastructure.Persistence.Repositories;
 using FluentAssertions;
 
 namespace AuthService.Infrastructure.IntegrationTests.Persistence.Repositories;
 
-[Collection(TestingConstants.TestingCollectionName)]
-public class UserRepositoryTests : IAsyncLifetime
+public class UserRepositoryTests(TestDatabaseFixture _testDatabaseFixture) : RepositoryTestsBase(_testDatabaseFixture)
 {
-    private readonly Func<Task> _resetDatabase;
-    private readonly AuthServiceDbContext _authServiceDbContext;
-    private readonly UserRepository _userRepository;
-
-    public UserRepositoryTests(TestingDatabaseFixture testingDatabaseFixture)
-    {
-        _resetDatabase = testingDatabaseFixture.ResetDatabaseAsync;
-        _authServiceDbContext = testingDatabaseFixture.AuthServiceDbContext;
-        _userRepository = new UserRepository(_authServiceDbContext);
-    }
-
-    public Task InitializeAsync()
-        => Task.CompletedTask;
-
-    public async Task DisposeAsync()
-        => await _resetDatabase();
+    private readonly TestDatabaseFixture _testDatabaseFixture = _testDatabaseFixture;
+    private readonly UserRepository _userRepository = new(_testDatabaseFixture.AuthServiceDbContext);
 
     [Fact]
     public async Task CreateAsync_should_AddNewUserToDatabase_when_EntityIsSpecified()
@@ -43,7 +27,7 @@ public class UserRepositoryTests : IAsyncLifetime
 
         // Assert
         result.Should().BePositive();
-        User createdUser = _authServiceDbContext.Users.First(x => x.Id == user.Id);
+        User createdUser = _testDatabaseFixture.AuthServiceDbContext.Users.First(x => x.Id == user.Id);
         createdUser.Should().BeEquivalentTo(user);
     }
 
@@ -64,8 +48,8 @@ public class UserRepositoryTests : IAsyncLifetime
             Password = "dsadasd@#!@#dsaldasn@#!#"
         };
 
-        _authServiceDbContext.Add(user);
-        _authServiceDbContext.SaveChanges();
+        _testDatabaseFixture.AuthServiceDbContext.Add(user);
+        _testDatabaseFixture.AuthServiceDbContext.SaveChanges();
 
         // Act
         User? result = await _userRepository.GetAsync(user.Id);
@@ -87,8 +71,8 @@ public class UserRepositoryTests : IAsyncLifetime
             Password = "dsadasd@#!@#dsaldasn@#!#"
         };
 
-        _authServiceDbContext.Add(user);
-        _authServiceDbContext.SaveChanges();
+        _testDatabaseFixture.AuthServiceDbContext.Add(user);
+        _testDatabaseFixture.AuthServiceDbContext.SaveChanges();
 
         // Act
         User? result = await _userRepository.GetAsync(invalidId);
@@ -117,8 +101,8 @@ public class UserRepositoryTests : IAsyncLifetime
             }
         ];
 
-        _authServiceDbContext.AddRange(users);
-        _authServiceDbContext.SaveChanges();
+        _testDatabaseFixture.AuthServiceDbContext.AddRange(users);
+        _testDatabaseFixture.AuthServiceDbContext.SaveChanges();
 
         // Act
         List<User> result = await _userRepository.GetAllAsync();
@@ -138,11 +122,11 @@ public class UserRepositoryTests : IAsyncLifetime
             Password = "dsad@##@!#"
         };
 
-        _authServiceDbContext.Add(user);
-        _authServiceDbContext.SaveChanges();
+        _testDatabaseFixture.AuthServiceDbContext.Add(user);
+        _testDatabaseFixture.AuthServiceDbContext.SaveChanges();
 
         // Act
-        User userToUpdate = _authServiceDbContext.Users.First(x => x.Id == user.Id);
+        User userToUpdate = _testDatabaseFixture.AuthServiceDbContext.Users.First(x => x.Id == user.Id);
         userToUpdate.Username = "newUsername";
         userToUpdate.Email = "newemail@email.com";
         userToUpdate.Password = "kjfds@#!@#djsa#@!#!@DASDA";
@@ -151,7 +135,7 @@ public class UserRepositoryTests : IAsyncLifetime
 
         // Assert
         result.Should().BePositive();
-        User updatedUser = _authServiceDbContext.Users.First(x => x.Id == result);
+        User updatedUser = _testDatabaseFixture.AuthServiceDbContext.Users.First(x => x.Id == result);
         updatedUser.Should().BeEquivalentTo(userToUpdate);
     }
 
@@ -172,15 +156,15 @@ public class UserRepositoryTests : IAsyncLifetime
             Password = "dsad@##@!#"
         };
 
-        _authServiceDbContext.Add(user);
-        _authServiceDbContext.SaveChanges();
+        _testDatabaseFixture.AuthServiceDbContext.Add(user);
+        _testDatabaseFixture.AuthServiceDbContext.SaveChanges();
 
         // Act
         int result = await _userRepository.DeleteAsync(user.Id);
 
         // Assert
         result.Should().BePositive();
-        User? deletedUser = _authServiceDbContext.Users.FirstOrDefault(x => x.Id == user.Id);
+        User? deletedUser = _testDatabaseFixture.AuthServiceDbContext.Users.FirstOrDefault(x => x.Id == user.Id);
         deletedUser.Should().BeNull();
     }
 }

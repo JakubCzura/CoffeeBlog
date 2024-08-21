@@ -5,30 +5,24 @@ using System.Data.Common;
 
 namespace AuthService.Infrastructure.IntegrationTests.HelpersForTests;
 
-public class TestingDatabaseFixture : IAsyncLifetime
+public class TestDatabaseFixture : IAsyncLifetime
 {
-    public readonly AuthServiceDbContext AuthServiceDbContext;
-    private static string CoffeeBlogAuthServiceInfrastructureDbConnectionString => $"Server=(localdb)\\MSSQLLocalDB;Database=CoffeeBlogAuthServiceInfrastructureIntegrationTests;Integrated Security=True;TrustServerCertificate=True";
-
+    private const string _connectionString = $"Server=(localdb)\\MSSQLLocalDB;Database=CoffeeBlogAuthServiceInfrastructureIntegrationTests;Integrated Security=True;TrustServerCertificate=True";
     private Respawner _respawner = default!;
     private DbConnection _connection = default!;
 
-    public TestingDatabaseFixture()
-    {
-        DbContextOptions<AuthServiceDbContext> options = new DbContextOptionsBuilder<AuthServiceDbContext>()
-                                                           .UseSqlServer(CoffeeBlogAuthServiceInfrastructureDbConnectionString)
-                                                           .Options;
-        AuthServiceDbContext = new(options);
+    public AuthServiceDbContext AuthServiceDbContext { get; init; }
 
-        //AuthServiceDbContext.Database.EnsureDeleted();
-        //AuthServiceDbContext.Database.EnsureCreated();
+    public TestDatabaseFixture()
+    {
+        DbContextOptions<AuthServiceDbContext> options = new DbContextOptionsBuilder<AuthServiceDbContext>().UseSqlServer(_connectionString).Options;
+        AuthServiceDbContext = new(options);
     }
 
     public async Task DisposeAsync()
     {
-        //await AuthServiceDbContext.Database.EnsureDeletedAsync();
+        await AuthServiceDbContext.Database.EnsureDeletedAsync();
         await AuthServiceDbContext.DisposeAsync();
-
         await _connection.CloseAsync();
     }
 
@@ -42,7 +36,8 @@ public class TestingDatabaseFixture : IAsyncLifetime
 
         RespawnerOptions respawnerOptions = new()
         {
-            DbAdapter = DbAdapter.SqlServer
+            DbAdapter = DbAdapter.SqlServer,
+            WithReseed = true
         };
 
         _connection = AuthServiceDbContext.Database.GetDbConnection();
