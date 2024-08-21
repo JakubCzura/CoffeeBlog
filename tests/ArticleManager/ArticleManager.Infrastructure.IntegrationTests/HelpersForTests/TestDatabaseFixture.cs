@@ -1,27 +1,27 @@
-﻿using AuthService.Infrastructure.Persistence.DatabaseContext;
+﻿using ArticleManager.Infrastructure.Persistence.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Respawn;
 using System.Data.Common;
 
-namespace AuthService.Infrastructure.IntegrationTests.HelpersForTests;
+namespace ArticleManager.Infrastructure.IntegrationTests.HelpersForTests;
 
 public class TestDatabaseFixture : IAsyncLifetime
 {
     private Respawner _respawner = default!;
     private DbConnection _connection = default!;
 
-    public AuthServiceDbContext AuthServiceDbContext { get; init; }
+    public ArticleManagerDbContext ArticleManagerDbContext { get; init; }
 
     public TestDatabaseFixture()
     {
-        DbContextOptions<AuthServiceDbContext> options = new DbContextOptionsBuilder<AuthServiceDbContext>().UseSqlServer(TestConstants.ConnectionString).Options;
-        AuthServiceDbContext = new(options);
+        DbContextOptions<ArticleManagerDbContext> options = new DbContextOptionsBuilder<ArticleManagerDbContext>().UseSqlServer(TestConstants.ConnectionString).Options;
+        ArticleManagerDbContext = new(options);
     }
 
     public async Task DisposeAsync()
     {
-        await AuthServiceDbContext.Database.EnsureDeletedAsync();
-        await AuthServiceDbContext.DisposeAsync();
+        await ArticleManagerDbContext.Database.EnsureDeletedAsync();
+        await ArticleManagerDbContext.DisposeAsync();
         await _connection.CloseAsync();
     }
 
@@ -30,8 +30,8 @@ public class TestDatabaseFixture : IAsyncLifetime
 
     public async Task InitializeAsync()
     {
-        await AuthServiceDbContext.Database.EnsureDeletedAsync();
-        await AuthServiceDbContext.Database.EnsureCreatedAsync();
+        await ArticleManagerDbContext.Database.EnsureDeletedAsync();
+        await ArticleManagerDbContext.Database.EnsureCreatedAsync();
 
         RespawnerOptions respawnerOptions = new()
         {
@@ -39,7 +39,7 @@ public class TestDatabaseFixture : IAsyncLifetime
             WithReseed = true
         };
 
-        _connection = AuthServiceDbContext.Database.GetDbConnection();
+        _connection = ArticleManagerDbContext.Database.GetDbConnection();
         await _connection.OpenAsync();
         _respawner = await Respawner.CreateAsync(_connection, respawnerOptions);
     }
