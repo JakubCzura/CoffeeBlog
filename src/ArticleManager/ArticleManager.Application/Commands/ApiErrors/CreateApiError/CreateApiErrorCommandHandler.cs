@@ -8,15 +8,12 @@ namespace ArticleManager.Application.Commands.ApiErrors.CreateApiError;
 /// <summary>
 /// Command handler to create new API error and save it to database. It's related to <see cref="CreateApiErrorCommand"/>.
 /// </summary>
-/// <param name="_apiErrorRepository">Interface to perform API error's operations in database.</param>
-/// <param name="_mapper">AutoMapper to map classes.</param>
-public class CreateApiErrorCommandHandler(IApiErrorRepository _apiErrorRepository,
-                                          IMapper _mapper)
+/// <param name="apiErrorRepository">Interface to perform API error's operations in database.</param>
+/// <param name="mapper">AutoMapper to map classes.</param>
+public class CreateApiErrorCommandHandler(IApiErrorRepository apiErrorRepository,
+                                          IMapper mapper)
     : IRequestHandler<CreateApiErrorCommand, Unit>
 {
-    private readonly IApiErrorRepository _apiErrorRepository = _apiErrorRepository;
-    private readonly IMapper _mapper = _mapper;
-
     /// <summary>
     /// Handles request to create new API error and save it to database.
     /// </summary>
@@ -26,8 +23,8 @@ public class CreateApiErrorCommandHandler(IApiErrorRepository _apiErrorRepositor
     public async Task<Unit> Handle(CreateApiErrorCommand request,
                                    CancellationToken cancellationToken)
     {
-        ApiError apiError = _mapper.Map<ApiError>(request);
-        await _apiErrorRepository.CreateAsync(apiError, cancellationToken);
+        ApiError apiError = mapper.Map<ApiError>(request);
+        await apiErrorRepository.CreateAsync(apiError, cancellationToken);
 
         return Unit.Value;
     }

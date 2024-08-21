@@ -10,20 +10,10 @@ namespace ArticleManager.Infrastructure.Persistence.Repositories;
 /// Generic repository to perform CRUD operations in database.
 /// </summary>
 /// <typeparam name="TEntity">Entity in database.</typeparam>
-internal class DbEntityBaseRepository<TEntity> : IDbEntityBaseRepository<TEntity> where TEntity : DbEntityBase
+/// <param name="articleManagerDbContext">Database context.</param>
+internal class BaseRepository<TEntity>(ArticleManagerDbContext articleManagerDbContext) : IBaseRepository<TEntity> where TEntity : DbEntityBase
 {
-    private readonly ArticleManagerDbContext _articleManagerDbContext;
-    private readonly DbSet<TEntity> _dbSet;
-
-    /// <summary>
-    /// Constructor with database context.
-    /// </summary>
-    /// <param name="articleManagerDbContext">Database context.</param>
-    public DbEntityBaseRepository(ArticleManagerDbContext articleManagerDbContext)
-    {
-        _articleManagerDbContext = articleManagerDbContext;
-        _dbSet = _articleManagerDbContext.Set<TEntity>();
-    }
+    private readonly DbSet<TEntity> _dbSet = articleManagerDbContext.Set<TEntity>();
 
     public async Task<int> CreateAsync(TEntity entity,
                                        CancellationToken cancellationToken = default)
@@ -34,7 +24,7 @@ internal class DbEntityBaseRepository<TEntity> : IDbEntityBaseRepository<TEntity
         }
 
         await _dbSet.AddAsync(entity, cancellationToken);
-        await _articleManagerDbContext.SaveChangesAsync(cancellationToken);
+        await articleManagerDbContext.SaveChangesAsync(cancellationToken);
         return entity.Id;
     }
 
@@ -56,7 +46,7 @@ internal class DbEntityBaseRepository<TEntity> : IDbEntityBaseRepository<TEntity
         }
 
         _dbSet.Update(entity);
-        return _articleManagerDbContext.SaveChangesAsync(cancellationToken);
+        return articleManagerDbContext.SaveChangesAsync(cancellationToken);
     }
 
     public async Task<int> DeleteAsync(int id,

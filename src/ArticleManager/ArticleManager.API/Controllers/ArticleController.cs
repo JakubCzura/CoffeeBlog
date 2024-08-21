@@ -8,8 +8,8 @@ namespace ArticleManager.API.Controllers;
 /// <summary>
 /// Controller to manage articles.
 /// </summary>
-/// <param name="_mediator">Mediator to handle commands and queries using CQRS pattern.</param>
+/// <param name="mediator">Mediator to handle commands and queries using CQRS pattern.</param>
 [ApiVersion(ApiVersioningInfo.Version_1_0)]
-public class ArticleController(IMediator _mediator) : ApiControllerBase(_mediator)
+public class ArticleController(IMediator mediator) : ApiControllerBase
 {
 }

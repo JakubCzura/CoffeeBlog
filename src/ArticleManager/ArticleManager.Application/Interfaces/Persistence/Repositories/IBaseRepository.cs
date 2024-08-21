@@ -6,8 +6,7 @@ namespace ArticleManager.Application.Interfaces.Persistence.Repositories;
 /// Generic interface to perform CRUD operations in database.
 /// </summary>
 /// <typeparam name="TEntity">Entity in database.</typeparam>
-public interface IDbEntityBaseRepository<TEntity>
-    where TEntity : DbEntityBase
+public interface IBaseRepository<TEntity> where TEntity : DbEntityBase
 {
     /// <summary>
     /// Adds new entity to database.
