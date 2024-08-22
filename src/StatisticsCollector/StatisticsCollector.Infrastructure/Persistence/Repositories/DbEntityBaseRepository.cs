@@ -11,7 +11,7 @@ namespace StatisticsCollector.Infrastructure.Persistence.Repositories;
 /// </summary>
 /// <typeparam name="TEntity">Entity in database.</typeparam>
 /// <param name="statisticsCollectorDbContext">Database context.</param>
-internal class DbEntityBaseRepository<TEntity>(StatisticsCollectorDbContext statisticsCollectorDbContext) 
+internal class DbEntityBaseRepository<TEntity>(StatisticsCollectorDbContext statisticsCollectorDbContext)
     : IBaseRepository<TEntity> where TEntity : DbEntityBase
 {
     private readonly DbSet<TEntity> _dbSet = statisticsCollectorDbContext.Set<TEntity>();

@@ -12,7 +12,7 @@ namespace NotificationProvider.Infrastructure.Persistence.Repositories;
 /// </summary>
 /// <typeparam name="TEntity">Entity in database.</typeparam>
 /// <param name="notificationProviderDbContext">Database context.</param>
-internal class BaseRepository<TEntity>(NotificationProviderDbContext notificationProviderDbContext) 
+internal class BaseRepository<TEntity>(NotificationProviderDbContext notificationProviderDbContext)
     : IBaseRepository<TEntity> where TEntity : DbEntityBase
 {
     private readonly DbSet<TEntity> _dbSet = notificationProviderDbContext.Set<TEntity>();

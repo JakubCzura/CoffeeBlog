@@ -11,7 +11,7 @@ namespace ArticleManager.Infrastructure.Persistence.Repositories;
 /// </summary>
 /// <typeparam name="TEntity">Entity in database.</typeparam>
 /// <param name="articleManagerDbContext">Database context.</param>
-internal class BaseRepository<TEntity>(ArticleManagerDbContext articleManagerDbContext) 
+internal class BaseRepository<TEntity>(ArticleManagerDbContext articleManagerDbContext)
     : IBaseRepository<TEntity> where TEntity : DbEntityBase
 {
     private readonly DbSet<TEntity> _dbSet = articleManagerDbContext.Set<TEntity>();

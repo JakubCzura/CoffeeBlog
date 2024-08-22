@@ -11,7 +11,7 @@ namespace AuthService.Infrastructure.Persistence.Repositories;
 /// </summary>
 /// <typeparam name="TEntity">Entity in database.</typeparam>
 /// <param name="authServiceDbContext">Database context.</param>
-internal class BaseRepository<TEntity>(AuthServiceDbContext authServiceDbContext) 
+internal class BaseRepository<TEntity>(AuthServiceDbContext authServiceDbContext)
     : IBaseRepository<TEntity> where TEntity : DbEntityBase
 {
     private readonly DbSet<TEntity> _dbSet = authServiceDbContext.Set<TEntity>();

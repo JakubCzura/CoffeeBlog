@@ -11,7 +11,7 @@ namespace PostManager.Infrastructure.Persistence.Repositories;
 /// </summary>
 /// <typeparam name="TEntity">Entity in database.</typeparam>
 /// <param name="postManagerDbContext">Database context.</param>
-internal class BaseRepository<TEntity>(PostManagerDbContext postManagerDbContext) 
+internal class BaseRepository<TEntity>(PostManagerDbContext postManagerDbContext)
     : IBaseRepository<TEntity> where TEntity : DbEntityBase
 {
     private readonly DbSet<TEntity> _dbSet = postManagerDbContext.Set<TEntity>();
