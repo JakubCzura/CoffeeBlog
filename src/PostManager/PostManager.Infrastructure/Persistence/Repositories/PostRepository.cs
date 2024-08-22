@@ -9,6 +9,6 @@ namespace PostManager.Infrastructure.Persistence.Repositories;
 /// </summary>
 /// <param name="_postManagerDbContext">Database context.</param>
 internal class PostRepository(PostManagerDbContext _postManagerDbContext)
-    : DbEntityBaseRepository<Post>(_postManagerDbContext), IPostRepository
+    : BaseRepository<Post>(_postManagerDbContext), IPostRepository
 {
 }

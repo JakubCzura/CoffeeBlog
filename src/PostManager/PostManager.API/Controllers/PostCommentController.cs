@@ -8,8 +8,8 @@ namespace PostManager.API.Controllers;
 /// <summary>
 /// Controller to manage post comment entity.
 /// </summary>
-/// <param name="_mediator">Mediator to handle commands and queries using CQRS pattern.</param>
+/// <param name="mediator">Mediator to handle commands and queries using CQRS pattern.</param>
 [ApiVersion(ApiVersioningInfo.Version_1_0)]
-public class PostCommentController(IMediator _mediator) : ApiControllerBase(_mediator)
+public class PostCommentController(IMediator mediator) : ApiControllerBase
 {
 }

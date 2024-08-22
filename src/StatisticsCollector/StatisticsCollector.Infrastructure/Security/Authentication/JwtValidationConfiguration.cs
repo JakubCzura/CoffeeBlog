@@ -11,10 +11,10 @@ namespace StatisticsCollector.Infrastructure.Security.Authentication;
 /// <summary>
 /// Configuration of JWT validation.
 /// </summary>
-/// <param name="authenticationOptions">Settings for authentication.</param>
-internal sealed class JwtValidationConfiguration(IOptions<AuthenticationOptions> authenticationOptions) : IConfigureNamedOptions<JwtBearerOptions>
+/// <param name="_authenticationOptions">Settings for authentication.</param>
+internal sealed class JwtValidationConfiguration(IOptions<AuthenticationOptions> _authenticationOptions) : IConfigureNamedOptions<JwtBearerOptions>
 {
-    private readonly AuthenticationOptions _authenticationOptions = authenticationOptions.Value;
+    private readonly AuthenticationOptions _authenticationOptions = _authenticationOptions.Value;
 
     /// <summary>
     /// Configures JWT validation.

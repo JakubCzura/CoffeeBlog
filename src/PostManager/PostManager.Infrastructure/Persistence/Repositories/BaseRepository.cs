@@ -10,53 +10,44 @@ namespace PostManager.Infrastructure.Persistence.Repositories;
 /// Generic repository to perform CRUD operations in database.
 /// </summary>
 /// <typeparam name="TEntity">Entity in database.</typeparam>
-internal class DbEntityBaseRepository<T> : IDbEntityBaseRepository<T> where T : DbEntityBase
+/// <param name="postManagerDbContext">Database context.</param>
+internal class BaseRepository<TEntity>(PostManagerDbContext postManagerDbContext) 
+    : IBaseRepository<TEntity> where TEntity : DbEntityBase
 {
-    private readonly PostManagerDbContext _postManagerDbContext;
-    private readonly DbSet<T> _dbSet;
+    private readonly DbSet<TEntity> _dbSet = postManagerDbContext.Set<TEntity>();
 
-    /// <summary>
-    /// Constructor with database context.
-    /// </summary>
-    /// <param name="postManagerDbContext">Database context.</param>
-    public DbEntityBaseRepository(PostManagerDbContext postManagerDbContext)
-    {
-        _postManagerDbContext = postManagerDbContext;
-        _dbSet = _postManagerDbContext.Set<T>();
-    }
-
-    public async Task<int> CreateAsync(T entity,
+    public async Task<int> CreateAsync(TEntity entity,
                                        CancellationToken cancellationToken = default)
     {
         if (entity is null)
         {
-            throw new NullEntityException($"Provided entity {typeof(T)} was null");
+            throw new NullEntityException($"Provided entity {typeof(TEntity)} was null");
         }
 
         await _dbSet.AddAsync(entity, cancellationToken);
-        await _postManagerDbContext.SaveChangesAsync(cancellationToken);
+        await postManagerDbContext.SaveChangesAsync(cancellationToken);
         return entity.Id;
     }
 
-    public async Task<T?> GetAsync(int id,
+    public async Task<TEntity?> GetAsync(int id,
                                    CancellationToken cancellationToken = default)
         => await _dbSet.AsNoTracking()
                        .FirstOrDefaultAsync(entity => entity.Id == id, cancellationToken);
 
-    public Task<List<T>> GetAllAsync(CancellationToken cancellationToken = default)
+    public Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
         => _dbSet.AsNoTracking()
                  .ToListAsync(cancellationToken);
 
-    public Task<int> UpdateAsync(T entity,
+    public Task<int> UpdateAsync(TEntity entity,
                                  CancellationToken cancellationToken = default)
     {
         if (entity is null)
         {
-            throw new NullEntityException($"Provided entity {typeof(T)} was null");
+            throw new NullEntityException($"Provided entity {typeof(TEntity)} was null");
         }
 
         _dbSet.Update(entity);
-        return _postManagerDbContext.SaveChangesAsync(cancellationToken);
+        return postManagerDbContext.SaveChangesAsync(cancellationToken);
     }
 
     public async Task<int> DeleteAsync(int id,

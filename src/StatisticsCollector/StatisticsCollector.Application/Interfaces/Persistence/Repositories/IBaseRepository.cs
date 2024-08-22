@@ -1,12 +1,13 @@
-﻿using PostManager.Domain.Entities.Basics;
+﻿using MongoDB.Bson;
+using StatisticsCollector.Domain.Entities.Basics;
 
-namespace PostManager.Application.Interfaces.Persistence.Repositories;
+namespace StatisticsCollector.Application.Interfaces.Persistence.Repositories;
 
 /// <summary>
 /// Generic interface to perform CRUD operations in database.
 /// </summary>
 /// <typeparam name="TEntity">Entity in database.</typeparam>
-public interface IDbEntityBaseRepository<TEntity> where TEntity : DbEntityBase
+public interface IBaseRepository<TEntity> where TEntity : DbEntityBase
 {
     /// <summary>
     /// Adds new entity to database.
@@ -14,8 +15,8 @@ public interface IDbEntityBaseRepository<TEntity> where TEntity : DbEntityBase
     /// <param name="entity">Entity to add to database.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Id of created entity.</returns>
-    Task<int> CreateAsync(TEntity entity,
-                          CancellationToken cancellationToken);
+    Task<ObjectId> CreateAsync(TEntity entity,
+                               CancellationToken cancellationToken);
 
     /// <summary>
     /// Returns entity from database by id.
@@ -23,7 +24,7 @@ public interface IDbEntityBaseRepository<TEntity> where TEntity : DbEntityBase
     /// <param name="id">Entity's id.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Entity if found, otherwise null.</returns>
-    Task<TEntity?> GetAsync(int id,
+    Task<TEntity?> GetAsync(ObjectId id,
                             CancellationToken cancellationToken);
 
     /// <summary>
@@ -48,6 +49,6 @@ public interface IDbEntityBaseRepository<TEntity> where TEntity : DbEntityBase
     /// <param name="id">Entity's id.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Number of rows deleted in database.</returns>
-    Task<int> DeleteAsync(int id,
+    Task<int> DeleteAsync(ObjectId id,
                           CancellationToken cancellationToken);
 }

@@ -11,9 +11,9 @@ namespace PostManager.API.Controllers;
 /// <summary>
 /// Controller to manage post entity.
 /// </summary>
-/// <param name="_mediator">Mediator to handle commands and queries using CQRS pattern.</param>
+/// <param name="mediator">Mediator to handle commands and queries using CQRS pattern.</param>
 [ApiVersion(ApiVersioningInfo.Version_1_0)]
-public class PostController(IMediator _mediator) : ApiControllerBase(_mediator)
+public class PostController(IMediator mediator) : ApiControllerBase
 {
     /// <summary>
     /// Endpoint to create post on website.
@@ -28,5 +28,5 @@ public class PostController(IMediator _mediator) : ApiControllerBase(_mediator)
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<int>> Create([FromBody] CreatePostCommand createPostCommand,
                                                 CancellationToken cancellationToken)
-        => await Mediator.Send(createPostCommand, cancellationToken);
+        => await mediator.Send(createPostCommand, cancellationToken);
 }

@@ -10,27 +10,18 @@ namespace StatisticsCollector.Infrastructure.Persistence.Repositories;
 /// Generic repository to perform CRUD operations in database.
 /// </summary>
 /// <typeparam name="TEntity">Entity in database.</typeparam>
-internal class DbEntityBaseRepository<TEntity> : IDbEntityBaseRepository<TEntity> where TEntity : DbEntityBase
+/// <param name="statisticsCollectorDbContext">Database context.</param>
+internal class DbEntityBaseRepository<TEntity>(StatisticsCollectorDbContext statisticsCollectorDbContext) 
+    : IBaseRepository<TEntity> where TEntity : DbEntityBase
 {
-    private readonly StatisticsCollectorDbContext _statisticsCollectorDbContext;
-    private readonly DbSet<TEntity> _dbSet;
-
-    /// <summary>
-    /// Constructor with database context.
-    /// </summary>
-    /// <param name="statisticsCollectorDbContext">Database context.</param>
-    public DbEntityBaseRepository(StatisticsCollectorDbContext statisticsCollectorDbContext)
-    {
-        _statisticsCollectorDbContext = statisticsCollectorDbContext;
-        _dbSet = _statisticsCollectorDbContext.Set<TEntity>();
-    }
+    private readonly DbSet<TEntity> _dbSet = statisticsCollectorDbContext.Set<TEntity>();
 
     public async Task<ObjectId> CreateAsync(TEntity entity,
                                             CancellationToken cancellationToken)
 
     {
         await _dbSet.AddAsync(entity, cancellationToken);
-        await _statisticsCollectorDbContext.SaveChangesAsync(cancellationToken);
+        await statisticsCollectorDbContext.SaveChangesAsync(cancellationToken);
         return entity.Id;
     }
 
@@ -48,7 +39,7 @@ internal class DbEntityBaseRepository<TEntity> : IDbEntityBaseRepository<TEntity
 
     {
         _dbSet.Update(entity);
-        return await _statisticsCollectorDbContext.SaveChangesAsync(cancellationToken);
+        return await statisticsCollectorDbContext.SaveChangesAsync(cancellationToken);
     }
 
     public async Task<int> DeleteAsync(ObjectId id,
@@ -62,6 +53,6 @@ internal class DbEntityBaseRepository<TEntity> : IDbEntityBaseRepository<TEntity
         }
 
         _dbSet.Remove(entity);
-        return await _statisticsCollectorDbContext.SaveChangesAsync(cancellationToken);
+        return await statisticsCollectorDbContext.SaveChangesAsync(cancellationToken);
     }
 }

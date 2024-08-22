@@ -5,6 +5,6 @@ namespace StatisticsCollector.Application.Interfaces.Persistence.Repositories;
 /// <summary>
 /// Interface for repository to perform database operations related to <see cref="RequestDetail"/>.
 /// </summary>
-public interface IRequestDetailRepository : IDbEntityBaseRepository<RequestDetail>
+public interface IRequestDetailRepository : IBaseRepository<RequestDetail>
 {
 }

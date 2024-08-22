@@ -9,6 +9,6 @@ namespace PostManager.Infrastructure.Persistence.Repositories;
 /// </summary>
 /// <param name="_postManagerDbContext">Database context.</param>
 internal class ApiErrorRepository(PostManagerDbContext _postManagerDbContext)
-    : DbEntityBaseRepository<ApiError>(_postManagerDbContext), IApiErrorRepository
+    : BaseRepository<ApiError>(_postManagerDbContext), IApiErrorRepository
 {
 }

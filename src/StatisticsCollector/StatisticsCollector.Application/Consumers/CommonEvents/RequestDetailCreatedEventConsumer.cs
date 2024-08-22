@@ -11,21 +11,18 @@ namespace StatisticsCollector.Application.Consumers.CommonEvents;
 /// <summary>
 /// Consumer of <see cref="RequestDetailCreatedEvent"/> event.
 /// </summary>
-/// <param name="_logger">Logger to log exceptions.</param>
-/// <param name="_eventConsumerDetailRepository">Interface to perform event consumer detail operations in database.</param>
-/// <param name="_apiErrorRepository">Interface to perform api error operations in database.</param>
-/// <param name="_requestDetailRepository">Interface to perform request detail operations in database.</param>
-/// <param name="_mapper">AutoMapper to map classes.</param>
-public sealed class RequestDetailCreatedEventConsumer(ILogger<RequestDetailCreatedEventConsumer> _logger,
-                                                      IEventConsumerDetailRepository _eventConsumerDetailRepository,
-                                                      IApiErrorRepository _apiErrorRepository,
-                                                      IRequestDetailRepository _requestDetailRepository,
-                                                      IMapper _mapper)
-    : EventConsumerBase<RequestDetailCreatedEvent, RequestDetailCreatedEventConsumer>(_logger, _eventConsumerDetailRepository, _apiErrorRepository)
+/// <param name="logger">Logger to log exceptions.</param>
+/// <param name="eventConsumerDetailRepository">Interface to perform event consumer detail operations in database.</param>
+/// <param name="apiErrorRepository">Interface to perform api error operations in database.</param>
+/// <param name="requestDetailRepository">Interface to perform request detail operations in database.</param>
+/// <param name="mapper">AutoMapper to map classes.</param>
+public sealed class RequestDetailCreatedEventConsumer(ILogger<RequestDetailCreatedEventConsumer> logger,
+                                                      IEventConsumerDetailRepository eventConsumerDetailRepository,
+                                                      IApiErrorRepository apiErrorRepository,
+                                                      IRequestDetailRepository requestDetailRepository,
+                                                      IMapper mapper)
+    : EventConsumerBase<RequestDetailCreatedEvent, RequestDetailCreatedEventConsumer>(logger, eventConsumerDetailRepository, apiErrorRepository)
 {
-    private readonly IRequestDetailRepository _requestDetailRepository = _requestDetailRepository;
-    private readonly IMapper _mapper = _mapper;
-
     /// <summary>
     /// Consumes <see cref="RequestDetailCreatedEvent"/> event.<br/>
     /// Saves request's details to database.
@@ -34,8 +31,8 @@ public sealed class RequestDetailCreatedEventConsumer(ILogger<RequestDetailCreat
     /// <returns><see cref="Task"/>.</returns>
     public override async Task ConsumeEvent(ConsumeContext<RequestDetailCreatedEvent> consumeContext)
     {
-        RequestDetail requestDetail = _mapper.Map<RequestDetail>(consumeContext.Message);
+        RequestDetail requestDetail = mapper.Map<RequestDetail>(consumeContext.Message);
 
-        await _requestDetailRepository.CreateAsync(requestDetail, default);
+        await requestDetailRepository.CreateAsync(requestDetail, default);
     }
 }
