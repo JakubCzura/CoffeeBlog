@@ -21,9 +21,9 @@ namespace AuthService.API.Controllers;
 /// <summary>
 /// Controller to manage users.
 /// </summary>
-/// <param name="_mediator">Mediator to handle commands and queries using CQRS pattern.</param>
+/// <param name="mediator">Mediator to handle commands and queries using CQRS pattern.</param>
 [ApiVersion(ApiVersioningInfo.Version_1_0)]
-public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
+public class UserController(IMediator mediator) : ApiControllerBase
 {
     /// <summary>
     /// Endpoint to sign up user.
@@ -39,7 +39,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<SignUpUserViewModel>> SignUp([FromBody] SignUpUserCommand signUpUserCommand,
                                                                 CancellationToken cancellationToken)
-        => await Mediator.Send(signUpUserCommand, cancellationToken) switch
+        => await mediator.Send(signUpUserCommand, cancellationToken) switch
         {
             { IsSuccess: true, Value: SignUpUserViewModel viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => errors[0] switch
@@ -65,7 +65,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> SignIn([FromBody] SignInUserQuery signInUserQuery,
                                             CancellationToken cancellationToken)
-        => await Mediator.Send(signInUserQuery, cancellationToken) switch
+        => await mediator.Send(signInUserQuery, cancellationToken) switch
         {
             { IsSuccess: true, Value: SignInUserViewModel viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => errors[0] switch
@@ -92,7 +92,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> ChangeUsername([FromBody] ChangeUsernameCommand changeUsernameCommand,
                                                     CancellationToken cancellationToken)
-        => await Mediator.Send(changeUsernameCommand, cancellationToken) switch
+        => await mediator.Send(changeUsernameCommand, cancellationToken) switch
         {
             { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => errors[0] switch
@@ -118,7 +118,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> ChangeEmail([FromBody] ChangeEmailCommand changeEmailCommand,
                                                  CancellationToken cancellationToken)
-        => await Mediator.Send(changeEmailCommand, cancellationToken) switch
+        => await mediator.Send(changeEmailCommand, cancellationToken) switch
         {
             { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => errors[0] switch
@@ -143,7 +143,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordCommand changePasswordCommand,
                                                     CancellationToken cancellationToken)
-        => await Mediator.Send(changePasswordCommand, cancellationToken) switch
+        => await mediator.Send(changePasswordCommand, cancellationToken) switch
         {
             { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => CreateBadRequestObjectResult(errors),
@@ -164,7 +164,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GenerateForgottenPasswordResetToken([FromBody] GenerateForgottenPasswordResetTokenCommand generateForgottenPasswordResetTokenCommand,
                                                                          CancellationToken cancellationToken)
-        => await Mediator.Send(generateForgottenPasswordResetTokenCommand, cancellationToken) switch
+        => await mediator.Send(generateForgottenPasswordResetTokenCommand, cancellationToken) switch
         {
             { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => errors[0] switch
@@ -190,7 +190,7 @@ public class UserController(IMediator _mediator) : ApiControllerBase(_mediator)
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> ResetPassword([FromBody] ResetForgottenPasswordCommand resetForgottenPasswordCommand,
                                                    CancellationToken cancellationToken)
-        => await Mediator.Send(resetForgottenPasswordCommand, cancellationToken) switch
+        => await mediator.Send(resetForgottenPasswordCommand, cancellationToken) switch
         {
             { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => errors[0] switch

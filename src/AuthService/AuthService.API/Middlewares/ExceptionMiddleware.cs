@@ -13,14 +13,11 @@ namespace AuthService.API.Middlewares;
 /// <summary>
 /// Middleware to handle request's exception. It logs the exception and returns a response with exception's details.
 /// </summary>
-/// <param name="_logger">Logger to log exceptions.</param>
-/// <param name="_mediator">Mediator to handle command to save API error in database.</param>
-public class ExceptionMiddleware(ILogger<ExceptionMiddleware> _logger,
-                                 IMediator _mediator) : IMiddleware
+/// <param name="logger">Logger to log exceptions.</param>
+/// <param name="mediator">Mediator to handle command to save API error in database.</param>
+public class ExceptionMiddleware(ILogger<ExceptionMiddleware> logger,
+                                 IMediator mediator) : IMiddleware
 {
-    private readonly ILogger<ExceptionMiddleware> _logger = _logger;
-    private readonly IMediator _mediator = _mediator;
-
     /// <summary>
     /// Handles request's exception.
     /// </summary>
@@ -68,7 +65,7 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> _logger,
     private async Task HandleExceptionAsync(HttpContext httpContext,
                                             Exception exception)
     {
-        _logger.LogError(exception, "Exception caught by exception middleware");
+        logger.LogError(exception, "Exception caught by exception middleware");
 
         try
         {
@@ -78,11 +75,11 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> _logger,
                 exception.Message,
                 "Exception caught by exception middleware"
             );
-            await _mediator.Send(createApiErrorCommand, httpContext.RequestAborted);
+            await mediator.Send(createApiErrorCommand, httpContext.RequestAborted);
         }
         catch (Exception)
         {
-            _logger.LogCritical(exception, $"{nameof(ExceptionMiddleware)}: Exception while saving API exception's data to database.");
+            logger.LogCritical(exception, $"{nameof(ExceptionMiddleware)}: Exception while saving API exception's data to database.");
         }
 
         ErrorDetailsViewModel errorDetailsViewModel = exception switch

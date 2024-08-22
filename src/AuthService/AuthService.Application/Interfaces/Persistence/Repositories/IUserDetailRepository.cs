@@ -5,7 +5,7 @@ namespace AuthService.Application.Interfaces.Persistence.Repositories;
 /// <summary>
 /// Interface for repository to perform database operations related to <see cref="UserDetail"/>.
 /// </summary>
-public interface IUserDetailRepository : IDbEntityBaseRepository<UserDetail>
+public interface IUserDetailRepository : IBaseRepository<UserDetail>
 {
     /// <summary>
     /// Updates the date and time when user successfully signed in last time and sets it to current UTC datetime.

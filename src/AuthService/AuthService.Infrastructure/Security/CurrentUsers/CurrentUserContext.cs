@@ -9,14 +9,12 @@ namespace AuthService.Infrastructure.Security.CurrentUsers;
 /// <summary>
 /// Service to get information about current authorized user who is using the application.
 /// </summary>
-/// <param name="_httpContextAccessor">Interface for accessing the HTTP context which gives information about authenticated user.</param>
-internal class CurrentUserContext(IHttpContextAccessor _httpContextAccessor) : ICurrentUserContext
+/// <param name="httpContextAccessor">Interface for accessing the HTTP context which gives information about authenticated user.</param>
+internal class CurrentUserContext(IHttpContextAccessor httpContextAccessor) : ICurrentUserContext
 {
-    private readonly IHttpContextAccessor _httpContextAccessor = _httpContextAccessor;
-
     public CurrentAuthorizedUser GetCurrentAuthorizedUser()
     {
-        ClaimsPrincipal? user = (_httpContextAccessor.HttpContext?.User) ?? throw new UserUnauthorizedException();
+        ClaimsPrincipal? user = (httpContextAccessor.HttpContext?.User) ?? throw new UserUnauthorizedException();
 
         if (user.Identity?.IsAuthenticated == false)
         {

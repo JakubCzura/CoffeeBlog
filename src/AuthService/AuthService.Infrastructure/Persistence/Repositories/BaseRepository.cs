@@ -10,20 +10,11 @@ namespace AuthService.Infrastructure.Persistence.Repositories;
 /// Generic repository to perform CRUD operations in database.
 /// </summary>
 /// <typeparam name="TEntity">Entity in database.</typeparam>
-internal class DbEntityBaseRepository<TEntity> : IDbEntityBaseRepository<TEntity> where TEntity : DbEntityBase
+/// <param name="authServiceDbContext">Database context.</param>
+internal class BaseRepository<TEntity>(AuthServiceDbContext authServiceDbContext) 
+    : IBaseRepository<TEntity> where TEntity : DbEntityBase
 {
-    private readonly AuthServiceDbContext _authServiceDbContext;
-    private readonly DbSet<TEntity> _dbSet;
-
-    /// <summary>
-    /// Constructor with database context.
-    /// </summary>
-    /// <param name="authServiceDbContext">Database context.</param>
-    public DbEntityBaseRepository(AuthServiceDbContext authServiceDbContext)
-    {
-        _authServiceDbContext = authServiceDbContext;
-        _dbSet = _authServiceDbContext.Set<TEntity>();
-    }
+    private readonly DbSet<TEntity> _dbSet = authServiceDbContext.Set<TEntity>();
 
     public async Task<int> CreateAsync(TEntity entity,
                                        CancellationToken cancellationToken = default)
@@ -34,7 +25,7 @@ internal class DbEntityBaseRepository<TEntity> : IDbEntityBaseRepository<TEntity
         }
 
         await _dbSet.AddAsync(entity, cancellationToken);
-        await _authServiceDbContext.SaveChangesAsync(cancellationToken);
+        await authServiceDbContext.SaveChangesAsync(cancellationToken);
         return entity.Id;
     }
 
@@ -56,7 +47,7 @@ internal class DbEntityBaseRepository<TEntity> : IDbEntityBaseRepository<TEntity
         }
 
         _dbSet.Update(entity);
-        return _authServiceDbContext.SaveChangesAsync(cancellationToken);
+        return authServiceDbContext.SaveChangesAsync(cancellationToken);
     }
 
     public async Task<int> DeleteAsync(int id,

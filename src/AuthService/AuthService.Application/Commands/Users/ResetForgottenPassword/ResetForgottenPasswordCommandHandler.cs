@@ -15,21 +15,16 @@ namespace AuthService.Application.Commands.Users.ResetForgottenPassword;
 /// <summary>
 /// Command handler to reset forgotten password. It's related to <see cref="ResetForgottenPasswordCommand"/>.
 /// </summary>
-/// <param name="_userRepository">Interface to perform user operations in database.</param>
-/// <param name="_passwordHasher">Interface to hash password.</param>
-/// <param name="_eventPublisher">Microservice to send event about generated token to reset password.</param>
-/// <param name="_dateTimeProvider">Interface to deliver date and time.</param>
-public class ResetForgottenPasswordCommandHandler(IUserRepository _userRepository,
-                                                  IPasswordHasher _passwordHasher,
-                                                  IEventPublisher _eventPublisher,
-                                                  IDateTimeProvider _dateTimeProvider)
+/// <param name="userRepository">Interface to perform user operations in database.</param>
+/// <param name="passwordHasher">Interface to hash password.</param>
+/// <param name="eventPublisher">Microservice to send event about generated token to reset password.</param>
+/// <param name="dateTimeProvider">Interface to deliver date and time.</param>
+public class ResetForgottenPasswordCommandHandler(IUserRepository userRepository,
+                                                  IPasswordHasher passwordHasher,
+                                                  IEventPublisher eventPublisher,
+                                                  IDateTimeProvider dateTimeProvider)
     : IRequestHandler<ResetForgottenPasswordCommand, Result<ViewModelBase>>
 {
-    private readonly IUserRepository _userRepository = _userRepository;
-    private readonly IPasswordHasher _passwordHasher = _passwordHasher;
-    private readonly IEventPublisher _eventPublisher = _eventPublisher;
-    private readonly IDateTimeProvider _dateTimeProvider = _dateTimeProvider;
-
     /// <summary>
     /// Handles request to reset forgotten password.
     /// </summary>
@@ -39,7 +34,7 @@ public class ResetForgottenPasswordCommandHandler(IUserRepository _userRepositor
     public async Task<Result<ViewModelBase>> Handle(ResetForgottenPasswordCommand request,
                                                     CancellationToken cancellationToken)
     {
-        User? user = await _userRepository.GetByEmailOrUsernameAsync(request.Email, cancellationToken);
+        User? user = await userRepository.GetByEmailOrUsernameAsync(request.Email, cancellationToken);
         if (user is null)
         {
             return Result.Fail<ViewModelBase>(new UserNotFoundError());
@@ -48,18 +43,18 @@ public class ResetForgottenPasswordCommandHandler(IUserRepository _userRepositor
         {
             return Result.Fail<ViewModelBase>(new InvalidForgottenPasswordResetTokenError());
         }
-        if (user.ForgottenPasswordResetTokenExpiresAt is not null && user.ForgottenPasswordResetTokenExpiresAt > _dateTimeProvider.UtcNow)
+        if (user.ForgottenPasswordResetTokenExpiresAt is not null && user.ForgottenPasswordResetTokenExpiresAt > dateTimeProvider.UtcNow)
         {
             return Result.Fail<ViewModelBase>(new ExpiredForgottenPasswordResetTokenError());
         }
 
-        string hashedPassword = _passwordHasher.HashPassword(request.NewPassword);
-        await _userRepository.ResetForgottenPasswordAsync(user.Id, request.NewPassword, cancellationToken);
+        string hashedPassword = passwordHasher.HashPassword(request.NewPassword);
+        await userRepository.ResetForgottenPasswordAsync(user.Id, request.NewPassword, cancellationToken);
 
         PasswordResetedEvent passwordResetedEvent = new(request.Email,
                                                         user.Username,
                                                         nameof(ResetForgottenPasswordCommandHandler));
-        await _eventPublisher.PublishAsync(passwordResetedEvent, cancellationToken);
+        await eventPublisher.PublishAsync(passwordResetedEvent, cancellationToken);
 
         ViewModelBase result = new(ResponseMessages.PasswordHasBeenReseted);
         return Result.Ok(result);

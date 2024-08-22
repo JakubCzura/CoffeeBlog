@@ -16,18 +16,14 @@ namespace AuthService.Application.Commands.Users.GenerateForgottenPasswordResetT
 /// <summary>
 /// Command handler to generate password reset token for user who has forgotten password. It's related to <see cref="GenerateForgottenPasswordResetTokenCommand"/>.
 /// </summary>
-/// <param name="_userRepository">Interface to perform user operations in database.</param>
-/// <param name="_securityTokenGenerator">Interface to generate security token to ensure user's identity.</param>
-/// <param name="_eventPublisher">Microservice to send event about generated token to reset password.</param>
-public class GenerateForgottenPasswordResetTokenCommandHandler(IUserRepository _userRepository,
-                                                               ISecurityTokenGenerator _securityTokenGenerator,
-                                                               IEventPublisher _eventPublisher)
+/// <param name="userRepository">Interface to perform user operations in database.</param>
+/// <param name="securityTokenGenerator">Interface to generate security token to ensure user's identity.</param>
+/// <param name="eventPublisher">Microservice to send event about generated token to reset password.</param>
+public class GenerateForgottenPasswordResetTokenCommandHandler(IUserRepository userRepository,
+                                                               ISecurityTokenGenerator securityTokenGenerator,
+                                                               IEventPublisher eventPublisher)
     : IRequestHandler<GenerateForgottenPasswordResetTokenCommand, Result<ViewModelBase>>
 {
-    private readonly IUserRepository _userRepository = _userRepository;
-    private readonly ISecurityTokenGenerator _securityTokenGenerator = _securityTokenGenerator;
-    private readonly IEventPublisher _eventPublisher = _eventPublisher;
-
     /// <summary>
     /// Handles request to generate password reset token for user who has forgotten password.
     /// </summary>
@@ -37,22 +33,22 @@ public class GenerateForgottenPasswordResetTokenCommandHandler(IUserRepository _
     public async Task<Result<ViewModelBase>> Handle(GenerateForgottenPasswordResetTokenCommand request,
                                                     CancellationToken cancellationToken)
     {
-        User? user = await _userRepository.GetByEmailOrUsernameAsync(request.Email, cancellationToken);
+        User? user = await userRepository.GetByEmailOrUsernameAsync(request.Email, cancellationToken);
         if (user is null)
         {
             return Result.Fail<ViewModelBase>(new UserNotFoundError());
         }
 
-        SecurityToken securityToken = _securityTokenGenerator.GenerateForgottenPasswordResetToken();
+        SecurityToken securityToken = securityTokenGenerator.GenerateForgottenPasswordResetToken();
         UpdateForgottenPasswordResetTokenDto updateForgottenPasswordResetTokenDto = new(request.Email, securityToken.Token, securityToken.ExpirationDate);
-        await _userRepository.UpdateForgottenPasswordResetTokenAsync(updateForgottenPasswordResetTokenDto, cancellationToken);
+        await userRepository.UpdateForgottenPasswordResetTokenAsync(updateForgottenPasswordResetTokenDto, cancellationToken);
 
         PasswordResetTokenSentEvent passwordResetTokenSentEvent = new(request.Email,
                                                                       user.Username,
                                                                       updateForgottenPasswordResetTokenDto.ForgottenPasswordResetToken,
                                                                       updateForgottenPasswordResetTokenDto.ForgottenPasswordResetTokenExpiresAt,
                                                                       nameof(GenerateForgottenPasswordResetTokenCommandHandler));
-        await _eventPublisher.PublishAsync(passwordResetTokenSentEvent, cancellationToken);
+        await eventPublisher.PublishAsync(passwordResetTokenSentEvent, cancellationToken);
 
         ViewModelBase result = new(ResponseMessages.TokenToResetPasswordHasBeenSentToYourEmail);
         return Result.Ok(result);

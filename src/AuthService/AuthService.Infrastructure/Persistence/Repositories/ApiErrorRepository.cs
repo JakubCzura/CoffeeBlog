@@ -9,6 +9,6 @@ namespace AuthService.Infrastructure.Persistence.Repositories;
 /// </summary>
 /// <param name="_authServiceDbContext">Database context.</param>
 internal class ApiErrorRepository(AuthServiceDbContext _authServiceDbContext)
-    : DbEntityBaseRepository<ApiError>(_authServiceDbContext), IApiErrorRepository
+    : BaseRepository<ApiError>(_authServiceDbContext), IApiErrorRepository
 {
 }

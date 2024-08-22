@@ -13,18 +13,14 @@ namespace AuthService.Application.Commands.Users.ChangeUsername;
 /// <summary>
 /// Command handler to change user's username. It's related to <see cref="ChangeUsernameCommand"/>.
 /// </summary>
-/// <param name="_userRepository">Interface to perform user operations in database.</param>
-/// <param name="_userDetailRepository">Interface to perform user's details operations in database.</param>
-/// <param name="_currentUserContext">Interface to get information about current signed in user.</param>
-public class ChangeUsernameCommandHandler(IUserRepository _userRepository,
-                                          IUserDetailRepository _userDetailRepository,
-                                          ICurrentUserContext _currentUserContext)
+/// <param name="userRepository">Interface to perform user operations in database.</param>
+/// <param name="userDetailRepository">Interface to perform user's details operations in database.</param>
+/// <param name="currentUserContext">Interface to get information about current signed in user.</param>
+public class ChangeUsernameCommandHandler(IUserRepository userRepository,
+                                          IUserDetailRepository userDetailRepository,
+                                          ICurrentUserContext currentUserContext)
     : IRequestHandler<ChangeUsernameCommand, Result<ViewModelBase>>
 {
-    private readonly IUserRepository _userRepository = _userRepository;
-    private readonly IUserDetailRepository _userDetailRepository = _userDetailRepository;
-    private readonly ICurrentUserContext _currentUserContext = _currentUserContext;
-
     /// <summary>
     /// Handles request to change user's username.
     /// </summary>
@@ -35,15 +31,15 @@ public class ChangeUsernameCommandHandler(IUserRepository _userRepository,
     public async Task<Result<ViewModelBase>> Handle(ChangeUsernameCommand request,
                                                     CancellationToken cancellationToken)
     {
-        CurrentAuthorizedUser currentAuthorizedUser = _currentUserContext.GetCurrentAuthorizedUser();
+        CurrentAuthorizedUser currentAuthorizedUser = currentUserContext.GetCurrentAuthorizedUser();
 
-        if (await _userRepository.UsernameExistsAsync(request.NewUsername, cancellationToken))
+        if (await userRepository.UsernameExistsAsync(request.NewUsername, cancellationToken))
         {
             return Result.Fail<ViewModelBase>(new UsernameExistsError());
         }
 
-        await _userRepository.UpdateUsernameAsync(currentAuthorizedUser.Id, request.NewUsername, cancellationToken);
-        await _userDetailRepository.UpdateLastUsernameChangeAsync(currentAuthorizedUser.Id, cancellationToken);
+        await userRepository.UpdateUsernameAsync(currentAuthorizedUser.Id, request.NewUsername, cancellationToken);
+        await userDetailRepository.UpdateLastUsernameChangeAsync(currentAuthorizedUser.Id, cancellationToken);
 
         ViewModelBase result = new(ResponseMessages.UsernameHasBeenChanged);
         return Result.Ok(result);

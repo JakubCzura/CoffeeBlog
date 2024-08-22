@@ -14,24 +14,18 @@ namespace AuthService.Application.Commands.Users.ChangePassword;
 /// <summary>
 /// Command handler to change user's password. It's related to <see cref="ChangePasswordCommand"/>.
 /// </summary>
-/// <param name="_userRepository">Interface to perform user operations in database.</param>
-/// <param name="_userDetailRepository">Interface to perform user's details operations in database.</param>
-/// <param name="_userLastPasswordRepository">Interface to perform user's last passwords operations in database.</param>
-/// <param name="_currentUserContext">Interface to get information about current signed in user.</param>
-/// <param name="_passwordHasher">Interface hash user's password.</param>
-public class ChangePasswordCommandHandler(IUserRepository _userRepository,
-                                         IUserDetailRepository _userDetailRepository,
-                                         IUserLastPasswordRepository _userLastPasswordRepository,
-                                         ICurrentUserContext _currentUserContext,
-                                         IPasswordHasher _passwordHasher)
+/// <param name="userRepository">Interface to perform user operations in database.</param>
+/// <param name="userDetailRepository">Interface to perform user's details operations in database.</param>
+/// <param name="userLastPasswordRepository">Interface to perform user's last passwords operations in database.</param>
+/// <param name="currentUserContext">Interface to get information about current signed in user.</param>
+/// <param name="passwordHasher">Interface hash user's password.</param>
+public class ChangePasswordCommandHandler(IUserRepository userRepository,
+                                         IUserDetailRepository userDetailRepository,
+                                         IUserLastPasswordRepository userLastPasswordRepository,
+                                         ICurrentUserContext currentUserContext,
+                                         IPasswordHasher passwordHasher)
     : IRequestHandler<ChangePasswordCommand, Result<ViewModelBase>>
 {
-    private readonly IUserRepository _userRepository = _userRepository;
-    private readonly IUserDetailRepository _userDetailRepository = _userDetailRepository;
-    private readonly IUserLastPasswordRepository _userLastPasswordRepository = _userLastPasswordRepository;
-    private readonly ICurrentUserContext _currentUserContext = _currentUserContext;
-    private readonly IPasswordHasher _passwordHasher = _passwordHasher;
-
     /// <summary>
     /// Handles request to change user's password.
     /// </summary>
@@ -42,21 +36,21 @@ public class ChangePasswordCommandHandler(IUserRepository _userRepository,
     public async Task<Result<ViewModelBase>> Handle(ChangePasswordCommand request,
                                                     CancellationToken cancellationToken)
     {
-        CurrentAuthorizedUser currentAuthorizedUser = _currentUserContext.GetCurrentAuthorizedUser();
+        CurrentAuthorizedUser currentAuthorizedUser = currentUserContext.GetCurrentAuthorizedUser();
 
-        string hashedPassword = _passwordHasher.HashPassword(request.NewPassword);
+        string hashedPassword = passwordHasher.HashPassword(request.NewPassword);
 
-        IEnumerable<string> userLastPasswords = (await _userLastPasswordRepository.GetLastPasswordsByUserIdAsync(currentAuthorizedUser.Id, cancellationToken))
-                                                                                  .Select(userLastPassword => userLastPassword.LastPassword);
+        IEnumerable<string> userLastPasswords = (await userLastPasswordRepository.GetLastPasswordsByUserIdAsync(currentAuthorizedUser.Id, cancellationToken))
+                                                                                 .Select(userLastPassword => userLastPassword.LastPassword);
 
         if (userLastPasswords.Contains(hashedPassword))
         {
             return Result.Fail<ViewModelBase>(new PasswordAlreadyUsedError());
         }
 
-        await _userRepository.UpdatePasswordAsync(currentAuthorizedUser.Id, hashedPassword, cancellationToken);
-        await _userLastPasswordRepository.CreateAsync(new(hashedPassword, currentAuthorizedUser.Id), cancellationToken);
-        await _userDetailRepository.UpdateLastPasswordChangeAsync(currentAuthorizedUser.Id, cancellationToken);
+        await userRepository.UpdatePasswordAsync(currentAuthorizedUser.Id, hashedPassword, cancellationToken);
+        await userLastPasswordRepository.CreateAsync(new(hashedPassword, currentAuthorizedUser.Id), cancellationToken);
+        await userDetailRepository.UpdateLastPasswordChangeAsync(currentAuthorizedUser.Id, cancellationToken);
 
         ViewModelBase result = new(ResponseMessages.PasswordHasBeenChanged);
         return Result.Ok(result);

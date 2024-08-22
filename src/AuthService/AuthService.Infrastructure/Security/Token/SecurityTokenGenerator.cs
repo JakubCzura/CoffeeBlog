@@ -11,10 +11,10 @@ namespace AuthService.Infrastructure.Security.Token;
 /// <summary>
 /// Generator of security tokens.
 /// </summary>
-/// <param name="securityTokenOptions"></param>
-internal class SecurityTokenGenerator(IOptions<SecurityTokenOptions> securityTokenOptions) : ISecurityTokenGenerator
+/// <param name="_securityTokenOptions"></param>
+internal class SecurityTokenGenerator(IOptions<SecurityTokenOptions> _securityTokenOptions) : ISecurityTokenGenerator
 {
-    private readonly SecurityTokenOptions _securityTokenOptions = securityTokenOptions.Value;
+    private readonly SecurityTokenOptions _securityTokenOptions = _securityTokenOptions.Value;
 
     private static string GenerateToken(int byteCount = 32)
         => byteCount >= 32

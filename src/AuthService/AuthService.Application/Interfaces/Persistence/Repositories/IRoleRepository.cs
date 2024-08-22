@@ -5,7 +5,7 @@ namespace AuthService.Application.Interfaces.Persistence.Repositories;
 /// <summary>
 /// Interface for repository to perform database operations related to <see cref="Role"/>.
 /// </summary>
-public interface IRoleRepository : IDbEntityBaseRepository<Role>
+public interface IRoleRepository : IBaseRepository<Role>
 {
     /// <summary>
     /// Returns all roles' names that are assigned to the user with given id.

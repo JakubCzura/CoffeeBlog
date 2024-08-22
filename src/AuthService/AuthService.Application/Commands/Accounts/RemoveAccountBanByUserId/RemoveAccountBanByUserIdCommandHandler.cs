@@ -10,15 +10,12 @@ namespace AuthService.Application.Commands.Accounts.RemoveAccountBanByUserId;
 /// <summary>
 /// Command handler to remove user's account ban. It's related to <see cref="RemoveAccountBanByUserIdCommand"/>.
 /// </summary>
-/// <param name="_accountRepository">Interface to perform account operations in database.</param>
-/// <param name="_userRepository">Interface to perform user operations in database.</param>
-public class RemoveAccountBanByUserIdCommandHandler(IAccountRepository _accountRepository,
-                                                    IUserRepository _userRepository)
+/// <param name="accountRepository">Interface to perform account operations in database.</param>
+/// <param name="userRepository">Interface to perform user operations in database.</param>
+public class RemoveAccountBanByUserIdCommandHandler(IAccountRepository accountRepository,
+                                                    IUserRepository userRepository)
     : IRequestHandler<RemoveAccountBanByUserIdCommand, Result<ViewModelBase>>
 {
-    private readonly IAccountRepository _accountRepository = _accountRepository;
-    private readonly IUserRepository _userRepository = _userRepository;
-
     /// <summary>
     /// Handles request to remove user's account ban.
     /// </summary>
@@ -28,12 +25,12 @@ public class RemoveAccountBanByUserIdCommandHandler(IAccountRepository _accountR
     public async Task<Result<ViewModelBase>> Handle(RemoveAccountBanByUserIdCommand request,
                                                     CancellationToken cancellationToken)
     {
-        if (!await _userRepository.UserExistsAsync(request.UserId, cancellationToken))
+        if (!await userRepository.UserExistsAsync(request.UserId, cancellationToken))
         {
             return Result.Fail<ViewModelBase>(new UserNotFoundError());
         }
 
-        await _accountRepository.RemoveAccountBanByUserIdAsync(request.UserId, cancellationToken);
+        await accountRepository.RemoveAccountBanByUserIdAsync(request.UserId, cancellationToken);
 
         ViewModelBase result = new(ResponseMessages.AccountBanHasBeenRemoved);
 

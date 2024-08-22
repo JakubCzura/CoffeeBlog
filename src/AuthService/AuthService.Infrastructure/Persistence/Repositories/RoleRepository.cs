@@ -10,15 +10,15 @@ namespace AuthService.Infrastructure.Persistence.Repositories;
 /// </summary>
 /// <param name="_authServiceDbContext">Database context.</param>
 internal class RoleRepository(AuthServiceDbContext _authServiceDbContext)
-    : DbEntityBaseRepository<Role>(_authServiceDbContext), IRoleRepository
+    : BaseRepository<Role>(_authServiceDbContext), IRoleRepository
 {
     private readonly AuthServiceDbContext _authServiceDbContext = _authServiceDbContext;
 
     public async Task<List<string>> GetAllRolesNamesByUserId(int userId,
                                                              CancellationToken cancellationToken = default)
         => await _authServiceDbContext.Users.Where(user => user.Id == userId)
-                                           .Include(user => user.Roles)
-                                           .SelectMany(user => user.Roles)
-                                           .Select(userRole => userRole.Name)
-                                           .ToListAsync(cancellationToken);
+                                            .Include(user => user.Roles)
+                                            .SelectMany(user => user.Roles)
+                                            .Select(userRole => userRole.Name)
+                                            .ToListAsync(cancellationToken);
 }

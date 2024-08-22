@@ -10,14 +10,11 @@ namespace ArticleManager.API.Middlewares;
 /// <summary>
 /// Middleware to measure request's details. It writes data like request's time, path, method etc. to database.
 /// </summary>
-/// <param name="_logger">Logger to log exceptions.</param>
-/// <param name="_mediator">Mediator to handle command to save request's details in database.</param>
-public class RequestDetailsMiddleware(ILogger<RequestDetailsMiddleware> _logger,
-                                      IMediator _mediator) : IMiddleware
+/// <param name="logger">Logger to log exceptions.</param>
+/// <param name="mediator">Mediator to handle command to save request's details in database.</param>
+public class RequestDetailsMiddleware(ILogger<RequestDetailsMiddleware> logger,
+                                      IMediator mediator) : IMiddleware
 {
-    private readonly ILogger<RequestDetailsMiddleware> _logger = _logger;
-    private readonly IMediator _mediator = _mediator;
-
     /// <summary>
     /// Measures request's details and writes them to database.
     /// <para>Important: this middleware should not throw any exception.
@@ -70,11 +67,11 @@ public class RequestDetailsMiddleware(ILogger<RequestDetailsMiddleware> _logger,
                 stopwatch.ElapsedMilliseconds,
                 userId is not null ? int.Parse(userId) : null
             );
-            await _mediator.Send(createRequestDetailCommand, httpContext.RequestAborted);
+            await mediator.Send(createRequestDetailCommand, httpContext.RequestAborted);
         }
         catch (Exception exception)
         {
-            _logger.LogCritical(exception, $"{nameof(RequestDetailsMiddleware)}: Exception while sending request's data to StatisticsCollector microservice.");
+            logger.LogCritical(exception, $"{nameof(RequestDetailsMiddleware)}: Exception while sending request's data to StatisticsCollector microservice.");
         }
     }
 

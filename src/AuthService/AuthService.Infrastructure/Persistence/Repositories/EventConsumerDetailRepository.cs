@@ -9,6 +9,6 @@ namespace AuthService.Infrastructure.Persistence.Repositories;
 /// </summary>
 /// <param name="_authServiceDbContext">Database context.</param>
 internal class EventConsumerDetailRepository(AuthServiceDbContext _authServiceDbContext)
-    : DbEntityBaseRepository<EventConsumerDetail>(_authServiceDbContext), IEventConsumerDetailRepository
+    : BaseRepository<EventConsumerDetail>(_authServiceDbContext), IEventConsumerDetailRepository
 {
 }

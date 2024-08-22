@@ -10,12 +10,9 @@ namespace AuthService.Infrastructure.BackgroundWorkers;
 /// <param name="_logger">Logger to log exceptions.</param>
 /// <param name="_accountRepository">Interface to perform account operations in database.</param>
 [DisallowConcurrentExecution]
-public class BanRemovalService(ILogger<BanRemovalService> _logger,
-                               IAccountRepository _accountRepository) : IJob
+public class BanRemovalService(ILogger<BanRemovalService> logger,
+                               IAccountRepository accountRepository) : IJob
 {
-    private readonly ILogger<BanRemovalService> _logger = _logger;
-    private readonly IAccountRepository _accountRepository = _accountRepository;
-
     /// <summary>
     /// Removes expired bans from users' accounts.
     /// </summary>
@@ -25,11 +22,11 @@ public class BanRemovalService(ILogger<BanRemovalService> _logger,
     {
         try
         {
-            await _accountRepository.RemoveAccountsBansDueToExpirationAsync(default);
+            await accountRepository.RemoveAccountsBansDueToExpirationAsync(default);
         }
         catch (Exception exception)
         {
-            _logger.LogError(exception, $"{nameof(BanRemovalService)}: Exception while saving data to database");
+            logger.LogError(exception, $"{nameof(BanRemovalService)}: Exception while saving data to database");
         }
     }
 }

@@ -13,18 +13,14 @@ namespace AuthService.Application.Commands.Users.ChangeEmail;
 /// <summary>
 /// Command handler to change user's e-mail. It's related to <see cref="ChangeEmailCommand"/>.
 /// </summary>
-/// <param name="_userRepository">Interface to perform user operations in database.</param>
-/// <param name="_userDetailRepository">Interface to perform user's details operations in database.</param>
-/// <param name="_currentUserContext">Interface to get information about current signed in user.</param>
-public class ChangeEmailCommandHandler(IUserRepository _userRepository,
-                                       IUserDetailRepository _userDetailRepository,
-                                       ICurrentUserContext _currentUserContext)
+/// <param name="userRepository">Interface to perform user operations in database.</param>
+/// <param name="userDetailRepository">Interface to perform user's details operations in database.</param>
+/// <param name="currentUserContext">Interface to get information about current signed in user.</param>
+public class ChangeEmailCommandHandler(IUserRepository userRepository,
+                                       IUserDetailRepository userDetailRepository,
+                                       ICurrentUserContext currentUserContext)
     : IRequestHandler<ChangeEmailCommand, Result<ViewModelBase>>
 {
-    private readonly IUserRepository _userRepository = _userRepository;
-    private readonly IUserDetailRepository _userDetailRepository = _userDetailRepository;
-    private readonly ICurrentUserContext _currentUserContext = _currentUserContext;
-
     /// <summary>
     /// Handles request to change user's e-mail.
     /// </summary>
@@ -35,15 +31,15 @@ public class ChangeEmailCommandHandler(IUserRepository _userRepository,
     public async Task<Result<ViewModelBase>> Handle(ChangeEmailCommand request,
                                                     CancellationToken cancellationToken)
     {
-        CurrentAuthorizedUser currentAuthorizedUser = _currentUserContext.GetCurrentAuthorizedUser();
+        CurrentAuthorizedUser currentAuthorizedUser = currentUserContext.GetCurrentAuthorizedUser();
 
-        if (await _userRepository.EmailExistsAsync(request.NewEmail, cancellationToken))
+        if (await userRepository.EmailExistsAsync(request.NewEmail, cancellationToken))
         {
             return Result.Fail<ViewModelBase>(new EmailExistsError());
         }
 
-        await _userRepository.UpdateEmailAsync(currentAuthorizedUser.Id, request.NewEmail, cancellationToken);
-        await _userDetailRepository.UpdateLastEmailChangeAsync(currentAuthorizedUser.Id, cancellationToken);
+        await userRepository.UpdateEmailAsync(currentAuthorizedUser.Id, request.NewEmail, cancellationToken);
+        await userDetailRepository.UpdateLastEmailChangeAsync(currentAuthorizedUser.Id, cancellationToken);
 
         ViewModelBase result = new(ResponseMessages.EmailHasBeenChanged);
         return Result.Ok(result);

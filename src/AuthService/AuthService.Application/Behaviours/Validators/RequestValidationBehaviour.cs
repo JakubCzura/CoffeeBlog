@@ -9,12 +9,10 @@ namespace AuthService.Application.Behaviours.Validators;
 /// </summary>
 /// <typeparam name="TRequest">Command or query for CQRS.</typeparam>
 /// <typeparam name="TResponse">Response from command or query.</typeparam>
-/// <param name="_validators">FluentValidation validators to validate commands and queries.</param>
-public sealed class RequestValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> _validators)
+/// <param name="validators">FluentValidation validators to validate commands and queries.</param>
+public sealed class RequestValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> validators)
     : IPipelineBehavior<TRequest, TResponse> where TRequest : class, IRequest<TResponse>
 {
-    private readonly IEnumerable<IValidator<TRequest>> _validators = _validators;
-
     /// <summary>
     /// Handles CQRS command or query request validation.
     /// </summary>
@@ -27,15 +25,15 @@ public sealed class RequestValidationBehavior<TRequest, TResponse>(IEnumerable<I
                                         RequestHandlerDelegate<TResponse> next,
                                         CancellationToken cancellationToken)
     {
-        if (!_validators.Any())
+        if (!validators.Any())
         {
             return await next();
         }
 
         ValidationContext<TRequest> context = new(request);
 
-        IEnumerable<ValidationFailure> errors = _validators.Select(v => v.Validate(context))
-                                                           .SelectMany(result => result.Errors);
+        IEnumerable<ValidationFailure> errors = validators.Select(v => v.Validate(context))
+                                                          .SelectMany(result => result.Errors);
 
         if (errors.Any())
         {

@@ -8,10 +8,10 @@ namespace AuthService.Infrastructure.Security.Password;
 /// <summary>
 /// Security service to hash and verify passwords. Passwords should be always securely stored.
 /// </summary>
-/// <param name="passwordHasherOptions">Settings to perform hashing and verifying passwords.</param>
-internal class PasswordHasher(IOptions<PasswordHasherOptions> passwordHasherOptions) : IPasswordHasher
+/// <param name="_passwordHasherOptions">Settings to perform hashing and verifying passwords.</param>
+internal class PasswordHasher(IOptions<PasswordHasherOptions> _passwordHasherOptions) : IPasswordHasher
 {
-    private readonly PasswordHasherOptions _passwordHasherOptions = passwordHasherOptions.Value;
+    private readonly PasswordHasherOptions _passwordHasherOptions = _passwordHasherOptions.Value;
 
     public string HashPassword(string password)
     {

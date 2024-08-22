@@ -6,7 +6,7 @@ namespace AuthService.Application.Interfaces.Persistence.Repositories;
 /// <summary>
 /// Interface for repository to perform database operations related to <see cref="UserLastPassword"/>.
 /// </summary>
-public interface IUserLastPasswordRepository : IDbEntityBaseRepository<UserLastPassword>
+public interface IUserLastPasswordRepository : IBaseRepository<UserLastPassword>
 {
     /// <summary>
     /// Returns all the last hashed passwords of user with specified id.

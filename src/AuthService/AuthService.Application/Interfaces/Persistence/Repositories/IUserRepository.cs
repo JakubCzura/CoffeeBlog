@@ -6,7 +6,7 @@ namespace AuthService.Application.Interfaces.Persistence.Repositories;
 /// <summary>
 /// Interface for repository to perform database operations related to <see cref="User"/>.
 /// </summary>
-public interface IUserRepository : IDbEntityBaseRepository<User>
+public interface IUserRepository : IBaseRepository<User>
 {
     /// <summary>
     /// Returns true if user exists in database.

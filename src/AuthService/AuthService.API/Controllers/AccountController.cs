@@ -15,9 +15,9 @@ namespace AuthService.API.Controllers;
 /// <summary>
 /// Controller to manage users' accounts.
 /// </summary>
-/// <param name="_mediator">Mediator to handle commands and queries using CQRS pattern.</param>
+/// <param name="mediator">Mediator to handle commands and queries using CQRS pattern.</param>
 [ApiVersion(ApiVersioningInfo.Version_1_0)]
-public class AccountController(IMediator _mediator) : ApiControllerBase(_mediator)
+public class AccountController(IMediator mediator) : ApiControllerBase
 {
     /// <summary>
     /// Endpoint to ban user's account by user id.
@@ -36,7 +36,7 @@ public class AccountController(IMediator _mediator) : ApiControllerBase(_mediato
     public async Task<ActionResult> BanAccount([FromRoute] int userId,
                                                [FromBody] BanAccountByUserIdRequest banAccountByUserIdRequest,
                                                CancellationToken cancellationToken)
-        => await Mediator.Send(new BanAccountByUserIdCommand(userId,
+        => await mediator.Send(new BanAccountByUserIdCommand(userId,
                                                              banAccountByUserIdRequest.BanReason,
                                                              banAccountByUserIdRequest.BanNote,
                                                              banAccountByUserIdRequest.BanEndsAt), cancellationToken) switch
@@ -65,7 +65,7 @@ public class AccountController(IMediator _mediator) : ApiControllerBase(_mediato
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> RemoveAccountBan([FromRoute] int userId,
                                                       CancellationToken cancellationToken)
-        => await Mediator.Send(new RemoveAccountBanByUserIdCommand(userId), cancellationToken) switch
+        => await mediator.Send(new RemoveAccountBanByUserIdCommand(userId), cancellationToken) switch
         {
             { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => errors[0] switch

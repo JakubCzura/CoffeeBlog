@@ -10,7 +10,7 @@ namespace AuthService.Infrastructure.Persistence.Repositories;
 /// </summary>
 /// <param name="_authServiceDbContext">Database context.</param>
 internal class UserLastPasswordRepository(AuthServiceDbContext _authServiceDbContext)
-    : DbEntityBaseRepository<UserLastPassword>(_authServiceDbContext), IUserLastPasswordRepository
+    : BaseRepository<UserLastPassword>(_authServiceDbContext), IUserLastPasswordRepository
 {
     private readonly AuthServiceDbContext _authServiceDbContext = _authServiceDbContext;
 
