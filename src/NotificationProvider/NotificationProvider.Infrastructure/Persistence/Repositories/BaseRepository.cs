@@ -11,27 +11,18 @@ namespace NotificationProvider.Infrastructure.Persistence.Repositories;
 /// Generic repository to perform CRUD operations in database.
 /// </summary>
 /// <typeparam name="TEntity">Entity in database.</typeparam>
-internal class DbEntityBaseRepository<TEntity> : IDbEntityBaseRepository<TEntity> where TEntity : DbEntityBase
+/// <param name="notificationProviderDbContext">Database context.</param>
+internal class BaseRepository<TEntity>(NotificationProviderDbContext notificationProviderDbContext) 
+    : IBaseRepository<TEntity> where TEntity : DbEntityBase
 {
-    private readonly NotificationProviderDbContext _notificationProviderDbContext;
-    private readonly DbSet<TEntity> _dbSet;
-
-    /// <summary>
-    /// Constructor with database context.
-    /// </summary>
-    /// <param name="notificationProviderDbContext">Database context.</param>
-    public DbEntityBaseRepository(NotificationProviderDbContext notificationProviderDbContext)
-    {
-        _notificationProviderDbContext = notificationProviderDbContext;
-        _dbSet = _notificationProviderDbContext.Set<TEntity>();
-    }
+    private readonly DbSet<TEntity> _dbSet = notificationProviderDbContext.Set<TEntity>();
 
     public async Task<ObjectId> CreateAsync(TEntity entity,
                                             CancellationToken cancellationToken = default)
 
     {
         await _dbSet.AddAsync(entity, cancellationToken);
-        await _notificationProviderDbContext.SaveChangesAsync(cancellationToken);
+        await notificationProviderDbContext.SaveChangesAsync(cancellationToken);
         return entity.Id;
     }
 
@@ -49,7 +40,7 @@ internal class DbEntityBaseRepository<TEntity> : IDbEntityBaseRepository<TEntity
 
     {
         _dbSet.Update(entity);
-        return await _notificationProviderDbContext.SaveChangesAsync(cancellationToken);
+        return await notificationProviderDbContext.SaveChangesAsync(cancellationToken);
     }
 
     public async Task<int> DeleteAsync(ObjectId id,
@@ -63,6 +54,6 @@ internal class DbEntityBaseRepository<TEntity> : IDbEntityBaseRepository<TEntity
         }
 
         _dbSet.Remove(entity);
-        return await _notificationProviderDbContext.SaveChangesAsync(cancellationToken);
+        return await notificationProviderDbContext.SaveChangesAsync(cancellationToken);
     }
 }

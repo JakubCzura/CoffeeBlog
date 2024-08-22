@@ -14,19 +14,15 @@ namespace NotificationProvider.Application.Consumers.Basics;
 /// </summary>
 /// <typeparam name="TEvent">Type of event.</typeparam>
 /// <typeparam name="TEventConsumer">Type of event's consumer that will inherit from this class.</typeparam>
-/// <param name="_logger">Logger to log exceptions.</param>
-/// <param name="_eventConsumerDetailRepository">Interface to perform event consumer detail operations in database.</param>
-/// <param name="_apiErrorRepository">Interface to perform api error operations in database.</param>
-public abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventConsumer> _logger,
-                                                                IEventConsumerDetailRepository _eventConsumerDetailRepository,
-                                                                IApiErrorRepository _apiErrorRepository)
+/// <param name="logger">Logger to log exceptions.</param>
+/// <param name="eventConsumerDetailRepository">Interface to perform event consumer detail operations in database.</param>
+/// <param name="apiErrorRepository">Interface to perform api error operations in database.</param>
+public abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventConsumer> logger,
+                                                                IEventConsumerDetailRepository eventConsumerDetailRepository,
+                                                                IApiErrorRepository apiErrorRepository)
     : IEventConsumer<TEvent> where TEvent : EventBase
                              where TEventConsumer : IEventConsumer<TEvent>
 {
-    private readonly ILogger<TEventConsumer> _logger = _logger;
-    private readonly IEventConsumerDetailRepository _eventConsumerDetailRepository = _eventConsumerDetailRepository;
-    private readonly IApiErrorRepository _apiErrorRepository = _apiErrorRepository;
-
     /// <summary>
     /// Handles event consuming.
     /// </summary>
@@ -37,7 +33,7 @@ public abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventCo
         try
         {
             await ConsumeEvent(context);
-            await _eventConsumerDetailRepository.CreateAsync(new EventConsumerDetail
+            await eventConsumerDetailRepository.CreateAsync(new EventConsumerDetail
             {
                 EventId = context.Message.EventId,
                 EventPublishedAt = context.Message.EventPublishedAt,
@@ -73,8 +69,8 @@ public abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventCo
     {
         try
         {
-            _logger.LogError(eventHandlerException, "Error while consuming event.");
-            await _apiErrorRepository.CreateAsync(new ApiError
+            logger.LogError(eventHandlerException, "Error while consuming event.");
+            await apiErrorRepository.CreateAsync(new ApiError
             {
                 Name = (eventHandlerException).GetType().Name,
                 Exception = eventHandlerException.ToString(),
@@ -84,7 +80,7 @@ public abstract class EventConsumerBase<TEvent, TEventConsumer>(ILogger<TEventCo
         }
         catch (Exception loggerException)
         {
-            _logger.LogCritical(loggerException, $"{nameof(EventConsumerBase<TEvent, TEventConsumer>)}: Exception while saving API exception's data to database.");
+            logger.LogCritical(loggerException, $"{nameof(EventConsumerBase<TEvent, TEventConsumer>)}: Exception while saving API exception's data to database.");
         }
     }
 

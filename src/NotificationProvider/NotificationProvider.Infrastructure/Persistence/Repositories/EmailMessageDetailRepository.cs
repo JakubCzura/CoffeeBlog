@@ -9,6 +9,6 @@ namespace NotificationProvider.Infrastructure.Persistence.Repositories;
 /// </summary>
 /// <param name="_notificationProviderDbContext">Database context.</param>
 internal class EmailMessageDetailRepository(NotificationProviderDbContext _notificationProviderDbContext)
-    : DbEntityBaseRepository<EmailMessageDetail>(_notificationProviderDbContext), IEmailMessageDetailRepository
+    : BaseRepository<EmailMessageDetail>(_notificationProviderDbContext), IEmailMessageDetailRepository
 {
 }

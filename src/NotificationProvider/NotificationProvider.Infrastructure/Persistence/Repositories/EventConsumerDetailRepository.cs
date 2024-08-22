@@ -9,6 +9,6 @@ namespace NotificationProvider.Infrastructure.Persistence.Repositories;
 /// </summary>
 /// <param name="_notificationProviderDbContext">Database context.</param>
 internal class EventConsumerDetailRepository(NotificationProviderDbContext _notificationProviderDbContext)
-    : DbEntityBaseRepository<EventConsumerDetail>(_notificationProviderDbContext), IEventConsumerDetailRepository
+    : BaseRepository<EventConsumerDetail>(_notificationProviderDbContext), IEventConsumerDetailRepository
 {
 }

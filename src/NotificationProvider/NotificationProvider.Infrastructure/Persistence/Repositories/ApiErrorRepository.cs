@@ -9,6 +9,6 @@ namespace NotificationProvider.Infrastructure.Persistence.Repositories;
 /// </summary>
 /// <param name="_notificationProviderDbContext">Database context.</param>
 internal class ApiErrorRepository(NotificationProviderDbContext _notificationProviderDbContext)
-    : DbEntityBaseRepository<ApiError>(_notificationProviderDbContext), IApiErrorRepository
+    : BaseRepository<ApiError>(_notificationProviderDbContext), IApiErrorRepository
 {
 }
