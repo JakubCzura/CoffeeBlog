@@ -1,4 +1,3 @@
-using AuthService.API.Components;
 using AuthService.API.ExtensionMethods.Swagger;
 using AuthService.API.ExtensionMethods.Versioning;
 using AuthService.API.Middlewares;
@@ -23,9 +22,6 @@ builder.Services.Configure<BanRemovalServiceOptions>(builder.Configuration.GetSe
 builder.Services.AddApplicationDI(builder.Configuration);
 builder.Services.AddInfrastructureDI(builder.Configuration);
 
-builder.Services.AddRazorComponents()
-    .AddInteractiveWebAssemblyComponents();
-
 builder.Host.UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration));
 
 builder.Services.AddControllers()
@@ -42,24 +38,14 @@ builder.Services.AddTransient<RequestDetailsMiddleware>();
 
 WebApplication app = builder.Build();
 
-app.UseMiddleware<RequestDetailsMiddleware>();
-app.UseMiddleware<ExceptionMiddleware>();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseWebAssemblyDebugging();
     app.UseSwaggerInterface();
 }
-else
-{
-    app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
 
-app.UseStaticFiles();
-app.UseAntiforgery();
+app.UseMiddleware<RequestDetailsMiddleware>();
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
@@ -68,9 +54,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.MapRazorComponents<App>()
-    .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(WebClient.UI._Imports).Assembly);
 
 app.Run();
