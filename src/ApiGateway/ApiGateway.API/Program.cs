@@ -7,6 +7,16 @@ builder.Services.Configure<AuthenticationOptions>(builder.Configuration.GetSecti
 
 builder.Services.AddInfrastructureDI();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: builder.Configuration.GetValue<string>("WebUserInterface:OriginPolicyName")!,
+                      policy =>
+                      {
+                          policy.WithOrigins(builder.Configuration.GetValue<string>("WebUserInterface:Address")!)
+                                .AllowAnyHeader();
+                      });
+});
+
 builder.Services.AddReverseProxy()
                 .LoadFromConfig(builder.Configuration.GetSection("ApiGateway"));
 
@@ -14,6 +24,8 @@ WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
+
+app.UseCors(builder.Configuration.GetValue<string>("WebUserInterface:OriginPolicyName")!);
 
 app.UseAuthentication();
 

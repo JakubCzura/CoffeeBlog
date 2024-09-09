@@ -1,4 +1,3 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
@@ -111,9 +110,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthService.API", "src\Auth
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{E4F396CC-218D-4F4E-9ACB-5D8485B03501}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUserInterface", "src\WebUI\WebUserInterface\WebUserInterface.csproj", "{BAD238BE-B1BB-432B-935B-2C2F23DFC45F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUserInterface", "src\WebUI\WebUserInterface\WebUserInterface.csproj", "{BAD238BE-B1BB-432B-935B-2C2F23DFC45F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUserInterface.Client", "src\WebUI\WebUserInterface.Client\WebUserInterface.Client.csproj", "{0D14D4D4-6B09-43BD-8602-A249FDB9BA79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUserInterface.Client", "src\WebUI\WebUserInterface.Client\WebUserInterface.Client.csproj", "{0D14D4D4-6B09-43BD-8602-A249FDB9BA79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
