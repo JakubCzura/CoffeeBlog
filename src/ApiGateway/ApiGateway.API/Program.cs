@@ -9,7 +9,7 @@ builder.Services.AddInfrastructureDI();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: builder.Configuration.GetValue<string>("WebUserInterface:OriginPolicyName")!,
+    options.AddPolicy(builder.Configuration.GetValue<string>("WebUserInterface:OriginPolicyName")!,
                       policy =>
                       {
                           policy.WithOrigins(builder.Configuration.GetValue<string>("WebUserInterface:Address")!)
