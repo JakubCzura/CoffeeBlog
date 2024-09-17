@@ -33,6 +33,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddApiVersion();
 builder.Services.AddSwagger();
 
+builder.Services.AddLocalization();
+
+builder.Services.Configure<RequestLocalizationOptions>(options => {
+    string[] SupportedCultures = [ "en-US", "pl" ];
+    options.SetDefaultCulture(SupportedCultures[0])
+            .AddSupportedCultures(SupportedCultures)
+            .AddSupportedUICultures(SupportedCultures);
+});
+
 builder.Services.AddTransient<ExceptionMiddleware>();
 builder.Services.AddTransient<RequestDetailsMiddleware>();
 
@@ -44,7 +53,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerInterface();
 }
 
+app.UseRequestLocalization();
+
 app.UseMiddleware<RequestDetailsMiddleware>();
+
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();

@@ -7,6 +7,7 @@ using AuthService.Application.Commands.Users.ChangeUsername;
 using AuthService.Application.Commands.Users.GenerateForgottenPasswordResetToken;
 using AuthService.Application.Commands.Users.ResetForgottenPassword;
 using AuthService.Application.Commands.Users.SignUpUser;
+using AuthService.Application.Commands.Users.YouAreGreat;
 using AuthService.Application.Queries.Users.SignInUser;
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.ViewModels.Basics;
@@ -25,6 +26,19 @@ namespace AuthService.API.Controllers;
 [ApiVersion(ApiVersioningInfo.Version_1_0)]
 public class UserController(IMediator mediator) : ApiControllerBase
 {
+    /// <summary>
+    /// Endpoint to be great.
+    /// </summary>
+    /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
+    /// <returns>Information about signin up user.</returns>
+    [AllowAnonymous]
+    [HttpGet("great")]
+    [ProducesResponseType(typeof(ViewModelBase), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
+    public async Task<ActionResult<ViewModelBase>> SignUp(CancellationToken cancellationToken)
+        => Ok(await mediator.Send(new YouAreGreatCommand() { Name = "Test" }, cancellationToken));
+
     /// <summary>
     /// Endpoint to sign up user.
     /// </summary>
