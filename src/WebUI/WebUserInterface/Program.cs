@@ -26,7 +26,8 @@ app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
-    .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(WebUserInterface.Client._Imports).Assembly);
+   .AddInteractiveWebAssemblyRenderMode()
+   .AddAdditionalAssemblies(typeof(WebUserInterface.Client._Imports).Assembly,
+                            typeof(WebUserInterface.Client.Components._Imports).Assembly);
 
 app.Run();
