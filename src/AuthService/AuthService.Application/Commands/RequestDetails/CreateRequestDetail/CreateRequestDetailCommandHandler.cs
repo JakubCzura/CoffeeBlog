@@ -4,6 +4,7 @@ using AutoMapper;
 using EventBus.Application.Interfaces.Publishers;
 using EventBus.Domain.Events.CommonEvents;
 using MediatR;
+using Shared.Application.AuthService.Commands.RequestDetails.CreateRequestDetail;
 
 namespace AuthService.Application.Commands.RequestDetails.CreateRequestDetail;
 

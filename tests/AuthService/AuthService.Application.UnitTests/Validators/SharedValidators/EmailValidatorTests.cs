@@ -2,6 +2,7 @@
 using AuthService.Domain.Resources;
 using FluentAssertions;
 using FluentValidation.TestHelper;
+using Shared.Application.AuthService.Validators.SharedValidators;
 
 namespace AuthService.Application.UnitTests.Validators.SharedValidators;
 

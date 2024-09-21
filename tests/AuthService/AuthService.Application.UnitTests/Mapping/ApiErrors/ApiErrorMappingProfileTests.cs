@@ -3,6 +3,7 @@ using AuthService.Application.Mapping.ApiErrors;
 using AuthService.Domain.Entities;
 using AutoMapper;
 using FluentAssertions;
+using Shared.Application.AuthService.Commands.ApiErrors.CreateApiError;
 
 namespace AuthService.Application.UnitTests.Mapping.ApiErrors;
 

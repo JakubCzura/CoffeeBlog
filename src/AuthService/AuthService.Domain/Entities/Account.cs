@@ -1,5 +1,5 @@
 ﻿using AuthService.Domain.Entities.Basics;
-using AuthService.Domain.Enums;
+using Shared.Domain.AuthService.Enums;
 
 namespace AuthService.Domain.Entities;
 

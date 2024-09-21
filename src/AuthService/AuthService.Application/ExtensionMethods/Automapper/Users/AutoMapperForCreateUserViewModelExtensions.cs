@@ -1,6 +1,7 @@
 ﻿using AuthService.Domain.Entities;
 using AuthService.Domain.ViewModels.Users;
 using AutoMapper;
+using Shared.Application.AuthService.Responses.Users;
 
 namespace AuthService.Application.ExtensionMethods.Automapper.Users;
 
@@ -17,9 +18,9 @@ public static class AutoMapperForCreateUserViewModelExtensions
     /// <param name="user">User entity.</param>
     /// <param name="jwtToken">JWT token for authorized user.</param>
     /// <returns>Instance of <see cref="SignUpUserViewModel"/></returns>
-    public static SignUpUserViewModel Map<T>(this IMapper mapper,
-                                             User user,
-                                             string jwtToken) where T : SignUpUserViewModel
+    public static SignUpUserResponse Map<T>(this IMapper mapper,
+                                            User user,
+                                            string jwtToken) where T : SignUpUserViewModel
         => mapper.Map<SignUpUserViewModel>(user, opt =>
         {
             opt.Items[nameof(SignUpUserViewModel.JwtToken)] = jwtToken;

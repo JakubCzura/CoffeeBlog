@@ -4,12 +4,13 @@ using AuthService.Application.Interfaces.Security.Authentication;
 using AuthService.Application.Interfaces.Security.Password;
 using AuthService.Domain.Entities;
 using AuthService.Domain.Errors.Users;
-using AuthService.Domain.ViewModels.Users;
 using AutoMapper;
 using EventBus.Application.Interfaces.Publishers;
 using EventBus.Domain.Events.AuthService.Users;
 using FluentResults;
 using MediatR;
+using Shared.Application.AuthService.Commands.Users.SignUpUser;
+using Shared.Application.AuthService.Responses.Users;
 
 namespace AuthService.Application.Commands.Users.SignUpUser;
 
@@ -32,24 +33,24 @@ public class SignUpUserCommandHandler(IUserRepository userRepository,
                                       IPasswordHasher passwordHasher,
                                       IEventPublisher eventPublisher,
                                       IMapper mapper)
-    : IRequestHandler<SignUpUserCommand, Result<SignUpUserViewModel>>
+    : IRequestHandler<SignUpUserCommand, Result<SignUpUserResponse>>
 {
     /// <summary>
     /// Handles request to sign up a new user and add this user to database.
     /// </summary>
     /// <param name="request">Request command with details to sign up a new user.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
-    /// <returns>Instance of <see cref="SignUpUserViewModel"/></returns>
-    public async Task<Result<SignUpUserViewModel>> Handle(SignUpUserCommand request,
+    /// <returns>Instance of <see cref="SignUpUserResponse"/></returns>
+    public async Task<Result<SignUpUserResponse>> Handle(SignUpUserCommand request,
                                                           CancellationToken cancellationToken)
     {
         if (await userRepository.UsernameExistsAsync(request.Username, cancellationToken))
         {
-            return Result.Fail<SignUpUserViewModel>(new UsernameExistsError());
+            return Result.Fail<SignUpUserResponse>(new UsernameExistsError());
         }
         if (await userRepository.EmailExistsAsync(request.Email, cancellationToken))
         {
-            return Result.Fail<SignUpUserViewModel>(new EmailExistsError());
+            return Result.Fail<SignUpUserResponse>(new EmailExistsError());
         }
 
         User user = mapper.Map<User>(request, passwordHasher.HashPassword(request.Password));
@@ -62,7 +63,7 @@ public class SignUpUserCommandHandler(IUserRepository userRepository,
 
         await eventPublisher.PublishAsync(new UserSignedUpEvent(user.Username, user.Email, nameof(SignUpUserCommandHandler)), cancellationToken);
 
-        SignUpUserViewModel result = mapper.Map<SignUpUserViewModel>(user, jwtToken);
+        SignUpUserResponse result = mapper.Map<SignUpUserResponse>(user, jwtToken);
         return Result.Ok(result);
     }
 }

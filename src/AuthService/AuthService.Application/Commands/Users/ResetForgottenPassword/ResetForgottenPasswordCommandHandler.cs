@@ -3,12 +3,13 @@ using AuthService.Application.Interfaces.Persistence.Repositories;
 using AuthService.Application.Interfaces.Security.Password;
 using AuthService.Domain.Entities;
 using AuthService.Domain.Errors.Users;
-using AuthService.Domain.Resources;
-using AuthService.Domain.ViewModels.Basics;
 using EventBus.Application.Interfaces.Publishers;
 using EventBus.Domain.Events.AuthService.Users;
 using FluentResults;
 using MediatR;
+using Shared.Application.AuthService.Commands.Users.ResetForgottenPassword;
+using Shared.Application.Common.Responses.Basics;
+using Shared.Domain.AuthService.Resources;
 
 namespace AuthService.Application.Commands.Users.ResetForgottenPassword;
 
@@ -23,29 +24,29 @@ public class ResetForgottenPasswordCommandHandler(IUserRepository userRepository
                                                   IPasswordHasher passwordHasher,
                                                   IEventPublisher eventPublisher,
                                                   IDateTimeProvider dateTimeProvider)
-    : IRequestHandler<ResetForgottenPasswordCommand, Result<ViewModelBase>>
+    : IRequestHandler<ResetForgottenPasswordCommand, Result<ResponseBase>>
 {
     /// <summary>
     /// Handles request to reset forgotten password.
     /// </summary>
     /// <param name="request">Request command with details to reset forgotten password.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
-    /// <returns>Instance of <see cref="ViewModelBase"/></returns>
-    public async Task<Result<ViewModelBase>> Handle(ResetForgottenPasswordCommand request,
-                                                    CancellationToken cancellationToken)
+    /// <returns>Instance of <see cref="ResponseBase"/></returns>
+    public async Task<Result<ResponseBase>> Handle(ResetForgottenPasswordCommand request,
+                                                   CancellationToken cancellationToken)
     {
         User? user = await userRepository.GetByEmailOrUsernameAsync(request.Email, cancellationToken);
         if (user is null)
         {
-            return Result.Fail<ViewModelBase>(new UserNotFoundError());
+            return Result.Fail<ResponseBase>(new UserNotFoundError());
         }
         if (user.ForgottenPasswordResetToken is not null && user.ForgottenPasswordResetToken != request.ForgottenPasswordResetToken)
         {
-            return Result.Fail<ViewModelBase>(new InvalidForgottenPasswordResetTokenError());
+            return Result.Fail<ResponseBase>(new InvalidForgottenPasswordResetTokenError());
         }
         if (user.ForgottenPasswordResetTokenExpiresAt is not null && user.ForgottenPasswordResetTokenExpiresAt > dateTimeProvider.UtcNow)
         {
-            return Result.Fail<ViewModelBase>(new ExpiredForgottenPasswordResetTokenError());
+            return Result.Fail<ResponseBase>(new ExpiredForgottenPasswordResetTokenError());
         }
 
         string hashedPassword = passwordHasher.HashPassword(request.NewPassword);
@@ -56,7 +57,7 @@ public class ResetForgottenPasswordCommandHandler(IUserRepository userRepository
                                                         nameof(ResetForgottenPasswordCommandHandler));
         await eventPublisher.PublishAsync(passwordResetedEvent, cancellationToken);
 
-        ViewModelBase result = new(ResponseMessages.PasswordHasBeenReseted);
+        ResponseBase result = new(ResponseMessages.PasswordHasBeenReseted);
         return Result.Ok(result);
     }
 }

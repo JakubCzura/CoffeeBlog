@@ -1,6 +1,7 @@
 ﻿using AuthService.Domain.Entities;
 using AuthService.Domain.ViewModels.Users;
 using AutoMapper;
+using Shared.Application.AuthService.Responses.Users;
 
 namespace AuthService.Application.Mapping.Users;
 

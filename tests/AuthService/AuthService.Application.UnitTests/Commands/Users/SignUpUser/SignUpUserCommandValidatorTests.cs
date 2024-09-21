@@ -1,6 +1,7 @@
 ﻿using AuthService.Application.Commands.Users.SignUpUser;
 using AuthService.Domain.Resources;
 using FluentValidation.TestHelper;
+using Shared.Application.AuthService.Commands.Users.SignUpUser;
 
 namespace AuthService.Application.UnitTests.Commands.Users.SignUpUser;
 

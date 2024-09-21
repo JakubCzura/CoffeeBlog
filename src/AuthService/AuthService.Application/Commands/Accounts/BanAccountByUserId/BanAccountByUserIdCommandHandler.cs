@@ -1,11 +1,12 @@
 ﻿using AuthService.Application.Dtos.Accounts.Repository;
 using AuthService.Application.Interfaces.Persistence.Repositories;
 using AuthService.Domain.Errors.Users;
-using AuthService.Domain.Resources;
-using AuthService.Domain.ViewModels.Basics;
 using AutoMapper;
 using FluentResults;
 using MediatR;
+using Shared.Application.AuthService.Commands.Accounts.BanAccountByUserId;
+using Shared.Application.Common.Responses.Basics;
+using Shared.Domain.AuthService.Resources;
 
 namespace AuthService.Application.Commands.Accounts.BanAccountByUserId;
 
@@ -18,26 +19,26 @@ namespace AuthService.Application.Commands.Accounts.BanAccountByUserId;
 public class BanAccountByUserIdCommandHandler(IAccountRepository accountRepository,
                                               IUserRepository userRepository,
                                               IMapper mapper)
-    : IRequestHandler<BanAccountByUserIdCommand, Result<ViewModelBase>>
+    : IRequestHandler<BanAccountByUserIdCommand, Result<ResponseBase>>
 {
     /// <summary>
     /// Handles request to ban user's account.
     /// </summary>
     /// <param name="request">Request command with details to ban user's account.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
-    /// <returns><see cref="ViewModelBase"/></returns>
-    public async Task<Result<ViewModelBase>> Handle(BanAccountByUserIdCommand request,
-                                                    CancellationToken cancellationToken)
+    /// <returns><see cref="ResponseBase"/></returns>
+    public async Task<Result<ResponseBase>> Handle(BanAccountByUserIdCommand request,
+                                                   CancellationToken cancellationToken)
     {
         if (!await userRepository.UserExistsAsync(request.UserId, cancellationToken))
         {
-            return Result.Fail<ViewModelBase>(new UserNotFoundError());
+            return Result.Fail<ResponseBase>(new UserNotFoundError());
         }
 
         BanAccountByUserIdDto banAccountByUserIdDto = mapper.Map<BanAccountByUserIdDto>(request);
         await accountRepository.BanAccountByUserIdAsync(banAccountByUserIdDto, cancellationToken);
 
-        ViewModelBase result = new(ResponseMessages.AccountHasBeenBanned);
+        ResponseBase result = new(ResponseMessages.AccountHasBeenBanned);
         return Result.Ok(result);
     }
 }

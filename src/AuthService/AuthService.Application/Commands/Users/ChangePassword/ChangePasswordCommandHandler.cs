@@ -4,10 +4,11 @@ using AuthService.Application.Interfaces.Security.Password;
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.Exceptions;
 using AuthService.Domain.Models.Users;
-using AuthService.Domain.Resources;
-using AuthService.Domain.ViewModels.Basics;
 using FluentResults;
 using MediatR;
+using Shared.Application.AuthService.Commands.Users.ChangePassword;
+using Shared.Application.Common.Responses.Basics;
+using Shared.Domain.AuthService.Resources;
 
 namespace AuthService.Application.Commands.Users.ChangePassword;
 
@@ -24,16 +25,16 @@ public class ChangePasswordCommandHandler(IUserRepository userRepository,
                                          IUserLastPasswordRepository userLastPasswordRepository,
                                          ICurrentUserContext currentUserContext,
                                          IPasswordHasher passwordHasher)
-    : IRequestHandler<ChangePasswordCommand, Result<ViewModelBase>>
+    : IRequestHandler<ChangePasswordCommand, Result<ResponseBase>>
 {
     /// <summary>
     /// Handles request to change user's password.
     /// </summary>
     /// <param name="request">Request command with details to change user's password.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
-    /// <returns>Instance of <see cref="ViewModelBase"/></returns>
+    /// <returns>Instance of <see cref="ResponseBase"/></returns>
     /// <exception cref="UserUnauthorizedException">When user is not authorized.</exception>
-    public async Task<Result<ViewModelBase>> Handle(ChangePasswordCommand request,
+    public async Task<Result<ResponseBase>> Handle(ChangePasswordCommand request,
                                                     CancellationToken cancellationToken)
     {
         CurrentAuthorizedUser currentAuthorizedUser = currentUserContext.GetCurrentAuthorizedUser();
@@ -45,14 +46,14 @@ public class ChangePasswordCommandHandler(IUserRepository userRepository,
 
         if (userLastPasswords.Contains(hashedPassword))
         {
-            return Result.Fail<ViewModelBase>(new PasswordAlreadyUsedError());
+            return Result.Fail<ResponseBase>(new PasswordAlreadyUsedError());
         }
 
         await userRepository.UpdatePasswordAsync(currentAuthorizedUser.Id, hashedPassword, cancellationToken);
         await userLastPasswordRepository.CreateAsync(new(hashedPassword, currentAuthorizedUser.Id), cancellationToken);
         await userDetailRepository.UpdateLastPasswordChangeAsync(currentAuthorizedUser.Id, cancellationToken);
 
-        ViewModelBase result = new(ResponseMessages.PasswordHasBeenChanged);
+        ResponseBase result = new(ResponseMessages.PasswordHasBeenChanged);
         return Result.Ok(result);
     }
 }

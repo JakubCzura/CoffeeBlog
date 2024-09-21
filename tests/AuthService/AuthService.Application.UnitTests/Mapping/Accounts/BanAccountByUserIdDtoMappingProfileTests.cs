@@ -4,6 +4,8 @@ using AuthService.Application.Mapping.Accounts;
 using AuthService.Domain.Enums;
 using AutoMapper;
 using FluentAssertions;
+using Shared.Application.AuthService.Commands.Accounts.BanAccountByUserId;
+using Shared.Application.AuthService.Enums;
 
 namespace AuthService.Application.UnitTests.Mapping.Accounts;
 

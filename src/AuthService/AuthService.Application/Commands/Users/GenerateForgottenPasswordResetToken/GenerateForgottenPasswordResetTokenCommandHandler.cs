@@ -4,12 +4,13 @@ using AuthService.Application.Interfaces.Security.Token;
 using AuthService.Domain.Entities;
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.Models.Security;
-using AuthService.Domain.Resources;
-using AuthService.Domain.ViewModels.Basics;
 using EventBus.Application.Interfaces.Publishers;
 using EventBus.Domain.Events.AuthService.Users;
 using FluentResults;
 using MediatR;
+using Shared.Application.AuthService.Commands.Users.GenerateForgottenPasswordResetToken;
+using Shared.Application.Common.Responses.Basics;
+using Shared.Domain.AuthService.Resources;
 
 namespace AuthService.Application.Commands.Users.GenerateForgottenPasswordResetToken;
 
@@ -22,21 +23,21 @@ namespace AuthService.Application.Commands.Users.GenerateForgottenPasswordResetT
 public class GenerateForgottenPasswordResetTokenCommandHandler(IUserRepository userRepository,
                                                                ISecurityTokenGenerator securityTokenGenerator,
                                                                IEventPublisher eventPublisher)
-    : IRequestHandler<GenerateForgottenPasswordResetTokenCommand, Result<ViewModelBase>>
+    : IRequestHandler<GenerateForgottenPasswordResetTokenCommand, Result<ResponseBase>>
 {
     /// <summary>
     /// Handles request to generate password reset token for user who has forgotten password.
     /// </summary>
     /// <param name="request">Request command with details to generate password reset token.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
-    /// <returns>Instance of <see cref="ViewModelBase"/></returns>
-    public async Task<Result<ViewModelBase>> Handle(GenerateForgottenPasswordResetTokenCommand request,
-                                                    CancellationToken cancellationToken)
+    /// <returns>Instance of <see cref="ResponseBase"/></returns>
+    public async Task<Result<ResponseBase>> Handle(GenerateForgottenPasswordResetTokenCommand request,
+                                                   CancellationToken cancellationToken)
     {
         User? user = await userRepository.GetByEmailOrUsernameAsync(request.Email, cancellationToken);
         if (user is null)
         {
-            return Result.Fail<ViewModelBase>(new UserNotFoundError());
+            return Result.Fail<ResponseBase>(new UserNotFoundError());
         }
 
         SecurityToken securityToken = securityTokenGenerator.GenerateForgottenPasswordResetToken();
@@ -50,7 +51,7 @@ public class GenerateForgottenPasswordResetTokenCommandHandler(IUserRepository u
                                                                       nameof(GenerateForgottenPasswordResetTokenCommandHandler));
         await eventPublisher.PublishAsync(passwordResetTokenSentEvent, cancellationToken);
 
-        ViewModelBase result = new(ResponseMessages.TokenToResetPasswordHasBeenSentToYourEmail);
+        ResponseBase result = new(ResponseMessages.TokenToResetPasswordHasBeenSentToYourEmail);
         return Result.Ok(result);
     }
 }

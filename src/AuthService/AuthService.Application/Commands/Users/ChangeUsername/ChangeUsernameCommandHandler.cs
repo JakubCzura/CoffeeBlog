@@ -3,10 +3,11 @@ using AuthService.Application.Interfaces.Security.CurrentUsers;
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.Exceptions;
 using AuthService.Domain.Models.Users;
-using AuthService.Domain.Resources;
-using AuthService.Domain.ViewModels.Basics;
 using FluentResults;
 using MediatR;
+using Shared.Application.AuthService.Commands.Users.ChangeUsername;
+using Shared.Application.Common.Responses.Basics;
+using Shared.Domain.AuthService.Resources;
 
 namespace AuthService.Application.Commands.Users.ChangeUsername;
 
@@ -19,29 +20,29 @@ namespace AuthService.Application.Commands.Users.ChangeUsername;
 public class ChangeUsernameCommandHandler(IUserRepository userRepository,
                                           IUserDetailRepository userDetailRepository,
                                           ICurrentUserContext currentUserContext)
-    : IRequestHandler<ChangeUsernameCommand, Result<ViewModelBase>>
+    : IRequestHandler<ChangeUsernameCommand, Result<ResponseBase>>
 {
     /// <summary>
     /// Handles request to change user's username.
     /// </summary>
     /// <param name="request">Request command with details to change user's username.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
-    /// <returns>Instance of <see cref="ViewModelBase"/></returns>
+    /// <returns>Instance of <see cref="ResponseBase"/></returns>
     /// <exception cref="UserUnauthorizedException">When user is not authorized.</exception>
-    public async Task<Result<ViewModelBase>> Handle(ChangeUsernameCommand request,
-                                                    CancellationToken cancellationToken)
+    public async Task<Result<ResponseBase>> Handle(ChangeUsernameCommand request,
+                                                   CancellationToken cancellationToken)
     {
         CurrentAuthorizedUser currentAuthorizedUser = currentUserContext.GetCurrentAuthorizedUser();
 
         if (await userRepository.UsernameExistsAsync(request.NewUsername, cancellationToken))
         {
-            return Result.Fail<ViewModelBase>(new UsernameExistsError());
+            return Result.Fail<ResponseBase>(new UsernameExistsError());
         }
 
         await userRepository.UpdateUsernameAsync(currentAuthorizedUser.Id, request.NewUsername, cancellationToken);
         await userDetailRepository.UpdateLastUsernameChangeAsync(currentAuthorizedUser.Id, cancellationToken);
 
-        ViewModelBase result = new(ResponseMessages.UsernameHasBeenChanged);
+        ResponseBase result = new(ResponseMessages.UsernameHasBeenChanged);
         return Result.Ok(result);
     }
 }

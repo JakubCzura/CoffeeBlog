@@ -4,6 +4,7 @@ using AuthService.Application.Mapping.RequestDetails;
 using AutoMapper;
 using EventBus.Domain.Events.CommonEvents;
 using FluentAssertions;
+using Shared.Application.AuthService.Commands.RequestDetails.CreateRequestDetail;
 
 namespace AuthService.Application.UnitTests.ExtensionMethods.Automapper.RequestDetails;
 

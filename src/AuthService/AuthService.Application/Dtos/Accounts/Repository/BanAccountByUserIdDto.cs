@@ -1,4 +1,4 @@
-﻿using AuthService.Domain.Enums;
+﻿using Shared.Domain.AuthService.Enums;
 
 namespace AuthService.Application.Dtos.Accounts.Repository;
 

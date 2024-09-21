@@ -5,6 +5,8 @@ using AuthService.Domain.ViewModels.Errors;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Application.AuthService.Commands.ApiErrors.CreateApiError;
+using Shared.Application.Common.Responses.Errors;
 using System.Diagnostics;
 using System.Net;
 

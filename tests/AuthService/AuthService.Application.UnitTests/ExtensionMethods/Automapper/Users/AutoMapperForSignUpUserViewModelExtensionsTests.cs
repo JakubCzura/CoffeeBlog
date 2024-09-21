@@ -4,6 +4,7 @@ using AuthService.Domain.Entities;
 using AuthService.Domain.ViewModels.Users;
 using AutoMapper;
 using FluentAssertions;
+using Shared.Application.AuthService.Responses.Users;
 
 namespace AuthService.Application.UnitTests.ExtensionMethods.Automapper.Users;
 

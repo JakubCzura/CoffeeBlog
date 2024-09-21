@@ -2,6 +2,7 @@
 using AuthService.Domain.Entities;
 using AutoMapper;
 using MediatR;
+using Shared.Application.AuthService.Commands.ApiErrors.CreateApiError;
 
 namespace AuthService.Application.Commands.ApiErrors.CreateApiError;
 

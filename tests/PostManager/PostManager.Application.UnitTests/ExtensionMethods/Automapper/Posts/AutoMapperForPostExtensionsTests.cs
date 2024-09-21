@@ -6,7 +6,7 @@ using PostManager.Application.ExtensionMethods.Automapper.RequestDetails;
 using PostManager.Application.Mapping.Posts;
 using PostManager.Domain.Entities;
 
-namespace PostManager.Application.UnitTests.ExtensionMethods.Automapper.RequestDetails;
+namespace PostManager.Application.UnitTests.ExtensionMethods.Automapper.Posts;
 
 public class AutoMapperForPostExtensionsTests
 {

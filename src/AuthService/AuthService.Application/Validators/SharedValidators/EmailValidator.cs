@@ -1,5 +1,5 @@
-﻿using AuthService.Domain.Resources;
-using FluentValidation;
+﻿using FluentValidation;
+using Shared.Domain.AuthService.Resources;
 
 namespace AuthService.Application.Validators.SharedValidators;
 

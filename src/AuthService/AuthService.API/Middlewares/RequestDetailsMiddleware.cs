@@ -2,6 +2,7 @@
 using AuthService.Application.Commands.RequestDetails.CreateRequestDetail;
 using AuthService.Domain.Constants;
 using MediatR;
+using Shared.Application.AuthService.Commands.RequestDetails.CreateRequestDetail;
 using System.Diagnostics;
 using System.Security.Claims;
 

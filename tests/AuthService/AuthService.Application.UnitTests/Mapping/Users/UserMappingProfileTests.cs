@@ -3,6 +3,7 @@ using AuthService.Application.Mapping.Users;
 using AuthService.Domain.Entities;
 using AutoMapper;
 using FluentAssertions;
+using Shared.Application.AuthService.Commands.Users.SignUpUser;
 
 namespace AuthService.Application.UnitTests.Mapping.Users;
 

@@ -1,5 +1,5 @@
-﻿using AuthService.Domain.Resources;
-using FluentResults;
+﻿using FluentResults;
+using Shared.Domain.AuthService.Resources;
 
 namespace AuthService.Domain.Errors.Users;
 

@@ -1,4 +1,4 @@
-﻿using AuthService.Domain.Resources;
+﻿using Shared.Domain.AuthService.Resources;
 
 namespace AuthService.Domain.Exceptions;
 

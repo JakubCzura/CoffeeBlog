@@ -1,10 +1,10 @@
 ﻿using AuthService.Application.ExtensionMethods.Collections;
 using AuthService.Domain.Constants;
-using AuthService.Domain.Resources;
-using AuthService.Domain.ViewModels.Errors;
 using FluentResults;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Application.Common.Responses.Errors;
+using Shared.Domain.AuthService.Resources;
 
 namespace AuthService.API.Controllers.Basics;
 
@@ -23,14 +23,14 @@ public class ApiControllerBase : ControllerBase
     /// <param name="errors">Errors that were returned by command / query handler.</param>
     /// <returns>Instance of <see cref="BadRequestObjectResult"/></returns>
     protected BadRequestObjectResult CreateBadRequestObjectResult(IList<IError> errors)
-        => BadRequest(new ErrorDetailsViewModel(StatusCodes.Status400BadRequest, errors.GetJoinedMessages()));
+        => BadRequest(new ErrorDetailsResponse(StatusCodes.Status400BadRequest, errors.GetJoinedMessages()));
 
     /// <summary>
     /// Creates bad request object result based on default response and status code 400.
     /// </summary>
     /// <returns>Instance of <see cref="BadRequestObjectResult"/></returns>
     protected BadRequestObjectResult CreateBadRequestObjectResult()
-        => BadRequest(new ErrorDetailsViewModel(StatusCodes.Status400BadRequest, ResponseMessages.UndefinedError));
+        => BadRequest(new ErrorDetailsResponse(StatusCodes.Status400BadRequest, ResponseMessages.UndefinedError));
 
     /// <summary>
     /// Creates not found object result based on errors that should be returned and status code 404.
@@ -38,7 +38,7 @@ public class ApiControllerBase : ControllerBase
     /// <param name="error">Error that was returned by command / query handler.</param>
     /// <returns>Instance of <see cref="NotFoundObjectResult"/></returns>
     protected NotFoundObjectResult CreateNotFoundObjectResult(IError error)
-        => NotFound(new ErrorDetailsViewModel(StatusCodes.Status404NotFound, error.Message));
+        => NotFound(new ErrorDetailsResponse(StatusCodes.Status404NotFound, error.Message));
 
     /// <summary>
     /// Creates conflict object result based on errors that should be returned and status code 409.
@@ -46,7 +46,7 @@ public class ApiControllerBase : ControllerBase
     /// <param name="error">Error that was returned by command / query handler.</param>
     /// <returns>Instance of <see cref="ConflictObjectResult"/></returns>
     protected ConflictObjectResult CreateConflictObjectResult(IError error)
-        => Conflict(new ErrorDetailsViewModel(StatusCodes.Status409Conflict, error.Message));
+        => Conflict(new ErrorDetailsResponse(StatusCodes.Status409Conflict, error.Message));
 
     /// <summary>
     /// Creates unauthorized object result based on errors that should be returned and status code 401.
@@ -54,5 +54,5 @@ public class ApiControllerBase : ControllerBase
     /// <param name="error">Error that was returned by command / query handler.</param>
     /// <returns>Instance of <see cref="UnauthorizedObjectResult"/></returns>
     protected UnauthorizedObjectResult CreateUnauthorizedObjectResult(IError error)
-        => Unauthorized(new ErrorDetailsViewModel(StatusCodes.Status401Unauthorized, error.Message));
+        => Unauthorized(new ErrorDetailsResponse(StatusCodes.Status401Unauthorized, error.Message));
 }

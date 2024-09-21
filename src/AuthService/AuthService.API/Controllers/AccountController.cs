@@ -1,14 +1,14 @@
 ﻿using Asp.Versioning;
 using AuthService.API.Controllers.Basics;
 using AuthService.API.ExtensionMethods.Versioning;
-using AuthService.Application.Commands.Accounts.BanAccountByUserId;
-using AuthService.Application.Commands.Accounts.RemoveAccountBanByUserId;
 using AuthService.Domain.Errors.Users;
-using AuthService.Domain.ViewModels.Basics;
-using AuthService.Domain.ViewModels.Errors;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Application.AuthService.Commands.Accounts.BanAccountByUserId;
+using Shared.Application.AuthService.Commands.Accounts.RemoveAccountBanByUserId;
+using Shared.Application.Common.Responses.Basics;
+using Shared.Application.Common.Responses.Errors;
 
 namespace AuthService.API.Controllers;
 
@@ -28,11 +28,11 @@ public class AccountController(IMediator mediator) : ApiControllerBase
     /// <returns>Information about banning user's account.</returns>
     [Authorize]
     [HttpPut("ban/{userId}")]
-    [ProducesResponseType(typeof(ViewModelBase), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseBase), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorDetailsResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(UnauthorizedResult), StatusCodes.Status401Unauthorized)]
-    [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(typeof(ErrorDetailsResponse), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ErrorDetailsResponse), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> BanAccount([FromRoute] int userId,
                                                [FromBody] BanAccountByUserIdRequest banAccountByUserIdRequest,
                                                CancellationToken cancellationToken)
@@ -41,7 +41,7 @@ public class AccountController(IMediator mediator) : ApiControllerBase
                                                              banAccountByUserIdRequest.BanNote,
                                                              banAccountByUserIdRequest.BanEndsAt), cancellationToken) switch
         {
-            { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
+            { IsSuccess: true, Value: ResponseBase viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => errors[0] switch
             {
                 UserNotFoundError => CreateNotFoundObjectResult(errors[0]),
@@ -58,16 +58,16 @@ public class AccountController(IMediator mediator) : ApiControllerBase
     /// <returns>Information about removing ban from user's account.</returns>
     [Authorize]
     [HttpPut("ban/remove/{userId}")]
-    [ProducesResponseType(typeof(ViewModelBase), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseBase), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorDetailsResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(UnauthorizedResult), StatusCodes.Status401Unauthorized)]
-    [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(typeof(ErrorDetailsResponse), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ErrorDetailsResponse), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> RemoveAccountBan([FromRoute] int userId,
                                                       CancellationToken cancellationToken)
         => await mediator.Send(new RemoveAccountBanByUserIdCommand(userId), cancellationToken) switch
         {
-            { IsSuccess: true, Value: ViewModelBase viewModel } => Ok(viewModel),
+            { IsSuccess: true, Value: ResponseBase viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => errors[0] switch
             {
                 UserNotFoundError => CreateNotFoundObjectResult(errors[0]),

@@ -3,10 +3,11 @@ using AuthService.Application.Interfaces.Security.CurrentUsers;
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.Exceptions;
 using AuthService.Domain.Models.Users;
-using AuthService.Domain.Resources;
-using AuthService.Domain.ViewModels.Basics;
 using FluentResults;
 using MediatR;
+using Shared.Application.AuthService.Commands.Users.ChangeEmail;
+using Shared.Application.Common.Responses.Basics;
+using Shared.Domain.AuthService.Resources;
 
 namespace AuthService.Application.Commands.Users.ChangeEmail;
 
@@ -19,29 +20,29 @@ namespace AuthService.Application.Commands.Users.ChangeEmail;
 public class ChangeEmailCommandHandler(IUserRepository userRepository,
                                        IUserDetailRepository userDetailRepository,
                                        ICurrentUserContext currentUserContext)
-    : IRequestHandler<ChangeEmailCommand, Result<ViewModelBase>>
+    : IRequestHandler<ChangeEmailCommand, Result<ResponseBase>>
 {
     /// <summary>
     /// Handles request to change user's e-mail.
     /// </summary>
     /// <param name="request">Request command with details to change user's e-mail.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
-    /// <returns>Instance of <see cref="ViewModelBase"/></returns>
+    /// <returns>Instance of <see cref="ResponseBase"/></returns>
     /// <exception cref="UserUnauthorizedException">When user is not authorized.</exception>
-    public async Task<Result<ViewModelBase>> Handle(ChangeEmailCommand request,
-                                                    CancellationToken cancellationToken)
+    public async Task<Result<ResponseBase>> Handle(ChangeEmailCommand request,
+                                                   CancellationToken cancellationToken)
     {
         CurrentAuthorizedUser currentAuthorizedUser = currentUserContext.GetCurrentAuthorizedUser();
 
         if (await userRepository.EmailExistsAsync(request.NewEmail, cancellationToken))
         {
-            return Result.Fail<ViewModelBase>(new EmailExistsError());
+            return Result.Fail<ResponseBase>(new EmailExistsError());
         }
 
         await userRepository.UpdateEmailAsync(currentAuthorizedUser.Id, request.NewEmail, cancellationToken);
         await userDetailRepository.UpdateLastEmailChangeAsync(currentAuthorizedUser.Id, cancellationToken);
 
-        ViewModelBase result = new(ResponseMessages.EmailHasBeenChanged);
+        ResponseBase result = new(ResponseMessages.EmailHasBeenChanged);
         return Result.Ok(result);
     }
 }

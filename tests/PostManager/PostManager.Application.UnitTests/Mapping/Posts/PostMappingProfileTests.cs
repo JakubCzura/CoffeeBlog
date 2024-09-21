@@ -4,7 +4,7 @@ using PostManager.Application.Commands.Posts.CreatePost;
 using PostManager.Application.Mapping.Posts;
 using PostManager.Domain.Entities;
 
-namespace PostManager.Application.UnitTests.Mapping.RequestDetails;
+namespace PostManager.Application.UnitTests.Mapping.Posts;
 
 public class PostMappingProfileTests
 {
