@@ -7,7 +7,6 @@ using AuthService.Application.Commands.Users.ChangeUsername;
 using AuthService.Application.Commands.Users.GenerateForgottenPasswordResetToken;
 using AuthService.Application.Commands.Users.ResetForgottenPassword;
 using AuthService.Application.Commands.Users.SignUpUser;
-using AuthService.Application.Queries.Users.SignInUser;
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.ViewModels.Basics;
 using AuthService.Domain.ViewModels.Errors;
@@ -15,6 +14,8 @@ using AuthService.Domain.ViewModels.Users;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Application.AuthService.Queries.Users.SignInUser;
+using Shared.Application.AuthService.Responses.Users;
 
 namespace AuthService.API.Controllers;
 
@@ -59,7 +60,7 @@ public class UserController(IMediator mediator) : ApiControllerBase
     /// <returns>Result of attempt to sign in and authorization token for successful attempt.</returns>
     [AllowAnonymous]
     [HttpPost("sign-in")]
-    [ProducesResponseType(typeof(SignInUserViewModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(SignInUserResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(UnauthorizedResult), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorDetailsViewModel), StatusCodes.Status500InternalServerError)]
@@ -67,7 +68,7 @@ public class UserController(IMediator mediator) : ApiControllerBase
                                             CancellationToken cancellationToken)
         => await mediator.Send(signInUserQuery, cancellationToken) switch
         {
-            { IsSuccess: true, Value: SignInUserViewModel viewModel } => Ok(viewModel),
+            { IsSuccess: true, Value: SignInUserResponse viewModel } => Ok(viewModel),
             { Errors: { Count: > 0 } errors } => errors[0] switch
             {
                 UserNotFoundError => CreateUnauthorizedObjectResult(errors[0]),

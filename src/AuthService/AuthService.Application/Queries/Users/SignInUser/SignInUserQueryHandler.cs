@@ -3,9 +3,10 @@ using AuthService.Application.Interfaces.Security.Authentication;
 using AuthService.Application.Interfaces.Security.Password;
 using AuthService.Domain.Entities;
 using AuthService.Domain.Errors.Users;
-using AuthService.Domain.ViewModels.Users;
 using FluentResults;
 using MediatR;
+using Shared.Application.AuthService.Queries.Users.SignInUser;
+using Shared.Application.AuthService.Responses.Users;
 
 namespace AuthService.Application.Queries.Users.SignInUser;
 
@@ -24,16 +25,16 @@ public class SignInUserQueryHandler(IUserRepository userRepository,
                                     IAccountRepository accountRepository,
                                     IPasswordHasher passwordHasher,
                                     IJwtService jwtService)
-    : IRequestHandler<SignInUserQuery, Result<SignInUserViewModel>>
+    : IRequestHandler<SignInUserQuery, Result<SignInUserResponse>>
 {
     /// <summary>
     /// Handles request to sign in a user.
     /// </summary>
     /// <param name="request">Request query with details to sign in a user.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
-    /// <returns>Instance of <see cref="SignInUserViewModel"/></returns>
-    public async Task<Result<SignInUserViewModel>> Handle(SignInUserQuery request,
-                                                          CancellationToken cancellationToken)
+    /// <returns>Instance of <see cref="SignInUserResponse"/></returns>
+    public async Task<Result<SignInUserResponse>> Handle(SignInUserQuery request,
+                                                         CancellationToken cancellationToken)
     {
         User? user = await userRepository.GetByEmailOrUsernameAsync(request.UsernameOrNickname, cancellationToken);
 
@@ -42,19 +43,19 @@ public class SignInUserQueryHandler(IUserRepository userRepository,
         //If statements are splitted to log failed sign in attempts if user was found but password was incorrect.
         if (user is null)
         {
-            return Result.Fail<SignInUserViewModel>(new UserNotFoundError());
+            return Result.Fail<SignInUserResponse>(new UserNotFoundError());
         }
         if (!passwordHasher.VerifyPassword(request.Password, user.Password))
         {
             await userDetailRepository.UpdateLastFailedSignInAsync(user.Id, cancellationToken);
-            return Result.Fail<SignInUserViewModel>(new UserNotFoundError());
+            return Result.Fail<SignInUserResponse>(new UserNotFoundError());
         }
 
         Account? account = await accountRepository.GetAsync(user.Id, cancellationToken);
         if (account is not null && account.IsBanned)
         {
             await userDetailRepository.UpdateLastFailedSignInAsync(user.Id, cancellationToken);
-            return Result.Fail<SignInUserViewModel>(new UserBannedError(account.BanNote));
+            return Result.Fail<SignInUserResponse>(new UserBannedError(account.BanNote));
         }
 
         await userDetailRepository.UpdateLastSuccessfullSignInAsync(user.Id, cancellationToken);
@@ -62,7 +63,7 @@ public class SignInUserQueryHandler(IUserRepository userRepository,
         List<string> userRolesNames = await roleRepository.GetAllRolesNamesByUserId(user.Id, cancellationToken);
         string jwtToken = jwtService.CreateToken(new(user.Id, user.Username, user.Email), userRolesNames);
 
-        SignInUserViewModel result = new() { JwtToken = jwtToken };
+        SignInUserResponse result = new() { JwtToken = jwtToken };
         return Result.Ok(result);
     }
 }

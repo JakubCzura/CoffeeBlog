@@ -1,14 +1,14 @@
-﻿using AuthService.Domain.ViewModels.Users;
-using FluentResults;
+﻿using FluentResults;
 using MediatR;
+using Shared.Application.AuthService.Responses.Users;
 using System.ComponentModel.DataAnnotations;
 
-namespace AuthService.Application.Queries.Users.SignInUser;
+namespace Shared.Application.AuthService.Queries.Users.SignInUser;
 
 /// <summary>
 /// Request query to sign in a user. It's handled using Mediatr and CQRS pattern.
 /// </summary>
-public class SignInUserQuery : IRequest<Result<SignInUserViewModel>>
+public class SignInUserQuery : IRequest<Result<SignInUserResponse>>
 {
     /// <summary>
     /// User can log in with either username or email.

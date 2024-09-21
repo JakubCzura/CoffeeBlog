@@ -9,6 +9,7 @@
 
   <ItemGroup>
 	  <ProjectReference Include="..\..\EventBus\EventBus.API\EventBus.API.csproj" />
+	  <ProjectReference Include="..\..\Shared\Shared.Application\Shared.Application.csproj" />
 	  <ProjectReference Include="..\AuthService.Domain\AuthService.Domain.csproj" />
   </ItemGroup>
 

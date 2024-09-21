@@ -114,7 +114,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUserInterface", "src\Web
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUserInterface.Client", "src\WebUI\WebUserInterface.Client\WebUserInterface.Client.csproj", "{0D14D4D4-6B09-43BD-8602-A249FDB9BA79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUserInterface.Client.Components", "src\WebUI\WebUserInterface.Client.Components\WebUserInterface.Client.Components.csproj", "{64EBFA1E-3123-4531-B412-00B5423F2822}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUserInterface.Client.Components", "src\WebUI\WebUserInterface.Client.Components\WebUserInterface.Client.Components.csproj", "{64EBFA1E-3123-4531-B412-00B5423F2822}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{B5D11560-FB38-4D5F-9E80-56D6632E5A8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Application", "src\Shared\Shared.Application\Shared.Application.csproj", "{5248DA09-C0FD-48A3-A086-6D04FCB14FBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -290,6 +294,10 @@ Global
 		{64EBFA1E-3123-4531-B412-00B5423F2822}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64EBFA1E-3123-4531-B412-00B5423F2822}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64EBFA1E-3123-4531-B412-00B5423F2822}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5248DA09-C0FD-48A3-A086-6D04FCB14FBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5248DA09-C0FD-48A3-A086-6D04FCB14FBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5248DA09-C0FD-48A3-A086-6D04FCB14FBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5248DA09-C0FD-48A3-A086-6D04FCB14FBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -350,6 +358,8 @@ Global
 		{BAD238BE-B1BB-432B-935B-2C2F23DFC45F} = {E4F396CC-218D-4F4E-9ACB-5D8485B03501}
 		{0D14D4D4-6B09-43BD-8602-A249FDB9BA79} = {E4F396CC-218D-4F4E-9ACB-5D8485B03501}
 		{64EBFA1E-3123-4531-B412-00B5423F2822} = {E4F396CC-218D-4F4E-9ACB-5D8485B03501}
+		{B5D11560-FB38-4D5F-9E80-56D6632E5A8B} = {3E9A59FB-E8A5-416F-A3E4-FDF8DF703C65}
+		{5248DA09-C0FD-48A3-A086-6D04FCB14FBF} = {B5D11560-FB38-4D5F-9E80-56D6632E5A8B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {65834F78-0330-46CA-A056-3269495743AD}
