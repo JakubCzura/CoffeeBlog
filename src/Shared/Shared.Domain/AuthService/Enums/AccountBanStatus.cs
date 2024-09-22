@@ -12,7 +12,7 @@ public enum AccountBanReason
 
     /// <summary>
     /// User behaves offensively.
-    /// /// </summary>
+    /// </summary>
     OffensiveBehaviour,
 
     /// <summary>
