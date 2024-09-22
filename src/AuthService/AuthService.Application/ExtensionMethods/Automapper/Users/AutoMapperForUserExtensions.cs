@@ -1,6 +1,6 @@
-﻿using AuthService.Application.Commands.Users.SignUpUser;
-using AuthService.Domain.Entities;
+﻿using AuthService.Domain.Entities;
 using AutoMapper;
+using Shared.Application.AuthService.Commands.Users.SignUpUser;
 
 namespace AuthService.Application.ExtensionMethods.Automapper.Users;
 

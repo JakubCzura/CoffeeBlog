@@ -1,19 +1,18 @@
 ﻿using AuthService.Application.Mapping.Users;
 using AuthService.Domain.Entities;
-using AuthService.Domain.ViewModels.Users;
 using AutoMapper;
 using FluentAssertions;
 using Shared.Application.AuthService.Responses.Users;
 
 namespace AuthService.Application.UnitTests.Mapping.Users;
 
-public class SignUpUserViewModelMappingTests
+public class SignUpUserResponseMappingTests
 {
     private readonly IMapper _mapper;
 
-    public SignUpUserViewModelMappingTests()
+    public SignUpUserResponseMappingTests()
     {
-        MapperConfiguration configurationProvider = new(cfg => cfg.AddProfile<SignUpUserViewModelMappingProfile>());
+        MapperConfiguration configurationProvider = new(cfg => cfg.AddProfile<SignUpUserResponseMappingProfile>());
         _mapper = configurationProvider.CreateMapper();
     }
 
@@ -22,7 +21,7 @@ public class SignUpUserViewModelMappingTests
         => _mapper.ConfigurationProvider.AssertConfigurationIsValid();
 
     [Fact]
-    public void Map_should_MapUserToSignUpUserViewModel_when_AdditionalPropertiesAreSpecified()
+    public void Map_should_MapUserToSignUpUserResponse_when_AdditionalPropertiesAreSpecified()
     {
         //Arrange
         string jwtToken = "jwtToken";
@@ -35,7 +34,7 @@ public class SignUpUserViewModelMappingTests
         };
 
         //Act
-        SignUpUserViewModel result = _mapper.Map<SignUpUserViewModel>(user, opt => opt.Items[nameof(SignUpUserViewModel.JwtToken)] = jwtToken);
+        SignUpUserResponse result = _mapper.Map<SignUpUserResponse>(user, opt => opt.Items[nameof(SignUpUserResponse.JwtToken)] = jwtToken);
 
         //Assert
         result.UserId.Should().Be(user.Id);
@@ -56,7 +55,7 @@ public class SignUpUserViewModelMappingTests
         };
 
         //Act
-        Func<SignUpUserViewModel> action = () => _mapper.Map<SignUpUserViewModel>(user);
+        Func<SignUpUserResponse> action = () => _mapper.Map<SignUpUserResponse>(user);
 
         //Assert
         action.Should().Throw<AutoMapperMappingException>();

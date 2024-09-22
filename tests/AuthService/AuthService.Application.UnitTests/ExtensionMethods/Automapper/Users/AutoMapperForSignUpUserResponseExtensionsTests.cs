@@ -1,25 +1,24 @@
 ﻿using AuthService.Application.ExtensionMethods.Automapper.Users;
 using AuthService.Application.Mapping.Users;
 using AuthService.Domain.Entities;
-using AuthService.Domain.ViewModels.Users;
 using AutoMapper;
 using FluentAssertions;
 using Shared.Application.AuthService.Responses.Users;
 
 namespace AuthService.Application.UnitTests.ExtensionMethods.Automapper.Users;
 
-public class AutoMapperForSignUpUserViewModelExtensionsTests
+public class AutoMapperForSignUpUserResponseExtensionsTests
 {
     private readonly IMapper _mapper;
 
-    public AutoMapperForSignUpUserViewModelExtensionsTests()
+    public AutoMapperForSignUpUserResponseExtensionsTests()
     {
-        MapperConfiguration configurationProvider = new(cfg => cfg.AddProfile<SignUpUserViewModelMappingProfile>());
+        MapperConfiguration configurationProvider = new(cfg => cfg.AddProfile<SignUpUserResponseMappingProfile>());
         _mapper = configurationProvider.CreateMapper();
     }
 
     [Fact]
-    public void Map_should_MapUserToSignUpUserViewModel_when_AdditionalPropertiesAreSpecified()
+    public void Map_should_MapUserToSignUpUserResponse_when_AdditionalPropertiesAreSpecified()
     {
         // Arrange
         string jwtToken = "jwtToken";
@@ -32,7 +31,7 @@ public class AutoMapperForSignUpUserViewModelExtensionsTests
         };
 
         //Act
-        SignUpUserViewModel result = _mapper.Map<SignUpUserViewModel>(user, jwtToken);
+        SignUpUserResponse result = _mapper.Map<SignUpUserResponse>(user, jwtToken);
 
         //Assert
         result.UserId.Should().Be(user.Id);

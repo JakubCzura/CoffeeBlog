@@ -1,11 +1,9 @@
-﻿using AuthService.Application.Commands.Accounts.BanAccountByUserId;
-using AuthService.Application.Dtos.Accounts.Repository;
+﻿using AuthService.Application.Dtos.Accounts.Repository;
 using AuthService.Application.Mapping.Accounts;
-using AuthService.Domain.Enums;
 using AutoMapper;
 using FluentAssertions;
 using Shared.Application.AuthService.Commands.Accounts.BanAccountByUserId;
-using Shared.Application.AuthService.Enums;
+using Shared.Domain.AuthService.Enums;
 
 namespace AuthService.Application.UnitTests.Mapping.Accounts;
 

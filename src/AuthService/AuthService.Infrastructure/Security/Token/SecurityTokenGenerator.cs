@@ -1,9 +1,9 @@
 ﻿using AuthService.Application.Interfaces.Security.Token;
 using AuthService.Domain.Exceptions;
 using AuthService.Domain.Models.Security;
-using AuthService.Domain.Resources;
 using AuthService.Domain.SettingsOptions.SecurityToken;
 using Microsoft.Extensions.Options;
+using Shared.Domain.AuthService.Resources;
 using System.Security.Cryptography;
 
 namespace AuthService.Infrastructure.Security.Token;

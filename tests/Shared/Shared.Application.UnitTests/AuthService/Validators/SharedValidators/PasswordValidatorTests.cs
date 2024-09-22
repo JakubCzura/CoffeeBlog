@@ -1,11 +1,10 @@
-﻿using AuthService.Application.Validators.SharedValidators;
-using AuthService.Domain.Resources;
-using FluentAssertions;
+﻿using FluentAssertions;
 using FluentValidation.TestHelper;
 using Shared.Application.AuthService.Constants;
 using Shared.Application.AuthService.Validators.SharedValidators;
+using Shared.Domain.AuthService.Resources;
 
-namespace AuthService.Application.UnitTests.Validators.SharedValidators;
+namespace Shared.Application.UnitTests.AuthService.Validators.SharedValidators;
 
 public class PasswordValidatorTests
 {

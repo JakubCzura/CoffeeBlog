@@ -1,6 +1,6 @@
-﻿using AuthService.Application.Commands.Users.SignUpUser;
-using AuthService.Domain.Entities;
+﻿using AuthService.Domain.Entities;
 using AutoMapper;
+using Shared.Application.AuthService.Commands.Users.SignUpUser;
 
 namespace AuthService.Application.Mapping.Users;
 
@@ -22,6 +22,6 @@ public class UserMappingProfile : Profile
             .ForMember(dest => dest.Roles, opt => opt.Ignore())
             .ForMember(dest => dest.RequestDetails, opt => opt.Ignore())
             .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
-            .ForMember(dest => dest.Password, opt => opt.MapFrom((src, dest, destMember, context) => context.Items[nameof(User.Password)]));
+            .ForMember(dest => dest.Password, opt => opt.MapFrom((src, dest, destMember, context) => context.Items[nameof(User.Password)])); //Hashed password is delivered for this property
     }
 }

@@ -1,10 +1,9 @@
 ﻿using AuthService.Application.Dtos.UserDiagnostics;
 using AuthService.Application.Interfaces.Persistence.Repositories;
-using AuthService.Domain.Enums;
 using AuthService.Infrastructure.Persistence.DatabaseContext;
 using MassTransit.Initializers;
 using Microsoft.EntityFrameworkCore;
-using Shared.Application.AuthService.Enums;
+using Shared.Domain.AuthService.Enums;
 
 namespace AuthService.Infrastructure.Persistence.Repositories;
 

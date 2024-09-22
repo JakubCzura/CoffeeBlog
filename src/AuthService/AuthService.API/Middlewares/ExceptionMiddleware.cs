@@ -1,7 +1,5 @@
-﻿using AuthService.Application.Commands.ApiErrors.CreateApiError;
-using AuthService.Domain.Constants;
+﻿using AuthService.Domain.Constants;
 using AuthService.Domain.Exceptions;
-using AuthService.Domain.ViewModels.Errors;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -84,22 +82,22 @@ public class ExceptionMiddleware(ILogger<ExceptionMiddleware> logger,
             logger.LogCritical(exception, $"{nameof(ExceptionMiddleware)}: Exception while saving API exception's data to database.");
         }
 
-        ErrorDetailsViewModel errorDetailsViewModel = exception switch
+        ErrorDetailsResponse errorDetailsResponse = exception switch
         {
             NullEntityException => CreateErrorDetailsResponse(httpContext, HttpStatusCode.BadRequest, exception.Message),
             _ => CreateErrorDetailsResponse(httpContext, HttpStatusCode.InternalServerError, "Internal server exception.")
         };
 
-        await httpContext.Response.WriteAsync(errorDetailsViewModel.ToString(), httpContext.RequestAborted);
+        await httpContext.Response.WriteAsync(errorDetailsResponse.ToString(), httpContext.RequestAborted);
     }
 
-    private static ErrorDetailsViewModel CreateErrorDetailsResponse(HttpContext httpContext,
-                                                                    HttpStatusCode statusCode,
-                                                                    string responseMessage)
+    private static ErrorDetailsResponse CreateErrorDetailsResponse(HttpContext httpContext,
+                                                                   HttpStatusCode statusCode,
+                                                                   string responseMessage)
     {
         httpContext.Response.ContentType = ContentTypeConstants.ApplicationJson;
         httpContext.Response.StatusCode = (int)statusCode;
 
-        return new ErrorDetailsViewModel(httpContext.Response.StatusCode, responseMessage);
+        return new ErrorDetailsResponse(httpContext.Response.StatusCode, responseMessage);
     }
 }
