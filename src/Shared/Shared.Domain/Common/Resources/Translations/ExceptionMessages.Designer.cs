@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Shared.Domain.AuthService.Resources {
+namespace Shared.Domain.Common.Resources.Translations {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Shared.Domain.AuthService.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ResponseMessages {
+    public class ExceptionMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ResponseMessages() {
+        internal ExceptionMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Shared.Domain.AuthService.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shared.Domain.AuthService.Resources.ResponseMessages", typeof(ResponseMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shared.Domain.Common.Resources.Translations.ExceptionMessages", typeof(ExceptionMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,74 +61,29 @@ namespace Shared.Domain.AuthService.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Account ban has been removed.
+        ///   Looks up a localized string similar to Token has expired.
         /// </summary>
-        public static string AccountBanHasBeenRemoved {
+        public static string TokenHasExpired {
             get {
-                return ResourceManager.GetString("AccountBanHasBeenRemoved", resourceCulture);
+                return ResourceManager.GetString("TokenHasExpired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Account has been banned.
+        ///   Looks up a localized string similar to Token value is invalid.
         /// </summary>
-        public static string AccountHasBeenBanned {
+        public static string TokenValueIsInvalid {
             get {
-                return ResourceManager.GetString("AccountHasBeenBanned", resourceCulture);
+                return ResourceManager.GetString("TokenValueIsInvalid", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to E-mail has been changed.
+        ///   Looks up a localized string similar to User is not authorized.
         /// </summary>
-        public static string EmailHasBeenChanged {
+        public static string UserUnauthorized {
             get {
-                return ResourceManager.GetString("EmailHasBeenChanged", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Password has been changed.
-        /// </summary>
-        public static string PasswordHasBeenChanged {
-            get {
-                return ResourceManager.GetString("PasswordHasBeenChanged", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Password has been reseted.
-        /// </summary>
-        public static string PasswordHasBeenReseted {
-            get {
-                return ResourceManager.GetString("PasswordHasBeenReseted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Token to reset password has been sent to your e-mail.
-        /// </summary>
-        public static string TokenToResetPasswordHasBeenSentToYourEmail {
-            get {
-                return ResourceManager.GetString("TokenToResetPasswordHasBeenSentToYourEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Undefined error.
-        /// </summary>
-        public static string UndefinedError {
-            get {
-                return ResourceManager.GetString("UndefinedError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Username has been changed.
-        /// </summary>
-        public static string UsernameHasBeenChanged {
-            get {
-                return ResourceManager.GetString("UsernameHasBeenChanged", resourceCulture);
+                return ResourceManager.GetString("UserUnauthorized", resourceCulture);
             }
         }
     }

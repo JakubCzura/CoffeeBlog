@@ -9,7 +9,7 @@ using FluentResults;
 using MediatR;
 using Shared.Application.AuthService.Commands.Users.ResetForgottenPassword;
 using Shared.Application.Common.Responses.Basics;
-using Shared.Domain.AuthService.Resources;
+using Shared.Domain.Common.Resources.Translations;
 
 namespace AuthService.Application.Commands.Users.ResetForgottenPassword;
 

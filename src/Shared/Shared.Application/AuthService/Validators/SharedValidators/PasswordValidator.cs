@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using Shared.Application.AuthService.Constants;
-using Shared.Domain.AuthService.Resources;
+using Shared.Domain.Common.Resources.Translations;
 
 namespace Shared.Application.AuthService.Validators.SharedValidators;
 

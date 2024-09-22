@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Shared.Domain.AuthService.Resources {
+namespace Shared.Domain.Common.Resources.Translations {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Shared.Domain.AuthService.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ExceptionMessages {
+    public class ErrorMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ExceptionMessages() {
+        internal ErrorMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Shared.Domain.AuthService.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shared.Domain.AuthService.Resources.ExceptionMessages", typeof(ExceptionMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shared.Domain.Common.Resources.Translations.ErrorMessages", typeof(ErrorMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,24 @@ namespace Shared.Domain.AuthService.Resources {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to E-mail already exists.
+        /// </summary>
+        public static string EmailAlreadyExists {
+            get {
+                return ResourceManager.GetString("EmailAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This account has been banned.
+        /// </summary>
+        public static string ThisAccountHasBeenBanned {
+            get {
+                return ResourceManager.GetString("ThisAccountHasBeenBanned", resourceCulture);
             }
         }
         
@@ -79,11 +97,29 @@ namespace Shared.Domain.AuthService.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User is not authorized.
+        ///   Looks up a localized string similar to Username already exists.
         /// </summary>
-        public static string UserUnauthorized {
+        public static string UsernameAlreadyExists {
             get {
-                return ResourceManager.GetString("UserUnauthorized", resourceCulture);
+                return ResourceManager.GetString("UsernameAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User not found.
+        /// </summary>
+        public static string UserNotFound {
+            get {
+                return ResourceManager.GetString("UserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have already used this password.
+        /// </summary>
+        public static string YouHaveAlreadyUsedThisPassword {
+            get {
+                return ResourceManager.GetString("YouHaveAlreadyUsedThisPassword", resourceCulture);
             }
         }
     }

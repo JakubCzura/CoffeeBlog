@@ -7,22 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="AuthService\Resources\ErrorMessages.Designer.cs">
+    <Compile Update="Common\Resources\Translations\ErrorMessages.Designer.cs">
       <DependentUpon>ErrorMessages.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="AuthService\Resources\ExceptionMessages.Designer.cs">
+    <Compile Update="Common\Resources\Translations\ExceptionMessages.Designer.cs">
       <DependentUpon>ExceptionMessages.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="AuthService\Resources\ResponseMessages.Designer.cs">
+    <Compile Update="Common\Resources\Translations\ResponseMessages.Designer.cs">
       <DependentUpon>ResponseMessages.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="AuthService\Resources\ValidatorMessages.Designer.cs">
+    <Compile Update="Common\Resources\Translations\ValidatorMessages.Designer.cs">
       <DependentUpon>ValidatorMessages.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -30,19 +30,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="AuthService\Resources\ErrorMessages.resx">
+    <EmbeddedResource Update="Common\Resources\Translations\ErrorMessages.resx">
       <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="AuthService\Resources\ExceptionMessages.resx">
+    <EmbeddedResource Update="Common\Resources\Translations\ExceptionMessages.resx">
       <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="AuthService\Resources\ResponseMessages.resx">
+    <EmbeddedResource Update="Common\Resources\Translations\ResponseMessages.resx">
       <LastGenOutput>ResponseMessages.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="AuthService\Resources\ValidatorMessages.resx">
+    <EmbeddedResource Update="Common\Resources\Translations\ValidatorMessages.resx">
       <LastGenOutput>ValidatorMessages.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>

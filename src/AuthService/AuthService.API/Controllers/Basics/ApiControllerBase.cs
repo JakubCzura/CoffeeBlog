@@ -4,7 +4,7 @@ using FluentResults;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Application.Common.Responses.Errors;
-using Shared.Domain.AuthService.Resources;
+using Shared.Domain.Common.Resources.Translations;
 
 namespace AuthService.API.Controllers.Basics;
 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Shared.Domain.AuthService.Resources {
+namespace Shared.Domain.Common.Resources.Translations {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Shared.Domain.AuthService.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shared.Domain.AuthService.Resources.ValidatorMessages", typeof(ValidatorMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shared.Domain.Common.Resources.Translations.ValidatorMessages", typeof(ValidatorMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

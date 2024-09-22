@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Shared.Domain.AuthService.Resources {
+namespace Shared.Domain.Common.Resources.Translations {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Shared.Domain.AuthService.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ErrorMessages {
+    public class ResponseMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ErrorMessages() {
+        internal ResponseMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Shared.Domain.AuthService.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shared.Domain.AuthService.Resources.ErrorMessages", typeof(ErrorMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shared.Domain.Common.Resources.Translations.ResponseMessages", typeof(ResponseMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,65 +61,74 @@ namespace Shared.Domain.AuthService.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to E-mail already exists.
+        ///   Looks up a localized string similar to Account ban has been removed.
         /// </summary>
-        public static string EmailAlreadyExists {
+        public static string AccountBanHasBeenRemoved {
             get {
-                return ResourceManager.GetString("EmailAlreadyExists", resourceCulture);
+                return ResourceManager.GetString("AccountBanHasBeenRemoved", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This account has been banned.
+        ///   Looks up a localized string similar to Account has been banned.
         /// </summary>
-        public static string ThisAccountHasBeenBanned {
+        public static string AccountHasBeenBanned {
             get {
-                return ResourceManager.GetString("ThisAccountHasBeenBanned", resourceCulture);
+                return ResourceManager.GetString("AccountHasBeenBanned", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Token has expired.
+        ///   Looks up a localized string similar to E-mail has been changed.
         /// </summary>
-        public static string TokenHasExpired {
+        public static string EmailHasBeenChanged {
             get {
-                return ResourceManager.GetString("TokenHasExpired", resourceCulture);
+                return ResourceManager.GetString("EmailHasBeenChanged", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Token value is invalid.
+        ///   Looks up a localized string similar to Password has been changed.
         /// </summary>
-        public static string TokenValueIsInvalid {
+        public static string PasswordHasBeenChanged {
             get {
-                return ResourceManager.GetString("TokenValueIsInvalid", resourceCulture);
+                return ResourceManager.GetString("PasswordHasBeenChanged", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Username already exists.
+        ///   Looks up a localized string similar to Password has been reseted.
         /// </summary>
-        public static string UsernameAlreadyExists {
+        public static string PasswordHasBeenReseted {
             get {
-                return ResourceManager.GetString("UsernameAlreadyExists", resourceCulture);
+                return ResourceManager.GetString("PasswordHasBeenReseted", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User not found.
+        ///   Looks up a localized string similar to Token to reset password has been sent to your e-mail.
         /// </summary>
-        public static string UserNotFound {
+        public static string TokenToResetPasswordHasBeenSentToYourEmail {
             get {
-                return ResourceManager.GetString("UserNotFound", resourceCulture);
+                return ResourceManager.GetString("TokenToResetPasswordHasBeenSentToYourEmail", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have already used this password.
+        ///   Looks up a localized string similar to Undefined error.
         /// </summary>
-        public static string YouHaveAlreadyUsedThisPassword {
+        public static string UndefinedError {
             get {
-                return ResourceManager.GetString("YouHaveAlreadyUsedThisPassword", resourceCulture);
+                return ResourceManager.GetString("UndefinedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username has been changed.
+        /// </summary>
+        public static string UsernameHasBeenChanged {
+            get {
+                return ResourceManager.GetString("UsernameHasBeenChanged", resourceCulture);
             }
         }
     }

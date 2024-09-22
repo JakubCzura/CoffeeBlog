@@ -1,6 +1,6 @@
 ﻿using FluentValidation.TestHelper;
 using Shared.Application.AuthService.Commands.Users.SignUpUser;
-using Shared.Domain.AuthService.Resources;
+using Shared.Domain.Common.Resources.Translations;
 
 namespace Shared.Application.UnitTests.AuthService.Commands.Users.SignUpUser;
 
