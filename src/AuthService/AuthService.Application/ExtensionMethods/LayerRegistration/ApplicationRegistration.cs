@@ -5,6 +5,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Shared.Application.AuthService.Commands.Users.SignUpUser;
 using System.Reflection;
 
 namespace AuthService.Application.ExtensionMethods.LayerRegistration;
@@ -31,7 +32,7 @@ public static class ApplicationRegistration
             config.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
         });
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
-        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        services.AddValidatorsFromAssemblyContaining(typeof(SignUpUserCommandValidator));
         services.AddFluentValidationAutoValidation(config =>
         {
             config.Filter = type => ExcludeUnexpectedTypesFromFluentValidationAutoValidation(type);
