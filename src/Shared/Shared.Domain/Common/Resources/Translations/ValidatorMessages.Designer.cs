@@ -70,11 +70,11 @@ namespace Shared.Domain.Common.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to E-mail can&apos;t contain more than 320 characters.
+        ///   Looks up a localized string similar to E-mail can&apos;t contain more than {0} characters.
         /// </summary>
-        public static string EmailCantContainMoreThan320Characters {
+        public static string EmailCantContainMoreThan_0_Characters {
             get {
-                return ResourceManager.GetString("EmailCantContainMoreThan320Characters", resourceCulture);
+                return ResourceManager.GetString("EmailCantContainMoreThan{0}Characters", resourceCulture);
             }
         }
         
@@ -124,11 +124,11 @@ namespace Shared.Domain.Common.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password must be between 5 and 50 characters long.
+        ///   Looks up a localized string similar to Password must be between {0} and {1} characters long.
         /// </summary>
-        public static string PasswordMustBeBetween5And50CharactersLong {
+        public static string PasswordMustBeBetween_0_And_1_CharactersLong {
             get {
-                return ResourceManager.GetString("PasswordMustBeBetween5And50CharactersLong", resourceCulture);
+                return ResourceManager.GetString("PasswordMustBeBetween{0}And{1}CharactersLong", resourceCulture);
             }
         }
         
@@ -151,11 +151,11 @@ namespace Shared.Domain.Common.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password must contain at least one of special characters.
+        ///   Looks up a localized string similar to Password must contain at least one of special characters: {0}.
         /// </summary>
-        public static string PasswordMustContainAtLeastOneOfSpecialCharacters {
+        public static string PasswordMustContainAtLeastOneOfSpecialCharacters__0_ {
             get {
-                return ResourceManager.GetString("PasswordMustContainAtLeastOneOfSpecialCharacters", resourceCulture);
+                return ResourceManager.GetString("PasswordMustContainAtLeastOneOfSpecialCharacters:{0}", resourceCulture);
             }
         }
         
@@ -169,11 +169,11 @@ namespace Shared.Domain.Common.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Token can&apos;t contain more than 200 characters.
+        ///   Looks up a localized string similar to Token can&apos;t contain more than {0} characters.
         /// </summary>
-        public static string TokenCantContainMoreThan200Characters {
+        public static string TokenCantContainMoreThan_0_Characters {
             get {
-                return ResourceManager.GetString("TokenCantContainMoreThan200Characters", resourceCulture);
+                return ResourceManager.GetString("TokenCantContainMoreThan{0}Characters", resourceCulture);
             }
         }
         
@@ -187,11 +187,11 @@ namespace Shared.Domain.Common.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Username can&apos;t contain more than 50 characters.
+        ///   Looks up a localized string similar to Username can&apos;t contain more than {0} characters.
         /// </summary>
-        public static string UsernameCantContainMoreThan50Characters {
+        public static string UsernameCantContainMoreThan_0_Characters {
             get {
-                return ResourceManager.GetString("UsernameCantContainMoreThan50Characters", resourceCulture);
+                return ResourceManager.GetString("UsernameCantContainMoreThan{0}Characters", resourceCulture);
             }
         }
         

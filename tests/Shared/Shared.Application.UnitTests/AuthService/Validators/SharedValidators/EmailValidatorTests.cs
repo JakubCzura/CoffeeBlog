@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using FluentValidation.TestHelper;
+using Shared.Application.AuthService.Constants.Policy;
 using Shared.Application.AuthService.Validators.SharedValidators;
 using Shared.Domain.Common.Resources.Translations;
 
@@ -29,7 +30,7 @@ public class EmailValidatorTests
         { "email.", ValidatorMessages.EmailMustBeInValidFormat },
         { "email.com", ValidatorMessages.EmailMustBeInValidFormat },
         { "email.Q", ValidatorMessages.EmailMustBeInValidFormat },
-        { new string('k', 321), ValidatorMessages.EmailCantContainMoreThan320Characters }
+        { new string('k', 321), string.Format(ValidatorMessages.EmailCantContainMoreThan_0_Characters, EmailPolicyConstants.MaxLength)}
     };
 
     [Theory]

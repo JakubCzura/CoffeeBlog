@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using FluentValidation.TestHelper;
-using Shared.Application.AuthService.Constants;
+using Shared.Application.AuthService.Constants.Policy;
 using Shared.Application.AuthService.Validators.SharedValidators;
 using Shared.Domain.Common.Resources.Translations;
 
@@ -29,15 +29,15 @@ public class PasswordValidatorTests
         { "", ValidatorMessages.PasswordIsRequired },
         { " ", ValidatorMessages.PasswordIsRequired },
         { "  ", ValidatorMessages.PasswordIsRequired },
-        { "@#", ValidatorMessages.PasswordMustBeBetween5And50CharactersLong },
-        { " d@1", ValidatorMessages.PasswordMustBeBetween5And50CharactersLong },
-        { "d#!", ValidatorMessages.PasswordMustBeBetween5And50CharactersLong },
-        { new string('k', 4), ValidatorMessages.PasswordMustBeBetween5And50CharactersLong },
-        { new string('k', 51), ValidatorMessages.PasswordMustBeBetween5And50CharactersLong },
+        { "@#", string.Format(ValidatorMessages.PasswordMustBeBetween_0_And_1_CharactersLong, PasswordPolicyConstants.MinLength, PasswordPolicyConstants.MaxLength) },
+        { " d@1", string.Format(ValidatorMessages.PasswordMustBeBetween_0_And_1_CharactersLong, PasswordPolicyConstants.MinLength, PasswordPolicyConstants.MaxLength) },
+        { "d#!", string.Format(ValidatorMessages.PasswordMustBeBetween_0_And_1_CharactersLong, PasswordPolicyConstants.MinLength, PasswordPolicyConstants.MaxLength) },
+        { new string('k', 4), string.Format(ValidatorMessages.PasswordMustBeBetween_0_And_1_CharactersLong, PasswordPolicyConstants.MinLength, PasswordPolicyConstants.MaxLength) },
+        { new string('k', 51), string.Format(ValidatorMessages.PasswordMustBeBetween_0_And_1_CharactersLong, PasswordPolicyConstants.MinLength, PasswordPolicyConstants.MaxLength) },
         { "d12#$da23", ValidatorMessages.PasswordMustContainAtLeastOneUpperLetter },
         { "3DDD23$$!@31@O", ValidatorMessages.PasswordMustContainAtLeastOneLowerLetter },
         { "DDD@@@ddad@@$#", ValidatorMessages.PasswordMustContainAtLeastOneDigit },
-        { "kdD2312dsa32d", $"{ValidatorMessages.PasswordMustContainAtLeastOneOfSpecialCharacters}: {PasswordConstants.SpecialCharacters}" }
+        { "kdD2312dsa32d", string.Format(ValidatorMessages.PasswordMustContainAtLeastOneOfSpecialCharacters__0_, PasswordPolicyConstants.SpecialCharacters) }
     };
 
     [Theory]

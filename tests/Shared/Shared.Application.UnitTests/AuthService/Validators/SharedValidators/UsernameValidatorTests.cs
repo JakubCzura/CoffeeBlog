@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using FluentValidation.TestHelper;
+using Shared.Application.AuthService.Constants.Policy;
 using Shared.Application.AuthService.Validators.SharedValidators;
 using Shared.Domain.Common.Resources.Translations;
 
@@ -27,7 +28,7 @@ public class UsernameValidatorTests
         { "", ValidatorMessages.UsernameIsRequired } ,
         { " ", ValidatorMessages.UsernameIsRequired } ,
         { "   ", ValidatorMessages.UsernameIsRequired } ,
-        { new string('k', 51), ValidatorMessages.UsernameCantContainMoreThan50Characters }
+        { new string('k', 51), string.Format(ValidatorMessages.UsernameCantContainMoreThan_0_Characters, UsernamePolicyConstants.MaxLength)}
     };
 
     [Theory]

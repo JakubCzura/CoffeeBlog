@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Shared.Application.AuthService.Constants.Policy;
 using Shared.Domain.Common.Resources.Translations;
 
 namespace Shared.Application.AuthService.Validators.SharedValidators;
@@ -14,6 +15,6 @@ public class UsernameValidator : AbstractValidator<string>
     public UsernameValidator()
         => RuleFor(username => username).NotEmpty()
                                         .WithMessage(ValidatorMessages.UsernameIsRequired)
-                                        .MaximumLength(50)
-                                        .WithMessage(ValidatorMessages.UsernameCantContainMoreThan50Characters);
+                                        .MaximumLength(UsernamePolicyConstants.MaxLength)
+                                        .WithMessage(string.Format(ValidatorMessages.UsernameCantContainMoreThan_0_Characters, UsernamePolicyConstants.MaxLength));
 }

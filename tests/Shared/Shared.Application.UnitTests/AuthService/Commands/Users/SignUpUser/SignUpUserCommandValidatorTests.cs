@@ -1,5 +1,6 @@
 ﻿using FluentValidation.TestHelper;
 using Shared.Application.AuthService.Commands.Users.SignUpUser;
+using Shared.Application.AuthService.Constants.Policy;
 using Shared.Domain.Common.Resources.Translations;
 
 namespace Shared.Application.UnitTests.AuthService.Commands.Users.SignUpUser;
@@ -42,7 +43,7 @@ public class SignUpUserCommandValidatorTests
 
         //Assert
         result.ShouldHaveValidationErrorFor(x => x.Username)
-              .WithErrorMessage(ValidatorMessages.UsernameCantContainMoreThan50Characters);
+              .WithErrorMessage(string.Format(ValidatorMessages.UsernameCantContainMoreThan_0_Characters, UsernamePolicyConstants.MaxLength));
     }
 
     [Fact]

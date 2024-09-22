@@ -120,8 +120,8 @@
   <data name="ConfirmPasswordIsRequired" xml:space="preserve">
     <value>Confirm password is required</value>
   </data>
-  <data name="EmailCantContainMoreThan320Characters" xml:space="preserve">
-    <value>E-mail can't contain more than 320 characters</value>
+  <data name="EmailCantContainMoreThan{0}Characters" xml:space="preserve">
+    <value>E-mail can't contain more than {0} characters</value>
   </data>
   <data name="EmailIsRequired" xml:space="preserve">
     <value>E-mail is required</value>
@@ -138,8 +138,8 @@
   <data name="PasswordIsRequired" xml:space="preserve">
     <value>Password is required</value>
   </data>
-  <data name="PasswordMustBeBetween5And50CharactersLong" xml:space="preserve">
-    <value>Password must be between 5 and 50 characters long</value>
+  <data name="PasswordMustBeBetween{0}And{1}CharactersLong" xml:space="preserve">
+    <value>Password must be between {0} and {1} characters long</value>
   </data>
   <data name="PasswordMustContainAtLeastOneDigit" xml:space="preserve">
     <value>Password must contain at least one digit</value>
@@ -147,20 +147,20 @@
   <data name="PasswordMustContainAtLeastOneLowerLetter" xml:space="preserve">
     <value>Password must contain at least one lower letter</value>
   </data>
-  <data name="PasswordMustContainAtLeastOneOfSpecialCharacters" xml:space="preserve">
-    <value>Password must contain at least one of special characters</value>
+  <data name="PasswordMustContainAtLeastOneOfSpecialCharacters:{0}" xml:space="preserve">
+    <value>Password must contain at least one of special characters: {0}</value>
   </data>
   <data name="PasswordMustContainAtLeastOneUpperLetter" xml:space="preserve">
     <value>Password must contain at least one upper letter</value>
   </data>
-  <data name="TokenCantContainMoreThan200Characters" xml:space="preserve">
-    <value>Token can't contain more than 200 characters</value>
+  <data name="TokenCantContainMoreThan{0}Characters" xml:space="preserve">
+    <value>Token can't contain more than {0} characters</value>
   </data>
   <data name="TokenToResetPasswordIsRequired" xml:space="preserve">
     <value>Token to reset password is required</value>
   </data>
-  <data name="UsernameCantContainMoreThan50Characters" xml:space="preserve">
-    <value>Username can't contain more than 50 characters</value>
+  <data name="UsernameCantContainMoreThan{0}Characters" xml:space="preserve">
+    <value>Username can't contain more than {0} characters</value>
   </data>
   <data name="UsernameIsRequired" xml:space="preserve">
     <value>Username is required</value>

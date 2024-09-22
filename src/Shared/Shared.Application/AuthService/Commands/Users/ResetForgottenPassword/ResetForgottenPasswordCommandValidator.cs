@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Shared.Application.AuthService.Constants.Policy;
 using Shared.Application.AuthService.Validators.SharedValidators;
 using Shared.Domain.Common.Resources.Translations;
 
@@ -25,7 +26,7 @@ public class ResetForgottenPasswordCommandValidator : AbstractValidator<ResetFor
 
         RuleFor(x => x.ForgottenPasswordResetToken).NotEmpty()
                                                    .WithMessage(ValidatorMessages.TokenToResetPasswordIsRequired)
-                                                   .MaximumLength(200)
-                                                   .WithMessage(ValidatorMessages.TokenCantContainMoreThan200Characters);
+                                                   .MaximumLength(ForgottenPasswordResetTokenPolicyConstants.MaxLength)
+                                                   .WithMessage(string.Format(ValidatorMessages.TokenCantContainMoreThan_0_Characters, ForgottenPasswordResetTokenPolicyConstants.MaxLength));
     }
 }
