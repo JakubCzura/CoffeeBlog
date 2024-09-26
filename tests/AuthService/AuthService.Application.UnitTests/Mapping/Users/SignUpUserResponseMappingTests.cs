@@ -29,7 +29,7 @@ public class SignUpUserResponseMappingTests
         User user = new()
         {
             Id = 1,
-            Username = "Johny",
+            UserName = "Johny",
             Email = "myemail@email.com"
         };
 
@@ -38,7 +38,7 @@ public class SignUpUserResponseMappingTests
 
         //Assert
         result.UserId.Should().Be(user.Id);
-        result.Username.Should().Be(user.Username);
+        result.Username.Should().Be(user.UserName);
         result.Email.Should().Be(user.Email);
         result.JwtToken.Should().Be(jwtToken);
     }
@@ -50,7 +50,7 @@ public class SignUpUserResponseMappingTests
         User user = new()
         {
             Id = 1,
-            Username = "Johny",
+            UserName = "Johny",
             Email = "myemail@email.com"
         };
 

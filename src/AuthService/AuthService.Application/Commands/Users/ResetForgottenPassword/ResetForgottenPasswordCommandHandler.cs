@@ -7,7 +7,9 @@ using EventBus.Application.Interfaces.Publishers;
 using EventBus.Domain.Events.AuthService.Users;
 using FluentResults;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Shared.Application.AuthService.Commands.Users.ResetForgottenPassword;
+using Shared.Application.AuthService.Responses.Users;
 using Shared.Application.Common.Responses.Basics;
 using Shared.Domain.Common.Resources.Translations;
 
@@ -21,6 +23,8 @@ namespace AuthService.Application.Commands.Users.ResetForgottenPassword;
 /// <param name="eventPublisher">Microservice to send event about generated token to reset password.</param>
 /// <param name="dateTimeProvider">Interface to deliver date and time.</param>
 public class ResetForgottenPasswordCommandHandler(IUserRepository userRepository,
+                                                  UserManager<User> userManager,
+                                                  IUserDetailRepository userDetailRepository,
                                                   IPasswordHasher passwordHasher,
                                                   IEventPublisher eventPublisher,
                                                   IDateTimeProvider dateTimeProvider)
@@ -35,7 +39,7 @@ public class ResetForgottenPasswordCommandHandler(IUserRepository userRepository
     public async Task<Result<ResponseBase>> Handle(ResetForgottenPasswordCommand request,
                                                    CancellationToken cancellationToken)
     {
-        User? user = await userRepository.GetByEmailOrUsernameAsync(request.Email, cancellationToken);
+        User? user = await userManager.FindByEmailAsync(request.Email);
         if (user is null)
         {
             return Result.Fail<ResponseBase>(new UserNotFoundError());
@@ -49,11 +53,18 @@ public class ResetForgottenPasswordCommandHandler(IUserRepository userRepository
             return Result.Fail<ResponseBase>(new ExpiredForgottenPasswordResetTokenError());
         }
 
-        string hashedPassword = passwordHasher.HashPassword(request.NewPassword);
-        await userRepository.ResetForgottenPasswordAsync(user.Id, request.NewPassword, cancellationToken);
+        //TODO: take care of valid token
+        IdentityResult resetPasswordResult = await userManager.ResetPasswordAsync(user, "PASS VALID TOKEN HERE", request.NewPassword);
+
+        //if (!resetPasswordResult.Succeeded)
+        //{
+        //    return Result.Fail<ResponseBase>(new ResetPasswordError());
+        //}
+
+        await userDetailRepository.UpdateLastPasswordChangeAsync(user.Id, cancellationToken);
 
         PasswordResetedEvent passwordResetedEvent = new(request.Email,
-                                                        user.Username,
+                                                        user.UserName!,
                                                         nameof(ResetForgottenPasswordCommandHandler));
         await eventPublisher.PublishAsync(passwordResetedEvent, cancellationToken);
 

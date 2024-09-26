@@ -19,9 +19,8 @@ public class UserMappingProfile : Profile
             .ForMember(dest => dest.ForgottenPasswordResetToken, opt => opt.Ignore())
             .ForMember(dest => dest.ForgottenPasswordResetTokenExpiresAt, opt => opt.Ignore())
             .ForMember(dest => dest.LastPasswords, opt => opt.Ignore())
-            .ForMember(dest => dest.Roles, opt => opt.Ignore())
             .ForMember(dest => dest.RequestDetails, opt => opt.Ignore())
             .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
-            .ForMember(dest => dest.Password, opt => opt.MapFrom((src, dest, destMember, context) => context.Items[nameof(User.Password)])); //Hashed password is delivered for this property
+            .ForMember(dest => dest.PasswordHash, opt => opt.Ignore());
     }
 }

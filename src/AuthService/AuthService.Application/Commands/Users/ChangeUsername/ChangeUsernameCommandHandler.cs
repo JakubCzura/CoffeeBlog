@@ -1,10 +1,12 @@
 ﻿using AuthService.Application.Interfaces.Persistence.Repositories;
 using AuthService.Application.Interfaces.Security.CurrentUsers;
+using AuthService.Domain.Entities;
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.Exceptions;
 using AuthService.Domain.Models.Users;
 using FluentResults;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Shared.Application.AuthService.Commands.Users.ChangeUsername;
 using Shared.Application.Common.Responses.Basics;
 using Shared.Domain.Common.Resources.Translations;
@@ -18,6 +20,7 @@ namespace AuthService.Application.Commands.Users.ChangeUsername;
 /// <param name="userDetailRepository">Interface to perform user's details operations in database.</param>
 /// <param name="currentUserContext">Interface to get information about current signed in user.</param>
 public class ChangeUsernameCommandHandler(IUserRepository userRepository,
+                                          UserManager<User> userManager,
                                           IUserDetailRepository userDetailRepository,
                                           ICurrentUserContext currentUserContext)
     : IRequestHandler<ChangeUsernameCommand, Result<ResponseBase>>
@@ -34,12 +37,13 @@ public class ChangeUsernameCommandHandler(IUserRepository userRepository,
     {
         CurrentAuthorizedUser currentAuthorizedUser = currentUserContext.GetCurrentAuthorizedUser();
 
-        if (await userRepository.UsernameExistsAsync(request.NewUsername, cancellationToken))
+        if (await userManager.FindByNameAsync(request.NewUsername) is not null)
         {
             return Result.Fail<ResponseBase>(new UsernameExistsError());
         }
 
-        await userRepository.UpdateUsernameAsync(currentAuthorizedUser.Id, request.NewUsername, cancellationToken);
+        User user = (await userManager.FindByNameAsync(currentAuthorizedUser.Username))!;
+        await userManager.SetUserNameAsync(user, request.NewUsername);
         await userDetailRepository.UpdateLastUsernameChangeAsync(currentAuthorizedUser.Id, cancellationToken);
 
         ResponseBase result = new(ResponseMessages.UsernameHasBeenChanged);

@@ -1,11 +1,13 @@
 ﻿using AuthService.Application.Interfaces.Persistence.Repositories;
 using AuthService.Application.Interfaces.Security.CurrentUsers;
 using AuthService.Application.Interfaces.Security.Password;
+using AuthService.Domain.Entities;
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.Exceptions;
 using AuthService.Domain.Models.Users;
 using FluentResults;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Shared.Application.AuthService.Commands.Users.ChangePassword;
 using Shared.Application.Common.Responses.Basics;
 using Shared.Domain.Common.Resources.Translations;
@@ -21,6 +23,7 @@ namespace AuthService.Application.Commands.Users.ChangePassword;
 /// <param name="currentUserContext">Interface to get information about current signed in user.</param>
 /// <param name="passwordHasher">Interface hash user's password.</param>
 public class ChangePasswordCommandHandler(IUserRepository userRepository,
+                                       UserManager<User> userManager,
                                          IUserDetailRepository userDetailRepository,
                                          IUserLastPasswordRepository userLastPasswordRepository,
                                          ICurrentUserContext currentUserContext,
@@ -35,7 +38,7 @@ public class ChangePasswordCommandHandler(IUserRepository userRepository,
     /// <returns>Instance of <see cref="ResponseBase"/></returns>
     /// <exception cref="UserUnauthorizedException">When user is not authorized.</exception>
     public async Task<Result<ResponseBase>> Handle(ChangePasswordCommand request,
-                                                    CancellationToken cancellationToken)
+                                                   CancellationToken cancellationToken)
     {
         CurrentAuthorizedUser currentAuthorizedUser = currentUserContext.GetCurrentAuthorizedUser();
 
@@ -43,13 +46,20 @@ public class ChangePasswordCommandHandler(IUserRepository userRepository,
 
         IEnumerable<string> userLastPasswords = (await userLastPasswordRepository.GetLastPasswordsByUserIdAsync(currentAuthorizedUser.Id, cancellationToken))
                                                                                  .Select(userLastPassword => userLastPassword.LastPassword);
-
         if (userLastPasswords.Contains(hashedPassword))
         {
             return Result.Fail<ResponseBase>(new PasswordAlreadyUsedError());
         }
 
-        await userRepository.UpdatePasswordAsync(currentAuthorizedUser.Id, hashedPassword, cancellationToken);
+        User user = (await userManager.FindByIdAsync(currentAuthorizedUser.Id.ToString()))!;
+
+        PasswordVerificationResult isNewPasswordSameAsCurrent = userManager.PasswordHasher.VerifyHashedPassword(user, user.PasswordHash!, request.NewPassword);
+        if (isNewPasswordSameAsCurrent == PasswordVerificationResult.Success)
+        {
+            return Result.Fail<ResponseBase>(new PasswordAlreadyUsedError());
+        }
+
+        await userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
         await userLastPasswordRepository.CreateAsync(new(hashedPassword, currentAuthorizedUser.Id), cancellationToken);
         await userDetailRepository.UpdateLastPasswordChangeAsync(currentAuthorizedUser.Id, cancellationToken);
 

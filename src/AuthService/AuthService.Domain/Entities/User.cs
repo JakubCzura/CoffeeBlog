@@ -1,27 +1,12 @@
-﻿using AuthService.Domain.Entities.Basics;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace AuthService.Domain.Entities;
 
 /// <summary>
 /// Entity that represents user of the application who has created an account.
 /// </summary>
-public class User : DbEntityBase
+public class User : IdentityUser<int>
 {
-    /// <summary>
-    /// User's unique username.
-    /// </summary>
-    public string Username { get; set; } = string.Empty;
-
-    /// <summary>
-    /// User's unique e-mail.
-    /// </summary>
-    public string Email { get; set; } = string.Empty;
-
-    /// <summary>
-    /// User's password. It's always hashed and must not be decrypted.
-    /// </summary>
-    public string Password { get; set; } = string.Empty;
-
     /// <summary>
     /// Date and time when the user was created.
     /// </summary>
@@ -46,11 +31,6 @@ public class User : DbEntityBase
     /// List of user's last credentials. It's used to prevent user from using the same password when changing it.
     /// </summary>
     public virtual List<UserLastPassword> LastPasswords { get; set; } = [];
-
-    /// <summary>
-    /// Roles assigned to the user. It's used to define user's permissions.
-    /// </summary>
-    public virtual List<Role> Roles { get; set; } = [];
 
     /// <summary>
     /// Requests sent by the user.

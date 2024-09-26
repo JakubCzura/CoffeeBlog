@@ -1,5 +1,7 @@
-﻿using AuthService.Infrastructure.Persistence.DatabaseContext;
+﻿using AuthService.Domain.Entities;
+using AuthService.Infrastructure.Persistence.DatabaseContext;
 using AuthService.Infrastructure.Persistence.Triggers;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +22,21 @@ public static class DbContextConfiguration
     public static IServiceCollection ConfigureDbContext(this IServiceCollection services,
                                                         IConfiguration configuration)
     {
+        services.AddIdentityCore<User>(options =>
+        {
+            //options.User.RequireUniqueEmail = true;
+            //options.Password.RequiredLength = 8;
+            //options.Password.RequireDigit = true;
+            //options.Password.RequireLowercase = true;
+            //options.Password.RequireUppercase = true;
+            //options.Password.RequireNonAlphanumeric = true;
+            //options.Lockout.MaxFailedAccessAttempts = 5;
+            //options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+        })
+        .AddRoles<IdentityRole<int>>()
+        .AddSignInManager<User>()
+        .AddEntityFrameworkStores<AuthServiceDbContext>();
+
         services.AddDbContext<AuthServiceDbContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("CoffeeBlogAuthServiceDbConnectionString"),

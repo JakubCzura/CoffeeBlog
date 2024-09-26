@@ -1,10 +1,12 @@
 ﻿using AuthService.Application.Interfaces.Persistence.Repositories;
 using AuthService.Application.Interfaces.Security.CurrentUsers;
+using AuthService.Domain.Entities;
 using AuthService.Domain.Errors.Users;
 using AuthService.Domain.Exceptions;
 using AuthService.Domain.Models.Users;
 using FluentResults;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Shared.Application.AuthService.Commands.Users.ChangeEmail;
 using Shared.Application.Common.Responses.Basics;
 using Shared.Domain.Common.Resources.Translations;
@@ -18,6 +20,7 @@ namespace AuthService.Application.Commands.Users.ChangeEmail;
 /// <param name="userDetailRepository">Interface to perform user's details operations in database.</param>
 /// <param name="currentUserContext">Interface to get information about current signed in user.</param>
 public class ChangeEmailCommandHandler(IUserRepository userRepository,
+                                       UserManager<User> userManager,
                                        IUserDetailRepository userDetailRepository,
                                        ICurrentUserContext currentUserContext)
     : IRequestHandler<ChangeEmailCommand, Result<ResponseBase>>
@@ -34,12 +37,13 @@ public class ChangeEmailCommandHandler(IUserRepository userRepository,
     {
         CurrentAuthorizedUser currentAuthorizedUser = currentUserContext.GetCurrentAuthorizedUser();
 
-        if (await userRepository.EmailExistsAsync(request.NewEmail, cancellationToken))
+        if (await userManager.FindByEmailAsync(request.NewEmail) is not null)
         {
             return Result.Fail<ResponseBase>(new EmailExistsError());
         }
 
-        await userRepository.UpdateEmailAsync(currentAuthorizedUser.Id, request.NewEmail, cancellationToken);
+        User user = (await userManager.FindByEmailAsync(currentAuthorizedUser.Email))!;
+        await userManager.SetEmailAsync(user, request.NewEmail);
         await userDetailRepository.UpdateLastEmailChangeAsync(currentAuthorizedUser.Id, cancellationToken);
 
         ResponseBase result = new(ResponseMessages.EmailHasBeenChanged);
