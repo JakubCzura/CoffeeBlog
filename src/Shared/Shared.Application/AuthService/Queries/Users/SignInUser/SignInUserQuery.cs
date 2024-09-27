@@ -11,12 +11,11 @@ namespace Shared.Application.AuthService.Queries.Users.SignInUser;
 public class SignInUserQuery : IRequest<Result<SignInUserResponse>>
 {
     /// <summary>
-    /// User can log in with either username or email.
-    /// Username and email are always unique.
+    /// User can log in using email.
     /// </summary>
-    [Required(ErrorMessage = "Username or e-mail is required.")]
+    [Required(ErrorMessage = "E-mail is required.")]
     [MaxLength(320)]
-    public string UsernameOrNickname { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
 
     /// <summary>
     /// User's password.

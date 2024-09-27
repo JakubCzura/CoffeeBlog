@@ -4,7 +4,9 @@ using AuthService.Application.Interfaces.Security.Password;
 using AuthService.Domain.Entities;
 using AuthService.Domain.Errors.Users;
 using FluentResults;
+using MassTransit.Initializers;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Shared.Application.AuthService.Queries.Users.SignInUser;
 using Shared.Application.AuthService.Responses.Users;
 
@@ -20,6 +22,8 @@ namespace AuthService.Application.Queries.Users.SignInUser;
 /// <param name="passwordHasher">Interface to verify password.</param>
 /// <param name="jwtService">Interface to create JWT token.</param>
 public class SignInUserQueryHandler(IUserRepository userRepository,
+                                    UserManager<User> userManager,
+                                    SignInManager<User> signInManager,
                                     IRoleRepository roleRepository,
                                     IUserDetailRepository userDetailRepository,
                                     IAccountRepository accountRepository,
@@ -36,32 +40,32 @@ public class SignInUserQueryHandler(IUserRepository userRepository,
     public async Task<Result<SignInUserResponse>> Handle(SignInUserQuery request,
                                                          CancellationToken cancellationToken)
     {
-        User? user = await userRepository.GetByEmailOrUsernameAsync(request.UsernameOrNickname, cancellationToken);
-
-        //Don't reveal whether user was not found or password was incorrect due to potential security risks.
-        //Just say that user was not found.
-        //If statements are splitted to log failed sign in attempts if user was found but password was incorrect.
+        User? user = await userManager.FindByEmailAsync(request.Email);
         if (user is null)
         {
-            return Result.Fail<SignInUserResponse>(new UserNotFoundError());
-        }
-        if (!passwordHasher.VerifyPassword(request.Password, user.Password))
-        {
-            await userDetailRepository.UpdateLastFailedSignInAsync(user.Id, cancellationToken);
-            return Result.Fail<SignInUserResponse>(new UserNotFoundError());
+            return Result.Fail<SignInUserResponse>(new InvalidCredentialsError()); //Message to return to frontend like "Invalid credentials"
         }
 
-        Account? account = await accountRepository.GetAsync(user.Id, cancellationToken);
-        if (account is not null && account.IsBanned)
+        SignInResult signInResult = await signInManager.PasswordSignInAsync(user, request.Password, false, false);
+        if (!signInResult.Succeeded)
         {
             await userDetailRepository.UpdateLastFailedSignInAsync(user.Id, cancellationToken);
-            return Result.Fail<SignInUserResponse>(new UserBannedError(account.BanNote));
+            return Result.Fail<SignInUserResponse>(new InvalidCredentialsError()); //Message to return to frontend like "Invalid credentials"
         }
+
+        //See userManager - lockout
+        //Account? account = await accountRepository.GetAsync(user.Id, cancellationToken);
+        //if (account is not null && account.IsBanned)
+        //{
+        //    await userDetailRepository.UpdateLastFailedSignInAsync(user.Id, cancellationToken);
+        //    return Result.Fail<SignInUserResponse>(new UserBannedError(account.BanNote));
+        //}
 
         await userDetailRepository.UpdateLastSuccessfullSignInAsync(user.Id, cancellationToken);
 
-        List<string> userRolesNames = await roleRepository.GetAllRolesNamesByUserId(user.Id, cancellationToken);
-        string jwtToken = jwtService.CreateToken(new(user.Id, user.Username, user.Email), userRolesNames);
+        IList<string> userRoles = await userManager.GetRolesAsync(user);
+        
+        string jwtToken = jwtService.CreateToken(new(user.Id, user.UserName, user.Email), userRoles);
 
         SignInUserResponse result = new() { JwtToken = jwtToken };
         return Result.Ok(result);
