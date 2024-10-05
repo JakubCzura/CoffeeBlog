@@ -3,6 +3,7 @@ using AuthService.API.ExtensionMethods.Versioning;
 using AuthService.API.Filters;
 using AuthService.Application.ExtensionMethods.LayerRegistration;
 using AuthService.Domain.Entities.Basics;
+using AuthService.Infrastructure.Persistence.DatabaseContext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -126,6 +127,9 @@ public static class SwaggerConfiguration
             options.RoutePrefix = SwaggerInfo.RoutePrefix;
             options.DocExpansion(DocExpansion.List);
         });
+
+        webApplication.UseSwagger();
+        webApplication.UseSwaggerUI();
 
         return webApplication;
     }

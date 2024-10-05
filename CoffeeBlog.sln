@@ -124,7 +124,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Domain", "src\Shared
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{C85D6514-11D1-493C-BB46-1BA370BBE87E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Application.UnitTests", "tests\Shared\Shared.Application.UnitTests\Shared.Application.UnitTests.csproj", "{F842CC73-4EED-4673-9715-3D2696BC6BEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Application.UnitTests", "tests\Shared\Shared.Application.UnitTests\Shared.Application.UnitTests.csproj", "{F842CC73-4EED-4673-9715-3D2696BC6BEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

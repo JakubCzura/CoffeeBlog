@@ -26,10 +26,10 @@ public class RemoveAccountBanByUserIdCommandHandler(IAccountRepository accountRe
     public async Task<Result<ResponseBase>> Handle(RemoveAccountBanByUserIdCommand request,
                                                    CancellationToken cancellationToken)
     {
-        if (!await userRepository.UserExistsAsync(request.UserId, cancellationToken))
-        {
-            return Result.Fail<ResponseBase>(new UserNotFoundError());
-        }
+        //if (!await userRepository.UserExistsAsync(request.UserId, cancellationToken))
+        //{
+        //    return Result.Fail<ResponseBase>(new UserNotFoundError());
+        //}
 
         await accountRepository.RemoveAccountBanByUserIdAsync(request.UserId, cancellationToken);
 

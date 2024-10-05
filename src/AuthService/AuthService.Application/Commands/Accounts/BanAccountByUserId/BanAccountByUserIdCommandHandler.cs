@@ -30,10 +30,10 @@ public class BanAccountByUserIdCommandHandler(IAccountRepository accountReposito
     public async Task<Result<ResponseBase>> Handle(BanAccountByUserIdCommand request,
                                                    CancellationToken cancellationToken)
     {
-        if (!await userRepository.UserExistsAsync(request.UserId, cancellationToken))
-        {
-            return Result.Fail<ResponseBase>(new UserNotFoundError());
-        }
+        //if (!await userRepository.UserExistsAsync(request.UserId, cancellationToken))
+        //{
+        //    return Result.Fail<ResponseBase>(new UserNotFoundError());
+        //}
 
         BanAccountByUserIdDto banAccountByUserIdDto = mapper.Map<BanAccountByUserIdDto>(request);
         await accountRepository.BanAccountByUserIdAsync(banAccountByUserIdDto, cancellationToken);

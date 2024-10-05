@@ -10,7 +10,8 @@ namespace AuthService.Infrastructure.Persistence.DatabaseContext;
 /// Database context.
 /// </summary>
 /// <param name="dbContextOptions">Configuration for database context.</param>
-public class AuthServiceDbContext(DbContextOptions<AuthServiceDbContext> dbContextOptions) : IdentityDbContext<User, IdentityRole<int>, int>(dbContextOptions)
+public class AuthServiceDbContext(DbContextOptions<AuthServiceDbContext> dbContextOptions) 
+    : IdentityDbContext<User, IdentityRole<int>, int>(dbContextOptions)
 {
     public DbSet<Account> Accounts { get; set; }
     public DbSet<ApiError> ApiErrors { get; set; }
@@ -18,9 +19,11 @@ public class AuthServiceDbContext(DbContextOptions<AuthServiceDbContext> dbConte
     public DbSet<RequestDetail> RequestDetails { get; set; }
 
     public DbSet<UserDetail> UserDetails { get; set; }
-    public DbSet<UserToRole> UserToRoles { get; set; }
     public DbSet<UserLastPassword> UserLastPasswords { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-        => modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+    }
 }

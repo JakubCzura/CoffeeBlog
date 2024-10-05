@@ -55,7 +55,7 @@ public class SignUpUserCommandHandler(UserManager<User> userManager,
 
         User user = mapper.Map<User>(request);
         await userManager.CreateAsync(user, request.Password);
-
+        
         await userDetailRepository.CreateAsync(new(user.Id), cancellationToken);
         await accountRepository.CreateAsync(new(user.Id), cancellationToken);
 

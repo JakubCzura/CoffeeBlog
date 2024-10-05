@@ -24,7 +24,7 @@ public static class DbContextConfiguration
     {
         services.AddIdentityCore<User>(options =>
         {
-            //options.User.RequireUniqueEmail = true;
+            options.User.RequireUniqueEmail = false;
             //options.Password.RequiredLength = 8;
             //options.Password.RequireDigit = true;
             //options.Password.RequireLowercase = true;
@@ -34,8 +34,11 @@ public static class DbContextConfiguration
             //options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
         })
         .AddRoles<IdentityRole<int>>()
-        .AddSignInManager<User>()
-        .AddEntityFrameworkStores<AuthServiceDbContext>();
+        .AddEntityFrameworkStores<AuthServiceDbContext>()
+        .AddSignInManager()
+        .AddRoleManager<RoleManager<IdentityRole<int>>>()
+        .AddApiEndpoints()
+        .AddDefaultTokenProviders();
 
         services.AddDbContext<AuthServiceDbContext>(options =>
         {

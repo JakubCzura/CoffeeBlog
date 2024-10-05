@@ -1,4 +1,5 @@
 ﻿using AuthService.Infrastructure.Security.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AuthService.Infrastructure.ExtensionMethods.Authentication;
@@ -15,7 +16,10 @@ public static class AuthenticationConfiguration
     /// <returns>Reference to <paramref name="services"/></returns>
     public static IServiceCollection ConfigureAuthentication(this IServiceCollection services)
     {
-        services.AddAuthentication().AddJwtBearer();
+        //services.AddAuthentication().AddJwtBearer();
+        services.AddAuthentication()
+            .AddCookie(IdentityConstants.ApplicationScheme)
+            .AddBearerToken(IdentityConstants.BearerScheme);
         services.ConfigureOptions<JwtAuthenticationConfiguration>();
         services.ConfigureOptions<JwtValidationConfiguration>();
 

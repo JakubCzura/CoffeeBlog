@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
 namespace AuthService.Infrastructure.Security.Authentication;
@@ -23,8 +24,8 @@ internal sealed class JwtAuthenticationConfiguration : IConfigureNamedOptions<Au
     /// <param name="options">The options instance to configure.</param>
     public void Configure(AuthenticationOptions options)
     {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultAuthenticateScheme = IdentityConstants.BearerScheme;
+        options.DefaultScheme = IdentityConstants.BearerScheme;
+        options.DefaultChallengeScheme = IdentityConstants.BearerScheme;
     }
 }

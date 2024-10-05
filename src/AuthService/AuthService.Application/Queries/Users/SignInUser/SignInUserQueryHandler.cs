@@ -40,18 +40,18 @@ public class SignInUserQueryHandler(IUserRepository userRepository,
     public async Task<Result<SignInUserResponse>> Handle(SignInUserQuery request,
                                                          CancellationToken cancellationToken)
     {
-        User? user = await userManager.FindByEmailAsync(request.Email);
-        if (user is null)
-        {
-            return Result.Fail<SignInUserResponse>(new InvalidCredentialsError()); //Message to return to frontend like "Invalid credentials"
-        }
+        //User? user = await userManager.FindByEmailAsync(request.Email);
+        //if (user is null)
+        //{
+        //    return Result.Fail<SignInUserResponse>(new InvalidCredentialsError()); //Message to return to frontend like "Invalid credentials"
+        //}
 
-        SignInResult signInResult = await signInManager.PasswordSignInAsync(user, request.Password, false, false);
-        if (!signInResult.Succeeded)
-        {
-            await userDetailRepository.UpdateLastFailedSignInAsync(user.Id, cancellationToken);
-            return Result.Fail<SignInUserResponse>(new InvalidCredentialsError()); //Message to return to frontend like "Invalid credentials"
-        }
+        //SignInResult signInResult = await signInManager.PasswordSignInAsync(user, request.Password, false, false);
+        //if (!signInResult.Succeeded)
+        //{
+        //    await userDetailRepository.UpdateLastFailedSignInAsync(user.Id, cancellationToken);
+        //    return Result.Fail<SignInUserResponse>(new InvalidCredentialsError()); //Message to return to frontend like "Invalid credentials"
+        //}
 
         //See userManager - lockout
         //Account? account = await accountRepository.GetAsync(user.Id, cancellationToken);
@@ -61,13 +61,14 @@ public class SignInUserQueryHandler(IUserRepository userRepository,
         //    return Result.Fail<SignInUserResponse>(new UserBannedError(account.BanNote));
         //}
 
-        await userDetailRepository.UpdateLastSuccessfullSignInAsync(user.Id, cancellationToken);
+        //await userDetailRepository.UpdateLastSuccessfullSignInAsync(user.Id, cancellationToken);
 
-        IList<string> userRoles = await userManager.GetRolesAsync(user);
-        
-        string jwtToken = jwtService.CreateToken(new(user.Id, user.UserName, user.Email), userRoles);
+        //IList<string> userRoles = await userManager.GetRolesAsync(user);
 
-        SignInUserResponse result = new() { JwtToken = jwtToken };
-        return Result.Ok(result);
+        //string jwtToken = jwtService.CreateToken(new(user.Id, user.UserName, user.Email), userRoles);
+
+        //SignInUserResponse result = new() { JwtToken = jwtToken };
+        //return Result.Ok(result);
+        throw new NotImplementedException();    
     }
 }

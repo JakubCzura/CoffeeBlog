@@ -2,6 +2,7 @@ using AuthService.API.ExtensionMethods.Swagger;
 using AuthService.API.ExtensionMethods.Versioning;
 using AuthService.API.Middlewares;
 using AuthService.Application.ExtensionMethods.LayerRegistration;
+using AuthService.Domain.Entities;
 using AuthService.Domain.SettingsOptions.Authentication;
 using AuthService.Domain.SettingsOptions.BanRemovalService;
 using AuthService.Domain.SettingsOptions.PasswordHasher;
@@ -30,9 +31,37 @@ builder.Services.AddControllers()
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 });
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddApiVersion();
-builder.Services.AddSwagger();
+//builder.Services.AddApiVersion();
+//builder.Services.AddSwagger();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new() { Title = "AuthService.API", Version = "v1" });
 
+    options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Description = "JWT Authorization header using the Bearer scheme",
+        Name = "Authorization",
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "bearer"
+    });
+
+    options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    {
+        {
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Id = "Bearer",
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme
+                }
+            },
+            new string[] { }
+        }
+    });
+});
 builder.Services.AddTransient<ExceptionMiddleware>();
 builder.Services.AddTransient<RequestDetailsMiddleware>();
 
@@ -41,7 +70,10 @@ WebApplication app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwaggerInterface();
+    //app.UseSwaggerInterface();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    //app.UseSwaggerInterface();
 }
 
 app.UseMiddleware<RequestDetailsMiddleware>();
@@ -54,5 +86,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapGroup("api/Account").MapIdentityApi<User>();
+
 
 app.Run();
