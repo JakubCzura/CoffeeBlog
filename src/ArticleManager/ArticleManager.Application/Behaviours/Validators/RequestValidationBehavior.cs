@@ -29,7 +29,7 @@ public sealed class RequestValidationBehavior<TRequest, TResponse>(IEnumerable<I
     {
         if (!_validators.Any())
         {
-            return await next();
+            return await next(cancellationToken);
         }
 
         ValidationContext<TRequest> context = new(request);
@@ -42,6 +42,6 @@ public sealed class RequestValidationBehavior<TRequest, TResponse>(IEnumerable<I
             throw new ValidationException(errors);
         }
 
-        return await next();
+        return await next(cancellationToken);
     }
 }
