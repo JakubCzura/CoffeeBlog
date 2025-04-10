@@ -12,8 +12,8 @@
 
   <!--MongoDB and EntityFramework must be the same version.-->
   <ItemGroup>
-	  <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.3" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3" />
+	  <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.4" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
 	  <PackageReference Include="MongoDB.Driver" Version="3.3.0" />
 	  <PackageReference Include="MongoDB.EntityFrameworkCore" Version="8.2.3" />
 	  <PackageReference Include="Quartz.Extensions.Hosting" Version="3.14.0" />
