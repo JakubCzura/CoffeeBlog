@@ -20,7 +20,16 @@ builder.Services.AddCors(options =>
 builder.Services.AddReverseProxy()
                 .LoadFromConfig(builder.Configuration.GetSection("ApiGateway"));
 
+builder.Services.AddSwaggerGen();
+
 WebApplication app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 // Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
