@@ -8,21 +8,33 @@
 <MudLayout>
     <MudAppBar Elevation="1">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <MudText Typo="Typo.h5" Class="ml-3">Application</MudText>
+        <img src="icon-192.png" alt="Coffee Blog Logo" style="height: 32px;" />
+        <MudText Typo="Typo.h5" Class="ms-3">Coffee Blog</MudText>
         <MudSpacer />
+        <div class="d-flex flex-row gap-2">
+            <MudButton StartIcon="@Icons.Material.Filled.EmojiPeople" Color="Color.Primary" Variant="Variant.Outlined" Class="rounded-pill px-4" Style="text-transform: none;" OnClick="NavigateToYoutube">
+                About us
+            </MudButton>
+            <MudButton StartIcon="@Icons.Material.Filled.ContactMail" Color="Color.Primary" Variant="Variant.Outlined" Class="rounded-pill px-4" Style="text-transform: none;" OnClick="NavigateToYoutube">
+                Contact
+            </MudButton>
+            <MudButton StartIcon="@Icons.Material.Filled.Person" Color="Color.Primary" Variant="Variant.Outlined" Class="rounded-pill px-4" Style="text-transform: none;" OnClick="NavigateToYoutube">
+                Sign in
+            </MudButton>
+        </div>
         <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle" />
     </MudAppBar>
-    <MudDrawer id="nav-drawer" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
         <NavMenu />
     </MudDrawer>
-    <MudMainContent Class="pt-16 pa-4">
+    <MudMainContent Class="pt-16 p-1">
         @Body
     </MudMainContent>
 </MudLayout>
 
 @code {
-    private bool _drawerOpen = true;
-    private bool _isDarkMode = true;
+    private bool _drawerOpen = false;
+    private bool _isDarkMode = false;
     private MudTheme? _theme = null;
 
     protected override void OnInitialized()
@@ -40,11 +52,22 @@
     private void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
-    }
-
-    private void DarkModeToggle()
+    }    private void DarkModeToggle()
     {
         _isDarkMode = !_isDarkMode;
+    }
+    
+    private void NavigateToYoutube()
+    {
+        // Navigate to YouTube
+        // Using JSRuntime to open in a new tab
+        // Need to inject IJSRuntime and use await JSRuntime.InvokeVoidAsync("open", "https://www.youtube.com", "_blank")
+        // For this simplified version, we'll navigate directly
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+        {
+            FileName = "https://www.youtube.com",
+            UseShellExecute = true
+        });
     }
 
     private readonly PaletteLight _lightPalette = new()

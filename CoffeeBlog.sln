@@ -122,6 +122,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Application.UnitTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUserInterface", "src\WebUI\WebUserInterface\WebUserInterface.csproj", "{BAD68C03-4E6F-4BBB-B5A4-19878BB4227C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUserInterface.Components", "WebUI\WebUserInterface.Components\WebUserInterface.Components.csproj", "{A0D9F78F-FA71-4EED-9C92-2CBB10DCBD76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -300,6 +302,10 @@ Global
 		{BAD68C03-4E6F-4BBB-B5A4-19878BB4227C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAD68C03-4E6F-4BBB-B5A4-19878BB4227C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAD68C03-4E6F-4BBB-B5A4-19878BB4227C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0D9F78F-FA71-4EED-9C92-2CBB10DCBD76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0D9F78F-FA71-4EED-9C92-2CBB10DCBD76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0D9F78F-FA71-4EED-9C92-2CBB10DCBD76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0D9F78F-FA71-4EED-9C92-2CBB10DCBD76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -363,6 +369,7 @@ Global
 		{C85D6514-11D1-493C-BB46-1BA370BBE87E} = {037FE616-C76C-4ED0-8AFF-ECAEA834E4EA}
 		{F842CC73-4EED-4673-9715-3D2696BC6BEC} = {C85D6514-11D1-493C-BB46-1BA370BBE87E}
 		{BAD68C03-4E6F-4BBB-B5A4-19878BB4227C} = {E4F396CC-218D-4F4E-9ACB-5D8485B03501}
+		{A0D9F78F-FA71-4EED-9C92-2CBB10DCBD76} = {E4F396CC-218D-4F4E-9ACB-5D8485B03501}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {65834F78-0330-46CA-A056-3269495743AD}

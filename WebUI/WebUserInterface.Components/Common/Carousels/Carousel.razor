@@ -1,0 +1,26 @@
+﻿@using MudBlazor
+@inject NavigationManager NavigationManager
+
+<MudCarouselItem Transition="Transition" Style="@($"background-image: url('{BackgroundImage}'); background-size: cover; background-position: center;")">
+    <div class="d-flex flex-column justify-content-center align-items-center text-center text-white" style="height:100%; padding: 20px;">
+        <h2 class="mb-2">@Title</h2>
+        <p class="mb-3">@($"{Date} · {Author}")</p>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="NavigateToPost">@Description</MudButton>
+    </div>
+</MudCarouselItem>
+
+@code {
+
+    [Parameter] public Transition Transition { get; set; } = Transition.Slide;
+    [Parameter] public string BackgroundImage { get; set; } = "images/carousel/coffee-future-4.jpg";
+    [Parameter] public string Title { get; set; } = "Gatunki ziaren kawowych";
+    [Parameter] public string Date { get; set; } = "24 marca 2025";
+    [Parameter] public string Author { get; set; } = "Jakub Czura";
+    [Parameter] public string Description { get; set; } = "Czytaj wpis";
+    [Parameter] public string PostLink { get; set; } = "https://www.google.com/";
+    
+    private void NavigateToPost()
+    {
+        NavigationManager.NavigateTo(PostLink);
+    }
+}

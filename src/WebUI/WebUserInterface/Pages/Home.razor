@@ -1,7 +1,18 @@
 ﻿@page "/"
+@using WebUserInterface.Components.Common.Carousels
+@inject NavigationManager NavigationManager
 
-<PageTitle>Home</PageTitle>
+<MudCarousel Class="mud-width-full" Style="height:400px;" ShowArrows="true" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="true" TData="object">
+    <Carousel BackgroundImage="images/carousel/coffee-future-3.jpg" Title="Kawa nie tylko pyszna, ale i zdrowa" Date="24 marca 2025" Author="Jakub Czura" Description="Czytaj wpis" />
+    <Carousel BackgroundImage="images/carousel/coffee-future-2.jpg" Title="Najpopularniejsze rodzaje kawy" Date="24 marca 2025" Author="Jakub Czura" Description="Czytaj wpis" />
+    <Carousel BackgroundImage="images/carousel/coffee-future-4.jpg" Title="Gatunki ziaren kawowych" Date="24 marca 2025" Author="Jakub Czura" Description="Czytaj wpis" />
+</MudCarousel>
 
-<h1>Hello, world!</h1>
+@code {
+    private Transition transition = Transition.Slide;
 
-Welcome to your new app.
+    private void NavigateToPost()
+    {
+        NavigationManager.NavigateTo("/link-to-post");
+    }
+}
