@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
 
 <MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode" />
 <MudPopoverProvider />
@@ -7,13 +8,17 @@
 
 <MudLayout>
     <MudAppBar Elevation="1">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <img src="icon-192.png" alt="Coffee Blog Logo" style="height: 32px;" />
+        <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" Edge="Edge.Start" OnClick="@DarkModeToggle" />
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" Class="me-3" />
+        <img src="icon-192.png" alt="Coffee Blog Logo" style="height: 32px; margin-left: 60px" />
         <MudText Typo="Typo.h5" Class="ms-3">Coffee Blog</MudText>
         <MudSpacer />
         <div class="d-flex flex-row gap-2">
-            <MudButton StartIcon="@Icons.Material.Filled.EmojiPeople" Color="Color.Primary" Variant="Variant.Outlined" Class="rounded-pill px-4" Style="text-transform: none;" OnClick="NavigateToYoutube">
+            <MudButton StartIcon="@Icons.Material.Filled.EmojiPeople" Color="Color.Primary" Variant="Variant.Outlined" Class="rounded-pill px-4" Style="text-transform: none;" OnClick="@(() => NavigationManager.NavigateTo("about-us"))">
                 About us
+            </MudButton>
+            <MudButton StartIcon="@Icons.Material.Filled.Mail" Color="Color.Primary" Variant="Variant.Outlined" Class="rounded-pill px-4" Style="text-transform: none;" OnClick="NavigateToYoutube">
+                Subscribe
             </MudButton>
             <MudButton StartIcon="@Icons.Material.Filled.ContactMail" Color="Color.Primary" Variant="Variant.Outlined" Class="rounded-pill px-4" Style="text-transform: none;" OnClick="NavigateToYoutube">
                 Contact
@@ -22,12 +27,12 @@
                 Sign in
             </MudButton>
         </div>
-        <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle" />
     </MudAppBar>
     <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
         <NavMenu />
     </MudDrawer>
-    <MudMainContent Class="pt-16 p-1">
+    @* <MudMainContent Class="pt-16 p-1"> *@
+    <MudMainContent Class="pt-16">
         @Body
     </MudMainContent>
 </MudLayout>
