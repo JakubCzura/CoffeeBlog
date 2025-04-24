@@ -15,4 +15,8 @@
     <ProjectReference Include="..\..\..\WebUI\WebUserInterface.Components\WebUserInterface.Components.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\about-us\" />
+  </ItemGroup>
+
 </Project>

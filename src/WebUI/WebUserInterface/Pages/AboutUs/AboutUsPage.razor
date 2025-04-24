@@ -1,3 +1,143 @@
 ﻿@page "/about-us"
 
-<h1>about us</h1>
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-5">
+    <!-- Hero Section -->
+    <MudPaper Elevation="0" Class="d-flex flex-column align-center justify-center py-16" Style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/about-us/coffee-beans.jpg'); background-size: cover; background-position: center;">
+        <MudText Typo="Typo.h1" Align="Align.Center" Class="white-text mb-4">Brewing Passion Into Every Story</MudText>
+        <MudText Typo="Typo.h5" Align="Align.Center" Class="white-text" Style="max-width: 700px;">
+            Welcome to Coffee Blog - where coffee culture meets community
+        </MudText>
+    </MudPaper>
+
+    <!-- About Us Section -->
+    <MudGrid Class="mt-16">
+        <MudItem xs="12">
+            <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-8">Why Coffee Blog Exists</MudText>
+        </MudItem>
+        
+        <MudItem xs="12" md="6" Class="d-flex align-center">
+            <MudPaper Elevation="0" Class="pa-4">
+                <MudText Typo="Typo.body1" Class="mb-4">
+                    Coffee Blog was born from a simple yet powerful idea: to create a space where coffee enthusiasts from around the world could connect, learn, and share their passion for exceptional coffee.
+                </MudText>
+                <MudText Typo="Typo.body1" Class="mb-4">
+                    We believe that coffee is more than just a beverage—it's a global language that brings people together. Every cup tells a story of the farmers who grew the beans, the roasters who crafted the profiles, and the baristas who transformed them into works of art.
+                </MudText>
+                <MudText Typo="Typo.body1">
+                    Our mission is to deepen your appreciation for coffee through educational content, inspiring stories, and practical guides that help you elevate your coffee experience, whether you're a casual drinker or a seasoned professional.
+                </MudText>
+            </MudPaper>
+        </MudItem>
+        
+        <MudItem xs="12" md="6">
+            <MudPaper Elevation="0" Class="p-2 d-flex justify-center">
+                <MudImage Fluid="true" Src="images/about-us/people-drinking-coffee.jpg" Alt="Coffee tasting session" Class="rounded" />
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+    <!-- Our Crew Section -->
+    <MudGrid Style="background-color: #f9f5f0;" Class="mt-16 pa-8">
+        <MudItem xs="12">
+            <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-8">Meet Our Crew</MudText>
+            <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-8" Style="max-width: 700px; margin: 0 auto;">
+                The passionate minds behind Coffee Blog are united by their love for coffee and dedication to sharing knowledge with our community.
+            </MudText>
+        </MudItem>
+        
+        <MudItem xs="12" md="4">
+            <MudCard Elevation="2" Class="h-100">
+                <MudCardMedia Image="images/about-us/woman-drinking-coffee-1.jpg" Height="300" />
+                <MudCardContent>
+                    <MudText Typo="Typo.h5">Emma Clarke</MudText>
+                    <MudText Typo="Typo.subtitle1" Class="mb-2">Founder & Coffee Sommelier</MudText>
+                    <MudText Typo="Typo.body2">
+                        With over 15 years of experience in specialty coffee, Emma has traveled to more than 30 coffee-producing countries. She holds a Q-Grader certification and has judged national barista championships. Emma founded Coffee Blog to democratize coffee knowledge.
+                    </MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        
+        <MudItem xs="12" md="4">
+            <MudCard Elevation="2" Class="h-100">
+                <MudCardMedia Image="images/about-us/man-drinking-coffee.jpg" Height="300" />
+                <MudCardContent>
+                    <MudText Typo="Typo.h5">Dave Son</MudText>
+                    <MudText Typo="Typo.subtitle1" Class="mb-2">Head Writer & Barista</MudText>
+                    <MudText Typo="Typo.body2">
+                        David brings his dual expertise as both a skilled writer and an award-winning barista to our articles. His approachable writing style makes complex coffee concepts accessible to everyone. When not writing, he experiments with brewing methods in our test kitchen.
+                    </MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        
+        <MudItem xs="12" md="4">
+            <MudCard Elevation="2" Class="h-100">
+                <MudCardMedia Image="images/about-us/woman-drinking-coffee-2.jpg" Height="300" />
+                <MudCardContent>
+                    <MudText Typo="Typo.h5">Sophia Kim</MudText>
+                    <MudText Typo="Typo.subtitle1" Class="mb-2">Photographer & Coffee Researcher</MudText>
+                    <MudText Typo="Typo.body2">
+                        Sophia's stunning photography captures the beauty of coffee in all its forms. With a background in food science, she brings a unique analytical perspective to our testing and reviews. Her research on extraction techniques has been published in industry journals.
+                    </MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+
+    <!-- Our Story Section -->
+    <MudGrid Class="mt-16 mb-16">
+        <MudItem xs="12">
+            <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-8">Our Story</MudText>
+        </MudItem>
+        
+        <MudItem xs="12" md="6">
+            <MudPaper Elevation="0" Class="pa-4 d-flex justify-center">
+                <MudImage Src="images/coffee-shop-meeting.jpg" Alt="The team meeting in a coffee shop" Class="rounded-lg" Width="400" />
+            </MudPaper>
+        </MudItem>
+        
+        <MudItem xs="12" md="6" Class="d-flex align-center">
+            <MudPaper Elevation="0" Class="pa-4">
+                <MudTimeline>
+                    <MudTimelineItem Color="Color.Primary" Size="Size.Medium">
+                        <MudText Typo="Typo.h6">2018: The Spark</MudText>
+                        <MudText Typo="Typo.body2">
+                            It all started in a small café in Portland, where Emma, David, and Sophia—then strangers—found themselves in a passionate debate about the perfect brewing temperature. That chance encounter revealed their shared obsession with coffee and planted the seed for something bigger.
+                        </MudText>
+                    </MudTimelineItem>
+                    
+                    <MudTimelineItem Color="Color.Secondary" Size="Size.Medium">
+                        <MudText Typo="Typo.h6">2019: First Steps</MudText>
+                        <MudText Typo="Typo.body2">
+                            What began as occasional meetups to try new coffees evolved into a small blog with a dedicated local following. Our first article, "Understanding Coffee Origins: Beyond the Label," went unexpectedly viral in coffee circles.
+                        </MudText>
+                    </MudTimelineItem>
+                    
+                    <MudTimelineItem Color="Color.Tertiary" Size="Size.Medium">
+                        <MudText Typo="Typo.h6">2021: Growing Community</MudText>
+                        <MudText Typo="Typo.body2">
+                            As our readership grew, we committed to turning Coffee Blog into a comprehensive resource. We launched our first coffee education workshop series and began partnering with specialty roasters to bring unique stories to our audience.
+                        </MudText>
+                    </MudTimelineItem>
+                    
+                    <MudTimelineItem Color="Color.Info" Size="Size.Medium">
+                        <MudText Typo="Typo.h6">Today</MudText>
+                        <MudText Typo="Typo.body2">
+                            With readers in over 120 countries, Coffee Blog has grown into a thriving community united by a love for exceptional coffee. While we've expanded our team and reach, our mission remains unchanged: to celebrate coffee culture and connect passionate people through the world's favorite beverage.
+                        </MudText>
+                    </MudTimelineItem>
+                </MudTimeline>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+    
+    <!-- Join Us Section -->
+    <MudPaper Elevation="0" Class="pa-8 d-flex flex-column align-center justify-center" Style="background-color: #3e2723; color: white;">
+        <MudText Typo="Typo.h4" Align="Align.Center" Class="mb-4">Join Our Coffee Journey</MudText>
+        <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-6" Style="max-width: 700px;">
+            Whether you're a coffee novice or connoisseur, there's always something new to discover. Subscribe to our newsletter and follow us on social media to stay connected with our latest articles, brewing guides, and coffee community events.
+        </MudText>
+        <MudButton Variant="Variant.Filled" Color="Color.Secondary" Size="Size.Large">Subscribe Now</MudButton>
+    </MudPaper>
+</MudContainer>
