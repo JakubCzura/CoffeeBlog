@@ -1,7 +1,6 @@
 ﻿@page "/about-us"
 
 <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-5">
-    <!-- Hero Section -->
     <MudPaper Elevation="0" Class="d-flex flex-column align-center justify-center py-16" Style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/about-us/coffee-beans.jpg'); background-size: cover; background-position: center;">
         <MudText Typo="Typo.h1" Align="Align.Center" Class="white-text mb-4">Brewing Passion Into Every Story</MudText>
         <MudText Typo="Typo.h5" Align="Align.Center" Class="white-text" Style="max-width: 700px;">
@@ -9,8 +8,7 @@
         </MudText>
     </MudPaper>
 
-    <!-- About Us Section -->
-    <MudGrid Class="mt-16">
+    <MudGrid Class="mt-16" >
         <MudItem xs="12">
             <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-8">Why Coffee Blog Exists</MudText>
         </MudItem>
@@ -30,14 +28,13 @@
         </MudItem>
         
         <MudItem xs="12" md="6">
-            <MudPaper Elevation="0" Class="p-2 d-flex justify-center">
+            <MudPaper Elevation="0" Class="p-md-5 d-flex justify-center">
                 <MudImage Fluid="true" Src="images/about-us/people-drinking-coffee.jpg" Alt="Coffee tasting session" Class="rounded" />
             </MudPaper>
         </MudItem>
     </MudGrid>
 
-    <!-- Our Crew Section -->
-    <MudGrid Style="background-color: #f9f5f0;" Class="mt-16 pa-8">
+    <MudGrid Spacing="0" Style="background-color: #f9f5f0;" Class="mt-16 pa-8" >
         <MudItem xs="12">
             <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-8">Meet Our Crew</MudText>
             <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-8" Style="max-width: 700px; margin: 0 auto;">
@@ -45,20 +42,20 @@
             </MudText>
         </MudItem>
         
-        <MudItem xs="12" md="4">
+        <MudItem xs="12" md="4" Class="p-2">
             <MudCard Elevation="2" Class="h-100">
                 <MudCardMedia Image="images/about-us/woman-drinking-coffee-1.jpg" Height="300" />
                 <MudCardContent>
                     <MudText Typo="Typo.h5">Emma Clarke</MudText>
                     <MudText Typo="Typo.subtitle1" Class="mb-2">Founder & Coffee Sommelier</MudText>
                     <MudText Typo="Typo.body2">
-                        With over 15 years of experience in specialty coffee, Emma has traveled to more than 30 coffee-producing countries. She holds a Q-Grader certification and has judged national barista championships. Emma founded Coffee Blog to democratize coffee knowledge.
+                        With over 15 years of experience in specialty coffee, Emma has traveled to more than 30 coffee-producing countries. She holds a Q-Grader certification and has judged national barista championships. Emma founded Coffee Blog to share coffee knowledge.
                     </MudText>
                 </MudCardContent>
             </MudCard>
         </MudItem>
         
-        <MudItem xs="12" md="4">
+        <MudItem xs="12" md="4" Class="p-2">
             <MudCard Elevation="2" Class="h-100">
                 <MudCardMedia Image="images/about-us/man-drinking-coffee.jpg" Height="300" />
                 <MudCardContent>
@@ -71,21 +68,20 @@
             </MudCard>
         </MudItem>
         
-        <MudItem xs="12" md="4">
+        <MudItem xs="12" md="4" Class="p-2">
             <MudCard Elevation="2" Class="h-100">
                 <MudCardMedia Image="images/about-us/woman-drinking-coffee-2.jpg" Height="300" />
                 <MudCardContent>
                     <MudText Typo="Typo.h5">Sophia Kim</MudText>
                     <MudText Typo="Typo.subtitle1" Class="mb-2">Photographer & Coffee Researcher</MudText>
                     <MudText Typo="Typo.body2">
-                        Sophia's stunning photography captures the beauty of coffee in all its forms. With a background in food science, she brings a unique analytical perspective to our testing and reviews. Her research on extraction techniques has been published in industry journals.
+                        Sophia's stunning photography captures the beauty of coffee in all its forms. With a background in food science, she brings a unique analytical perspective to our testing and reviews. Her beautiful photos of coffee have been published in industry journals.
                     </MudText>
                 </MudCardContent>
             </MudCard>
         </MudItem>
     </MudGrid>
 
-    <!-- Our Story Section -->
     <MudGrid Class="mt-16 mb-16">
         <MudItem xs="12">
             <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-8">Our Story</MudText>
@@ -93,7 +89,7 @@
         
         <MudItem xs="12" md="6">
             <MudPaper Elevation="0" Class="pa-4 d-flex justify-center">
-                <MudImage Src="images/coffee-shop-meeting.jpg" Alt="The team meeting in a coffee shop" Class="rounded-lg" Width="400" />
+                <MudImage Fluid="true" Src="images/about-us/team-drinking-coffee.jpg" Alt="The team meeting in a coffee shop" Class="rounded-lg"  />
             </MudPaper>
         </MudItem>
         
@@ -103,7 +99,7 @@
                     <MudTimelineItem Color="Color.Primary" Size="Size.Medium">
                         <MudText Typo="Typo.h6">2018: The Spark</MudText>
                         <MudText Typo="Typo.body2">
-                            It all started in a small café in Portland, where Emma, David, and Sophia—then strangers—found themselves in a passionate debate about the perfect brewing temperature. That chance encounter revealed their shared obsession with coffee and planted the seed for something bigger.
+                            It all started in a small café in Portland, where Emma, Dave and Sophia found had a passionate debate about the perfect brewing temperature. That chance encounter revealed their shared obsession with coffee and planted the seed for something bigger.
                         </MudText>
                     </MudTimelineItem>
                     
@@ -132,7 +128,6 @@
         </MudItem>
     </MudGrid>
     
-    <!-- Join Us Section -->
     <MudPaper Elevation="0" Class="pa-8 d-flex flex-column align-center justify-center" Style="background-color: #3e2723; color: white;">
         <MudText Typo="Typo.h4" Align="Align.Center" Class="mb-4">Join Our Coffee Journey</MudText>
         <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-6" Style="max-width: 700px;">
