@@ -122,7 +122,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Application.UnitTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUserInterface", "src\WebUI\WebUserInterface\WebUserInterface.csproj", "{BAD68C03-4E6F-4BBB-B5A4-19878BB4227C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUserInterface.Components", "WebUI\WebUserInterface.Components\WebUserInterface.Components.csproj", "{A0D9F78F-FA71-4EED-9C92-2CBB10DCBD76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUserInterface.Components", "src\WebUI\WebUserInterface.Components\WebUserInterface.Components.csproj", "{A0D9F78F-FA71-4EED-9C92-2CBB10DCBD76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\WebUI\WebUserInterface.Components\WebUserInterface.Components.csproj" />
+    <ProjectReference Include="..\WebUserInterface.Components\WebUserInterface.Components.csproj" />
   </ItemGroup>
 
   <ItemGroup>
