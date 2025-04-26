@@ -1,0 +1,292 @@
+﻿@page "/"
+@using WebUserInterface.Components.Common.Carousels
+@inject NavigationManager NavigationManager
+
+<PageTitle>Home</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-5">
+
+    <MudCarousel Class="mud-width-full rounded" Style="height:400px;" ShowArrows="true" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="true" TData="object">
+        <Carousel BackgroundImage="images/carousel/coffee-future-3.jpg" Title="Kawa nie tylko pyszna, ale i zdrowa" Date="24 marca 2025" Author="Jakub Czura" Description="Czytaj wpis" />
+        <Carousel BackgroundImage="images/carousel/coffee-future-2.jpg" Title="Najpopularniejsze rodzaje kawy" Date="24 marca 2025" Author="Jakub Czura" Description="Czytaj wpis" />
+        <Carousel BackgroundImage="images/carousel/coffee-future-4.jpg" Title="Gatunki ziaren kawowych" Date="24 marca 2025" Author="Jakub Czura" Description="Czytaj wpis" />
+    </MudCarousel>
+
+    <MudPaper Elevation="0" Class="d-flex flex-column align-center justify-center py-10 px-4 mt-8" Style="background-color: #f9f5f0;">
+        <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-4">Welcome to CoffeeBlog</MudText>
+        <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-6" Style="max-width: 800px;">
+            Your ultimate destination for everything coffee - from bean to cup. We're passionate coffee enthusiasts who roast our own beans,
+            share brewing knowledge, and celebrate coffee culture in all its forms.
+        </MudText>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Href="about-us">
+            Discover Our Story
+        </MudButton>
+    </MudPaper>
+
+    <MudGrid Class="mt-10">
+        <MudItem xs="12" md="6" Class="d-flex align-center">
+            <MudPaper Elevation="0" Class="pa-4">
+                <MudText Typo="Typo.h5" Class="mb-4">Crafted with Passion</MudText>
+                <MudText Typo="Typo.body1" Class="mb-4">
+                    At the heart of CoffeeBlog is our artisanal roastery, where we transform carefully selected green beans into exceptional coffee.
+                    Our master roasters use a combination of time-honored techniques and modern precision to develop unique flavor profiles that highlight
+                    each bean's natural characteristics.
+                </MudText>
+                <MudText Typo="Typo.body1" Class="mb-4">
+                    We source our beans directly from farmers in renowned coffee regions, ensuring fair compensation and sustainable practices.
+                    Every batch is roasted in small quantities to maintain optimal freshness and flavor.
+                </MudText>
+                @* TODO: Implement coffee shop *@
+                <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Href="coffee-shop">
+                    Explore Our Coffees
+                </MudButton>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudPaper Elevation="0" Class="p-md-5 d-flex justify-center">
+                <MudImage Fluid="true" Src="images/home/roastery.jpg" Alt="Our coffee roastery" Class="rounded" />
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+    @*   <MudGrid Spacing="0" Class="mt-16" Style="background-color: #f9f5f0;">
+        <MudItem xs="12" Class="pa-6">
+            <MudText Typo="Typo.h4" Align="Align.Center" Class="mb-2">Our Signature Coffees</MudText>
+            <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-8" Style="max-width: 700px; margin: 0 auto;">
+                Discover our carefully crafted coffee selections, available in your favorite stores and online shops.
+            </MudText>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="3" Class="pa-4">
+            <MudCard Elevation="2" Style="height: 100%;">
+                <MudCardMedia Image="images/home/coffee-ethiopia.jpg" Height="200" />
+                <MudCardContent>
+                    <MudText Typo="Typo.h6">Ethiopian Yirgacheffe</MudText>
+                    <MudText Typo="Typo.body2" Class="mb-2">Light Roast</MudText>
+                    <MudText Typo="Typo.body2">
+                        Bright and vibrant with floral notes, citrus acidity, and a delicate sweetness reminiscent of bergamot and jasmine.
+                    </MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@(() => NavigationManager.NavigateTo("/coffee-shop/ethiopian-yirgacheffe"))">Learn More</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="3" Class="pa-4">
+            <MudCard Elevation="2" Style="height: 100%;">
+                <MudCardMedia Image="images/home/coffee-colombia.jpg" Height="200" />
+                <MudCardContent>
+                    <MudText Typo="Typo.h6">Colombian Supremo</MudText>
+                    <MudText Typo="Typo.body2" Class="mb-2">Medium Roast</MudText>
+                    <MudText Typo="Typo.body2">
+                        Well-balanced with a silky body, caramel sweetness, and hints of toasted nuts and dark chocolate.
+                    </MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@(() => NavigationManager.NavigateTo("/coffee-shop/colombian-supremo"))">Learn More</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="3" Class="pa-4">
+            <MudCard Elevation="2" Style="height: 100%;">
+                <MudCardMedia Image="images/home/coffee-guatemala.jpg" Height="200" />
+                <MudCardContent>
+                    <MudText Typo="Typo.h6">Guatemalan Antigua</MudText>
+                    <MudText Typo="Typo.body2" Class="mb-2">Medium-Dark Roast</MudText>
+                    <MudText Typo="Typo.body2">
+                        Complex profile featuring rich cocoa, spicy notes of cinnamon, and a smooth, smoky finish.
+                    </MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@(() => NavigationManager.NavigateTo("/coffee-shop/guatemalan-antigua"))">Learn More</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="3" Class="pa-4">
+            <MudCard Elevation="2" Style="height: 100%;">
+                <MudCardMedia Image="images/home/coffee-sumatra.jpg" Height="200" />
+                <MudCardContent>
+                    <MudText Typo="Typo.h6">Sumatran Mandheling</MudText>
+                    <MudText Typo="Typo.body2" Class="mb-2">Dark Roast</MudText>
+                    <MudText Typo="Typo.body2">
+                        Bold and earthy with a full body, low acidity, and notes of dark chocolate, cedar, and spices.
+                    </MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@(() => NavigationManager.NavigateTo("/coffee-shop/sumatran-mandheling"))">Learn More</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid> *@
+
+    <MudGrid Class="mt-16">
+        @*     <MudItem xs="12">
+            <MudText Typo="Typo.h4" Class="mb-6">Latest from Our Blog</MudText>
+        </MudItem> *@
+
+        <MudItem xs="12" md="8">
+            <MudPaper Elevation="3">
+                <MudGrid>
+                    <MudItem xs="12" md="6">
+                        <MudPaper Elevation="0" Class="p-md-5 d-flex justify-center">
+                            <MudImage Fluid="true" Src="images/home/coffee-brewing.jpg" Alt="Brewing perfection" Class="rounded" />
+                        </MudPaper>
+                    </MudItem>
+                    <MudItem xs="12" md="6" Class="d-flex align-center">
+                        <MudPaper Elevation="0" Class="pa-4">
+                            <MudText Typo="Typo.overline" Color="Color.Primary">Featured Article</MudText>
+                            <MudText Typo="Typo.h5" Class="mt-2 mb-4">The Art of Pour Over: Mastering the Perfect Cup</MudText>
+                            <MudText Typo="Typo.body2" Class="mb-4">
+                                Dive into the meticulous world of pour-over brewing, where precision and patience yield extraordinary results.
+                                Learn how small adjustments to your technique can dramatically transform your coffee experience.
+                            </MudText>
+                            <div>
+                                <MudText Typo="Typo.caption" Class="mb-4">April 20, 2025 · 8 min read</MudText>
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => NavigationManager.NavigateTo("/blog/pour-over-guide"))">
+                                    Read Article
+                                </MudButton>
+                            </div>
+                        </MudPaper>
+                    </MudItem>
+                </MudGrid>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" md="4">
+            <MudPaper Elevation="2" Class="mb-3 pa-2">
+                <MudText Typo="Typo.h6" Class="mb-2">Origin Story: The Highlands of Ethiopia</MudText>
+                <MudText Typo="Typo.body2" Class="mb-2">
+                    Follow our journey to the birthplace of coffee and discover how altitude, climate, and tradition shape exceptional beans.
+                </MudText>
+                <MudText Typo="Typo.caption">April 15, 2025 · 6 min read</MudText>
+                <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@(() => NavigationManager.NavigateTo("/blog/ethiopian-highlands"))">
+                    Continue Reading
+                </MudButton>
+            </MudPaper>
+            <MudPaper Elevation="2" Class="mt-3 pa-2">
+                <MudText Typo="Typo.h6" Class="mb-2">The Science of Coffee Freshness</MudText>
+                <MudText Typo="Typo.body2" Class="mb-2">
+                    Unlock the secrets of coffee's peak flavor window and learn practical storage methods to extend your beans' lifespan.
+                </MudText>
+                <MudText Typo="Typo.caption">April 10, 2025 · 5 min read</MudText>
+                <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@(() => NavigationManager.NavigateTo("/blog/coffee-freshness"))">
+                    Continue Reading
+                </MudButton>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+    <MudGrid Spacing="0" Class="mt-16" Style="background-color: #f9f5f0;">
+        <MudItem xs="12" Class="pa-6">
+            <MudText Typo="Typo.h4" Align="Align.Center" Class="mb-2">Brewing Excellence</MudText>
+            <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-8" Style="max-width: 700px; margin: 0 auto;">
+                Discover how our coffee shines through different brewing methods, each highlighting unique flavor profiles.
+            </MudText>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="3" Class="pa-4 d-flex flex-column align-center text-center">
+            <MudCard>
+                <MudCardContent>
+                    <MudAvatar Size="Size.Large" Color="Color.Secondary" Class="mb-4">
+                        <MudIcon Icon="@Icons.Material.Filled.CoffeeMaker" Size="Size.Large" />
+                    </MudAvatar>
+                    <MudText Typo="Typo.h6" Class="mb-2">Espresso</MudText>
+                    <MudText Typo="Typo.body2">
+                        Intense and concentrated, perfect for experiencing our darker roasts' full-bodied richness.
+                    </MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="3" Class="pa-4 d-flex flex-column align-center text-center">
+            <MudCard>
+                <MudCardContent>
+                    <MudAvatar Size="Size.Large" Color="Color.Secondary" Class="mb-4">
+                        <MudIcon Icon="@Icons.Material.Filled.Coffee" Size="Size.Large" />
+                    </MudAvatar>
+                    <MudText Typo="Typo.h6" Class="mb-2">Pour Over</MudText>
+                    <MudText Typo="Typo.body2">
+                        Clean and nuanced, highlighting the delicate notes of our single-origin light roasts.
+                    </MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="3" Class="pa-4 d-flex flex-column align-center text-center">
+            <MudCard>
+                <MudCardContent>
+                    <MudAvatar Size="Size.Large" Color="Color.Secondary" Class="mb-4">
+                        <MudIcon Icon="@Icons.Material.Filled.LocalDrink" Size="Size.Large" />
+                    </MudAvatar>
+                    <MudText Typo="Typo.h6" Class="mb-2">French Press</MudText>
+                    <MudText Typo="Typo.body2">
+                        Rich and full-bodied, perfect for bringing out the chocolate and nutty notes of our medium roasts.
+                    </MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="3" Class="pa-4 d-flex flex-column align-center text-center">
+            <MudCard>
+                <MudCardContent>
+                    <MudAvatar Size="Size.Large" Color="Color.Secondary" Class="mb-4">
+                        <MudIcon Icon="@Icons.Material.Filled.WaterDrop" Size="Size.Large" />
+                    </MudAvatar>
+                    <MudText Typo="Typo.h6" Class="mb-2">Cold Brew</MudText>
+                    <MudText Typo="Typo.body2">
+                        Smooth and sweet with low acidity, perfect for summer days and our medium-dark blends.
+                    </MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+
+    <MudGrid Class="mt-16 mb-16">
+        <MudItem xs="12" md="6">
+            <MudPaper Elevation="0" Class="p-md-5 d-flex justify-center">
+                <MudImage Fluid="true" Src="images/home/sustainability.jpg" Alt="Sustainable coffee farming" Class="rounded" />
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" md="6" Class="d-flex align-center">
+            <MudPaper Elevation="0" Class="pa-4">
+                <MudText Typo="Typo.h5" Class="mb-4">Our Commitment to Sustainability</MudText>
+                <MudText Typo="Typo.body1" Class="mb-4">
+                    At CoffeeBlog Roastery, we believe exceptional coffee must be sustainable. We work directly with farmers
+                    who practice environmentally responsible cultivation methods.
+                </MudText>
+                <MudText Typo="Typo.body1" Class="mb-4">
+                    Our roastery operates on 100% renewable energy, and we use eco-friendly packaging that is either biodegradable
+                    or easily recyclable. With every purchase, a portion goes to reforestation efforts in coffee-growing regions.
+                </MudText>
+                <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Href="sustainability">
+                    Learn About Our Initiatives
+                </MudButton>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+    <MudPaper Elevation="0" Class="pa-8 d-flex flex-column align-center justify-center" Style="background-color: #f9f5f0;">
+        <MudText Typo="Typo.h4" Align="Align.Center" Class="mb-4">Join Our Coffee Community</MudText>
+        <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-6" Style="max-width: 700px;">
+            Subscribe to our newsletter for brewing tips, exclusive discounts, and first access to our seasonal limited editions.
+        </MudText>
+
+        <MudButton Variant="Variant.Filled" Color="Color.Secondary" Size="Size.Large" OnClick="@(() => NavigationManager.NavigateTo("/newsletter/subscription"))">Subscribe Now</MudButton>
+
+        <MudDivider Light="true" Class="my-6" Style="width: 60%;" />
+
+        <MudText Typo="Typo.subtitle1" Align="Align.Center" Class="mb-4">Follow us on social media</MudText>
+        <MudButtonGroup Size="Size.Medium" Variant="Variant.Text">
+            <MudIconButton Href="https://www.facebook.com" Icon="@Icons.Custom.Brands.Facebook" Color="Color.Primary" Target="_blank" />
+            <MudIconButton Href="https://www.twitter.com" Icon="@Icons.Custom.Brands.Twitter" Color="Color.Primary" Target="_blank" />
+            <MudIconButton Href="https://www.instagram.com" Icon="@Icons.Custom.Brands.Instagram" Color="Color.Primary" Target="_blank" />
+            <MudIconButton Href="https://www.youtube.com" Icon="@Icons.Custom.Brands.YouTube" Color="Color.Primary" Target="_blank" />
+            <MudIconButton Href="https://www.linkedin.com" Icon="@Icons.Custom.Brands.LinkedIn" Color="Color.Primary" Target="_blank" />
+        </MudButtonGroup>
+    </MudPaper>
+</MudContainer>

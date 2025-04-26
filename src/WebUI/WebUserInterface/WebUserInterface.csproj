@@ -17,6 +17,8 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\about-us\" />
+    <Folder Include="wwwroot\images\home\" />
+    <Folder Include="wwwroot\images\sustainability\" />
   </ItemGroup>
 
 </Project>

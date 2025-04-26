@@ -1,0 +1,282 @@
+﻿@page "/sustainability"
+
+<PageTitle>Sustainability</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge">
+    <MudGrid Spacing="0" Class="pt-5 pa-8" Style="background-color: #f9f5f0;">
+        <MudItem xs="12">
+            <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-6">Responsible Approach to Coffee</MudText>
+            <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-8" Style="max-width: 800px; margin: 0 auto;">
+                At CoffeeBlog Roastery, we believe that truly exceptional coffee can only come from sustainable practices across the entire coffee journey.
+                Our commitment extends beyond quality beans to encompass the wellbeing of farmers, the integrity of our supply chain, and the health of our environment.
+            </MudText>
+        </MudItem>
+    </MudGrid>
+
+    <MudGrid Class="mt-10">
+        <MudItem xs="12" md="6">
+            <MudPaper Elevation="0" Class="p-md-5 d-flex justify-center">
+                <MudImage Fluid="true" Src="images/sustainability/coffee-farmers.jpg" Alt="Coffee farmers harvesting beans" Class="rounded" />
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" md="6" Class="d-flex align-center">
+            <MudPaper Elevation="0" Class="pa-4">
+                <MudText Typo="Typo.h4" Class="mb-4">Empowering Coffee Farmers</MudText>
+                <MudText Typo="Typo.body1" Class="mb-4">
+                    We believe the foundation of exceptional coffee begins with the farmers who nurture each plant. Our direct trade relationships ensure that the families behind our beans receive fair compensation that reflects the true value of their craft and expertise.
+                </MudText>
+                <MudText Typo="Typo.body1" Class="mb-4">
+                    Beyond fair pricing, we invest in long-term partnerships that provide:
+                </MudText>
+                <MudList T="string" ReadOnly="true">
+                    <MudListItem Icon="@Icons.Material.Filled.School" IconColor="Color.Primary">
+                        Agricultural training and education to improve cultivation techniques
+                    </MudListItem>
+                    <MudListItem Icon="@Icons.Material.Filled.Build" IconColor="Color.Primary">
+                        Access to modern equipment and processing technology
+                    </MudListItem>
+                    <MudListItem Icon="@Icons.Material.Filled.Payments" IconColor="Color.Primary">
+                        Microfinancing programs for farm improvements and expansion
+                    </MudListItem>
+                    <MudListItem Icon="@Icons.Material.Filled.HealthAndSafety" IconColor="Color.Primary">
+                        Community healthcare initiatives for farming families
+                    </MudListItem>
+                </MudList>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+    <MudGrid Spacing="0" Class="mt-16 pa-8" Style="background-color: #f9f5f0;">
+        <MudItem xs="12">
+            <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-10">Reliable Supply Chain</MudText>
+        </MudItem>
+
+        <MudItem xs="12" md="4" Class="d-flex flex-column align-center text-center mb-6">
+            <MudAvatar Size="Size.Large" Color="Color.Tertiary" Class="mb-4" Style="height: 80px; width: 80px;">
+                <MudIcon Icon="@Icons.Material.Filled.Map" Size="Size.Large" />
+            </MudAvatar>
+            <MudText Typo="Typo.h5" Class="mb-4">Traceability</MudText>
+            <MudText Typo="Typo.body1" Style="max-width: 350px;">
+                Every bag of our coffee includes a QR code that reveals the complete journey of your beans - from the specific farm and harvest date to roasting details and flavor notes.
+            </MudText>
+        </MudItem>
+
+        <MudItem xs="12" md="4" Class="d-flex flex-column align-center text-center mb-6">
+            <MudAvatar Size="Size.Large" Color="Color.Tertiary" Class="mb-4" Style="height: 80px; width: 80px;">
+                <MudIcon Icon="@Icons.Material.Filled.AccessTime" Size="Size.Large" />
+            </MudAvatar>
+            <MudText Typo="Typo.h5" Class="mb-4">Freshness First</MudText>
+            <MudText Typo="Typo.body1" Style="max-width: 350px;">
+                We maintain a minimal inventory system and roast in small batches to ensure maximum freshness. We prioritize quality over quantity at every step of the process.
+            </MudText>
+        </MudItem>
+
+        <MudItem xs="12" md="4" Class="d-flex flex-column align-center text-center mb-6">
+            <MudAvatar Size="Size.Large" Color="Color.Tertiary" Class="mb-4" Style="height: 80px; width: 80px;">
+                <MudIcon Icon="@Icons.Material.Filled.WaterDrop" Size="Size.Large" />
+            </MudAvatar>
+            <MudText Typo="Typo.h5" Class="mb-4">Water Conservation</MudText>
+            <MudText Typo="Typo.body1" Style="max-width: 350px;">
+                We implement water-efficient processing methods, recycling 95% of water used in our operations. Our closed-loop system reduces consumption by ensuring every drop serves multiple purposes.
+            </MudText>
+        </MudItem>
+    </MudGrid>
+
+    <MudGrid Class="mt-16">
+        <MudItem xs="12" Class="pt-8">
+            <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-6">Environmental Stewardship</MudText>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudPaper Elevation="0" Class="p-4 d-flex justify-center">
+                <MudImage Fluid="true" Src="images/sustainability/shade-grown-coffee.jpg" Alt="Shade-grown coffee plants" Class="rounded" />
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" md="6" Class="d-flex align-center">
+            <MudPaper Elevation="0" Class="pa-4">
+                <MudTimeline>
+                    <MudTimelineItem Color="Color.Success" Size="Size.Medium">
+                        <MudText Typo="Typo.h6">Shade-Grown Coffee</MudText>
+                        <MudText Typo="Typo.body2">
+                            We prioritize shade-grown coffee that preserves forest canopy, maintains bird habitats. These practices also produce sweeter, more complex flavor profiles.
+                        </MudText>
+                    </MudTimelineItem>
+
+                    <MudTimelineItem Color="Color.Success" Size="Size.Medium">
+                        <MudText Typo="Typo.h6">Water Conservation</MudText>
+                        <MudText Typo="Typo.body2">
+                            We support farms using water-efficient processing methods and water recycling systems. Our roastery features a closed-loop water system that reduces usage by 85% compared to standard operations.
+                        </MudText>
+                    </MudTimelineItem>
+
+                    <MudTimelineItem Color="Color.Success" Size="Size.Medium">
+                        <MudText Typo="Typo.h6">Renewable Energy</MudText>
+                        <MudText Typo="Typo.body2">
+                            Our roastery operates on 100% renewable energy through on-site solar panels and renewable. We're working with partner farms to implement solar drying stations in off-grid areas.
+                        </MudText>
+                    </MudTimelineItem>
+
+                    <MudTimelineItem Color="Color.Success" Size="Size.Medium">
+                        <MudText Typo="Typo.h6">Waste Reduction</MudText>
+                        <MudText Typo="Typo.body2">
+                            Coffee chaff from our roasting process is donated to local organic farms for compost. We use biodegradable or recyclable packaging made from post-consumer materials.
+                        </MudText>
+                    </MudTimelineItem>
+                </MudTimeline>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+    <MudGrid Class="mt-16 mb-8">
+        <MudItem xs="12">
+            <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-8">Our Certifications</MudText>
+        </MudItem>
+
+        <MudItem xs="6" sm="4" md="2" Class="d-flex flex-column align-center mb-6">
+            <MudAvatar Color="Color.Success" Size="Size.Large" Class="mb-3">
+                <MudIcon Icon="@Icons.Material.Filled.Nature" Size="Size.Large" />
+            </MudAvatar>
+            <MudText Typo="Typo.subtitle1" Align="Align.Center">Organic Farming</MudText>
+        </MudItem>
+
+        <MudItem xs="6" sm="4" md="2" Class="d-flex flex-column align-center mb-6">
+            <MudAvatar Color="Color.Info" Size="Size.Large" Class="mb-3">
+                <MudIcon Icon="@Icons.Material.Filled.Balance" Size="Size.Large" />
+            </MudAvatar>
+            <MudText Typo="Typo.subtitle1" Align="Align.Center">Fair Trade</MudText>
+        </MudItem>
+
+        <MudItem xs="6" sm="4" md="2" Class="d-flex flex-column align-center mb-6">
+            <MudAvatar Color="Color.Success" Size="Size.Large" Class="mb-3">
+                <MudIcon Icon="@Icons.Material.Filled.Forest" Size="Size.Large" />
+            </MudAvatar>
+            <MudText Typo="Typo.subtitle1" Align="Align.Center">Forest Friends</MudText>
+        </MudItem>
+
+        <MudItem xs="6" sm="4" md="2" Class="d-flex flex-column align-center mb-6">
+            <MudAvatar Color="Color.Info" Size="Size.Large" Class="mb-3">
+                <MudIcon Icon="@Icons.Material.Filled.Water" Size="Size.Large" />
+            </MudAvatar>
+            <MudText Typo="Typo.subtitle1" Align="Align.Center">Save Water</MudText>
+        </MudItem>
+
+        <MudItem xs="6" sm="4" md="2" Class="d-flex flex-column align-center mb-6">
+            <MudAvatar Color="Color.Primary" Size="Size.Large" Class="mb-3">
+                <MudIcon Icon="@Icons.Material.Filled.Handshake" Size="Size.Large" />
+            </MudAvatar>
+            <MudText Typo="Typo.subtitle1" Align="Align.Center">Direct Trade</MudText>
+        </MudItem>
+
+        <MudItem xs="6" sm="4" md="2" Class="d-flex flex-column align-center mb-6">
+            <MudAvatar Color="Color.Secondary" Size="Size.Large" Class="mb-3">
+                <MudIcon Icon="@Icons.Material.Filled.Business" Size="Size.Large" />
+            </MudAvatar>
+            <MudText Typo="Typo.subtitle1" Align="Align.Center">Fair Company</MudText>
+        </MudItem>
+    </MudGrid>
+
+    <MudGrid Class="mt-10 mb-16">
+        <MudItem xs="12">
+            <MudPaper Elevation="3" Class="pa-8" Style="background-color: #f9f5f0;">
+                <MudText Typo="Typo.h4" Align="Align.Center" Class="mb-6">Our 2030 Sustainability Goals</MudText>
+
+                <MudGrid>
+                    <MudItem xs="12" md="4">
+                        <MudText Typo="Typo.h6" Class="mb-2">Environmental Impact</MudText>
+                        <MudList T="string" Dense="true" ReadOnly="true">
+                            <MudListItem Icon="@Icons.Material.Filled.Check" IconColor="Color.Success">
+                                Saving water operations across our entire supply chain
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Check" IconColor="Color.Success">
+                                100% plastic-free packaging
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Check" IconColor="Color.Success">
+                                Plant 1 million trees in coffee-growing regions
+                            </MudListItem>
+                        </MudList>
+                    </MudItem>
+
+                    <MudItem xs="12" md="4">
+                        <MudText Typo="Typo.h6" Class="mb-2">Farmer Support</MudText>
+                        <MudList T="string" Dense="true" ReadOnly="true">
+                            <MudListItem Icon="@Icons.Material.Filled.Check" IconColor="Color.Success">
+                                Triple premium payments above market price
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Check" IconColor="Color.Success">
+                                Fund 500 scholarships for farmers' children
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Check" IconColor="Color.Success">
+                                Deliver modern equipment for farmers
+                            </MudListItem>
+                        </MudList>
+                    </MudItem>
+
+                    <MudItem xs="12" md="4">
+                        <MudText Typo="Typo.h6" Class="mb-2">Community Engagement</MudText>
+                        <MudList T="string" Dense="true" ReadOnly="true">
+                            <MudListItem Icon="@Icons.Material.Filled.Check" IconColor="Color.Success">
+                                Build 25 community centers in key growing regions
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Check" IconColor="Color.Success">
+                                Establish healthcare clinics in 15 remote farming villages
+                            </MudListItem>
+                            <MudListItem Icon="@Icons.Material.Filled.Check" IconColor="Color.Success">
+                                Launch farmer-to-consumer digital connection platform
+                            </MudListItem>
+                        </MudList>
+                    </MudItem>
+                </MudGrid>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+    <MudGrid Class="mt-10 mb-16">
+        <MudItem xs="12">
+            <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-6">Our Impact in Numbers</MudText>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="3" Class="d-flex flex-column align-center mb-4">
+            <MudText Typo="Typo.h2" Class="coffee-stats">65%</MudText>
+            <MudText Typo="Typo.subtitle1" Align="Align.Center">Reduction in water usage since 2020</MudText>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3" Class="d-flex flex-column align-center mb-4">
+            <MudText Typo="Typo.h2" Class="coffee-stats">2,500+</MudText>
+            <MudText Typo="Typo.subtitle1" Align="Align.Center">Farmers directly supported</MudText>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3" Class="d-flex flex-column align-center mb-4">
+            <MudText Typo="Typo.h2" Class="coffee-stats">100k</MudText>
+            <MudText Typo="Typo.subtitle1" Align="Align.Center">Trees planted in the last year</MudText>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="3" Class="d-flex flex-column align-center mb-4">
+            <MudText Typo="Typo.h2" Class="coffee-stats">
+                <MudIcon Icon="@Icons.Material.Filled.Insights" Class="coffee-bean" /> 42%
+            </MudText>
+            <MudText Typo="Typo.subtitle1" Align="Align.Center">Higher income for partner farmers</MudText>
+        </MudItem>
+    </MudGrid>
+
+    <MudGrid Spacing="0" Class="mt-16 pa-8" Style="background-color: #f9f5f0;">
+        <MudItem xs="12" md="6" Class="d-flex align-center">
+            <MudPaper Elevation="0" Class="pa-4 bg-transparent">
+                <MudText Typo="Typo.h4" Class="mb-4">Join Our Sustainability Journey</MudText>
+                <MudText Typo="Typo.body1" Class="mb-4">
+                    We believe that creating a sustainable coffee industry is a collective effort. Every cup of coffee you purchase from CoffeeBlog Roastery contributes to our mission of supporting farming communities and preserving the environment for future generations of coffee lovers.
+                </MudText>
+                <MudText Typo="Typo.body1" Class="mb-4">
+                    Subscribe to our newsletter to stay updated on our sustainability initiatives and learn how you can make more environmentally conscious choices in your coffee routine.
+                </MudText>
+                <MudButton Variant="Variant.Filled" Color="Color.Secondary" Href="newsletter/subscription">
+                    Subscribe to Newsletter
+                </MudButton>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudPaper Elevation="0" Class="p-md-5 d-flex justify-center bg-transparent">
+                <MudImage Fluid="true" Src="images/sustainability/planted-seedlings.jpg" Alt="Coffee seedlings being planted" Class="rounded" />
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
