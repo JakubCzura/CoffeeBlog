@@ -1,4 +1,6 @@
-﻿namespace Shared.Application.Common.Responses.Basics;
+﻿using System.Text.Json;
+
+namespace Shared.Application.Common.Responses.Basics;
 
 /// <summary>
 /// Base response for HTTP request.
@@ -27,9 +29,16 @@ public class ResponseBase
     /// </summary>
     /// <param name="isSuccess">Idicates if the request was successful.</param>
     /// <param name="responseMessage">Response from request.</param>
-    public ResponseBase(bool isSuccess, string? responseMessage)
+    public ResponseBase(string? responseMessage, bool isSuccess = true)
     {
         IsSuccess = isSuccess;
         ResponseMessage = responseMessage;
     }
+
+    /// <summary>
+    /// Converts the reponse to json.
+    /// </summary>
+    /// <returns>Response as json.</returns>
+    public override string ToString()
+        => JsonSerializer.Serialize(this, GetType());
 }
