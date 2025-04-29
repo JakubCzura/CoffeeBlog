@@ -1,0 +1,71 @@
+﻿@page "/newsletter/cancelling/{id}"
+
+<PageTitle>Newsletter Cancellation</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-10 mb-10">
+    <MudPaper Elevation="3" Class="pa-8" Style="background-color: #f9f5f0;">
+        <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-4">Newsletter Unsubscribed</MudText>
+
+        @if (isProcessing)
+        {
+            <div class="d-flex justify-center ma-4">
+                <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+            </div>
+            <MudText Typo="Typo.body1" Align="Align.Center">Processing your unsubscription...</MudText>
+        }
+        else
+        {
+            <MudIcon Icon="@Icons.Material.Filled.MarkEmailRead" Color="Color.Primary" Size="Size.Large" Class="d-flex justify-center mb-4 mx-auto" />
+
+            <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-6">
+                You have successfully unsubscribed from our newsletter. We're sorry to see you go!
+            </MudText>
+
+            <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-6">
+                If you have any feedback about our newsletter, we'd love to hear it. Your insights help us improve.
+            </MudText>
+
+            <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-6">
+                Remember, you're always welcome to rejoin our coffee community whenever you'd like.
+            </MudText>
+
+            <div class="d-flex justify-center">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Href="newsletter/subscription" StartIcon="@Icons.Material.Filled.Coffee">
+                    Resubscribe
+                </MudButton>
+            </div>
+
+            <MudDivider DividerType="DividerType.Middle" Class="my-6" />
+
+            <MudText Typo="Typo.body2" Align="Align.Center" Class="mt-4">
+                If you unsubscribed by mistake, you can click the button above to resubscribe our newsletter.
+            </MudText>
+        }
+    </MudPaper>
+</MudContainer>
+
+@code
+{
+    [Parameter]
+    public string Id { get; set; } = string.Empty;
+
+    private bool isProcessing = false;
+
+    protected override async Task OnInitializedAsync() 
+        => await Submit();
+
+    private async Task Submit()
+    {
+        if (isProcessing)
+        {
+            return;
+        }
+
+        isProcessing = true;
+
+        // TODO: Replace with actual API call to unsubscribe the user instead of simulating delay
+        await Task.Delay(2000);
+
+        isProcessing = false;
+    }
+}

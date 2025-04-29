@@ -1,0 +1,37 @@
+﻿@page "/contact-us"
+
+<PageTitle>Contact Us</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-5">
+    <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-4">Contact Us</MudText>
+    <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-6">
+        Have a question, suggestion, or just want to share your love for coffee? We'd love to hear from you! Fill out the form below and let's connect.
+    </MudText>
+
+    <MudForm @bind-IsValid="isValid" Class="pa-4">
+        <MudTextField @bind-Value="contactCommand.Name" Label="Name" Variant="Variant.Outlined" Required="true" RequiredError="Name is required." Class="mb-4" />
+        <MudTextField @bind-Value="contactCommand.Surname" Label="Surname" Variant="Variant.Outlined" Required="true" RequiredError="Surname is required." Class="mb-4" />
+        <MudTextField @bind-Value="contactCommand.Email" Label="Email" Variant="Variant.Outlined" InputType="InputType.Email" Required="true" RequiredError="A valid email is required." Class="mb-4" />
+        <MudTextField @bind-Value="contactCommand.Message" Label="Message" Variant="Variant.Outlined" Lines="4" Required="true" RequiredError="Message cannot be empty." Class="mb-4" />
+
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!isValid)" OnClick="SubmitForm">Send Message</MudButton>
+    </MudForm>
+
+    @if (!string.IsNullOrEmpty(resultMessage))
+    {
+        <MudAlert Severity="Severity.Success" Class="mt-4">@resultMessage</MudAlert>
+    }
+</MudContainer>
+
+@code {
+    private ContactUsCommand contactCommand = new();
+    private bool isValid;
+    private string resultMessage = string.Empty;
+
+    private async Task SubmitForm()
+    {
+        // Simulate sending the command to the backend
+        await Task.Delay(500); // Simulate async operation
+        resultMessage = "Thank you for reaching out! We'll get back to you soon.";
+    }
+}

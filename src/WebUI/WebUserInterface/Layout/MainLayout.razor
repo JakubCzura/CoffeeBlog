@@ -20,7 +20,7 @@
             <MudButton StartIcon="@Icons.Material.Filled.Mail" Color="Color.Primary" Variant="Variant.Outlined" Class="rounded-pill px-4" Style="text-transform: none;" Href="newsletter/subscription">
                 Subscribe
             </MudButton>
-            <MudButton StartIcon="@Icons.Material.Filled.ContactMail" Color="Color.Primary" Variant="Variant.Outlined" Class="rounded-pill px-4" Style="text-transform: none;">
+            <MudButton StartIcon="@Icons.Material.Filled.ContactMail" Color="Color.Primary" Variant="Variant.Outlined" Class="rounded-pill px-4" Style="text-transform: none;" Href="contact-us">
                 Contact
             </MudButton>
             <MudButton StartIcon="@Icons.Material.Filled.Person" Color="Color.Primary" Variant="Variant.Outlined" Class="rounded-pill px-4" Style="text-transform: none;">
@@ -57,7 +57,8 @@
     private void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
-    }    private void DarkModeToggle()
+    }
+    private void DarkModeToggle()
     {
         _isDarkMode = !_isDarkMode;
     }
