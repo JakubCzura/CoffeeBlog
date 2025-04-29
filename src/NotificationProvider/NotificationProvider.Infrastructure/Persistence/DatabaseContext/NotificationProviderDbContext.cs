@@ -11,8 +11,9 @@ namespace NotificationProvider.Infrastructure.Persistence.DatabaseContext;
 public class NotificationProviderDbContext(DbContextOptions<NotificationProviderDbContext> dbContextOptions) : DbContext(dbContextOptions)
 {
     public DbSet<ApiError> ApiErrors { get; set; }
-    public DbSet<EmailMessageDetail> EmailMessageDetails { get; set; }
     public DbSet<EventConsumerDetail> EventConsumerDetails { get; set; }
+    public DbSet<EmailMessageDetail> EmailMessageDetails { get; set; }
+    public DbSet<NewsletterSubscriber> NewsletterSubscribers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
         => modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

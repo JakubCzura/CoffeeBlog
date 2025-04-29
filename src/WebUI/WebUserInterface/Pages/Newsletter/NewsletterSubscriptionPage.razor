@@ -38,28 +38,27 @@
                     Enter your email below to receive our bi-weekly newsletter filled with coffee inspiration, education, and community stories.
                 </MudText>
 
-                <MudForm @bind-IsValid="@isValid">
-                    <MudTextField @bind-Value="email"
+                <MudForm @ref="subscribeNewsletterForm" Model="subscribeNewsletterCommand" Validation="@(subscribeNewsletterCommandValidator.ValidateValue)" Class="gap-2">
+                    <MudTextField @bind-Value="subscribeNewsletterCommand.Email"
+                                  Label="Email Address"
+                                  For="@(() => subscribeNewsletterCommand.Email)"
                                   InputType="InputType.Email"
                                   InputMode="InputMode.email"
-                                  Label="Email Address"
                                   Variant="Variant.Outlined"
                                   Adornment="Adornment.Start"
                                   AdornmentIcon="@Icons.Material.Filled.Email"
-                                  AdornmentColor="Color.Primary"
-                                  Required="true"
-                                  RequiredError="Email is required!"
-                                  Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})"
-                                  Class="mb-4" />
+                                  AdornmentColor="Color.Primary" />
 
-                    <MudCheckBox T="bool" @bind-Checked="@agreeToTerms" Required="true" RequiredError="You must agree to receive emails from us" Label="I agree to receive emails about coffee content, events, and offers" Class="mb-6" />
+                    <MudCheckBox @bind-Value="subscribeNewsletterCommand.AgreeToTerms"
+                                 Label="I agree to receive emails about coffee content, events, and offers"
+                                 For="@(() => subscribeNewsletterCommand.AgreeToTerms)" />
 
-                    <MudButton Variant="Variant.Filled"
+                    <MudButton OnClick="Submit"
+                               Variant="Variant.Filled"
                                Color="Color.Primary"
                                Size="Size.Large"
                                FullWidth="true"
-                               OnClick="Submit"
-                               Disabled="@(!isValid || isProcessing)">
+                               Disabled="isProcessing">
                         <MudIcon Icon="@Icons.Material.Filled.Coffee" Class="mr-2" /> Subscribe Now
                     </MudButton>
                 </MudForm>

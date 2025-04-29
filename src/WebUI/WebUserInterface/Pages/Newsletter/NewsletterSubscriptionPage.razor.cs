@@ -1,23 +1,26 @@
-﻿namespace WebUserInterface.Pages.Newsletter;
+﻿using MudBlazor;
+using Shared.Application.NotificationProvider.Commands.NewsletterSubscriptions.SubscribeNewsletter;
+
+namespace WebUserInterface.Pages.Newsletter;
 
 public partial class NewsletterSubscriptionPage
 {
-    //TODO: Use command instead of "email" variable when working on backend
-    private string email = string.Empty;
-
-    private bool agreeToTerms = false;
-    private bool isValid = false;
     private string resultMessage = string.Empty;
     private bool isProcessing = false;
 
-    private void Submit()
+    private MudForm subscribeNewsletterForm;
+    private SubscribeNewsletterCommand subscribeNewsletterCommand = new();
+    private SubscribeNewsletterCommandValidator subscribeNewsletterCommandValidator = new();
+
+    private async Task Submit()
     {
         if (isProcessing)
         {
             return;
         }
 
-        if (!isValid)
+        await subscribeNewsletterForm.Validate();
+        if (!subscribeNewsletterForm.IsValid)
         {
             return;
         }

@@ -203,5 +203,14 @@ namespace Shared.Domain.Common.Resources.Translations {
                 return ResourceManager.GetString("UsernameIsRequired", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must agree to the terms and conditions.
+        /// </summary>
+        public static string YouMustAgreeToTheTermsAndConditions {
+            get {
+                return ResourceManager.GetString("YouMustAgreeToTheTermsAndConditions", resourceCulture);
+            }
+        }
     }
 }

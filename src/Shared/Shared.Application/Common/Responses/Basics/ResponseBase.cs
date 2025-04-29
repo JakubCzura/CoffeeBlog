@@ -6,6 +6,11 @@
 public class ResponseBase
 {
     /// <summary>
+    /// Indicates if the request was successful.
+    /// </summary>
+    public bool IsSuccess { get; set; } = true;
+
+    /// <summary>
     /// Response message which user gets from request.
     /// </summary>
     public string? ResponseMessage { get; set; } = null;
@@ -20,6 +25,11 @@ public class ResponseBase
     /// <summary>
     /// Parameterized constructor.
     /// </summary>
+    /// <param name="isSuccess">Idicates if the request was successful.</param>
     /// <param name="responseMessage">Response from request.</param>
-    public ResponseBase(string? responseMessage) => ResponseMessage = responseMessage;
+    public ResponseBase(bool isSuccess, string? responseMessage)
+    {
+        IsSuccess = isSuccess;
+        ResponseMessage = responseMessage;
+    }
 }
