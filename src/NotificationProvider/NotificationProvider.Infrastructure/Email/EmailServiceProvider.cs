@@ -19,7 +19,7 @@ internal class EmailServiceProvider(IOptions<EmailOptions> _emailOptions) : IEma
         {
             Sender = new MailboxAddress(_emailOptions.CoffeeBlog.SenderName, _emailOptions.CoffeeBlog.Email)
         };
-        emailToSend.To.Add(MailboxAddress.Parse(emailMessage.RecipientName));
+        emailToSend.To.Add(MailboxAddress.Parse(emailMessage.RecipientEmail));
         emailToSend.Subject = emailMessage.Subject;
         emailToSend.Body = new TextPart(TextFormat.Html) { Text = emailMessage.Body };
 

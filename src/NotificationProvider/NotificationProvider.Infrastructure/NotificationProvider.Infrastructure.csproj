@@ -13,7 +13,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.4" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.4" />
     <PackageReference Include="MongoDB.Driver" Version="3.3.0" />
-    <PackageReference Include="MongoDB.EntityFrameworkCore" Version="8.2.3" />
+    <PackageReference Include="MongoDB.EntityFrameworkCore" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>

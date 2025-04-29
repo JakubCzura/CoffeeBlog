@@ -16,11 +16,6 @@ public interface IEmailMessage
     string SenderEmail { get; init; }
 
     /// <summary>
-    /// Name of email's recipient.
-    /// </summary>
-    string RecipientName { get; init; }
-
-    /// <summary>
     /// Email of email's recipient.
     /// </summary>
     string RecipientEmail { get; init; }

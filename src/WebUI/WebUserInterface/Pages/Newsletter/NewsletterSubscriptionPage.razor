@@ -51,7 +51,8 @@
 
                     <MudCheckBox @bind-Value="subscribeNewsletterCommand.AgreeToTerms"
                                  Label="I agree to receive emails about coffee content, events, and offers"
-                                 For="@(() => subscribeNewsletterCommand.AgreeToTerms)" />
+                                 For="@(() => subscribeNewsletterCommand.AgreeToTerms)"
+                                 Color="Color.Primary" />
 
                     <MudButton OnClick="Submit"
                                Variant="Variant.Filled"

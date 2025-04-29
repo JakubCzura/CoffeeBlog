@@ -23,6 +23,7 @@ public static class InfrastructureRegistration
         services.AddScoped<IApiErrorRepository, ApiErrorRepository>();
         services.AddScoped<IEmailMessageDetailRepository, EmailMessageDetailRepository>();
         services.AddScoped<IEventConsumerDetailRepository, EventConsumerDetailRepository>();
+        services.AddScoped<INewsletterSubscriberRepository, NewsletterSubscriberRepository>();
 
         return services;
     }
