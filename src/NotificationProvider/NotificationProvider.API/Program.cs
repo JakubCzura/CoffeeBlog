@@ -1,3 +1,4 @@
+using NotificationProvider.API.ExtensionMethods.BackgroundWorkers;
 using NotificationProvider.Application.ExtensionMethods.LayerRegistration;
 using NotificationProvider.Domain.SettingsOptions.Database;
 using NotificationProvider.Domain.SettingsOptions.Email;
@@ -31,6 +32,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseBackgroundWorkers();
 
 app.UseHttpsRedirection();
 

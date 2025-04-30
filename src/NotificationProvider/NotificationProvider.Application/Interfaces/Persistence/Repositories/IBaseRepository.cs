@@ -44,6 +44,15 @@ public interface IBaseRepository<TEntity> where TEntity : DbEntityBase
                           CancellationToken cancellationToken);
 
     /// <summary>
+    /// Updates entities in database.
+    /// </summary>
+    /// <param name="entities">Entities to update.</param>
+    /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
+    /// <returns>Number of state entries written to database.</returns>
+    Task<int> UpdateRangeAsync(List<TEntity> entities,
+                               CancellationToken cancellationToken);
+
+    /// <summary>
     /// Deletes entity in database by id.
     /// </summary>
     /// <param name="id">Entity's id.</param>

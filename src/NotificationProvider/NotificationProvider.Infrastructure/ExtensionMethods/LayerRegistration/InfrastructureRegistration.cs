@@ -1,5 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Hangfire;
+using Hangfire.Mongo;
+using Hangfire.Mongo.Migration.Strategies;
+using Hangfire.Mongo.Migration.Strategies.Backup;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Driver;
 using NotificationProvider.Application.Interfaces.Email;
 using NotificationProvider.Application.Interfaces.Factories.Emails;
 using NotificationProvider.Application.Interfaces.Persistence.Repositories;
@@ -18,12 +23,37 @@ public static class InfrastructureRegistration
         services.ConfigureDbContext(configuration);
 
         services.AddScoped<IEmailMessageFactory, EmailMessageFactory>();
-        services.AddScoped<IEmailServiceProvider, EmailServiceProvider>();
+        services.AddScoped<IEmailSender, EmailSender>();
 
         services.AddScoped<IApiErrorRepository, ApiErrorRepository>();
-        services.AddScoped<IEmailMessageDetailRepository, EmailMessageDetailRepository>();
+        services.AddScoped<IEmailMessageRepository, EmailMessageRepository>();
         services.AddScoped<IEventConsumerDetailRepository, EventConsumerDetailRepository>();
         services.AddScoped<INewsletterSubscriberRepository, NewsletterSubscriberRepository>();
+
+        MongoUrlBuilder mongoUrlBuilder = new(configuration.GetValue<string>("Database:ConnectionString"));
+        MongoClient mongoClient = new(mongoUrlBuilder.ToMongoUrl());
+
+        services.AddHangfire(cfg => cfg
+            .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
+            .UseSimpleAssemblyNameTypeSerializer()
+            .UseRecommendedSerializerSettings()
+            .UseMongoStorage(mongoClient, configuration.GetValue<string>("Database:DatabaseName"), new MongoStorageOptions
+            {
+                CheckQueuedJobsStrategy = CheckQueuedJobsStrategy.TailNotificationsCollection,
+                MigrationOptions = new MongoMigrationOptions
+                {
+                    MigrationStrategy = new MigrateMongoMigrationStrategy(),
+                    BackupStrategy = new CollectionMongoBackupStrategy(),
+                },
+                Prefix = "notifications.hangfire",
+                CheckConnection = true
+            })
+        );
+
+        services.AddHangfireServer(serverOptions =>
+        {
+            serverOptions.ServerName = "Notifications.Hangfire";
+        });
 
         return services;
     }

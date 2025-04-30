@@ -5,7 +5,7 @@ using NotificationProvider.Domain.Models.Emails;
 namespace NotificationProvider.Application.Mapping.MessageDetails;
 
 /// <summary>
-/// Mapping profile for <see cref="EmailMessageDetail"/>.
+/// Mapping profile for <see cref="EmailMessage"/>.
 /// </summary>
 public class EmailMessageDetailMappingProfile : Profile
 {
@@ -14,7 +14,7 @@ public class EmailMessageDetailMappingProfile : Profile
     /// </summary>
     public EmailMessageDetailMappingProfile()
     {
-        CreateMap<IEmailMessage, EmailMessageDetail>()
+        CreateMap<IEmailMessage, EmailMessage>()
             .ForMember(dest => dest.SentAt, opt => opt.Ignore());
     }
 }

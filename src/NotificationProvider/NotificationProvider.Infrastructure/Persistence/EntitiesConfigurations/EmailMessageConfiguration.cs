@@ -6,19 +6,17 @@ using NotificationProvider.Domain.Entities;
 namespace NotificationProvider.Infrastructure.Persistence.EntitiesConfigurations;
 
 /// <summary>
-/// Configuration for <see cref="EmailMessageDetail"/> in database.
+/// Configuration for <see cref="EmailMessage"/> in database.
 /// </summary>
-internal class EmailMessageDetailConfiguration : IEntityTypeConfiguration<EmailMessageDetail>
+internal class EmailMessageConfiguration : IEntityTypeConfiguration<EmailMessage>
 {
-    public void Configure(EntityTypeBuilder<EmailMessageDetail> builder)
+    public void Configure(EntityTypeBuilder<EmailMessage> builder)
     {
-        builder.ToCollection("EmailMessageDetail");
+        builder.ToCollection("EmailMessage");
 
         builder.Property(x => x.SenderName).IsRequired();
 
         builder.Property(x => x.SenderEmail).IsRequired();
-
-        builder.Property(x => x.RecipientName).IsRequired();
 
         builder.Property(x => x.RecipientEmail).IsRequired();
 

@@ -43,6 +43,14 @@ internal class BaseRepository<TEntity>(NotificationProviderDbContext notificatio
         return await notificationProviderDbContext.SaveChangesAsync(cancellationToken);
     }
 
+    public async Task<int> UpdateRangeAsync(List<TEntity> entities,
+                                            CancellationToken cancellationToken = default)
+
+    {
+        _dbSet.UpdateRange(entities);
+        return await notificationProviderDbContext.SaveChangesAsync(cancellationToken);
+    }
+
     public async Task<int> DeleteAsync(ObjectId id,
                                        CancellationToken cancellationToken = default)
     {

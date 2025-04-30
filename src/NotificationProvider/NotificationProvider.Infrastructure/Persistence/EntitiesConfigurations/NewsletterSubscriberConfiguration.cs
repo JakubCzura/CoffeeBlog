@@ -16,8 +16,8 @@ internal class NewsletterSubscriberConfiguration : IEntityTypeConfiguration<News
 
         builder.Property(x => x.Email).IsRequired();
 
-        builder.Property(x => x.AgreeToTerms).IsRequired();
+        builder.Property(x => x.AgreeToTerms);
 
-        builder.Property(x => x.IsConfirmed).IsRequired(false);
+        builder.Property(x => x.IsConfirmed);
     }
 }
