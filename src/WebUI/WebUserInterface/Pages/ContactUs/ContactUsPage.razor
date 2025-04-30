@@ -1,5 +1,4 @@
 ﻿@page "/contact-us"
-@using Shared.Application.NotificationProvider.Commands.EmailMessages.ContactUs
 
 <PageTitle>Contact Us</PageTitle>
 
@@ -9,13 +8,35 @@
         Have a question, suggestion, or just want to share your love for coffee? We'd love to hear from you! Fill out the form below and let's connect.
     </MudText>
 
-    <MudForm @bind-IsValid="isValid" Class="pa-4">
-        <MudTextField @bind-Value="contactCommand.Name" Label="Name" Variant="Variant.Outlined" Required="true" RequiredError="Name is required." Class="mb-4" />
-        <MudTextField @bind-Value="contactCommand.Surname" Label="Surname" Variant="Variant.Outlined" Required="true" RequiredError="Surname is required." Class="mb-4" />
-        <MudTextField @bind-Value="contactCommand.Email" Label="Email" Variant="Variant.Outlined" InputType="InputType.Email" Required="true" RequiredError="A valid email is required." Class="mb-4" />
-        <MudTextField @bind-Value="contactCommand.Message" Label="Message" Variant="Variant.Outlined" Lines="4" Required="true" RequiredError="Message cannot be empty." Class="mb-4" />
+    <MudForm @ref="contactUsForm" Model="contactUsCommand" Validation="@(contactUsCommandValidator.ValidateValue)" Class="gap-2">
+        <MudTextField @bind-Value="contactUsCommand.Name"
+                      Label="Name"
+                      For="@(() => contactUsCommand.Name)"
+                      Variant="Variant.Outlined" />
 
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!isValid)" OnClick="SubmitForm">Send Message</MudButton>
+        <MudTextField @bind-Value="contactUsCommand.Surname"
+                      Label="Surname"
+                      For="@(() => contactUsCommand.Surname)"
+                      Variant="Variant.Outlined" />
+
+        <MudTextField @bind-Value="contactUsCommand.Email"
+                      Label="Email"
+                      For="@(() => contactUsCommand.Email)"
+                      InputType="InputType.Email"
+                      InputMode="InputMode.email"
+                      Variant="Variant.Outlined" />
+
+        <MudTextField @bind-Value="contactUsCommand.Message"
+                      Label="Message"
+                      For="@(() => contactUsCommand.Message)"
+                      Variant="Variant.Outlined" />
+
+        <MudButton OnClick="Submit"
+                   Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   Disabled="isProcessing">
+            Send Message
+        </MudButton>
     </MudForm>
 
     @if (!string.IsNullOrEmpty(resultMessage))
@@ -23,16 +44,3 @@
         <MudAlert Severity="Severity.Success" Class="mt-4">@resultMessage</MudAlert>
     }
 </MudContainer>
-
-@code {
-    private ContactUsCommand contactCommand = new();
-    private bool isValid;
-    private string resultMessage = string.Empty;
-
-    private async Task SubmitForm()
-    {
-        // Simulate sending the command to the backend
-        await Task.Delay(500); // Simulate async operation
-        resultMessage = "Thank you for reaching out! We'll get back to you soon.";
-    }
-}
