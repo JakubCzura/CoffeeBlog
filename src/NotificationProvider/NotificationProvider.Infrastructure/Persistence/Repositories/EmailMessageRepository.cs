@@ -14,12 +14,12 @@ internal class EmailMessageRepository(NotificationProviderDbContext _notificatio
     : BaseRepository<EmailMessage>(_notificationProviderDbContext), IEmailMessageRepository
 {
     public Task<List<EmailMessage>> GetMessagesToSendAsync(CancellationToken cancellationToken)
-        => _notificationProviderDbContext.EmailMessages
-            .Where(p => p.MessageStatus != EmailMessageStatus.Sent &&
-                        p.SentAt < DateTime.UtcNow &&
-                        p.SentAt > DateTime.UtcNow.AddDays(-3) &&
-                        p.SendErrorCount < 5)
-            .OrderBy(p => p.SentAt)
-            .Take(50)
-            .ToListAsync(cancellationToken);
+        => _notificationProviderDbContext.EmailMessages.AsNoTracking()
+                                                       .Where(emailMessage => emailMessage.MessageStatus != EmailMessageStatus.Sent &&
+                                                                              emailMessage.SentAt < DateTime.UtcNow &&
+                                                                              emailMessage.SentAt > DateTime.UtcNow.AddDays(-3) &&
+                                                                              emailMessage.SendErrorCount < 5)
+                                                       .OrderBy(p => p.SentAt)
+                                                       .Take(50)
+                                                       .ToListAsync(cancellationToken);
 }

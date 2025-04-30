@@ -1,27 +1,26 @@
 ﻿using Microsoft.Extensions.Logging;
 using NotificationProvider.Application.Interfaces.Email;
+using NotificationProvider.Application.Interfaces.Helpers;
 using NotificationProvider.Application.Interfaces.Persistence.Repositories;
 using NotificationProvider.Domain.Entities;
 using NotificationProvider.Domain.Models.Emails;
 
 namespace NotificationProvider.Infrastructure.BackgroundWorkers;
 
-public class EmailSendingProcessor(IEmailMessageRepository emailMessageDetailRepository,
+public class EmailSendingProcessor(ILogger<EmailSendingProcessor> logger,
                                    IEmailSender emailServiceProvider,
-                                   ILogger<EmailSendingProcessor> logger)
+                                   IEmailMessageRepository emailMessageDetailRepository,
+                                   IDateTimeProvider dateTimeProvider)
 {
     public async Task SendEmailsAsync()
     {
-        List<EmailMessage> emailMessages = await emailMessageDetailRepository
-            .GetMessagesToSendAsync(default);
+        List<EmailMessage> emailMessages = await emailMessageDetailRepository.GetMessagesToSendAsync(default);
 
-        Dictionary<EmailMessage, Task<SendEmailMessageResult>> sendEmailMessagesTasks =
-            emailMessages.ToDictionary(emailMessage => emailMessage,
-                                       emailMessage => emailServiceProvider
-                                           .SendEmailAsync(emailMessage, default));
+        Dictionary<EmailMessage, Task<SendEmailMessageResult>> sendEmailMessagesTasks 
+            = emailMessages.ToDictionary(emailMessage => emailMessage, 
+                                         emailMessage => emailServiceProvider.SendEmailAsync(emailMessage, default));
 
-        SendEmailMessageResult[] sendEmailMessageResults =
-            await Task.WhenAll(sendEmailMessagesTasks.Values);
+        SendEmailMessageResult[] sendEmailMessageResults = await Task.WhenAll(sendEmailMessagesTasks.Values);
 
         List<EmailMessage> messagesToUpdate = [];
 
@@ -30,7 +29,7 @@ public class EmailSendingProcessor(IEmailMessageRepository emailMessageDetailRep
             if (sendEmailMessageResult.EmailMessageStatus == Domain.Enums.EmailMessageStatus.Sent)
             {
                 sendEmailMessageResult.EmailMessage.MessageStatus = sendEmailMessageResult.EmailMessageStatus;
-                sendEmailMessageResult.EmailMessage.SentAt = DateTime.UtcNow;
+                sendEmailMessageResult.EmailMessage.SentAt = dateTimeProvider.UtcNow;
 
                 messagesToUpdate.Add(sendEmailMessageResult.EmailMessage);
 
@@ -42,7 +41,7 @@ public class EmailSendingProcessor(IEmailMessageRepository emailMessageDetailRep
                 sendEmailMessageResult.EmailMessage.SmtpErrorCode = sendEmailMessageResult.SmtpErrorCode;
                 sendEmailMessageResult.EmailMessage.ErrorMessage = sendEmailMessageResult.ErrorMessage;
                 sendEmailMessageResult.EmailMessage.MessageStatus = sendEmailMessageResult.EmailMessageStatus;
-                sendEmailMessageResult.EmailMessage.SentAt = DateTime.UtcNow;
+                sendEmailMessageResult.EmailMessage.SentAt = dateTimeProvider.UtcNow;
 
                 messagesToUpdate.Add(sendEmailMessageResult.EmailMessage);
 
