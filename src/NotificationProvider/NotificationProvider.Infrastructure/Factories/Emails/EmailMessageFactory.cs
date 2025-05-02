@@ -47,7 +47,7 @@ internal class EmailMessageFactory(IOptions<EmailOptions> _emailOptions,
                                       string message)
     {
         StringBuilder emailBody = new();
-        string currentDate = dateTimeProvider.Now.ToString("dd.MM.yyyy HH:mm");
+        DateTime currentDate = dateTimeProvider.Now;
 
         emailBody.AppendLine("<!DOCTYPE html>");
         emailBody.AppendLine("<html>");
@@ -68,7 +68,7 @@ internal class EmailMessageFactory(IOptions<EmailOptions> _emailOptions,
         emailBody.AppendLine($"        <p>Last name: {recipientSurname}</p>");
         emailBody.AppendLine($"        <p>E-mail: {recipientEmail}</p>");
         emailBody.AppendLine("        <br/>");
-        emailBody.AppendLine($"        <p>On {currentDate}, you wrote to us:</p>");
+        emailBody.AppendLine($"        <p>On {currentDate.ToString("dd.MM.yyyy HH:mm")}, you wrote to us:</p>");
         emailBody.AppendLine($"        <p>{message}</p>");
         emailBody.AppendLine("        <br/>");
         emailBody.AppendLine("        <p>Thank you for contacting us. We appreciate your feedback. Our staff will reply to the message soon.</p>");
@@ -78,7 +78,7 @@ internal class EmailMessageFactory(IOptions<EmailOptions> _emailOptions,
         emailBody.AppendLine("    </tr>");
         emailBody.AppendLine("    <tr>");
         emailBody.AppendLine("      <td align=\"center\" style=\"padding:10px; background-color:#f4f4f4; font-size:12px; color:#999999;\">");
-        emailBody.AppendLine("        2025 Coffee Blog. Thank you for visiting our webpage.");
+        emailBody.AppendLine($"        {currentDate.Year} Coffee Blog. Thank you for visiting our webpage.");
         emailBody.AppendLine("      </td>");
         emailBody.AppendLine("    </tr>");
         emailBody.AppendLine("  </table>");
