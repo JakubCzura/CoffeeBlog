@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Hangfire;
+using Microsoft.Extensions.Logging;
 using NotificationProvider.Application.Interfaces.Email;
 using NotificationProvider.Application.Interfaces.Helpers;
 using NotificationProvider.Application.Interfaces.Persistence.Repositories;
@@ -7,6 +8,7 @@ using NotificationProvider.Domain.Models.Emails;
 
 namespace NotificationProvider.Infrastructure.BackgroundWorkers;
 
+[DisableConcurrentExecution(120)]
 public class EmailSendingProcessor(ILogger<EmailSendingProcessor> logger,
                                    IEmailSender emailServiceProvider,
                                    IEmailMessageRepository emailMessageDetailRepository,
@@ -37,10 +39,10 @@ public class EmailSendingProcessor(ILogger<EmailSendingProcessor> logger,
             }
             else
             {
-                sendEmailMessageResult.EmailMessage.SendErrorCount++;
+                sendEmailMessageResult.EmailMessage.MessageStatus = sendEmailMessageResult.EmailMessageStatus;
                 sendEmailMessageResult.EmailMessage.SmtpErrorCode = sendEmailMessageResult.SmtpErrorCode;
                 sendEmailMessageResult.EmailMessage.ErrorMessage = sendEmailMessageResult.ErrorMessage;
-                sendEmailMessageResult.EmailMessage.MessageStatus = sendEmailMessageResult.EmailMessageStatus;
+                sendEmailMessageResult.EmailMessage.SendErrorCount++;
                 sendEmailMessageResult.EmailMessage.SentAt = dateTimeProvider.UtcNow;
 
                 messagesToUpdate.Add(sendEmailMessageResult.EmailMessage);

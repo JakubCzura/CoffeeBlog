@@ -37,4 +37,17 @@ public interface IEmailMessageFactory
     /// <returns>Message to send.</returns>
     IEmailMessage CreatePasswordResetedEmailMessage(string recipientName,
                                                     string recipientEmail);
+
+    /// <summary>
+    /// Creates an e-mail message body based on contact form.
+    /// </summary>
+    /// <param name="recipientName">User's name.</param>
+    /// <param name="recipientSurname">User's surname.</param>
+    /// <param name="recipientEmail">User's e-mail.</param>
+    /// <param name="message">User's message to CoffeeBlog.</param>
+    /// <returns>Message body to send.</returns>
+    public string CreateContactUsBody(string recipientName,
+                                      string recipientSurname,
+                                      string recipientEmail,
+                                      string message);
 }

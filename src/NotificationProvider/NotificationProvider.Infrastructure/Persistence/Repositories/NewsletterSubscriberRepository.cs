@@ -13,5 +13,5 @@ internal class NewsletterSubscriberRepository(NotificationProviderDbContext noti
 {
     public async Task<bool> EmailExistsAsync(string email, CancellationToken cancellationToken)
         => await notificationProviderDbContext.NewsletterSubscribers.AsNoTracking()
-                                                                     .AnyAsync(s => s.Email == email, cancellationToken);
+                                                                    .AnyAsync(s => s.Email == email, cancellationToken);
 }
