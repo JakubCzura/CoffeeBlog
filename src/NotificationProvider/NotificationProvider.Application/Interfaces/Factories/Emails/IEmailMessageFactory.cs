@@ -50,4 +50,13 @@ public interface IEmailMessageFactory
                                       string recipientSurname,
                                       string recipientEmail,
                                       string message);
+
+    /// <summary>
+    /// Creates an e-mail message body for newsletter subscription confirmation.
+    /// </summary>
+    /// <param name="recipientEmail">User's e-mail.</param>
+    /// <param name="recipientId">User's Id used for confirmation link.</param>
+    /// <returns>Message body to send.</returns>
+    public string CreateSubscribeNewsletterBody(string recipientEmail,
+                                                string recipientId);
 }
