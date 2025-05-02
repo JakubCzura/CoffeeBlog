@@ -13,7 +13,7 @@
             </div>
             <MudText Typo="Typo.body1" Align="Align.Center">Processing your unsubscription...</MudText>
         }
-        else
+        @if (isSuccess)
         {
             <MudIcon Icon="@Icons.Material.Filled.MarkEmailRead" Color="Color.Primary" Size="Size.Large" Class="d-flex justify-center mb-4 mx-auto" />
 
@@ -43,29 +43,3 @@
         }
     </MudPaper>
 </MudContainer>
-
-@code
-{
-    [Parameter]
-    public string Id { get; set; } = string.Empty;
-
-    private bool isProcessing = false;
-
-    protected override async Task OnInitializedAsync() 
-        => await Submit();
-
-    private async Task Submit()
-    {
-        if (isProcessing)
-        {
-            return;
-        }
-
-        isProcessing = true;
-
-        // TODO: Replace with actual API call to unsubscribe the user instead of simulating delay
-        await Task.Delay(2000);
-
-        isProcessing = false;
-    }
-}

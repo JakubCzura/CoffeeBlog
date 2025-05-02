@@ -165,6 +165,9 @@
   <data name="UsernameIsRequired" xml:space="preserve">
     <value>Username is required</value>
   </data>
+  <data name="ValueIsRequired" xml:space="preserve">
+    <value>Value is required</value>
+  </data>
   <data name="YouMustAgreeToTheTermsAndConditions" xml:space="preserve">
     <value>You must agree to the terms and conditions</value>
   </data>

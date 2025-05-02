@@ -123,6 +123,9 @@
   <data name="AccountHasBeenBanned" xml:space="preserve">
     <value>Account has been banned</value>
   </data>
+  <data name="AnErrorOccurredWhileProcessingYourRequest.PleaseTryAgain" xml:space="preserve">
+    <value>An error occurred while processing your request. Please try again</value>
+  </data>
   <data name="EmailHasBeenChanged" xml:space="preserve">
     <value>E-mail has been changed</value>
   </data>

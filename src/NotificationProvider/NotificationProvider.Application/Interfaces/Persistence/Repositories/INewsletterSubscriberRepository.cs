@@ -1,4 +1,5 @@
-﻿using NotificationProvider.Domain.Entities;
+﻿using MongoDB.Bson;
+using NotificationProvider.Domain.Entities;
 
 namespace NotificationProvider.Application.Interfaces.Persistence.Repositories;
 
@@ -13,6 +14,15 @@ public interface INewsletterSubscriberRepository : IBaseRepository<NewsletterSub
     /// <param name="email">The email to check.</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>True if the email exists, otherwise false.</returns>
-    public Task<bool> EmailExistsAsync(string email,
+    Task<bool> EmailExistsAsync(string email,
+                                CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Confirms the subscription of a newsletter subscriber by setting the IsConfirmed property to true.
+    /// </summary>
+    /// <param name="id">Id of subscription to confirm.</param>
+    /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
+    /// <returns>Number of rows edited in database.</returns>
+    Task<int> ConfirmSubscriptionAsync(ObjectId id,
                                        CancellationToken cancellationToken);
 }

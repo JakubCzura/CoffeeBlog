@@ -205,6 +205,15 @@ namespace Shared.Domain.Common.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Value is required.
+        /// </summary>
+        public static string ValueIsRequired {
+            get {
+                return ResourceManager.GetString("ValueIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must agree to the terms and conditions.
         /// </summary>
         public static string YouMustAgreeToTheTermsAndConditions {

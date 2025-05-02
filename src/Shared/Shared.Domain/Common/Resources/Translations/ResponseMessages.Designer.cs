@@ -79,6 +79,15 @@ namespace Shared.Domain.Common.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred while processing your request. Please try again.
+        /// </summary>
+        public static string AnErrorOccurredWhileProcessingYourRequest_PleaseTryAgain {
+            get {
+                return ResourceManager.GetString("AnErrorOccurredWhileProcessingYourRequest.PleaseTryAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to E-mail has been changed.
         /// </summary>
         public static string EmailHasBeenChanged {
