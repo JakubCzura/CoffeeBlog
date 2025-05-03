@@ -1,6 +1,11 @@
 ﻿using EventBus.API.ExtensionMethods.LayerRegistration;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NotificationProvider.Application.Behaviours.Validators;
+using NotificationProvider.Domain.Constants;
+using Shared.Application.NotificationProvider.Commands.NewsletterSubscriptions.SubscribeNewsletter;
 using System.Reflection;
 
 namespace NotificationProvider.Application.ExtensionMethods.LayerRegistration;
@@ -20,8 +25,20 @@ public static class ApplicationRegistration
                                                       IConfiguration configuration)
     {
         services.AddEventBus(configuration, Assembly.GetExecutingAssembly());
+        services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            config.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
+        });
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
+        services.AddValidatorsFromAssemblyContaining(typeof(SubscribeNewsletterCommandValidator));
+        services.AddFluentValidationAutoValidation(config =>
+        {
+            config.Filter = type => ExcludeUnexpectedTypesFromFluentValidationAutoValidation(type);
+        });
         return services;
     }
+
+    private static Func<Type, bool> ExcludeUnexpectedTypesFromFluentValidationAutoValidation =>
+        type => !FluentValidationConstants.TypesExcludedFromAutoValidation.Contains(type);
 }

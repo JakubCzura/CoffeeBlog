@@ -53,5 +53,6 @@ internal class BaseRepository<TEntity>(NotificationProviderDbContext notificatio
 
     public async Task<int> DeleteAsync(ObjectId id,
                                        CancellationToken cancellationToken = default)
-        => await _dbSet.Where(x => x.Id == id).ExecuteDeleteAsync(cancellationToken);
+        => await _dbSet.Where(x => x.Id == id)
+                       .ExecuteDeleteAsync(cancellationToken);
 }

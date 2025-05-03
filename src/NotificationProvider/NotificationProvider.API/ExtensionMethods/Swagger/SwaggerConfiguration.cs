@@ -1,15 +1,15 @@
-﻿using ArticleManager.API.ExtensionMethods.Versioning;
-using ArticleManager.API.Filters;
-using ArticleManager.Application.ExtensionMethods.LayerRegistration;
-using ArticleManager.Domain.Entities.Basics;
-using Asp.Versioning;
+﻿using Asp.Versioning;
+using NotificationProvider.Application.ExtensionMethods.LayerRegistration;
+using NotificationProvider.Domain.Entities.Basics;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
+using NotificationProvider.API.Filters;
+using NotificationProvider.API.ExtensionMethods.Versioning;
 
-namespace ArticleManager.API.ExtensionMethods.Swagger;
+namespace NotificationProvider.API.ExtensionMethods.Swagger;
 
 /// <summary>
 /// Configuration of Swagger.
@@ -40,19 +40,19 @@ public static class SwaggerConfiguration
             Scheme = JwtBearerDefaults.AuthenticationScheme
         });
         swaggerGenOptions.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
         {
-            new OpenApiSecurityScheme
             {
-                Reference = new OpenApiReference
+                new OpenApiSecurityScheme
                 {
-                    Id = JwtBearerDefaults.AuthenticationScheme,
-                    Type = ReferenceType.SecurityScheme
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
+                    Reference = new OpenApiReference
+                    {
+                        Id = JwtBearerDefaults.AuthenticationScheme,
+                        Type = ReferenceType.SecurityScheme
+                    }
+                },
+                Array.Empty<string>()
+            }
+        });
     }
 
     /// <summary>
@@ -112,7 +112,7 @@ public static class SwaggerConfiguration
     /// Configures Swagger UI and launches Swagger UI in browser using configured path.
     /// </summary>
     /// <param name="webApplication">The web application used to configure the HTTP pipeline, and routes.</param>
-    /// <returns>Reference to <paramref name="webApplication"/></returns>
+    /// <returns>Reference to <paramref name="webApplication"/>.</returns>
     public static WebApplication UseSwaggerInterface(this WebApplication webApplication)
     {
         webApplication.UseSwagger(options => options.RouteTemplate = SwaggerInfo.RouteTemplate);

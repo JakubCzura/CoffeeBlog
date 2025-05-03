@@ -97,7 +97,7 @@ public static class SwaggerConfiguration
 
                 if (!mapsToApiVersions.Any())
                 {
-                    mapsToApiVersions = apiVersions.ToArray();
+                    mapsToApiVersions = [.. apiVersions];
                 }
 
                 version = version.Replace("v", "");
