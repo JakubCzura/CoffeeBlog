@@ -10,6 +10,7 @@ using NotificationProvider.Domain.Entities;
 using NotificationProvider.Domain.Enums;
 using NotificationProvider.Domain.Models.Emails;
 using NotificationProvider.Domain.SettingsOptions.Email;
+using System;
 
 namespace NotificationProvider.Infrastructure.Email;
 
@@ -40,19 +41,19 @@ internal class EmailSender(IOptions<EmailOptions> _emailOptions) : IEmailSender
         }
         catch (SslHandshakeException sslHandshakeException)
         {
-            return new SendEmailMessageResult(emailMessage, EmailMessageStatus.ConfigurationError, SmtpErrorConstants.ConnectionError, sslHandshakeException.Message[..300]);
+            return new SendEmailMessageResult(emailMessage, EmailMessageStatus.ConfigurationError, SmtpErrorConstants.ConnectionError, sslHandshakeException.Message.Length > 300 ? sslHandshakeException.Message[..300] : sslHandshakeException.Message);
         }
         catch (AuthenticationException authenticationException)
         {
-            return new SendEmailMessageResult(emailMessage, EmailMessageStatus.AuthenticationError, SmtpErrorConstants.AuthenticationError, authenticationException.Message[..300]);
+            return new SendEmailMessageResult(emailMessage, EmailMessageStatus.AuthenticationError, SmtpErrorConstants.AuthenticationError, authenticationException.Message.Length > 300 ? authenticationException.Message[..300] : authenticationException.Message);
         }
         catch (ServiceNotAuthenticatedException serviceNotAuthenticatedException)
         {
-            return new SendEmailMessageResult(emailMessage, EmailMessageStatus.AuthenticationError, SmtpErrorConstants.AuthenticationError, serviceNotAuthenticatedException.Message[..300]);
+            return new SendEmailMessageResult(emailMessage, EmailMessageStatus.AuthenticationError, SmtpErrorConstants.AuthenticationError, serviceNotAuthenticatedException.Message.Length > 300 ? serviceNotAuthenticatedException.Message[..300] : exception.Message);
         }
         catch (Exception exception)
         {
-            return new SendEmailMessageResult(emailMessage, EmailMessageStatus.ServerError, SmtpErrorConstants.ServerError, exception.Message[..300]);
+            return new SendEmailMessageResult(emailMessage, EmailMessageStatus.ServerError, SmtpErrorConstants.ServerError, exception.Message.Length > 300 ? exception.Message[..300] : exception.Message);
         }
     }
 }
