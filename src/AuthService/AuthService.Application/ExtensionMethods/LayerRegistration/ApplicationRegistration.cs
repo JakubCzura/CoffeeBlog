@@ -25,7 +25,6 @@ public static class ApplicationRegistration
                                                       IConfiguration configuration)
     {
         services.AddEventBus(configuration, Assembly.GetExecutingAssembly());
-
         services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());

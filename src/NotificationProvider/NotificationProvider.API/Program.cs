@@ -2,6 +2,7 @@ using NotificationProvider.API.ExtensionMethods.Swagger;
 using NotificationProvider.API.ExtensionMethods.Versioning;
 using NotificationProvider.API.Middlewares;
 using NotificationProvider.Application.ExtensionMethods.LayerRegistration;
+using NotificationProvider.Domain.SettingsOptions.Authentication;
 using NotificationProvider.Domain.SettingsOptions.Database;
 using NotificationProvider.Domain.SettingsOptions.Email;
 using NotificationProvider.Infrastructure.ExtensionMethods.LayerRegistration;
@@ -10,6 +11,7 @@ using System.Text.Json.Serialization;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+builder.Services.Configure<AuthenticationOptions>(builder.Configuration.GetSection(AuthenticationOptions.AppsettingsKey));
 builder.Services.Configure<DatabaseOptions>(builder.Configuration.GetSection(DatabaseOptions.AppsettingsKey));
 builder.Services.Configure<EmailOptions>(builder.Configuration.GetSection(EmailOptions.AppsettingsKey));
 

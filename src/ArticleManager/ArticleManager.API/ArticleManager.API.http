@@ -1,6 +1,0 @@
-@ArticleManager.API_HostAddress = http://localhost:5239
-
-GET {{ArticleManager.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

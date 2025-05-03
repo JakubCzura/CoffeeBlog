@@ -1,7 +1,9 @@
-﻿using MediatR;
+﻿using Asp.Versioning;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NotificationProvider.API.Controllers.Basics;
+using NotificationProvider.API.ExtensionMethods.Versioning;
 using Shared.Application.Common.Responses.Basics;
 using Shared.Application.Common.Responses.Errors;
 using Shared.Application.NotificationProvider.Commands.NewsletterSubscriptions.CancelNewsletterSubscription;
@@ -14,6 +16,7 @@ namespace NotificationProvider.API.Controllers;
 /// Controller to manage newsletter subscriptions.
 /// </summary>
 /// <param name="mediator">Mediator to handle command</param>
+[ApiVersion(ApiVersioningInfo.Version_1_0)]
 public class NewsletterSubscriptionController(IMediator mediator) : ApiControllerBase
 {
     /// <summary>

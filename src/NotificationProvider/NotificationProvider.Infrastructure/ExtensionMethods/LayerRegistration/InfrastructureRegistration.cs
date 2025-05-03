@@ -10,6 +10,7 @@ using NotificationProvider.Application.Interfaces.Factories.Emails;
 using NotificationProvider.Application.Interfaces.Helpers;
 using NotificationProvider.Application.Interfaces.Persistence.Repositories;
 using NotificationProvider.Infrastructure.Email;
+using NotificationProvider.Infrastructure.ExtensionMethods.Authentication;
 using NotificationProvider.Infrastructure.ExtensionMethods.Database;
 using NotificationProvider.Infrastructure.Factories.Emails;
 using NotificationProvider.Infrastructure.Helpers;
@@ -32,6 +33,8 @@ public static class InfrastructureRegistration
         services.AddScoped<IEmailMessageRepository, EmailMessageRepository>();
         services.AddScoped<IEventConsumerDetailRepository, EventConsumerDetailRepository>();
         services.AddScoped<INewsletterSubscriptionRepository, NewsletterSubscriptionRepository>();
+
+        services.ConfigureAuthentication();
 
         MongoUrlBuilder mongoUrlBuilder = new(configuration.GetValue<string>("Database:ConnectionString"));
         MongoClient mongoClient = new(mongoUrlBuilder.ToMongoUrl());

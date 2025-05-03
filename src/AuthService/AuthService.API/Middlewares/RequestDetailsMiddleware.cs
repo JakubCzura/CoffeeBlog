@@ -1,5 +1,4 @@
 ﻿using AuthService.API.ExtensionMethods.Request;
-using AuthService.Application.Commands.RequestDetails.CreateRequestDetail;
 using AuthService.Domain.Constants;
 using MediatR;
 using Shared.Application.AuthService.Commands.RequestDetails.CreateRequestDetail;

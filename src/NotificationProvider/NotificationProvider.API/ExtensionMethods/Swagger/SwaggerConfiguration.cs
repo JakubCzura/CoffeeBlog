@@ -1,13 +1,13 @@
 ﻿using Asp.Versioning;
-using NotificationProvider.Application.ExtensionMethods.LayerRegistration;
-using NotificationProvider.Domain.Entities.Basics;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
+using NotificationProvider.API.ExtensionMethods.Versioning;
+using NotificationProvider.API.Filters;
+using NotificationProvider.Application.ExtensionMethods.LayerRegistration;
+using NotificationProvider.Domain.Entities.Basics;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
-using NotificationProvider.API.Filters;
-using NotificationProvider.API.ExtensionMethods.Versioning;
 
 namespace NotificationProvider.API.ExtensionMethods.Swagger;
 

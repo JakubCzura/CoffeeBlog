@@ -25,8 +25,8 @@ public static class SwaggerInfo
     /// <summary>
     /// Route template to use swagger.
     /// </summary>
-    public static string RouteTemplate => $"{RoutePrefix}/{{documentName}}/{ProjectNameJson}";
-
+    public static string RouteTemplate => $"{RoutePrefix}/{{documentName}}/{ProjectNameJson}";    
+    
     /// <summary>
     /// Endpoint URL of swagger.
     /// </summary>
