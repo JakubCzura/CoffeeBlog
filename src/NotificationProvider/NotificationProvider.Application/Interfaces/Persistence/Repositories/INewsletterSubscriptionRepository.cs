@@ -4,9 +4,9 @@ using NotificationProvider.Domain.Entities;
 namespace NotificationProvider.Application.Interfaces.Persistence.Repositories;
 
 /// <summary>
-/// Interface for repository to perform database operations related to <see cref="NewsletterSubscriber"/>.
+/// Interface for repository to perform database operations related to <see cref="NewsletterSubscription"/>.
 /// </summary>
-public interface INewsletterSubscriberRepository : IBaseRepository<NewsletterSubscriber>
+public interface INewsletterSubscriptionRepository : IBaseRepository<NewsletterSubscription>
 {
     /// <summary>
     /// Checks if a newsletter subscriber with the given email exists.

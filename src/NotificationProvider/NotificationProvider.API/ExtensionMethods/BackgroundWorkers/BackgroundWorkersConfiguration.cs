@@ -10,7 +10,7 @@ public static class BackgroundWorkersConfiguration
         string emailSendingProcessorName = "email-sending-processor";
 
         IRecurringJobManager jobManager = app.Services.GetRequiredService<IRecurringJobManager>();
-        var isEmailProcessorShouldRun = bool.TryParse(app.Configuration["BackgroundWorkers:EmailSendingProcessor:IsActive"], out var result) && result;
+        bool isEmailProcessorShouldRun = bool.TryParse(app.Configuration["BackgroundWorkers:EmailSendingProcessor:IsActive"], out bool result) && result;
         if (isEmailProcessorShouldRun)
         {
             jobManager.AddOrUpdate<EmailSendingProcessor>(emailSendingProcessorName, job => job.SendEmailsAsync(), app.Configuration["BackgroundWorkers:EmailSendingProcessor:Schedule"]);

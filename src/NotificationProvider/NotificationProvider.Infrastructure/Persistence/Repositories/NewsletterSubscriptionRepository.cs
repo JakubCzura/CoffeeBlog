@@ -7,18 +7,18 @@ using NotificationProvider.Infrastructure.Persistence.DatabaseContext;
 namespace NotificationProvider.Infrastructure.Persistence.Repositories;
 
 /// <summary>
-/// Repository to perform database operations related to <see cref="NewsletterSubscriber"/>.
+/// Repository to perform database operations related to <see cref="NewsletterSubscription"/>.
 /// </summary>
-internal class NewsletterSubscriberRepository(NotificationProviderDbContext notificationProviderDbContext)
-    : BaseRepository<NewsletterSubscriber>(notificationProviderDbContext), INewsletterSubscriberRepository
+internal class NewsletterSubscriptionRepository(NotificationProviderDbContext notificationProviderDbContext)
+    : BaseRepository<NewsletterSubscription>(notificationProviderDbContext), INewsletterSubscriptionRepository
 {
     public async Task<bool> EmailExistsAsync(string email, 
                                              CancellationToken cancellationToken)
-        => await notificationProviderDbContext.NewsletterSubscribers.AsNoTracking()
+        => await notificationProviderDbContext.NewsletterSubscriptions.AsNoTracking()
                                                                     .AnyAsync(s => s.Email == email, cancellationToken);
 
     public async Task<int> ConfirmSubscriptionAsync(ObjectId id, 
                                                     CancellationToken cancellationToken)
-        => await notificationProviderDbContext.NewsletterSubscribers.Where(s => s.Id == id)
-                                                                    .ExecuteUpdateAsync(s => s.SetProperty(x => x.IsConfirmed, true), cancellationToken);
+        => await notificationProviderDbContext.NewsletterSubscriptions.Where(s => s.Id == id)
+                                                                      .ExecuteUpdateAsync(s => s.SetProperty(x => x.IsConfirmed, true), cancellationToken);
 }

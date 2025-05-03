@@ -31,7 +31,7 @@ public static class InfrastructureRegistration
         services.AddScoped<IApiErrorRepository, ApiErrorRepository>();
         services.AddScoped<IEmailMessageRepository, EmailMessageRepository>();
         services.AddScoped<IEventConsumerDetailRepository, EventConsumerDetailRepository>();
-        services.AddScoped<INewsletterSubscriberRepository, NewsletterSubscriberRepository>();
+        services.AddScoped<INewsletterSubscriptionRepository, NewsletterSubscriptionRepository>();
 
         MongoUrlBuilder mongoUrlBuilder = new(configuration.GetValue<string>("Database:ConnectionString"));
         MongoClient mongoClient = new(mongoUrlBuilder.ToMongoUrl());

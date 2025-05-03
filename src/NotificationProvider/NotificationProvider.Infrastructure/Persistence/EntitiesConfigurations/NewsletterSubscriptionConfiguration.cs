@@ -6,13 +6,13 @@ using NotificationProvider.Domain.Entities;
 namespace NotificationProvider.Infrastructure.Persistence.EntitiesConfigurations;
 
 /// <summary>
-/// Configuration for <see cref="NewsletterSubscriber"/> in database.
+/// Configuration for <see cref="NewsletterSubscription"/> in database.
 /// </summary>
-internal class NewsletterSubscriberConfiguration : IEntityTypeConfiguration<NewsletterSubscriber>
+internal class NewsletterSubscriptionConfiguration : IEntityTypeConfiguration<NewsletterSubscription>
 {
-    public void Configure(EntityTypeBuilder<NewsletterSubscriber> builder)
+    public void Configure(EntityTypeBuilder<NewsletterSubscription> builder)
     {
-        builder.ToCollection("NewsletterSubscriber");
+        builder.ToCollection("NewsletterSubscription");
 
         builder.Property(x => x.Email).IsRequired();
 

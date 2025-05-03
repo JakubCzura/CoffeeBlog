@@ -11,7 +11,7 @@ using NotificationProvider.Domain.SettingsOptions.Email;
 using Shared.Application.Common.Responses.Basics;
 using Shared.Application.NotificationProvider.Commands.NewsletterSubscriptions.SubscribeNewsletter;
 
-namespace NotificationProvider.Application.Commands.NewsletterSubscribers.SubscribeNewsletter;
+namespace NotificationProvider.Application.Commands.NewsletterSubscriptions.SubscribeNewsletter;
 
 /// <summary>
 /// Command handler to insert newsletter subscription. It's related to <see cref="SubscribeNewsletterCommand"/>.
@@ -22,7 +22,7 @@ namespace NotificationProvider.Application.Commands.NewsletterSubscribers.Subscr
 /// <param name="emailMessageFactory">Interface to create e-mail message.</param>
 /// <param name="dateTimeProvider">Interface to get current date and time.</param>
 public class SubscribeNewsletterCommandHandler(IOptions<EmailOptions> _emailOptions,
-                                               INewsletterSubscriberRepository newsletterSubscriberRepository,
+                                               INewsletterSubscriptionRepository newsletterSubscriberRepository,
                                                IEmailMessageRepository emailMessageRepository,
                                                IEmailMessageFactory emailMessageFactory,
                                                IDateTimeProvider dateTimeProvider)
@@ -45,7 +45,7 @@ public class SubscribeNewsletterCommandHandler(IOptions<EmailOptions> _emailOpti
             //return Result.Fail<ResponseBase>(new EmailAlreadyExists());
         }
 
-        NewsletterSubscriber newsletterSubscriber = new() { Email = request.Email, AgreeToTerms = request.AgreeToTerms, IsConfirmed = false };
+        NewsletterSubscription newsletterSubscriber = new() { Email = request.Email, AgreeToTerms = request.AgreeToTerms, IsConfirmed = false };
         ObjectId subscriberId = await newsletterSubscriberRepository.CreateAsync(newsletterSubscriber, cancellationToken);
 
         string body = emailMessageFactory.CreateSubscribeNewsletterBody(request.Email, subscriberId.ToString());

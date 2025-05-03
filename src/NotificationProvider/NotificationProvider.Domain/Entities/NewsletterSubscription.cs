@@ -5,7 +5,7 @@ namespace NotificationProvider.Domain.Entities;
 /// <summary>
 /// Entity for newsletter subscribers.
 /// </summary>
-public class NewsletterSubscriber : DbEntityBase
+public class NewsletterSubscription : DbEntityBase
 {
     /// <summary>
     /// Email of the subscriber to get notifications.
