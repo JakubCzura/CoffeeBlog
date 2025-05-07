@@ -10,7 +10,6 @@ using NotificationProvider.Domain.Entities;
 using NotificationProvider.Domain.Enums;
 using NotificationProvider.Domain.Models.Emails;
 using NotificationProvider.Domain.SettingsOptions.Email;
-using System;
 
 namespace NotificationProvider.Infrastructure.Email;
 
@@ -49,7 +48,7 @@ internal class EmailSender(IOptions<EmailOptions> _emailOptions) : IEmailSender
         }
         catch (ServiceNotAuthenticatedException serviceNotAuthenticatedException)
         {
-            return new SendEmailMessageResult(emailMessage, EmailMessageStatus.AuthenticationError, SmtpErrorConstants.AuthenticationError, serviceNotAuthenticatedException.Message.Length > 300 ? serviceNotAuthenticatedException.Message[..300] : exception.Message);
+            return new SendEmailMessageResult(emailMessage, EmailMessageStatus.AuthenticationError, SmtpErrorConstants.AuthenticationError, serviceNotAuthenticatedException.Message.Length > 300 ? serviceNotAuthenticatedException.Message[..300] : serviceNotAuthenticatedException.Message);
         }
         catch (Exception exception)
         {

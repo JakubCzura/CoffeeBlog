@@ -8,8 +8,15 @@ namespace NotificationProvider.Infrastructure.Persistence.DatabaseContext;
 /// Database context.
 /// </summary>
 /// <param name="dbContextOptions">Configuration for database context.</param>
-public class NotificationProviderDbContext(DbContextOptions<NotificationProviderDbContext> dbContextOptions) : DbContext(dbContextOptions)
+public class NotificationProviderDbContext : DbContext
 {
+    public NotificationProviderDbContext(DbContextOptions<NotificationProviderDbContext> dbContextOptions)
+        : base(dbContextOptions)
+    {
+        // Set AutoTransactionBehavior to Never
+        Database.AutoTransactionBehavior = AutoTransactionBehavior.Never;
+    }
+
     public DbSet<ApiError> ApiErrors { get; set; }
     public DbSet<EventConsumerDetail> EventConsumerDetails { get; set; }
     public DbSet<EmailMessage> EmailMessages { get; set; }

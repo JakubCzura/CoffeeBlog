@@ -1,11 +1,13 @@
 ﻿using MudBlazor;
+using Shared.Application.Common.Responses.Basics;
 using Shared.Application.NotificationProvider.Commands.NewsletterSubscriptions.SubscribeNewsletter;
+using WebUserInterface.Services.Communication.NotificationProvider.Interfaces;
 
 namespace WebUserInterface.Pages.Newsletter;
 
-public partial class NewsletterSubscriptionPage
+public partial class NewsletterSubscriptionPage(INewsletterSubscriptionCommunicationService newsletterSubscriptionCommunicationService)
 {
-    private string resultMessage = string.Empty;
+    private ResponseBase resultMessage = new();
     private bool isProcessing = false;
 
     private MudForm subscribeNewsletterForm;
@@ -27,9 +29,15 @@ public partial class NewsletterSubscriptionPage
 
         isProcessing = true;
 
-        // TODO: Implement logic when working on backend
-
-        resultMessage = "Thank you for subscribing! Please check your e-mail to confirm your subscription.";
+        ResponseBase response = await newsletterSubscriptionCommunicationService.SubscribeAsync(subscribeNewsletterCommand, default);
+        if (response.IsSuccess)
+        {
+            resultMessage.ResponseMessage = "Thank you for subscribing! Please check your e-mail to confirm your subscription.";
+        }
+        else
+        {
+            resultMessage.ResponseMessage ??= "An error occurred while processing your request. Please try again later.";
+        }
 
         isProcessing = false;
     }

@@ -26,7 +26,7 @@ public class NewsletterSubscriptionController(IMediator mediator) : ApiControlle
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Information about subscribing user to newsletter.</returns>
     [AllowAnonymous]
-    [HttpPost("subscribe")]
+    [HttpPost]
     [ProducesResponseType(typeof(ResponseBase), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorDetailsResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ErrorDetailsResponse), StatusCodes.Status500InternalServerError)]
@@ -45,7 +45,7 @@ public class NewsletterSubscriptionController(IMediator mediator) : ApiControlle
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Information about confirming subscription to newsletter.</returns>
     [AllowAnonymous]
-    [HttpPost("confirm")]
+    [HttpPut]
     [ProducesResponseType(typeof(ResponseBase), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorDetailsResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ErrorDetailsResponse), StatusCodes.Status500InternalServerError)]
@@ -60,17 +60,17 @@ public class NewsletterSubscriptionController(IMediator mediator) : ApiControlle
     /// <summary>
     /// Endpoint to cancel subscription to newsletter.
     /// </summary>
-    /// <param name="cancelNewsletterSubscriptionCommand">Details to cancel subscription to newsletter.</param>
+    /// <param name="Id">Id of newsletter subscription to cancel .</param>
     /// <param name="cancellationToken">Token to cancel asynchronous operation.</param>
     /// <returns>Information about cancelling subscription to newsletter.</returns>
     [AllowAnonymous]
-    [HttpPost("cancel")]
+    [HttpDelete("{Id}")]
     [ProducesResponseType(typeof(ResponseBase), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorDetailsResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ErrorDetailsResponse), StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<ResponseBase>> Cancel([FromBody] CancelNewsletterSubscriptionCommand cancelNewsletterSubscriptionCommand,
+    public async Task<ActionResult<ResponseBase>> Cancel([FromRoute] string Id,
                                                          CancellationToken cancellationToken)
-        => await mediator.Send(cancelNewsletterSubscriptionCommand, cancellationToken) switch
+        => await mediator.Send(new CancelNewsletterSubscriptionCommand() { Id = Id }, cancellationToken) switch
         {
             { IsSuccess: true, Value: ResponseBase viewModel } => Ok(viewModel),
             _ => CreateBadRequestObjectResult()

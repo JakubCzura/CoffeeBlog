@@ -13,7 +13,8 @@ builder.Services.AddCors(options =>
                       policy =>
                       {
                           policy.WithOrigins(builder.Configuration.GetValue<string>("WebUserInterface:Address")!)
-                                .AllowAnyHeader();
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
                       });
 });
 

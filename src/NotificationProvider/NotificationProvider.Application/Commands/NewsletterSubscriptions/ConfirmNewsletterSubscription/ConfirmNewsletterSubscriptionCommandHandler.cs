@@ -13,6 +13,6 @@ public class ConfirmNewsletterSubscriptionCommandHandler(INewsletterSubscription
     public async Task<Result<ResponseBase>> Handle(ConfirmNewsletterSubscriptionCommand request, CancellationToken cancellationToken)
     {
         await newsletterSubscriberRepository.ConfirmSubscriptionAsync(new ObjectId(request.Id), cancellationToken);
-        return Result.Ok();
+        return Result.Ok(new ResponseBase());
     }
 }

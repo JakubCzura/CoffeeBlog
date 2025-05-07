@@ -13,6 +13,6 @@ public class CancelNewsletterSubscriptionCommandHandler(INewsletterSubscriptionR
     public async Task<Result<ResponseBase>> Handle(CancelNewsletterSubscriptionCommand request, CancellationToken cancellationToken)
     {
         await newsletterSubscriberRepository.DeleteAsync(new ObjectId(request.Id), cancellationToken);
-        return Result.Ok();
+        return Result.Ok(new ResponseBase());
     }
 }

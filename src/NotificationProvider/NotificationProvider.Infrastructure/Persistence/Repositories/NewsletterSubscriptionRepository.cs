@@ -17,8 +17,12 @@ internal class NewsletterSubscriptionRepository(NotificationProviderDbContext no
         => await notificationProviderDbContext.NewsletterSubscriptions.AsNoTracking()
                                                                     .AnyAsync(s => s.Email == email, cancellationToken);
 
-    public async Task<int> ConfirmSubscriptionAsync(ObjectId id, 
+    public async Task<int> ConfirmSubscriptionAsync(ObjectId id,
                                                     CancellationToken cancellationToken)
-        => await notificationProviderDbContext.NewsletterSubscriptions.Where(s => s.Id == id)
-                                                                      .ExecuteUpdateAsync(s => s.SetProperty(x => x.IsConfirmed, true), cancellationToken);
+    {
+        var subscription = await notificationProviderDbContext.NewsletterSubscriptions.Where(s => s.Id == id).FirstAsync(cancellationToken);
+                                                                         subscription.IsConfirmed = true;
+        notificationProviderDbContext.NewsletterSubscriptions.Update(subscription);
+        return await notificationProviderDbContext.SaveChangesAsync(cancellationToken);
+    }
 }
