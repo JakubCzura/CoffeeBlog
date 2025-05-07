@@ -38,11 +38,9 @@ public class SubscribeNewsletterCommandHandler(IOptions<EmailOptions> _emailOpti
     /// <returns><see cref="ResponseBase"/></returns>
     public async Task<Result<ResponseBase>> Handle(SubscribeNewsletterCommand request, CancellationToken cancellationToken)
     {
-        //TODO: implement EmailAlreadyExists error
         if (await newsletterSubscriberRepository.EmailExistsAsync(request.Email, cancellationToken))
         {
-            throw new NotImplementedException(" implement EmailAlreadyExists error");
-            //return Result.Fail<ResponseBase>(new EmailAlreadyExists());
+            return Result.Ok(new ResponseBase());
         }
 
         NewsletterSubscription newsletterSubscriber = new() { Email = request.Email, AgreeToTerms = request.AgreeToTerms, IsConfirmed = false };

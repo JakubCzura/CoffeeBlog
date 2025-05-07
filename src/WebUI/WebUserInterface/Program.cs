@@ -18,5 +18,6 @@ builder.Services.AddHttpClient(HttpClientConstants.ApiGateway, client => client.
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient(HttpClientConstants.ApiGateway));
 
 builder.Services.AddScoped<INewsletterSubscriptionCommunicationService, NewsletterSubscriptionCommunicationService>();
+builder.Services.AddScoped<IEmailMessageCommunicationService, EmailMessageCommunicationService>();
 
 await builder.Build().RunAsync();

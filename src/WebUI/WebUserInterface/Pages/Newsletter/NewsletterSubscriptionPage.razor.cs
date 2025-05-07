@@ -33,7 +33,7 @@ public partial class NewsletterSubscriptionPage(INewsletterSubscriptionCommunica
         ResponseBase response = await newsletterSubscriptionCommunicationService.SubscribeAsync(subscribeNewsletterCommand, default);
         if (response.IsSuccess)
         {
-            resultMessage.ResponseMessage = ResponseMessages.ThankYouForSubscribing_PleaseCheckYourEmailToConfirmYourSubscription;
+            resultMessage.ResponseMessage = ResponseMessages.ThankYouForSubscribing_WeWillSendYouConfirmationLinkUnlessYouHaveAlreadySubscribedOurNewsletter;
         }
         else
         {

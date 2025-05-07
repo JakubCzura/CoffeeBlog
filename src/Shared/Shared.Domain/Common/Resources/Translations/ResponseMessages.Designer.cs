@@ -115,11 +115,21 @@ namespace Shared.Domain.Common.Resources.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thank you for subscribing! Please check your e-mail to confirm your subscription.
+        ///   Looks up a localized string similar to Thank you for reaching out! We will get back to you soon.
         /// </summary>
-        public static string ThankYouForSubscribing_PleaseCheckYourEmailToConfirmYourSubscription {
+        public static string ThankYouForReachingOut_WeWillGetBackToYouSoon {
             get {
-                return ResourceManager.GetString("ThankYouForSubscribing!PleaseCheckYourEmailToConfirmYourSubscription", resourceCulture);
+                return ResourceManager.GetString("ThankYouForReachingOut!WeWillGetBackToYouSoon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thank you for subscribing! We will send you confirmation link unless you have already subscribed our newsletter.
+        /// </summary>
+        public static string ThankYouForSubscribing_WeWillSendYouConfirmationLinkUnlessYouHaveAlreadySubscribedOurNewsletter {
+            get {
+                return ResourceManager.GetString("ThankYouForSubscribing!WeWillSendYouConfirmationLinkUnlessYouHaveAlreadySubscribe" +
+                        "dOurNewsletter", resourceCulture);
             }
         }
         

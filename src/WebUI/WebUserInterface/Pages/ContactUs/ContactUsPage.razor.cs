@@ -1,11 +1,16 @@
 ﻿using MudBlazor;
+using Shared.Application.Common.Responses.Basics;
 using Shared.Application.NotificationProvider.Commands.EmailMessages.ContactUs;
+using Shared.Application.NotificationProvider.Commands.NewsletterSubscriptions.SubscribeNewsletter;
+using Shared.Domain.Common.Resources.Translations;
+using WebUserInterface.Services.Communication.NotificationProvider;
+using WebUserInterface.Services.Communication.NotificationProvider.Interfaces;
 
 namespace WebUserInterface.Pages.ContactUs;
 
-public partial class ContactUsPage
+public partial class ContactUsPage(IEmailMessageCommunicationService emailMessageCommunicationService)
 {
-    private string resultMessage = string.Empty;
+    private ResponseBase resultMessage = new();
     private bool isProcessing = false;
 
     private MudForm contactUsForm;
@@ -27,9 +32,15 @@ public partial class ContactUsPage
 
         isProcessing = true;
 
-        // TODO: Implement logic when working on backend
-
-        resultMessage = "Thank you for reaching out! We'll get back to you soon.";
+        ResponseBase response = await emailMessageCommunicationService.ContactUsAsync(contactUsCommand, default);
+        if (response.IsSuccess)
+        {
+            resultMessage.ResponseMessage = ResponseMessages.ThankYouForReachingOut_WeWillGetBackToYouSoon;
+        }
+        else
+        {
+            resultMessage.ResponseMessage ??= ResponseMessages.AnErrorOccurredWhileProcessingYourRequest_PleaseTryAgain;
+        }
 
         isProcessing = false;
     }

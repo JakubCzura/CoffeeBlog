@@ -39,8 +39,8 @@
         </MudButton>
     </MudForm>
 
-    @if (!string.IsNullOrEmpty(resultMessage))
+    @if (!string.IsNullOrEmpty(resultMessage.ResponseMessage))
     {
-        <MudAlert Severity="Severity.Success" Class="mt-4">@resultMessage</MudAlert>
+        <MudAlert Severity="resultMessage.IsSuccess ? Severity.Success : Severity.Error" Class="mt-4">@resultMessage.ResponseMessage</MudAlert>
     }
 </MudContainer>
