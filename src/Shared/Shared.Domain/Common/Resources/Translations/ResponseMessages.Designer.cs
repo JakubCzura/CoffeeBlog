@@ -115,6 +115,15 @@ namespace Shared.Domain.Common.Resources.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thank you for subscribing! Please check your e-mail to confirm your subscription.
+        /// </summary>
+        public static string ThankYouForSubscribing_PleaseCheckYourEmailToConfirmYourSubscription {
+            get {
+                return ResourceManager.GetString("ThankYouForSubscribing!PleaseCheckYourEmailToConfirmYourSubscription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Token to reset password has been sent to your e-mail.
         /// </summary>
         public static string TokenToResetPasswordHasBeenSentToYourEmail {

@@ -1,6 +1,7 @@
 ﻿using MudBlazor;
 using Shared.Application.Common.Responses.Basics;
 using Shared.Application.NotificationProvider.Commands.NewsletterSubscriptions.SubscribeNewsletter;
+using Shared.Domain.Common.Resources.Translations;
 using WebUserInterface.Services.Communication.NotificationProvider.Interfaces;
 
 namespace WebUserInterface.Pages.Newsletter;
@@ -32,11 +33,11 @@ public partial class NewsletterSubscriptionPage(INewsletterSubscriptionCommunica
         ResponseBase response = await newsletterSubscriptionCommunicationService.SubscribeAsync(subscribeNewsletterCommand, default);
         if (response.IsSuccess)
         {
-            resultMessage.ResponseMessage = "Thank you for subscribing! Please check your e-mail to confirm your subscription.";
+            resultMessage.ResponseMessage = ResponseMessages.ThankYouForSubscribing_PleaseCheckYourEmailToConfirmYourSubscription;
         }
         else
         {
-            resultMessage.ResponseMessage ??= "An error occurred while processing your request. Please try again later.";
+            resultMessage.ResponseMessage ??= ResponseMessages.AnErrorOccurredWhileProcessingYourRequest_PleaseTryAgain;
         }
 
         isProcessing = false;

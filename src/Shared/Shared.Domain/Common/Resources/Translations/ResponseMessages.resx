@@ -135,6 +135,9 @@
   <data name="PasswordHasBeenReseted" xml:space="preserve">
     <value>Password has been reseted</value>
   </data>
+  <data name="ThankYouForSubscribing!PleaseCheckYourEmailToConfirmYourSubscription" xml:space="preserve">
+    <value>Thank you for subscribing! Please check your e-mail to confirm your subscription</value>
+  </data>
   <data name="TokenToResetPasswordHasBeenSentToYourEmail" xml:space="preserve">
     <value>Token to reset password has been sent to your e-mail</value>
   </data>

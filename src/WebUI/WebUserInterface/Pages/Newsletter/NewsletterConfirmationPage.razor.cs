@@ -1,12 +1,15 @@
 ﻿using FluentValidation.Results;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using Shared.Application.Common.Responses.Basics;
 using Shared.Application.NotificationProvider.Commands.NewsletterSubscriptions.ConfirmNewsletterSubscription;
 using Shared.Domain.Common.Resources.Translations;
+using WebUserInterface.Services.Communication.NotificationProvider.Interfaces;
 
 namespace WebUserInterface.Pages.Newsletter;
 
-public partial class NewsletterConfirmationPage(ISnackbar snackbar)
+public partial class NewsletterConfirmationPage(INewsletterSubscriptionCommunicationService newsletterSubscriptionCommunicationService, 
+                                                ISnackbar snackbar)
 {
     [Parameter]
     public string Id { get; set; } = string.Empty;
@@ -39,9 +42,15 @@ public partial class NewsletterConfirmationPage(ISnackbar snackbar)
 
         isProcessing = true;
 
-        // TODO: Replace with actual API call to confirm the user's subscription instead of simulating delay
-        await Task.Delay(2000);
-        isSuccess = true;
+        ResponseBase response = await newsletterSubscriptionCommunicationService.ConfirmAsync(confirmNewsletterSubscriptionCommand, default);
+        if (response.IsSuccess)
+        {
+            isSuccess = true;
+        }
+        else
+        {
+            snackbar.Add(response.ResponseMessage ?? ResponseMessages.AnErrorOccurredWhileProcessingYourRequest_PleaseTryAgain, Severity.Error);
+        }
 
         isProcessing = false;
     }
