@@ -1,0 +1,66 @@
+@using WebUserInterface.Pages.Shop.Models
+@using System.Globalization
+
+<MudDialog>
+    <DialogContent>
+        <MudGrid>
+            <MudItem>
+                <MudText Typo="Typo.h4">@Coffee.Name</MudText>
+                <MudText Typo="Typo.subtitle1" Class="mb-4">@Coffee.Origin</MudText>
+
+                <MudText Typo="Typo.body1" Class="my-3">
+                    @Coffee.Description
+                </MudText>
+
+                <MudDivider Class="my-4" />
+
+                <MudGrid>
+                    <MudItem xs="6">
+                        <MudText Typo="Typo.body2"><strong>Species:</strong> @Coffee.Species</MudText>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudText Typo="Typo.body2"><strong>Type:</strong> @Coffee.Type</MudText>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudText Typo="Typo.body2"><strong>Roast Level:</strong> @Coffee.RoastLevel</MudText>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudText Typo="Typo.body2"><strong>Grind Type:</strong> @Coffee.GrindType</MudText>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudText Typo="Typo.body2"><strong>Flavor Profile:</strong> @Coffee.FlavorProfile</MudText>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudText Typo="Typo.body2"><strong>Weight:</strong> @Coffee.Weight</MudText>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudText Typo="Typo.body2">
+                            <strong>Caffeine:</strong> @(Coffee.HasCaffeine ? "Yes" : "Decaffeinated")
+                        </MudText>
+                    </MudItem>
+                </MudGrid>
+
+                <MudDivider Class="my-4" />
+
+                <MudText Typo="Typo.h5" Color="Color.Primary">@(Coffee.Price.ToString("C", new System.Globalization.CultureInfo("en-US")))</MudText>
+
+                <MudText Typo="Typo.body2" Class="mt-4">
+                    <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Dense="true">
+                        This coffee is available in our physical stores only. Please visit one of our locations to purchase.
+                    </MudAlert>
+                </MudText>
+            </MudItem>
+        </MudGrid>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Info" Variant="Variant.Filled" OnClick="() => MudDialog.Close()">Close</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    IMudDialogInstance MudDialog { get; set; } = default!;
+
+    [Parameter]
+    public Coffee Coffee { get; set; } = default!;
+}

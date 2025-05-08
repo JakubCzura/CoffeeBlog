@@ -1,0 +1,175 @@
+﻿@page "/shop"
+@using WebUserInterface.Pages.Shop.Components
+@using WebUserInterface.Pages.Shop.Models
+@using WebUserInterface.Pages.Shop.Services
+@inject IDialogService DialogService
+@inject CoffeeService CoffeeService
+
+<PageTitle>Shop</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-5">
+    <MudPaper Elevation="0" Class="d-flex flex-column align-center justify-center py-8 px-4 mt-8" Style="background-color: #f9f5f0;">
+        <MudText Typo="Typo.h4" Align="Align.Center" Class="mb-4">Visit Our Shops</MudText>
+        <MudText Typo="Typo.body1" Align="Align.Center" Class="mb-6" Style="max-width: 800px;">
+            Our coffees are only available in our physical shops. We believe in the importance of experiencing the aroma and quality
+            of our coffee firsthand. Visit us to discover our full range of products and get expert advice from our baristas.
+        </MudText>
+    </MudPaper>
+
+    <MudGrid Class="mt-8">
+        <MudItem xs="12" sm="12" md="3">
+            <MudPaper Class="pa-4" Elevation="2">
+                <MudText Typo="Typo.h6" Class="mb-4">Filter & Sort</MudText>
+                
+                <MudTextField @bind-Value="SearchString" Label="Search" Variant="Variant.Outlined" 
+                              Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" 
+                              OnKeyUp="@SearchKeyUp" Class="mb-4" />
+
+                <MudSelect T="string" Label="Sort By" @bind-Value="SortBy" Variant="Variant.Outlined" Class="mb-4">
+                    <MudSelectItem Value="@("name")">Name</MudSelectItem>
+                    <MudSelectItem Value="@("price")">Price</MudSelectItem>
+                    <MudSelectItem Value="@("origin")">Origin</MudSelectItem>
+                    <MudSelectItem Value="@("type")">Type</MudSelectItem>
+                    <MudSelectItem Value="@("roast")">Roast Level</MudSelectItem>
+                </MudSelect>
+
+                <MudSwitch T="bool" @bind-Checked="@SortAscending" Color="Color.Primary" Label="Sort Ascending" Class="mb-4" />
+
+                <MudText Typo="Typo.subtitle2" Class="mb-2">Coffee Type</MudText>
+                <MudCheckBox T="bool" @bind-Checked="@FilterBeans" Label="Beans" Color="Color.Primary" Class="mb-1" />
+                <MudCheckBox T="bool" @bind-Checked="@FilterGround" Label="Ground" Color="Color.Primary" Class="mb-1" />
+                <MudCheckBox T="bool" @bind-Checked="@FilterPads" Label="Pads" Color="Color.Primary" Class="mb-1" />
+                <MudCheckBox T="bool" @bind-Checked="@FilterCapsules" Label="Capsules" Color="Color.Primary" Class="mb-1" />
+                <MudCheckBox T="bool" @bind-Checked="@FilterInstant" Label="Instant" Color="Color.Primary" Class="mb-4" />
+
+                <MudDivider Class="my-4" />
+
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" 
+                           OnClick="ApplyFilters">Apply Filters</MudButton>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" sm="12" md="9">
+            @if (Loading)
+            {
+                <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+            }
+            else if (Coffees.Count == 0)
+            {
+                <MudAlert Severity="Severity.Info" Class="mb-4" Dense="false">
+                    No coffees found matching your criteria. Try adjusting your filters.
+                </MudAlert>
+            }
+            else
+            {
+                <MudGrid>
+                    @foreach (var coffee in Coffees)
+                    {
+                        <MudItem xs="12" sm="6" md="4" Class="mb-4">
+                            <CoffeeCard Coffee="coffee" OnCoffeeSelected="ShowCoffeeDetails" />
+                        </MudItem>
+                    }
+                </MudGrid>
+
+                <MudPagination Count="@TotalPages" SelectedChanged="PageChanged" Class="mt-4 d-flex justify-center" />
+            }
+        </MudItem>
+    </MudGrid>
+
+    <MudDivider Class="my-8" />
+    
+    <ShopLocations/>
+
+</MudContainer>
+
+@code {
+    private List<Coffee> Coffees { get; set; } = new();
+    private bool Loading { get; set; } = true;
+    private string SearchString { get; set; } = string.Empty;
+    private string SortBy { get; set; } = "name";
+    private bool SortAscending { get; set; } = true;
+    
+    // Coffee type filters
+    private bool FilterBeans { get; set; } = true;
+    private bool FilterGround { get; set; } = true;
+    private bool FilterPads { get; set; } = true;
+    private bool FilterCapsules { get; set; } = true;
+    private bool FilterInstant { get; set; } = true;
+    
+    // Pagination
+    private int CurrentPage { get; set; } = 1;
+    private int PageSize { get; set; } = 6;
+    private int TotalItems { get; set; }
+    private int TotalPages => (int)Math.Ceiling(TotalItems / (double)PageSize);
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        Loading = true;
+        
+        // Apply filters based on checkboxes
+        var effectiveSearchString = SearchString;
+        if (!string.IsNullOrWhiteSpace(SearchString))
+        {
+            // Keep the search string as is
+        }
+        
+        Coffees = await CoffeeService.GetCoffeesAsync(effectiveSearchString, SortBy, SortAscending, CurrentPage, PageSize);
+        TotalItems = await CoffeeService.GetTotalCoffeesCountAsync(effectiveSearchString);
+        
+        // Filter by type
+        if (FilterBeans || FilterGround || FilterPads || FilterCapsules || FilterInstant)
+        {
+            var filteredCoffees = new List<Coffee>();
+            
+            if (FilterBeans)
+                filteredCoffees.AddRange(Coffees.Where(c => c.Type == CoffeeType.Beans));
+                
+            if (FilterGround)
+                filteredCoffees.AddRange(Coffees.Where(c => c.Type == CoffeeType.Ground));
+                
+            if (FilterPads)
+                filteredCoffees.AddRange(Coffees.Where(c => c.Type == CoffeeType.Pads));
+                
+            if (FilterCapsules)
+                filteredCoffees.AddRange(Coffees.Where(c => c.Type == CoffeeType.Capsules));
+                
+            if (FilterInstant)
+                filteredCoffees.AddRange(Coffees.Where(c => c.Type == CoffeeType.Instant));
+                
+            Coffees = filteredCoffees;
+        }
+        
+        Loading = false;
+    }
+
+    private async Task SearchKeyUp(KeyboardEventArgs args)
+    {
+        if (args.Key == "Enter")
+        {
+            await ApplyFilters();
+        }
+    }
+
+    private async Task ApplyFilters()
+    {
+        CurrentPage = 1;
+        await LoadData();
+    }
+
+    private async Task PageChanged(int page)
+    {
+        CurrentPage = page;
+        await LoadData();
+    }
+
+    private async Task ShowCoffeeDetails(Coffee coffee)
+    {
+        var parameters = new DialogParameters { ["Coffee"] = coffee };
+        await DialogService.ShowAsync<CoffeeDetailsDialog>("Coffee Details", parameters);
+    }
+}

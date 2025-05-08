@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 using WebUserInterface;
 using WebUserInterface.Constants.Communication;
+using WebUserInterface.Pages.Shop.Services;
 using WebUserInterface.Services.Communication.NotificationProvider;
 using WebUserInterface.Services.Communication.NotificationProvider.Interfaces;
 
@@ -19,5 +20,6 @@ builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().Cre
 
 builder.Services.AddScoped<INewsletterSubscriptionCommunicationService, NewsletterSubscriptionCommunicationService>();
 builder.Services.AddScoped<IEmailMessageCommunicationService, EmailMessageCommunicationService>();
+builder.Services.AddScoped<CoffeeService>();
 
 await builder.Build().RunAsync();

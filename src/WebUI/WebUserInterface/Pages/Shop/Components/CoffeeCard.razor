@@ -1,0 +1,41 @@
+@using WebUserInterface.Pages.Shop.Models
+@using System.Globalization
+
+<MudCard Elevation="2" Class="h-100">
+    <MudCardMedia Image="@Coffee.ImageUrl" Height="200" />
+    <MudCardContent>
+        <MudText Typo="Typo.h6">@Coffee.Name</MudText>
+        <MudText Typo="Typo.body2" Class="mb-2">
+            <MudChip T="string" Size="Size.Small" Color="Color.Primary">@Coffee.RoastLevel Roast</MudChip>
+            <MudChip T="CoffeeType" Size="Size.Small" Color="Color.Secondary">@Coffee.Type</MudChip>
+            @if (!Coffee.HasCaffeine)
+            {
+                <MudChip T="string" Size="Size.Small" Color="Color.Info">Decaf</MudChip>
+            }
+        </MudText>
+        <MudText Typo="Typo.body2" Class="mb-2">
+            <strong>Origin:</strong> @Coffee.Origin
+        </MudText>
+        <MudText Typo="Typo.body2" Class="mb-2">
+            <strong>Species:</strong> @Coffee.Species
+        </MudText>
+        <MudText Typo="Typo.body2" Class="mb-2">
+            <strong>Notes:</strong> @Coffee.FlavorProfile
+        </MudText>
+        <MudText Typo="Typo.body2" Class="mb-2 text-truncate" Style="max-height: 80px; overflow: hidden;">
+            @Coffee.Description
+        </MudText>
+        <MudText Typo="Typo.h6" Color="Color.Primary" Class="mt-4">@(Coffee.Price.ToString("C", new System.Globalization.CultureInfo("en-US")))</MudText>
+    </MudCardContent>
+    <MudCardActions Class="d-flex justify-end">
+        <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@(() => OnCoffeeSelected.InvokeAsync(Coffee))">Details</MudButton>
+    </MudCardActions>
+</MudCard>
+
+@code {
+    [Parameter]
+    public Coffee Coffee { get; set; } = default!;
+
+    [Parameter]
+    public EventCallback<Coffee> OnCoffeeSelected { get; set; }
+}

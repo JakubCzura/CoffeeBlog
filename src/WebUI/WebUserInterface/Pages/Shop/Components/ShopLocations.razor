@@ -1,0 +1,19 @@
+﻿@using WebUserInterface.Pages.Shop.Models
+@using WebUserInterface.Pages.Shop.Services
+@inject CoffeeService CoffeeService
+
+<MudText Typo="Typo.h4" Align="Align.Center" Class="mb-6">Our Shop Locations</MudText>
+
+@foreach (var shop in Shops)
+{
+    <ShopLocationCard ShopLocation="shop" />
+}
+
+@code {
+    private List<ShopLocation> Shops { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Shops = await CoffeeService.GetShopLocationsAsync();
+    }
+}

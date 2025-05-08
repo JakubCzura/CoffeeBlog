@@ -1,0 +1,44 @@
+@using WebUserInterface.Pages.Shop.Models
+
+<MudPaper Elevation="3" Class="pa-4 mb-4 rounded-lg">
+    <MudText Typo="Typo.h5" Class="mb-4">@ShopLocation.Name</MudText>
+
+    <MudGrid>
+        <MudItem xs="12" md="6">
+            <MudText Typo="Typo.body1" Class="mb-2">
+                <MudIcon Icon="@Icons.Material.Filled.LocationOn" Class="mr-2" />
+                @ShopLocation.Address, @ShopLocation.PostalCode @ShopLocation.City
+            </MudText>
+            <MudText Typo="Typo.body1" Class="mb-2">
+                <MudIcon Icon="@Icons.Material.Filled.Phone" Class="mr-2" />
+                @ShopLocation.PhoneNumber
+            </MudText>
+            <MudText Typo="Typo.body1" Class="mb-2">
+                <MudIcon Icon="@Icons.Material.Filled.Email" Class="mr-2" />
+                @ShopLocation.Email
+            </MudText>
+        </MudItem>
+        <MudItem xs="12" md="6">
+            <MudText Typo="Typo.body1" Class="mb-2">
+                <MudIcon Icon="@Icons.Material.Filled.AccessTime" Class="mr-2" />
+                <strong>Opening Hours:</strong>
+            </MudText>
+            <MudText Typo="Typo.body2" Class="mb-4 ml-6">
+                @ShopLocation.OpeningHours
+            </MudText>
+
+            <MudButton Variant="Variant.Outlined"
+                       Color="Color.Primary"
+                       StartIcon="@Icons.Material.Filled.Map"
+                       Href="@ShopLocation.MapUrl"
+                       Target="_blank">
+                View on Map
+            </MudButton>
+        </MudItem>
+    </MudGrid>
+</MudPaper>
+
+@code {
+    [Parameter]
+    public ShopLocation ShopLocation { get; set; } = default!;
+}
